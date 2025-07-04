@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Complete Indian Stock Investor - Master the Market with Rohit</title>
-    <meta name="description" content="Learn proven investment strategies from experienced investor Rohit. Build long-term wealth in Indian markets.">
+    <title>The Complete Indian Stock Investor - Master the Market with Lotuslion</title>
+    <meta name="description" content="Learn proven investment strategies from experienced investors. Build long-term wealth in Indian markets.">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -14,194 +19,381 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #1E1E1E;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%);
             color: #ffffff;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
+        /* Navigation */
+        .nav-trigger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1002;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-trigger:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-trigger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #ffffff;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+        
+        #nav-panel {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: rgba(13, 20, 33, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 80px 30px 30px;
+            transition: left 0.3s ease;
+            z-index: 1001;
+            overflow-y: auto;
+        }
+        
+        #nav-panel.active {
+            left: 0;
+        }
+        
+        #nav-panel a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        #nav-panel a:hover,
+        #nav-panel a.active {
+            color: #F4A261;
+            transform: translateX(10px);
+        }
+        
+        /* Progress Indicator */
+        .progress-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            margin: 20px 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-dot.active {
+            background: #F4A261;
+            transform: scale(1.5);
+        }
+        
+        .progress-dot:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+        
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
         
-        /* Header */
-        header {
-            background-color: #0A2342;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        
-        .nav {
+        /* Section Base */
+        section {
+            padding: 60px 40px;
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
             align-items: center;
         }
         
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #F4A261;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
         
         /* Hero Section */
         .hero {
-            margin-top: 80px;
-            padding: 80px 0;
+            position: relative;
             text-align: center;
-            background: linear-gradient(135deg, #0A2342 0%, #1E1E1E 100%);
+            padding-top: 120px;
         }
         
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #ffffff;
-            line-height: 1.2;
+            font-size: clamp(36px, 8vw, 64px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
         }
         
         .hero .subtitle {
-            font-size: 24px;
+            font-size: clamp(20px, 4vw, 28px);
             color: #2CA58D;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
+            font-weight: 600;
         }
         
         .hero .description {
             font-size: 18px;
-            color: #e0e0e0;
-            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 48px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.8;
         }
         
         .cta-button {
             display: inline-block;
-            background-color: #F4A261;
+            background: #F4A261;
             color: #0A2342;
-            padding: 18px 40px;
-            font-size: 20px;
-            font-weight: bold;
+            padding: 20px 48px;
+            font-size: 18px;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
+            box-shadow: 0 4px 20px rgba(244, 162, 97, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .cta-button:hover {
-            background-color: #f5b681;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(244, 162, 97, 0.5);
         }
         
-        .price {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #e0e0e0;
+        .price-box {
+            margin-top: 32px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .price .original {
+        .price-box .original {
             text-decoration: line-through;
-            color: #999;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 18px;
         }
         
-        .price .current {
-            font-size: 28px;
+        .price-box .current {
+            font-size: 36px;
             color: #2CA58D;
-            font-weight: bold;
+            font-weight: 800;
+            margin: 0 12px;
+        }
+        
+        .price-box .discount {
+            color: #F4A261;
+            font-weight: 600;
         }
         
         /* Trust Badges */
         .trust-badges {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
+            margin-top: 48px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .badge {
-            color: #e0e0e0;
-            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        /* Pain Points Section */
-        .pain-points {
-            padding: 80px 0;
-            background-color: #0A2342;
+        .badge:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Problem Section */
+        .problems {
+            background: rgba(0, 0, 0, 0.3);
         }
         
         .section-title {
-            font-size: 36px;
+            font-size: clamp(32px, 6vw, 48px);
             text-align: center;
-            margin-bottom: 50px;
-            color: #ffffff;
+            margin-bottom: 60px;
+            font-weight: 800;
         }
         
-        .pain-grid {
+        .problem-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: 32px;
         }
         
-        .pain-item {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid rgba(44, 165, 141, 0.3);
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
         
-        .pain-item h3 {
-            color: #F4A261;
-            margin-bottom: 15px;
-            font-size: 20px;
+        .problem-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
-        /* Course Modules */
-        .modules {
-            padding: 80px 0;
-            background-color: #1E1E1E;
+        .problem-card h3 {
+            color: #FF3B3B;
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 700;
         }
         
-        .module-list {
-            display: grid;
-            gap: 20px;
+        .problem-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+        
+        /* Solution Section */
+        .solution {
+            position: relative;
+        }
+        
+        .solution-content {
+            text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
         
-        .module {
-            background-color: rgba(10, 35, 66, 0.3);
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 4px solid #2CA58D;
+        .checkmark-list {
+            text-align: left;
+            margin: 48px auto;
+            max-width: 600px;
         }
         
-        .module h3 {
-            color: #2CA58D;
-            margin-bottom: 10px;
-        }
-        
-        .module ul {
+        .checkmark-list li {
             list-style: none;
-            margin-left: 20px;
+            padding: 16px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .module ul li:before {
-            content: "✓ ";
+        .checkmark-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
             color: #2CA58D;
+            font-size: 24px;
             font-weight: bold;
+        }
+        
+        /* Modules Section */
+        .modules {
+            background: rgba(10, 35, 66, 0.3);
+        }
+        
+        .module-stack {
+            display: grid;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .module-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            border-radius: 12px;
+            border-left: 4px solid #2CA58D;
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            transform: translateX(8px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .module-card h3 {
+            color: #2CA58D;
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        .module-card ul {
+            list-style: none;
+        }
+        
+        .module-card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .module-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #F4A261;
         }
         
         /* Instructor Section */
         .instructor {
-            padding: 80px 0;
-            background-color: #0A2342;
+            background: linear-gradient(135deg, rgba(10, 35, 66, 0.5) 0%, rgba(13, 20, 33, 0.5) 100%);
             text-align: center;
         }
         
@@ -211,164 +403,234 @@
         }
         
         .instructor-content p {
-            font-size: 18px;
+            font-size: 20px;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            color: rgba(255, 255, 255, 0.9);
         }
         
-        /* CTA Section */
+        /* Final CTA */
         .final-cta {
-            padding: 80px 0;
             text-align: center;
-            background: linear-gradient(135deg, #1E1E1E 0%, #0A2342 100%);
-        }
-        
-        .final-cta h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #ffffff;
+            background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
         }
         
         .urgency {
             color: #F4A261;
-            font-size: 20px;
-            margin-bottom: 30px;
+            font-size: 24px;
+            margin-bottom: 32px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
         /* Footer */
         footer {
-            background-color: #0A2342;
+            background: rgba(0, 0, 0, 0.5);
             padding: 40px 0;
             text-align: center;
-            color: #e0e0e0;
+            color: rgba(255, 255, 255, 0.6);
         }
         
-        .footer-links {
-            margin-bottom: 20px;
-        }
-        
-        .footer-links a {
-            color: #e0e0e0;
+        footer a {
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 16px;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: #F4A261;
         }
         
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 32px;
+            section {
+                padding: 40px 20px;
+                min-height: auto;
             }
             
-            .hero .subtitle {
-                font-size: 20px;
+            .container {
+                padding: 0 20px;
             }
             
-            .section-title {
-                font-size: 28px;
+            .hero {
+                padding-top: 80px;
             }
             
-            .pain-grid {
+            .progress-indicator {
+                display: none;
+            }
+            
+            .trust-badges {
                 grid-template-columns: 1fr;
+            }
+            
+            .problem-grid,
+            .module-stack {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-trigger {
+                top: 10px;
+                left: 10px;
+            }
+            
+            #nav-panel {
+                width: 250px;
+                left: -250px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="nav container">
-            <div class="logo">LOTUS LION VENTURES</div>
-            <a href="#enroll" class="cta-button" style="padding: 12px 24px; font-size: 16px;">Enroll Now</a>
-        </nav>
-    </header>
+    <!-- Navigation Trigger -->
+    <div class="nav-trigger" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Navigation Panel -->
+    <nav id="nav-panel">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#problems" class="nav-link">The Challenge</a>
+        <a href="#solution" class="nav-link">The Solution</a>
+        <a href="#modules" class="nav-link">Course Modules</a>
+        <a href="#instructor" class="nav-link">Your Instructor</a>
+        <a href="#enroll" class="nav-link">Enroll Now</a>
+    </nav>
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-dot" data-title="Home" data-section="hero"></div>
+        <div class="progress-dot" data-title="Challenge" data-section="problems"></div>
+        <div class="progress-dot" data-title="Solution" data-section="solution"></div>
+        <div class="progress-dot" data-title="Modules" data-section="modules"></div>
+        <div class="progress-dot" data-title="Instructor" data-section="instructor"></div>
+        <div class="progress-dot" data-title="Enroll" data-section="final-cta"></div>
+    </div>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
+    <section class="hero" id="hero">
+        <div class="container animate-in">
             <h1>The Complete Indian Stock Investor</h1>
-            <p class="subtitle">Master the Market with Rohit's Proven Framework</p>
+            <p class="subtitle">Master the Market with Lotuslion's Proven Framework</p>
             <p class="description">
-                Stop guessing. Start investing with confidence. Learn the exact strategies that helped Rohit build wealth through multiple market cycles.
+                Stop guessing. Start investing with confidence. Learn the exact strategies that have helped build wealth through multiple market cycles.
             </p>
-            <a href="https://payments.cashfree.com/links?code=e8q3ues21830" class="cta-button" id="enroll">
-                Secure Your Spot Now
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
+                SECURE YOUR SPOT
             </a>
-            <div class="price">
-                <span class="original">₹4,999</span> 
+            <div class="price-box">
+                <span class="original">₹4,999</span>
                 <span class="current">₹1,999</span>
-                <span style="color: #F4A261;">(60% OFF - Limited Time)</span>
+                <span class="discount">60% OFF - Limited Time</span>
             </div>
             <div class="trust-badges">
-                <div class="badge">✓ SEBI-Registered Research Analyst</div>
                 <div class="badge">✓ 30-Day Money Back Guarantee</div>
                 <div class="badge">✓ Lifetime Access</div>
+                <div class="badge">✓ Immediate Course Access</div>
             </div>
         </div>
     </section>
 
-    <!-- Pain Points -->
-    <section class="pain-points">
-        <div class="container">
-            <h2 class="section-title">Are You Struggling With...</h2>
-            <div class="pain-grid">
-                <div class="pain-item">
-                    <h3>Information Overload?</h3>
-                    <p>Drowning in YouTube videos, WhatsApp tips, and contradictory advice? Get a clear, structured framework instead.</p>
+    <!-- Problems Section -->
+    <section class="problems" id="problems">
+        <div class="container animate-in">
+            <h2 class="section-title">The Challenge You Face</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>📊 Information Overload</h3>
+                    <p>Drowning in YouTube videos, WhatsApp tips, and contradictory advice? You need a clear, structured framework instead of more noise.</p>
                 </div>
-                <div class="pain-item">
-                    <h3>Fear of Losing Money?</h3>
+                <div class="problem-card">
+                    <h3>💸 Fear of Losing Money</h3>
                     <p>Worried about making costly mistakes? Learn from someone who's navigated bear markets and emerged profitable.</p>
                 </div>
-                <div class="pain-item">
-                    <h3>No Time for Research?</h3>
-                    <p>Busy with your career but want to grow wealth? Get proven shortcuts and efficient analysis methods.</p>
+                <div class="problem-card">
+                    <h3>⏰ No Time for Research</h3>
+                    <p>Busy with your career but want to grow wealth? Get proven shortcuts and efficient analysis methods that actually work.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🤔 Trust Issues</h3>
+                    <p>Tired of "finfluencers" with no real track record? It's time to learn from practitioners who've actually done it.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Course Modules -->
-    <section class="modules">
-        <div class="container">
-            <h2 class="section-title">What You'll Learn</h2>
-            <div class="module-list">
-                <div class="module">
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container animate-in">
+            <div class="solution-content">
+                <h2 class="section-title">The Lotuslion Method</h2>
+                <p style="font-size: 20px; margin-bottom: 40px; color: rgba(255, 255, 255, 0.9);">
+                    A proven, systematic approach to building wealth in Indian markets. No gimmicks, no shortcuts - just practical strategies that work.
+                </p>
+                <ul class="checkmark-list">
+                    <li>Learn to analyze stocks like a professional investor</li>
+                    <li>Understand when to buy, hold, and sell with confidence</li>
+                    <li>Build a portfolio that grows steadily over time</li>
+                    <li>Navigate market volatility without panic</li>
+                    <li>Create multiple income streams from your investments</li>
+                </ul>
+                <a href="#modules" class="cta-button">SEE WHAT YOU'LL LEARN</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules" id="modules">
+        <div class="container animate-in">
+            <h2 class="section-title">Your Learning Journey</h2>
+            <div class="module-stack">
+                <div class="module-card">
                     <h3>Module 1: Foundation - Think Like an Investor</h3>
                     <ul>
-                        <li>Rohit's Investment Philosophy</li>
+                        <li>The Lotuslion Investment Philosophy</li>
                         <li>Investor vs Trader Mindset</li>
                         <li>Understanding India's Growth Story</li>
+                        <li>Building Your Investment DNA</li>
                     </ul>
                 </div>
-                <div class="module">
-                    <h3>Module 2: The Rohit Framework - Stock Analysis</h3>
+                <div class="module-card">
+                    <h3>Module 2: The Framework - Stock Analysis Process</h3>
                     <ul>
-                        <li>4-Step Screening Process</li>
+                        <li>4-Step Screening Workflow</li>
                         <li>Quality Filters (ROCE, FCF, Growth)</li>
-                        <li>Valuation Techniques</li>
+                        <li>Deep Dive Research Methods</li>
+                        <li>Valuation Techniques That Work</li>
                     </ul>
                 </div>
-                <div class="module">
+                <div class="module-card">
                     <h3>Module 3: Real Case Studies</h3>
                     <ul>
-                        <li>Bharti Airtel Analysis</li>
-                        <li>Bajaj Finance Deep Dive</li>
+                        <li>Telecom Giants Analysis (Bharti Airtel)</li>
+                        <li>NBFC Deep Dive (Bajaj Finance)</li>
                         <li>Crisis Investing Playbook</li>
+                        <li>Turnaround Stories That Made Money</li>
                     </ul>
                 </div>
-                <div class="module">
+                <div class="module-card">
                     <h3>Module 4: Timing & Macro</h3>
                     <ul>
-                        <li>Rate Cycles & Market Impact</li>
+                        <li>Understanding Rate Cycles</li>
                         <li>Sector Rotation Strategies</li>
+                        <li>Market Regime Detection</li>
                         <li>When to Buy vs Hold vs Sell</li>
                     </ul>
                 </div>
-                <div class="module">
+                <div class="module-card">
                     <h3>Module 5: Portfolio Management</h3>
                     <ul>
                         <li>Position Sizing by Conviction</li>
-                        <li>Risk Management</li>
+                        <li>Risk Management That Works</li>
+                        <li>Rebalancing Strategies</li>
                         <li>Behavioral Traps to Avoid</li>
                     </ul>
                 </div>
@@ -376,31 +638,34 @@
         </div>
     </section>
 
-    <!-- Instructor -->
-    <section class="instructor">
-        <div class="container">
-            <h2 class="section-title">About Your Instructor</h2>
+    <!-- Instructor Section -->
+    <section class="instructor" id="instructor">
+        <div class="container animate-in">
+            <h2 class="section-title">Learn from Experience</h2>
             <div class="instructor-content">
                 <p>
                     Rohit is not just another "finance influencer." He's a seasoned investor who has successfully navigated Indian markets for over a decade, building substantial wealth through disciplined investing.
                 </p>
                 <p>
-                    His practical approach cuts through the noise to focus on what actually works - fundamental analysis, patience, and strategic thinking.
+                    His practical approach cuts through the noise to focus on what actually works - fundamental analysis, patience, and strategic thinking. Every strategy taught in this course has been tested in real markets with real money.
+                </p>
+                <p>
+                    Now, through Lotuslion Ventures, he's sharing these proven methods with serious investors who want to build lasting wealth.
                 </p>
             </div>
         </div>
     </section>
 
     <!-- Final CTA -->
-    <section class="final-cta">
-        <div class="container">
-            <h2>Ready to Take Control of Your Financial Future?</h2>
-            <p class="urgency">⏰ Enrollment closing soon. Don't miss out!</p>
-            <a href="https://payments.cashfree.com/links?code=e8q3ues21830" class="cta-button">
-                Enroll Now for ₹1,999
+    <section class="final-cta" id="enroll">
+        <div class="container animate-in">
+            <h2 class="section-title">Ready to Transform Your Financial Future?</h2>
+            <p class="urgency">⏰ Special Launch Price Ends Soon</p>
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
+                ENROLL NOW FOR ₹1,999
             </a>
-            <p style="margin-top: 20px; color: #e0e0e0;">
-                After payment, you'll receive access details via WhatsApp/Email within 24 hours
+            <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
+                After payment, you'll receive access details via email within 24 hours
             </p>
         </div>
     </section>
@@ -408,26 +673,117 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="mailto:support@lotuslionventures.com">Contact Support</a>
+            <div style="margin-bottom: 20px;">
+                <a href="mailto:rohit.ahuja@lotuslion.in">Contact Support</a>
                 <a href="#">Terms & Conditions</a>
                 <a href="#">Privacy Policy</a>
             </div>
-            <p>&copy; 2025 Lotus Lion Ventures. All rights reserved.</p>
-            <p style="margin-top: 10px; font-size: 14px;">SEBI Registration: [Your SEBI Number]</p>
+            <p>&copy; <span id="copyright-year"></span> Lotus Lion Ventures. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Toggle Navigation
+        function toggleNav() {
+            const navPanel = document.getElementById('nav-panel');
+            navPanel.classList.toggle('active');
+        }
+        
+        // Close nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const navPanel = document.getElementById('nav-panel');
+            const navTrigger = document.querySelector('.nav-trigger');
+            
+            if (navPanel.classList.contains('active') && 
+                !navPanel.contains(event.target) && 
+                !navTrigger.contains(event.target)) {
+                navPanel.classList.remove('active');
+            }
+        });
+        
+        // Close nav when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-panel').classList.remove('active');
             });
         });
+        
+        // Smooth scrolling for navigation links and progress dots
+        document.querySelectorAll('.nav-link, .progress-dot').forEach(element => {
+            element.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                let targetId;
+                if (this.classList.contains('nav-link')) {
+                    targetId = this.getAttribute('href').substring(1);
+                } else {
+                    targetId = this.getAttribute('data-section');
+                }
+                
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // IntersectionObserver for active states
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.getAttribute('id');
+                    
+                    // Update nav links
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                    
+                    // Update progress dots
+                    document.querySelectorAll('.progress-dot').forEach(dot => {
+                        dot.classList.remove('active');
+                        if (dot.getAttribute('data-section') === sectionId) {
+                            dot.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, {
+            rootMargin: '-30% 0px -70% 0px'
+        });
+        
+        // Observe all sections for active state
+        document.querySelectorAll('section[id]').forEach(section => {
+            sectionObserver.observe(section);
+        });
+        
+        // IntersectionObserver for animations
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.style.animationPlayState = 'running';
+                    animationObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
+        
+        // Observe all animate-in elements
+        document.querySelectorAll('.animate-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            animationObserver.observe(el);
+        });
+        
+        // Set current year in copyright
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>

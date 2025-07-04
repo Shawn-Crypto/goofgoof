@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - The Complete Indian Stock Investor</title>
+    <meta name="description" content="Thank you for enrolling in The Complete Indian Stock Investor course.">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        /* Success Animation */
+        @keyframes checkmark {
+            0% {
+                stroke-dashoffset: 100;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
+            background: rgba(44, 165, 141, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .success-icon svg {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .success-icon svg path {
+            stroke: #2CA58D;
+            stroke-width: 3;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: checkmark 0.8s ease 0.3s forwards;
+        }
+        
+        h1 {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #2CA58D;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 48px;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+        
+        .info-box h2 {
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: #F4A261;
+        }
+        
+        .info-box p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 16px;
+        }
+        
+        .steps {
+            text-align: left;
+            max-width: 500px;
+            margin: 32px auto;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease 0.5s both;
+        }
+        
+        .step-number {
+            background: #F4A261;
+            color: #0A2342;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 16px;
+        }
+        
+        .step-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .support-section {
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.6s ease 0.6s both;
+        }
+        
+        .support-section h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .support-section p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 8px;
+        }
+        
+        .button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .button.primary {
+            background: #F4A261;
+            color: #0A2342;
+            border-color: #F4A261;
+        }
+        
+        .button.primary:hover {
+            background: #f5b681;
+            border-color: #f5b681;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .info-box {
+                padding: 24px;
+            }
+            
+            .steps {
+                margin: 24px auto;
+            }
+            
+            .button {
+                display: block;
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Success Icon -->
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        
+        <!-- Success Message -->
+        <h1>Payment Successful!</h1>
+        <p class="subtitle">Welcome to The Complete Indian Stock Investor</p>
+        
+        <!-- Info Box -->
+        <div class="info-box">
+            <h2>What Happens Next?</h2>
+            <p>Thank you for enrolling in the course. Your payment has been successfully processed.</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">You'll receive a confirmation email with your payment receipt within the next few minutes.</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Within 24 hours, you'll receive your course access credentials via email.</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Once you receive your credentials, you can immediately start learning and building wealth!</div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 32px; font-size: 16px; color: rgba(255, 255, 255, 0.6);">
+                <strong>Note:</strong> Please check your spam folder if you don't see our emails in your inbox.
+            </p>
+        </div>
+        
+        <!-- Support Section -->
+        <div class="support-section">
+            <h3>Need Help?</h3>
+            <p>If you have any questions or don't receive your access within 24 hours, please contact us:</p>
+            <a href="mailto:rohit.ahuja@lotuslion.in" class="button primary">Email Support</a>
+            <a href="/" class="button">Return to Homepage</a>
+        </div>
+    </div>
+    
+    <script>
+        // Optional: Add celebration confetti or particles effect here
+        console.log('Payment successful! Welcome to the course.');
+        
+        // Track successful conversion if you add analytics later
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'conversion', {
+                'event_category': 'enrollment',
+                'event_label': 'course_purchase',
+                'value': 1999
+            });
+        }
+    </script>
+</body>
+</html>
