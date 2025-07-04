@@ -6,6 +6,14 @@
     <title>The Complete Indian Stock Investor - Master the Market with Lotuslion</title>
     <meta name="description" content="Learn proven investment strategies from experienced investors. Build long-term wealth in Indian markets.">
     
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
+    <!-- End Google Tag Manager -->
+    
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -488,6 +496,11 @@
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
     <!-- Navigation Trigger -->
     <div class="nav-trigger" onclick="toggleNav()">
         <span></span>
@@ -784,6 +797,38 @@
         
         // Set current year in copyright
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        
+        // Track button clicks
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Push event to dataLayer for GTM
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'cta_click',
+                    'button_text': this.textContent.trim(),
+                    'button_location': this.closest('section').id || 'unknown'
+                });
+            });
+        });
+        
+        // Track scroll depth
+        let scrollPoints = [25, 50, 75, 100];
+        let scrolled = [];
+        
+        window.addEventListener('scroll', function() {
+            let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+            
+            scrollPoints.forEach(point => {
+                if (scrollPercent >= point && !scrolled.includes(point)) {
+                    scrolled.push(point);
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                        'event': 'scroll_depth',
+                        'scroll_percent': point
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>

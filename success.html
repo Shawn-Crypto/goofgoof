@@ -6,6 +6,14 @@
     <title>Payment Successful - The Complete Indian Stock Investor</title>
     <meta name="description" content="Thank you for enrolling in The Complete Indian Stock Investor course.">
     
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
+    <!-- End Google Tag Manager -->
+    
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -221,6 +229,11 @@
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
     <div class="container">
         <!-- Success Icon -->
         <div class="success-icon">
@@ -271,20 +284,26 @@
     </div>
     
     <script>
-        // Optional: Add celebration confetti or particles effect here
-        console.log('Payment successful! Welcome to the course.');
+        // Push purchase event to dataLayer
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'purchase',
+            'value': 1999,
+            'currency': 'INR',
+            'transaction_id': new Date().getTime(), // You can replace with actual transaction ID if available
+            'items': [{
+                'item_name': 'The Complete Indian Stock Investor',
+                'item_id': 'TCISI-001',
+                'price': 1999,
+                'item_category': 'Online Course',
+                'quantity': 1
+            }]
+        });
         
         // Set current year in copyright
         document.getElementById('copyright-year-success').textContent = new Date().getFullYear();
         
-        // Track successful conversion if you add analytics later
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'conversion', {
-                'event_category': 'enrollment',
-                'event_label': 'course_purchase',
-                'value': 1999
-            });
-        }
+        console.log('Payment successful! Purchase event tracked.');
     </script>
 </body>
 </html>
