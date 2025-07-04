@@ -245,7 +245,7 @@
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <div class="step-text">Within 24 hours, you'll receive your course access credentials via email.</div>
+                    <div class="step-text">Within 5 minutes, you'll receive your course access credentials via email.</div>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
@@ -256,13 +256,16 @@
             <p style="margin-top: 32px; font-size: 16px; color: rgba(255, 255, 255, 0.6);">
                 <strong>Note:</strong> Please check your spam folder if you don't see our emails in your inbox.
             </p>
+            <p style="margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
+                &copy; <span id="copyright-year-success"></span> Lotuslion Venture. All rights reserved.
+            </p>
         </div>
         
         <!-- Support Section -->
         <div class="support-section">
             <h3>Need Help?</h3>
             <p>If you have any questions or don't receive your access within 24 hours, please contact us:</p>
-            <a href="mailto:rohit.ahuja@lotuslion.in" class="button primary">Email Support</a>
+            <a href="mailto:investoreducation@lotuslion.in" class="button primary">Email Support</a>
             <a href="/" class="button">Return to Homepage</a>
         </div>
     </div>
@@ -270,6 +273,9 @@
     <script>
         // Optional: Add celebration confetti or particles effect here
         console.log('Payment successful! Welcome to the course.');
+        
+        // Set current year in copyright
+        document.getElementById('copyright-year-success').textContent = new Date().getFullYear();
         
         // Track successful conversion if you add analytics later
         if (typeof gtag !== 'undefined') {
