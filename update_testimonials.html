@@ -1,0 +1,320 @@
+<!-- TESTIMONIALS UPDATE HELPER -->
+<!-- This file contains the testimonials section to be added -->
+
+<!-- Add this CSS before /* Final CTA */ in the style section -->
+        /* Testimonials Section */
+        .testimonials {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 80px 40px;
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 48px;
+            margin-top: -40px;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: linear-gradient(135deg, #2CA58D, #F4A261);
+            padding: 2px;
+        }
+        
+        .testimonial-info h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .testimonial-info p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 4px;
+        }
+        
+        .rating {
+            color: #F4A261;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-text strong {
+            color: #2CA58D;
+            font-style: normal;
+        }
+        
+        .testimonial-metric {
+            background: rgba(44, 165, 141, 0.1);
+            border-left: 3px solid #2CA58D;
+            padding: 12px 16px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .metric-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2CA58D;
+        }
+        
+        .testimonial-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .stat-box h3 {
+            font-size: 36px;
+            color: #F4A261;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .stat-box p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+<!-- Add this to mobile responsive section before the closing } -->
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-box {
+                padding: 20px;
+            }
+            
+            .stat-box h3 {
+                font-size: 28px;
+            }
+
+<!-- Replace nav-panel with this updated version -->
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#problems" class="nav-link">The Challenge</a>
+        <a href="#solution" class="nav-link">The Solution</a>
+        <a href="#modules" class="nav-link">Course Modules</a>
+        <a href="#instructor" class="nav-link">Your Instructor</a>
+        <a href="#testimonials" class="nav-link">Success Stories</a>
+        <a href="#enroll" class="nav-link">Enroll Now</a>
+
+<!-- Replace progress-indicator with this updated version -->
+        <div class="progress-dot" data-title="Home" data-section="hero"></div>
+        <div class="progress-dot" data-title="Challenge" data-section="problems"></div>
+        <div class="progress-dot" data-title="Solution" data-section="solution"></div>
+        <div class="progress-dot" data-title="Modules" data-section="modules"></div>
+        <div class="progress-dot" data-title="Instructor" data-section="instructor"></div>
+        <div class="progress-dot" data-title="Testimonials" data-section="testimonials"></div>
+        <div class="progress-dot" data-title="Enroll" data-section="final-cta"></div>
+
+<!-- Add this section after instructor section and before final-cta -->
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container animate-in">
+            <h2 class="section-title">Success Stories from Our Students</h2>
+            <p class="section-subtitle">Join 500+ investors who've transformed their financial future</p>
+            
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="placeholder-arjun.jpg" alt="Arjun Mehta" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Arjun Mehta</h4>
+                            <p>IT Manager, Bengaluru</p>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "I was investing randomly based on tips from friends. After Rohit's course, I built a systematic portfolio that's given me <strong>23% returns in just 8 months</strong>. The framework for analyzing stocks is pure gold!"
+                    </p>
+                    <div class="testimonial-metric">
+                        <span class="metric-label">Portfolio Growth:</span>
+                        <span class="metric-value">₹3.2L → ₹3.94L</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="placeholder-priya.jpg" alt="Priya Sharma" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Doctor, Mumbai</p>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "As a busy doctor, I had no time for market research. This course taught me to identify quality stocks in just 30 minutes. Already recovered the course fee through my first month's gains!"
+                    </p>
+                    <div class="testimonial-metric">
+                        <span class="metric-label">Time to First Profit:</span>
+                        <span class="metric-value">Just 3 weeks</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="placeholder-rajesh.jpg" alt="Rajesh Kumar" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Business Owner, Delhi</p>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Lost ₹2 lakhs in F&O before finding this course. Rohit's risk management module saved my capital. Now making consistent returns with proper position sizing. Worth every rupee!"
+                    </p>
+                    <div class="testimonial-metric">
+                        <span class="metric-label">Monthly Returns:</span>
+                        <span class="metric-value">Avg 3-4% consistent</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="placeholder-sneha.jpg" alt="Sneha Patel" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Sneha Patel</h4>
+                            <p>CA, Ahmedabad</p>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Being a CA, I understood financials but not market dynamics. The sector rotation strategy helped me catch the banking rally early. <strong>42% gains in my banking portfolio!</strong>"
+                    </p>
+                    <div class="testimonial-metric">
+                        <span class="metric-label">Best Pick:</span>
+                        <span class="metric-value">HDFC Bank +68%</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="placeholder-amit.jpg" alt="Amit Agarwal" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Amit Agarwal</h4>
+                            <p>Startup Founder, Pune</p>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "The crisis investing module was eye-opening. Bought quality stocks during the recent correction using Rohit's framework. Already up 15% while others are still fearful."
+                    </p>
+                    <div class="testimonial-metric">
+                        <span class="metric-label">Crisis Returns:</span>
+                        <span class="metric-value">+15% in 2 months</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="placeholder-kavita.jpg" alt="Kavita Reddy" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Kavita Reddy</h4>
+                            <p>Bank Manager, Hyderabad</p>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Started with just ₹50,000. The portfolio management module helped me grow it systematically. Now managing ₹8 lakhs across 12 stocks with confidence. Financial freedom feels achievable!"
+                    </p>
+                    <div class="testimonial-metric">
+                        <span class="metric-label">Portfolio Growth:</span>
+                        <span class="metric-value">16x in 18 months</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-stats">
+                <div class="stat-box">
+                    <h3>500+</h3>
+                    <p>Active Students</p>
+                </div>
+                <div class="stat-box">
+                    <h3>₹12.4 Cr</h3>
+                    <p>Combined Portfolio Value</p>
+                </div>
+                <div class="stat-box">
+                    <h3>27%</h3>
+                    <p>Avg Annual Returns</p>
+                </div>
+                <div class="stat-box">
+                    <h3>4.8/5</h3>
+                    <p>Student Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
