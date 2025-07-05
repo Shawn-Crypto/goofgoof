@@ -460,142 +460,27 @@
         }
         
         /* Testimonials Section */
-        .testimonials {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 80px 40px;
-        }
-
-        .section-subtitle {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            margin-bottom: 48px;
-            margin-top: -40px;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 32px;
-            margin-bottom: 60px;
-        }
-
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: linear-gradient(135deg, #2CA58D, #F4A261);
-            padding: 2px;
-        }
-
-        .testimonial-info h4 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .testimonial-info p {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 4px;
-        }
-
-        .rating {
-            color: #F4A261;
-            font-size: 14px;
-            letter-spacing: 2px;
-        }
-
-        .testimonial-text {
-            font-size: 16px;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .testimonial-text strong {
-            color: #2CA58D;
-            font-style: normal;
-        }
-
-        .testimonial-metric {
-            background: rgba(44, 165, 141, 0.1);
-            border-left: 3px solid #2CA58D;
-            padding: 12px 16px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .metric-label {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .metric-value {
-            font-size: 16px;
-            font-weight: 600;
-            color: #2CA58D;
-        }
-
-        .testimonial-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .stat-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 32px;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-box:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .stat-box h3 {
-            font-size: 36px;
-            color: #F4A261;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .stat-box p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
+        .testimonials { background: rgba(0, 0, 0, 0.3); padding: 80px 40px; }
+        .section-subtitle { font-size: 20px; color: rgba(255, 255, 255, 0.8); text-align: center; margin-bottom: 48px; margin-top: -40px; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 32px; margin-bottom: 60px; }
+        .testimonial-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 32px; transition: all 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.08); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+        .testimonial-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .testimonial-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; background: linear-gradient(135deg, #2CA58D, #F4A261); padding: 2px; }
+        .testimonial-info h4 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+        .testimonial-info p { font-size: 14px; color: rgba(255, 255, 255, 0.7); margin-bottom: 4px; }
+        .rating { color: #F4A261; font-size: 14px; letter-spacing: 2px; }
+        .testimonial-text { font-size: 16px; line-height: 1.8; color: rgba(255, 255, 255, 0.9); margin-bottom: 20px; font-style: italic; }
+        .testimonial-text strong { color: #2CA58D; font-style: normal; }
+        .testimonial-metric { background: rgba(44, 165, 141, 0.1); border-left: 3px solid #2CA58D; padding: 12px 16px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
+        .metric-label { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
+        .metric-value { font-size: 16px; font-weight: 600; color: #2CA58D; }
+        .testimonial-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+        .stat-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 32px; border-radius: 12px; text-align: center; transition: all 0.3s ease; }
+        .stat-box:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.08); }
+        .stat-box h3 { font-size: 36px; color: #F4A261; font-weight: 800; margin-bottom: 8px; }
+        .stat-box p { font-size: 16px; color: rgba(255, 255, 255, 0.8); }
+        
         /* Final CTA */
         .final-cta {
             text-align: center;
@@ -765,7 +650,6 @@
                     या सिर्फ <strong>₹1,667/महीना</strong> (6 EMI)
                 </div>
                 <div class="payment-security">
-                    <img src="https://img.shields.io/badge/PAYMENT-SECURE-green" alt="Secure Payment" style="height: 28px; opacity: 0.9;">
                     <p>🔒 100% Secure Payment</p>
                     <p>💳 All Cards, UPI, Net Banking, EMI</p>
                 </div>
