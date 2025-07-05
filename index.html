@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+.module-stack {
+                grid-template-columns: 1fr;
+            }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -218,6 +220,7 @@
         
         /* Updated CTA Button Styles */
         .cta-button {
+            display: inline-block;
             background: linear-gradient(135deg, #F4A261, #E09C4A) !important;
             color: #0A2342 !important;
             padding: 24px 56px !important;
@@ -230,6 +233,7 @@
             transition: all 0.3s ease !important;
             border: none !important;
             animation: pulse 1.5s infinite;
+            text-decoration: none;
         }
 
         .cta-button:hover {
@@ -432,8 +436,7 @@
                 grid-template-columns: 1fr;
             }
             
-            .problem-grid,
-            .module-stack {
+            .problem-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -448,7 +451,7 @@
             }
             
             .price-box .current {
-                font-size: 36px;
+                font-size: 36px !important;
             }
             
             .emi-option {
@@ -481,8 +484,8 @@
             }
 
             .cta-button {
-                padding: 16px 32px;
-                font-size: 16px;
+                padding: 16px 32px !important;
+                font-size: 16px !important;
             }
 
             .countdown-timer .countdown-item {
@@ -625,7 +628,8 @@
             font-size: 18px;
             font-weight: bold;
             padding: 8px 16px;
-            background: linear-gradient(90deg, #F4A261, #2CA58D);
+            background: rgba(0, 0, 0, 0.3);
+            color: #FFFFFF;
             border-radius: 8px;
             animation: pulse 1.5s infinite;
         }
@@ -635,6 +639,7 @@
             align-items: center;
             justify-content: center;
             margin-top: 16px;
+            flex-wrap: nowrap;
         }
 
         .countdown-item {
@@ -642,33 +647,41 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8px;
-            border: 2px solid #F4A261;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid #FFFFFF;
             border-radius: 8px;
-            margin: 0 8px;
+            margin: 0 4px;
         }
 
         .countdown-number {
             font-size: 32px;
-            font-weight: bold;
-            color: #F4A261;
+            font-weight: 900;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .countdown-label {
             font-size: 14px;
-            color: #FFF;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .countdown-separator {
             font-size: 32px;
             font-weight: bold;
-            color: #FFF;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 0 2px;
         }
 
         .countdown-text {
             font-size: 16px;
             margin-top: 8px;
-            color: #FFF;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes pulse {
@@ -688,11 +701,8 @@
                 font-size: 16px;
                 padding: 6px 12px;
             }
-            .countdown-timer {
-                flex-direction: column;
-            }
             .countdown-item {
-                margin: 4px 0;
+                padding: 6px 8px;
             }
             .countdown-number {
                 font-size: 24px;
@@ -711,7 +721,7 @@
         /* Problems Section Grid and Card Styles */
         .problem-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 32px;
         }
         .problem-card {
@@ -737,6 +747,7 @@
             list-style: none;
             padding: 0;
             margin: 0 0 32px 0;
+            text-align: left;
         }
         .checkmark-list li {
             position: relative;
@@ -751,6 +762,13 @@
             color: #2CA58D;
             font-size: 24px;
             line-height: 1;
+        }
+        
+        /* Solution Content */
+        .solution-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         /* Modules Section Stack and Card Styles */
@@ -770,6 +788,27 @@
             background: rgba(244, 162, 97, 0.1);
             transform: scale(1.03);
             box-shadow: 0 8px 32px rgba(244,162,97,0.10);
+        }
+        .module-card h3 {
+            color: #2CA58D;
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        .module-card ul {
+            list-style: none;
+        }
+        .module-card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .module-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #F4A261;
         }
         /* JavaScript for Countdown Timer */
 
@@ -948,7 +987,7 @@
             <!-- Hero Badge -->
             <div class="hero-badge">🎯 INSTITUTIONAL EXPERIENCE MEETS RETAIL ACCESSIBILITY</div>
             <h1>The Complete Indian Stock Investor</h1>
-            <p class="subtitle">Master Stock Market के Proven Strategies सीखें</p>
+            <p class="subtitle">Master Proven Investment Strategies</p>
             <!-- Credentials Highlight Boxes -->
             <div class="hero-credentials">
                 <div class="credential-highlight">
@@ -988,7 +1027,7 @@
                 </div>
                 <div class="countdown-text">Hurry! Special price expires soon.</div>
             </div>
-            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button" style="padding: 24px 56px; background: linear-gradient(90deg, #FF5733, #FFC300); color: #FFF; font-weight: bold; text-transform: uppercase; animation: pulse 1.5s infinite;">
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button" style="display: inline-block; margin: 24px auto;">
                 ENROLL NOW - ₹9,999
             </a>
             <!-- SPECIAL LAUNCH PRICE Floating Badge -->
@@ -998,7 +1037,7 @@
                 <span class="current">₹9,999</span>
                 <span class="discount">60% OFF - Limited Period</span>
                 <div class="emi-option">
-                    या सिर्फ <strong>₹1,667/महीना</strong> (6 EMI)
+                    Or just <strong>₹1,667/month</strong> (6 EMI)
                 </div>
                 <div class="payment-security" style="text-align: center; margin-top: 24px;">
                     <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
@@ -1019,6 +1058,16 @@
                     <strong>30-Day Money-Back Guarantee</strong>
                     <span>No questions asked. 100% refund if not satisfied.</span>
                 </div>
+            </div>
+            
+            <!-- Trust Badges Text -->
+            <div style="margin-top: 32px; text-align: center;">
+                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); font-weight: 600; margin: 8px 0;">
+                    🔒 Verified by Trusted Payment Gateways
+                </p>
+                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); font-weight: 600; margin: 8px 0;">
+                    🌟 Rated 4.8/5 by 500+ Students
+                </p>
             </div>
         </div>
     </section>
@@ -1056,14 +1105,14 @@
                 <p style="font-size: 20px; margin-bottom: 40px; color: rgba(255, 255, 255, 0.9);">
                     A proven, systematic approach to building wealth in Indian markets. No gimmicks, no shortcuts - just practical strategies that work.
                 </p>
-                <ul class="checkmark-list">
+                <ul class="checkmark-list" style="max-width: 600px; margin: 0 auto 32px auto;">
                     <li>Learn to analyze stocks like a professional investor</li>
                     <li>Understand when to buy, hold, and sell with confidence</li>
                     <li>Build a portfolio that grows steadily over time</li>
                     <li>Navigate market volatility without panic</li>
                     <li>Create multiple income streams from your investments</li>
                 </ul>
-                <a href="#modules" class="cta-button">देखें क्या सीखेंगे</a>
+                <a href="#modules" class="cta-button" style="display: inline-block;">SEE WHAT YOU'LL LEARN</a>
             </div>
         </div>
     </section>
@@ -1322,10 +1371,10 @@
             <h2 class="section-title">Ready to Transform Your Financial Future?</h2>
             <p class="urgency">⏰ Special Launch Price Ends Soon</p>
             <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
-                अभी ENROLL करें - ₹9,999
+                ENROLL NOW - ₹9,999
             </a>
             <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
-                या केवल ₹1,667/महीना (6 EMI) • 30-Day Money Back Guarantee
+                Or just ₹1,667/month (6 EMI) • 30-Day Money Back Guarantee
             </p>
             <p style="margin-top: 16px; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
                 After payment, you'll receive access details via email within 5 minutes
@@ -1554,16 +1603,6 @@
 
         document.addEventListener('DOMContentLoaded', initCountdown);
     </script>
-
-    <!-- Trust Badges Section -->
-    <div class="trust-badges" style="text-align: center; margin-top: 24px;">
-        <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
-            🔒 Verified by Trusted Payment Gateways
-        </p>
-        <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
-            🌟 Rated 4.8/5 by 500+ Students
-        </p>
-    </div>
 
 </body>
 </html>
