@@ -170,7 +170,7 @@
         .hero {
             position: relative;
             text-align: center;
-            padding-top: 180px; /* Increased for fixed banner */
+            padding-top: 180px;
         }
         
         .hero h1 {
@@ -202,20 +202,21 @@
         .cta-button {
             background: linear-gradient(135deg, #F4A261, #E09C4A) !important;
             color: #0A2342 !important;
-            padding: 20px 48px !important;
+            padding: 24px 56px !important;
             font-size: 18px !important;
             font-weight: 800 !important;
-            border-radius: 12px !important;
+            border-radius: 8px !important;
             box-shadow: 0 8px 32px rgba(244, 162, 97, 0.4) !important;
             text-transform: uppercase !important;
             letter-spacing: 1px !important;
             transition: all 0.3s ease !important;
             border: none !important;
+            animation: pulse 1.5s infinite;
         }
 
         .cta-button:hover {
             transform: translateY(-4px) !important;
-            box-shadow: 0 12px 40px rgba(244, 162, 97, 0.6) !important;
+            box-shadow: 0 12px 40px rgba(244,162,97,0.6) !important;
             background: linear-gradient(135deg, #f5b681, #f2a85c) !important;
         }
         
@@ -312,22 +313,14 @@
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-        }
-        
-        .payment-security img {
-            height: 36px;
-            opacity: 0.92;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(44,165,141,0.10);
-            background: #fff;
-            padding: 2px 6px;
+            text-align: center;
         }
         
         .payment-security p {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            margin: 0;
+            font-size: 16px;
+            color: #FFF;
             font-weight: 600;
+            margin: 8px 0;
         }
         
         /* Guarantee Badge */
@@ -398,24 +391,7 @@
             color: #F4A261;
         }
         
-        /* Urgent Fixed Banner */
-        .urgent-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            background: linear-gradient(90deg, #FF6B6B 0%, #F4A261 100%);
-            color: #fff;
-            font-weight: 900;
-            font-size: 18px;
-            text-align: center;
-            padding: 16px 8px;
-            z-index: 2000;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 18px rgba(244,162,97,0.18);
-            animation: pulse 2s infinite;
-        }
-        
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             section {
                 padding: 40px 20px;
@@ -427,7 +403,7 @@
             }
             
             .hero {
-                padding-top: 120px;
+                padding-top: 80px;
             }
             
             .progress-indicator {
@@ -479,6 +455,24 @@
 
             .stat-box h3 {
                 font-size: 28px;
+            }
+
+            .urgent-banner {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .cta-button {
+                padding: 16px 32px;
+                font-size: 16px;
+            }
+
+            .countdown-timer .countdown-item {
+                font-size: 14px;
+            }
+
+            .guarantee-badge {
+                font-size: 14px;
             }
         }
 
@@ -566,60 +560,120 @@
             }
         }
 
-        /* Add to <style> section */
+        /* Urgent Banner Animation */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         .urgent-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            background: linear-gradient(90deg, #FF6B6B 0%, #F4A261 100%);
-            color: #fff;
-            font-weight: 900;
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        /* Countdown Timer Styles */
+        .urgency-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #FF5733, #FFC300);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 24px;
+            color: #FFF;
+        }
+
+        .urgency-badge {
             font-size: 18px;
-            text-align: center;
-            padding: 16px 8px;
-            z-index: 2000;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 18px rgba(244,162,97,0.18);
-            animation: pulse 2s infinite;
+            font-weight: bold;
+            padding: 8px 16px;
+            background: linear-gradient(90deg, #F4A261, #2CA58D);
+            border-radius: 8px;
+            animation: pulse 1.5s infinite;
         }
-        @media (max-width: 768px) {
-            .urgent-banner {
-                font-size: 13px;
-                padding: 10px 2px;
-            }
-            .hero {
-                padding-top: 120px;
-            }
+
+        .countdown-timer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 16px;
         }
-        .primary-cta {
-            display: inline-block;
-            background: linear-gradient(90deg, #F4A261 0%, #FF6B6B 100%) !important;
-            color: #0A2342 !important;
-            padding: 24px 56px !important;
-            font-size: 22px !important;
-            font-weight: 900 !important;
-            border-radius: 14px !important;
-            box-shadow: 0 12px 40px rgba(244, 162, 97, 0.32) !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1.2px !important;
-            border: none !important;
-            margin: 32px 0 0 0;
-            transition: all 0.3s ease !important;
-            animation: pulse 2s infinite;
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border: 2px solid #F4A261;
+            border-radius: 8px;
+            margin: 0 8px;
         }
-        .primary-cta:hover {
-            transform: translateY(-6px) scale(1.04);
-            box-shadow: 0 16px 48px rgba(244, 162, 97, 0.45) !important;
-            background: linear-gradient(90deg, #FF6B6B 0%, #F4A261 100%) !important;
-            color: #fff !important;
+
+        .countdown-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #F4A261;
         }
-        .pulse {
-            animation: pulse 2s infinite;
+
+        .countdown-label {
+            font-size: 14px;
+            color: #FFF;
         }
+
+        .countdown-separator {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFF;
+        }
+
+        .countdown-text {
+            font-size: 16px;
+            margin-top: 8px;
+            color: #FFF;
+        }
+
         @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.85; transform: scale(1.04); }
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .urgency-container {
+                padding: 12px;
+            }
+            .urgency-badge {
+                font-size: 16px;
+                padding: 6px 12px;
+            }
+            .countdown-timer {
+                flex-direction: column;
+            }
+            .countdown-item {
+                margin: 4px 0;
+            }
+            .countdown-number {
+                font-size: 24px;
+            }
+            .countdown-label {
+                font-size: 12px;
+            }
+            .countdown-separator {
+                font-size: 24px;
+            }
+            .countdown-text {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -658,11 +712,13 @@
         <div class="progress-dot" data-title="Enroll" data-section="final-cta"></div>
     </div>
 
-    <!-- Urgent Fixed Banner -->
-    <div class="urgent-banner">🚨 LIMITED TIME: Launch Special Ending Soon! Only First 100 Students Get 60% OFF 🚨</div>
+    <!-- Fixed Urgent Banner -->
+    <div class="urgent-banner" style="position: fixed; top: 0; left: 0; width: 100%; background: #FF5733; color: #FFF; text-align: center; padding: 12px 0; font-size: 16px; font-weight: bold; z-index: 1000;">
+        🚨 LIMITED TIME: Launch Special Ending Soon! Only First 100 Students Get 60% OFF 🚨
+    </div>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero" id="hero" style="padding-top: 180px;">
         <div class="container animate-in">
             <img src="logo.webp" alt="LotusLion Ventures Logo" style="width: 80px; height: auto;">
             <!-- Hero Badge -->
@@ -708,8 +764,8 @@
                 </div>
                 <div class="countdown-text">Hurry! Special price expires soon.</div>
             </div>
-            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
-                COURSE में ENROLL करें
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button" style="padding: 24px 56px; background: linear-gradient(90deg, #FF5733, #FFC300); color: #FFF; font-weight: bold; text-transform: uppercase; animation: pulse 1.5s infinite;">
+                ENROLL NOW - ₹9,999
             </a>
             <!-- SPECIAL LAUNCH PRICE Floating Badge -->
             <div class="launch-badge">SPECIAL LAUNCH PRICE</div>
@@ -720,11 +776,16 @@
                 <div class="emi-option">
                     या सिर्फ <strong>₹1,667/महीना</strong> (6 EMI)
                 </div>
-                <div class="payment-security">
-                    <img src="https://img.shields.io/badge/100%25_Secure-Payment-success?style=for-the-badge&logo=shield&logoColor=white" alt="Secure Payment">
-                    <img src="https://img.shields.io/badge/EMI-Available-blue?style=for-the-badge&logo=credit-card&logoColor=white" alt="EMI Available">
-                    <img src="https://img.shields.io/badge/UPI-Accepted-brightgreen?style=for-the-badge&logo=google-pay&logoColor=white" alt="UPI Accepted">
-                    <p>💳 All Cards, UPI, Net Banking, EMI</p>
+                <div class="payment-security" style="text-align: center; margin-top: 24px;">
+                    <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
+                        🔒 100% Secure Payment
+                    </p>
+                    <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
+                        💳 All Cards • UPI • Net Banking
+                    </p>
+                    <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
+                        📱 Easy EMI Available
+                    </p>
                 </div>
             </div>
             <!-- 30-Day Money-Back Guarantee Badge -->
@@ -735,9 +796,6 @@
                     <span>No questions asked. 100% refund if not satisfied.</span>
                 </div>
             </div>
-            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="hero-cta-button primary-cta pulse">
-                START LEARNING NOW - ₹9,999
-            </a>
         </div>
     </section>
 
@@ -1039,7 +1097,17 @@
         <div class="container animate-in">
             <h2 class="section-title">Ready to Transform Your Financial Future?</h2>
             <p class="urgency">⏰ Special Launch Price Ends Soon</p>
-            <!-- Countdown Timer in Final CTA -->
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
+                अभी ENROLL करें - ₹9,999
+            </a>
+            <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
+                या केवल ₹1,667/महीना (6 EMI) • 30-Day Money Back Guarantee
+            </p>
+            <p style="margin-top: 16px; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
+                After payment, you'll receive access details via email within 5 minutes
+            </p>
+
+            <!-- Second Countdown Timer -->
             <div class="urgency-container">
                 <div class="urgency-badge">LAUNCH OFFER ENDS IN:</div>
                 <div class="countdown-timer">
@@ -1060,7 +1128,8 @@
                 </div>
                 <div class="countdown-text">Hurry! Special price expires soon.</div>
             </div>
-            <!-- Guarantee Badge in Final CTA -->
+
+            <!-- Repeat Guarantee Badge -->
             <div class="guarantee-badge">
                 <span class="guarantee-icon">🛡️</span>
                 <div class="guarantee-text">
@@ -1068,15 +1137,6 @@
                     <span>No questions asked. 100% refund if not satisfied.</span>
                 </div>
             </div>
-            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="hero-cta-button primary-cta pulse">
-                START LEARNING NOW - ₹9,999
-            </a>
-            <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
-                या केवल ₹1,667/महीना (6 EMI) • 30-Day Money Back Guarantee
-            </p>
-            <p style="margin-top: 16px; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
-                After payment, you'll receive access details via email within 5 minutes
-            </p>
         </div>
     </section>
 
@@ -1245,75 +1305,41 @@
         // Countdown Timer Script
         function initCountdown() {
             function updateCountdown() {
-                // Get current time
                 const now = new Date();
-                
-                // Calculate end of next day (tomorrow at 23:59:59)
                 const tomorrow = new Date(now);
                 tomorrow.setDate(tomorrow.getDate() + 1);
                 tomorrow.setHours(23, 59, 59, 999);
-                
-                // Calculate time difference
                 const timeDiff = tomorrow.getTime() - now.getTime();
-                
-                if (timeDiff > 0) {
-                    // Calculate hours, minutes, seconds
-                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                    
-                    // Update display with leading zeros
-                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-                } else {
-                    // Timer expired, reset to next day
-                    updateCountdown();
-                }
+
+                const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+                document.getElementById('final-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('final-minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('final-seconds').textContent = String(seconds).padStart(2, '0');
             }
-            
-            // Update immediately
+
             updateCountdown();
-            
-            // Update every second
             setInterval(updateCountdown, 1000);
         }
 
-        // Countdown Timer for Final CTA
-        function initFinalCountdown() {
-            function updateFinalCountdown() {
-                const now = new Date();
-                const tomorrow = new Date(now);
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                tomorrow.setHours(23, 59, 59, 999);
-                const timeDiff = tomorrow.getTime() - now.getTime();
-                if (timeDiff > 0) {
-                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                    document.getElementById('final-hours').textContent = hours.toString().padStart(2, '0');
-                    document.getElementById('final-minutes').textContent = minutes.toString().padStart(2, '0');
-                    document.getElementById('final-seconds').textContent = seconds.toString().padStart(2, '0');
-                } else {
-                    updateFinalCountdown();
-                }
-            }
-            updateFinalCountdown();
-            setInterval(updateFinalCountdown, 1000);
-        }
-
-        // Initialize countdown when page loads
         document.addEventListener('DOMContentLoaded', initCountdown);
-        document.addEventListener('DOMContentLoaded', initFinalCountdown);
-
-        // Also initialize if script is loaded after DOM
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initCountdown);
-            document.addEventListener('DOMContentLoaded', initFinalCountdown);
-        } else {
-            initCountdown();
-            initFinalCountdown();
-        }
     </script>
+
+    <!-- Trust Badges Section -->
+    <div class="trust-badges" style="text-align: center; margin-top: 24px;">
+        <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
+            🔒 Verified by Trusted Payment Gateways
+        </p>
+        <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
+            🌟 Rated 4.8/5 by 500+ Students
+        </p>
+    </div>
+
 </body>
 </html>
