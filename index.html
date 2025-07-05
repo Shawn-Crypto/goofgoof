@@ -220,29 +220,71 @@
         
         .price-box {
             margin-top: 32px;
-            padding: 24px;
+            padding: 32px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             display: inline-block;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
         
         .price-box .original {
             text-decoration: line-through;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 18px;
+            font-size: 24px;
+            display: block;
+            margin-bottom: 8px;
         }
         
         .price-box .current {
-            font-size: 36px;
+            font-size: 48px;
             color: #2CA58D;
             font-weight: 800;
-            margin: 0 12px;
+            display: block;
+            margin-bottom: 8px;
         }
         
         .price-box .discount {
             color: #F4A261;
             font-weight: 600;
+            font-size: 18px;
+            display: inline-block;
+            background: rgba(244, 162, 97, 0.2);
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+        
+        .emi-option {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .emi-option strong {
+            color: #F4A261;
+            font-size: 24px;
+        }
+        
+        .payment-security {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-security img {
+            height: 40px;
+            opacity: 0.8;
+        }
+        
+        .payment-security p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         /* Trust Badges */
@@ -492,6 +534,18 @@
                 width: 250px;
                 left: -250px;
             }
+            
+            .price-box .current {
+                font-size: 36px;
+            }
+            
+            .emi-option {
+                font-size: 16px;
+            }
+            
+            .emi-option strong {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -543,17 +597,24 @@
                 </div>
             </div>
             
-            <p class="subtitle">Master the Market with Lotuslion's Proven Framework</p>
+            <p class="subtitle">Master Stock Market के Proven Strategies सीखें</p>
             <p class="description">
-                Stop guessing. Start investing with confidence. Learn the exact strategies that have helped build wealth through multiple market cycles.
+                Stop guessing. Start investing with confidence. Learn the exact institutional-grade strategies that have helped build wealth through multiple market cycles.
             </p>
             <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
-                SECURE YOUR SPOT
+                COURSE में ENROLL करें
             </a>
             <div class="price-box">
-                <span class="original">₹4,999</span>
-                <span class="current">₹1,999</span>
-                <span class="discount">60% OFF - Limited Time</span>
+                <span class="original">₹24,999</span>
+                <span class="current">₹9,999</span>
+                <span class="discount">60% OFF - Limited Period</span>
+                <div class="emi-option">
+                    या सिर्फ <strong>₹1,667/महीना</strong> (6 EMI)
+                </div>
+                <div class="payment-security">
+                    <p>🔒 100% Secure Payment</p>
+                    <p>💳 All Cards, UPI, Net Banking, EMI</p>
+                </div>
             </div>
             <div class="trust-badges">
                 <div class="badge">✓ 17+ Years Institutional Experience</div>
@@ -610,7 +671,7 @@
                     <li>Navigate market volatility without panic</li>
                     <li>Create multiple income streams from your investments</li>
                 </ul>
-                <a href="#modules" class="cta-button">SEE WHAT YOU'LL LEARN</a>
+                <a href="#modules" class="cta-button">देखें क्या सीखेंगे</a>
             </div>
         </div>
     </section>
@@ -732,9 +793,12 @@
             <h2 class="section-title">Ready to Transform Your Financial Future?</h2>
             <p class="urgency">⏰ Special Launch Price Ends Soon</p>
             <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
-                ENROLL NOW FOR ₹1,999
+                अभी ENROLL करें - ₹9,999
             </a>
             <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
+                या केवल ₹1,667/महीना (6 EMI) • 30-Day Money Back Guarantee
+            </p>
+            <p style="margin-top: 16px; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
                 After payment, you'll receive access details via email within 5 minutes
             </p>
         </div>
