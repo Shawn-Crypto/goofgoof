@@ -198,25 +198,24 @@
             line-height: 1.8;
         }
         
-        /* Updated CTA Button Styles */
         .cta-button {
-            background: linear-gradient(135deg, #F4A261, #E09C4A) !important;
-            color: #0A2342 !important;
-            padding: 20px 48px !important;
-            font-size: 18px !important;
-            font-weight: 800 !important;
-            border-radius: 12px !important;
-            box-shadow: 0 8px 32px rgba(244, 162, 97, 0.4) !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-            transition: all 0.3s ease !important;
-            border: none !important;
+            display: inline-block;
+            background: #F4A261;
+            color: #0A2342;
+            padding: 20px 48px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(244, 162, 97, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-
+        
         .cta-button:hover {
-            transform: translateY(-4px) !important;
-            box-shadow: 0 12px 40px rgba(244, 162, 97, 0.6) !important;
-            background: linear-gradient(135deg, #f5b681, #f2a85c) !important;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(244, 162, 97, 0.5);
         }
         
         .price-box {
@@ -238,10 +237,11 @@
         }
         
         .price-box .current {
-            font-size: 48px !important; /* Increase from 36px */
-            color: #F4A261 !important; /* Change to saffron for more impact */
-            font-weight: 900 !important;
-            text-shadow: 0 2px 4px rgba(244, 162, 97, 0.3);
+            font-size: 48px;
+            color: #2CA58D;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 8px;
         }
         
         .price-box .discount {
@@ -249,12 +249,10 @@
             font-weight: 600;
             font-size: 18px;
             display: inline-block;
-            background: #F4A261;
-            color: #0A2342;
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-top: 12px;
-            font-weight: 700;
+            background: rgba(244, 162, 97, 0.2);
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
         }
         
         .emi-option {
@@ -587,198 +585,6 @@
                 font-size: 28px;
             }
         }
-
-        /* Hero Section - Additional Styles */
-        .hero-cta-button {
-            display: inline-block;
-            background: #F4A261;
-            color: #0A2342;
-            padding: 24px 56px;
-            font-size: 22px;
-            font-weight: 800;
-            text-decoration: none;
-            border-radius: 12px;
-            margin-top: 32px;
-            box-shadow: 0 8px 32px rgba(244, 162, 97, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .hero-cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(244, 162, 97, 0.6);
-            background: #f5b681;
-        }
-
-        .hero-credentials {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-
-        .credential-highlight {
-            text-align: center;
-            padding: 20px;
-            background: rgba(244, 162, 97, 0.1);
-            border-radius: 12px;
-            border: 1px solid rgba(244, 162, 97, 0.3);
-            min-width: 160px;
-        }
-
-        .credential-number {
-            display: block;
-            font-size: 28px;
-            font-weight: 800;
-            color: #F4A261;
-            margin-bottom: 8px;
-        }
-
-        .credential-text {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-        }
-
-        /* Add 48-Hour Rolling Countdown Timer */
-        .urgency-container {
-            text-align: center;
-            margin: 32px 0;
-            padding: 24px;
-            background: rgba(255, 107, 107, 0.1);
-            border-radius: 16px;
-            border: 2px solid rgba(255, 107, 107, 0.2);
-        }
-
-        .urgency-badge {
-            background: linear-gradient(135deg, #FF6B6B, #FF4757);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 16px;
-            display: inline-block;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgba(244, 162, 97, 0.1);
-            border: 2px solid rgba(244, 162, 97, 0.3);
-            border-radius: 12px;
-            padding: 16px 12px;
-            min-width: 80px;
-        }
-
-        .countdown-number {
-            font-size: 32px;
-            font-weight: 900;
-            color: #F4A261;
-            line-height: 1;
-            text-shadow: 0 2px 4px rgba(244, 162, 97, 0.3);
-        }
-
-        .countdown-label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
-        }
-
-        .countdown-separator {
-            font-size: 28px;
-            color: #F4A261;
-            font-weight: 900;
-            margin: 0 4px;
-        }
-
-        .countdown-text {
-            color: #FF6B6B;
-            font-size: 16px;
-            font-weight: 600;
-            margin-top: 16px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .countdown-timer {
-                gap: 4px;
-            }
-            
-            .countdown-item {
-                min-width: 70px;
-                padding: 12px 8px;
-            }
-            
-            .countdown-number {
-                font-size: 28px;
-            }
-            
-            .countdown-separator {
-                font-size: 24px;
-            }
-            
-            .urgency-badge {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-        }
-
-        /* Prominent Money-Back Guarantee Badge */
-        .guarantee-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            background: rgba(44, 165, 141, 0.1);
-            border: 2px solid rgba(44, 165, 141, 0.3);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 24px auto;
-            max-width: 400px;
-        }
-
-        .guarantee-icon {
-            font-size: 32px;
-        }
-
-        .guarantee-text {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        .guarantee-text strong {
-            color: #2CA58D;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .guarantee-text span {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -846,24 +652,6 @@
                 <div class="payment-security">
                     <p>🔒 100% Secure Payment</p>
                     <p>💳 All Cards, UPI, Net Banking, EMI</p>
-                </div>
-            </div>
-            <a href="https://payments.cashfree.com/forms/lotuslion-course" 
-               class="hero-cta-button">
-               START LEARNING NOW - ₹9,999
-            </a>
-            <div class="hero-credentials">
-                <div class="credential-highlight">
-                    <span class="credential-number">17+</span>
-                    <span class="credential-text">Years at ICRA & Top Firms</span>
-                </div>
-                <div class="credential-highlight">
-                    <span class="credential-number">100+</span>
-                    <span class="credential-text">Companies Analyzed</span>
-                </div>
-                <div class="credential-highlight">
-                    <span class="credential-number">₹12.4Cr</span>
-                    <span class="credential-text">Student Portfolio Value</span>
                 </div>
             </div>
             <div class="trust-badges">
@@ -1351,53 +1139,6 @@
                 }
             });
         });
-
-        // Countdown Timer Script
-        function initCountdown() {
-            function updateCountdown() {
-                // Get current time
-                const now = new Date();
-                
-                // Calculate end of next day (tomorrow at 23:59:59)
-                const tomorrow = new Date(now);
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                tomorrow.setHours(23, 59, 59, 999);
-                
-                // Calculate time difference
-                const timeDiff = tomorrow.getTime() - now.getTime();
-                
-                if (timeDiff > 0) {
-                    // Calculate hours, minutes, seconds
-                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                    
-                    // Update display with leading zeros
-                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-                } else {
-                    // Timer expired, reset to next day
-                    updateCountdown();
-                }
-            }
-            
-            // Update immediately
-            updateCountdown();
-            
-            // Update every second
-            setInterval(updateCountdown, 1000);
-        }
-
-        // Initialize countdown when page loads
-        document.addEventListener('DOMContentLoaded', initCountdown);
-
-        // Also initialize if script is loaded after DOM
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initCountdown);
-        } else {
-            initCountdown();
-        }
     </script>
 </body>
 </html>
