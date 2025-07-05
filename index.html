@@ -1,6 +1,4 @@
-.module-stack {
-                grid-template-columns: 1fr;
-            }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,931 +14,50 @@
     })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
     <!-- End Google Tag Manager -->
     
-    <!-- Inter Font -->
+    <!-- Preload and Stylesheets -->
+    <link rel="preload" href="/styles.css" as="style">
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&font-display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%);
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* Navigation */
-        .nav-trigger {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1002;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-trigger:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .nav-trigger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: #ffffff;
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-        
-        #nav-panel {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background: rgba(13, 20, 33, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 80px 30px 30px;
-            transition: left 0.3s ease;
-            z-index: 1001;
-            overflow-y: auto;
-        }
-        
-        #nav-panel.active {
-            left: 0;
-        }
-        
-        #nav-panel a {
-            display: block;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        #nav-panel a:hover,
-        #nav-panel a.active {
-            color: #F4A261;
-            transform: translateX(10px);
-        }
-        
-        /* Progress Indicator */
-        .progress-indicator {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-        }
-        
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            margin: 20px 0;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .progress-dot.active {
-            background: #F4A261;
-            transform: scale(1.5);
-        }
-        
-        .progress-dot:hover::after {
-            content: attr(data-title);
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 4px;
-            white-space: nowrap;
-            font-size: 12px;
-        }
-        
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-        
-        /* Section Base */
-        section {
-            padding: 60px 40px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-        
-        /* Section Titles and Subtitles */
-        .section-title {
-            text-align: center;
-            font-size: clamp(28px, 5vw, 42px);
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: #ffffff;
-        }
-        .section-subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 48px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-in {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        /* Hero Section */
-        .hero {
-            position: relative;
-            text-align: center;
-            padding-top: 180px;
-        }
-        
-        .hero h1 {
-            font-size: clamp(36px, 8vw, 64px);
-            font-weight: 800;
-            margin-bottom: 24px;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-        
-        .hero .subtitle {
-            font-size: clamp(20px, 4vw, 28px);
-            color: #2CA58D;
-            margin-bottom: 32px;
-            font-weight: 600;
-        }
-        
-        .hero .description {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 48px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-        }
-        
-        /* Updated CTA Button Styles */
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #F4A261, #E09C4A) !important;
-            color: #0A2342 !important;
-            padding: 24px 56px !important;
-            font-size: 18px !important;
-            font-weight: 800 !important;
-            border-radius: 8px !important;
-            box-shadow: 0 8px 32px rgba(244,162,97,0.4) !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-            transition: all 0.3s ease !important;
-            border: none !important;
-            animation: pulse 1.5s infinite;
-            text-decoration: none;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-4px) !important;
-            box-shadow: 0 12px 40px rgba(244,162,97,0.6) !important;
-            background: linear-gradient(135deg, #f5b681, #f2a85c) !important;
-        }
-        
-        /* SPECIAL LAUNCH PRICE Floating Badge */
-        .launch-badge {
-            display: inline-block;
-            position: relative;
-            top: 0;
-            left: 0;
-            background: linear-gradient(90deg, #F4A261 0%, #E09C4A 100%);
-            color: #0A2342;
-            font-weight: 900;
-            font-size: 15px;
-            letter-spacing: 1px;
-            padding: 8px 28px;
-            border-radius: 30px;
-            margin-bottom: -18px;
-            margin-top: 18px;
-            box-shadow: 0 4px 18px rgba(244,162,97,0.18);
-            text-transform: uppercase;
-            z-index: 2;
-            animation: pulse 2s infinite;
-        }
-        
-        .price-box {
-            margin-top: 32px;
-            padding: 40px 32px 32px 32px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(244,162,97,0.08) 100%);
-            border-radius: 18px;
-            display: inline-block;
-            border: 2px solid #F4A261;
-            position: relative;
-            box-shadow: 0 8px 32px rgba(244,162,97,0.18);
-            min-width: 320px;
-        }
-        
-        .price-box .original {
-            text-decoration: line-through;
-            color: #ffbfa3;
-            font-size: 22px;
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            opacity: 0.7;
-        }
-        
-        .price-box .current {
-            font-size: 56px !important;
-            color: #F4A261 !important;
-            font-weight: 900 !important;
-            text-shadow: 0 4px 18px rgba(244,162,97,0.32);
-            margin-bottom: 8px;
-            display: block;
-            line-height: 1.1;
-        }
-        
-        .price-box .discount {
-            color: #F4A261;
-            font-weight: 700;
-            font-size: 20px;
-            display: inline-block;
-            background: linear-gradient(90deg, #F4A261 0%, #E09C4A 100%);
-            color: #0A2342;
-            padding: 10px 22px;
-            border-radius: 20px;
-            margin-top: 16px;
-            font-weight: 900;
-            box-shadow: 0 2px 8px rgba(244,162,97,0.18);
-            letter-spacing: 1px;
-        }
-        
-        .emi-option {
-            font-size: 20px;
-            color: #fff;
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            font-weight: 600;
-            background: rgba(244,162,97,0.08);
-            border-radius: 10px;
-        }
-        
-        .emi-option strong {
-            color: #F4A261;
-            font-size: 26px;
-            font-weight: 900;
-        }
-        
-        .payment-security {
-            margin-top: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            text-align: center;
-        }
-        
-        .payment-security p {
-            font-size: 16px;
-            color: #FFF;
-            font-weight: 600;
-            margin: 8px 0;
-        }
-        
-        /* Guarantee Badge */
-        .guarantee-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            background: linear-gradient(90deg, #2CA58D 0%, #43e9c6 100%);
-            border: 2px solid #2CA58D;
-            padding: 22px 32px;
-            border-radius: 16px;
-            margin: 32px auto 0 auto;
-            max-width: 420px;
-            box-shadow: 0 6px 32px rgba(44,165,141,0.18);
-            transition: box-shadow 0.2s, background 0.2s;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .guarantee-badge:hover {
-            box-shadow: 0 12px 40px rgba(44,165,141,0.32);
-            background: linear-gradient(90deg, #43e9c6 0%, #2CA58D 100%);
-        }
-        
-        .guarantee-icon {
-            font-size: 36px;
-            color: #fff;
-            filter: drop-shadow(0 2px 8px rgba(44,165,141,0.18));
-        }
-        
-        .guarantee-text {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-        
-        .guarantee-text strong {
-            color: #fff;
-            font-size: 18px;
-            margin-bottom: 4px;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-        }
-        
-        .guarantee-text span {
-            color: #0A2342;
-            font-size: 15px;
-            font-weight: 700;
-        }
-        
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 40px 0;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        footer a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            margin: 0 16px;
-            transition: color 0.3s ease;
-        }
-        
-        footer a:hover {
-            color: #F4A261;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            section {
-                padding: 40px 20px;
-                min-height: auto;
-            }
-            
-            .container {
-                padding: 0 20px;
-            }
-            
-            .hero {
-                padding-top: 80px;
-            }
-            
-            .progress-indicator {
-                display: none;
-            }
-            
-            .trust-badges {
-                grid-template-columns: 1fr;
-            }
-            
-            .problem-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-trigger {
-                top: 10px;
-                left: 10px;
-            }
-            
-            #nav-panel {
-                width: 250px;
-                left: -250px;
-            }
-            
-            .price-box .current {
-                font-size: 36px !important;
-            }
-            
-            .emi-option {
-                font-size: 16px;
-            }
-            
-            .emi-option strong {
-                font-size: 20px;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonial-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stat-box {
-                padding: 20px;
-            }
-
-            .stat-box h3 {
-                font-size: 28px;
-            }
-
-            .urgent-banner {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            .cta-button {
-                padding: 16px 32px !important;
-                font-size: 16px !important;
-            }
-
-            .countdown-timer .countdown-item {
-                font-size: 14px;
-            }
-
-            .guarantee-badge {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .testimonial-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 600px) {
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-            .testimonial-stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Hero Section - Additional Styles */
-        .hero-badge {
-            display: inline-block;
-            background: linear-gradient(90deg, #F4A261 0%, #E09C4A 100%);
-            color: #0A2342;
-            font-weight: 800;
-            font-size: 15px;
-            letter-spacing: 1px;
-            padding: 10px 28px;
-            border-radius: 30px;
-            margin-bottom: 24px;
-            margin-top: 16px;
-            box-shadow: 0 4px 18px rgba(244,162,97,0.18);
-            text-transform: uppercase;
-            animation: pulse 2s infinite;
-        }
-        .hero-credentials {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin: 32px 0 24px 0;
-            flex-wrap: wrap;
-        }
-        .credential-highlight {
-            background: linear-gradient(135deg, rgba(244,162,97,0.18) 0%, rgba(255,255,255,0.08) 100%);
-            border: 2px solid #F4A261;
-            border-radius: 18px;
-            box-shadow: 0 6px 32px rgba(244,162,97,0.18);
-            padding: 28px 24px 20px 24px;
-            min-width: 170px;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            position: relative;
-        }
-        .credential-highlight:hover {
-            transform: translateY(-6px) scale(1.04);
-            box-shadow: 0 12px 40px rgba(244,162,97,0.32);
-            background: linear-gradient(135deg, #F4A261 0%, #E09C4A 100%);
-            color: #0A2342;
-        }
-        .credential-number {
-            font-size: 32px;
-            font-weight: 900;
-            color: #F4A261;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 8px rgba(244,162,97,0.18);
-            transition: color 0.2s;
-        }
-        .credential-highlight:hover .credential-number {
-            color: #0A2342;
-        }
-        .credential-text {
-            font-size: 15px;
-            color: rgba(255,255,255,0.92);
-            font-weight: 700;
-            letter-spacing: 0.2px;
-            transition: color 0.2s;
-        }
-        .credential-highlight:hover .credential-text {
-            color: #0A2342;
-        }
-        @media (max-width: 768px) {
-            .hero-badge {
-                font-size: 12px;
-                padding: 8px 14px;
-                margin-bottom: 16px;
-            }
-            .hero-credentials {
-                gap: 12px;
-                margin: 20px 0 16px 0;
-            }
-            .credential-highlight {
-                min-width: 120px;
-                padding: 16px 8px 12px 8px;
-            }
-            .credential-number {
-                font-size: 22px;
-            }
-            .credential-text {
-                font-size: 12px;
-            }
-        }
-
-        /* Urgent Banner Animation */
-        @keyframes slideIn {
-            0% {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .urgent-banner {
-            animation: slideIn 0.5s ease-out forwards;
-        }
-
-        /* Countdown Timer Styles */
-        .urgency-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(90deg, #FF5733, #FFC300);
-            padding: 16px;
-            border-radius: 12px;
-            margin-top: 24px;
-            color: #FFF;
-        }
-
-        .urgency-badge {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 8px 16px;
-            background: rgba(0, 0, 0, 0.3);
-            color: #FFFFFF;
-            border-radius: 8px;
-            animation: pulse 1.5s infinite;
-        }
-
-        .countdown-timer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 16px;
-            flex-wrap: nowrap;
-        }
-
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 2px solid #FFFFFF;
-            border-radius: 8px;
-            margin: 0 4px;
-        }
-
-        .countdown-number {
-            font-size: 32px;
-            font-weight: 900;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .countdown-label {
-            font-size: 14px;
-            color: #FFFFFF;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .countdown-separator {
-            font-size: 32px;
-            font-weight: bold;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin: 0 2px;
-        }
-
-        .countdown-text {
-            font-size: 16px;
-            margin-top: 8px;
-            color: #FFFFFF;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .urgency-container {
-                padding: 12px;
-            }
-            .urgency-badge {
-                font-size: 16px;
-                padding: 6px 12px;
-            }
-            .countdown-item {
-                padding: 6px 8px;
-            }
-            .countdown-number {
-                font-size: 24px;
-            }
-            .countdown-label {
-                font-size: 12px;
-            }
-            .countdown-separator {
-                font-size: 24px;
-            }
-            .countdown-text {
-                font-size: 14px;
-            }
-        }
-
-        /* Problems Section Grid and Card Styles */
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-        }
-        .problem-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
-            padding: 32px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-        .problem-card:hover {
-            border-color: #F4A261;
-            transform: translateY(-8px);
-            box-shadow: 0 8px 32px rgba(244,162,97,0.12);
-        }
-        .problem-card h3 {
-            color: #F4A261;
-            font-size: 22px;
-            margin-bottom: 16px;
-        }
-
-        /* Solution Section Checkmark List */
-        .checkmark-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 32px 0;
-            text-align: left;
-        }
-        .checkmark-list li {
-            position: relative;
-            padding-left: 36px;
-            margin-bottom: 20px;
-        }
-        .checkmark-list li::before {
-            content: '✔';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: #2CA58D;
-            font-size: 24px;
-            line-height: 1;
-        }
-        
-        /* Solution Content */
-        .solution-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Modules Section Stack and Card Styles */
-        .module-stack {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-        .module-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 24px 32px;
-            border-radius: 12px;
-            border-left: 4px solid #F4A261;
-            transition: all 0.3s cubic-bezier(.4,1.3,.6,1);
-        }
-        .module-card:hover {
-            background: rgba(244, 162, 97, 0.1);
-            transform: scale(1.03);
-            box-shadow: 0 8px 32px rgba(244,162,97,0.10);
-        }
-        .module-card h3 {
-            color: #2CA58D;
-            font-size: 24px;
-            margin-bottom: 16px;
-            font-weight: 700;
-        }
-        .module-card ul {
-            list-style: none;
-        }
-        .module-card li {
-            padding: 8px 0;
-            padding-left: 24px;
-            position: relative;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        .module-card li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #F4A261;
-        }
-        /* JavaScript for Countdown Timer */
-
-        /* Instructor Section Styles */
-        .instructor-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(13, 20, 33, 0.5);
-            padding: 32px;
-            border-radius: 16px;
-        }
-
-        /* Testimonials Section Grid and Card Styles */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-            margin-bottom: 48px;
-        }
-        .testimonial-card {
-            background: linear-gradient(135deg, rgba(244,162,97,0.08) 0%, rgba(255,255,255,0.04) 100%);
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 18px rgba(244,162,97,0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-        .testimonial-card:hover {
-            box-shadow: 0 8px 32px rgba(244,162,97,0.16);
-            transform: translateY(-4px) scale(1.02);
-        }
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            margin-bottom: 16px;
-        }
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #F4A261;
-            box-shadow: 0 2px 8px rgba(244,162,97,0.12);
-        }
-        .rating {
-            color: #F4A261;
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 4px;
-        }
-        .testimonial-info h4 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-        }
-        .testimonial-info p {
-            margin: 0;
-            font-size: 14px;
-            color: rgba(255,255,255,0.7);
-        }
-        .testimonial-text {
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 18px;
-        }
-        .testimonial-metric {
-            border-top: 1px solid rgba(244,162,97,0.18);
-            padding-top: 14px;
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 15px;
-            color: #F4A261;
-            font-weight: 700;
-        }
-        .metric-label {
-            color: #F4A261;
-            font-weight: 700;
-        }
-        .metric-value {
-            color: #fff;
-            font-weight: 700;
-        }
-
-        /* Testimonial Stats Grid */
-        .testimonial-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-top: 32px;
-        }
-        .stat-box {
-            background: rgba(244, 162, 97, 0.1);
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .stat-box h3 {
-            color: #F4A261;
-            font-size: 32px;
-            margin-bottom: 8px;
-            font-weight: 900;
-        }
-        .stat-box p {
-            color: #fff;
-            font-size: 16px;
-            margin: 0;
-        }
-
-        /* Final CTA Section Styles */
-        .final-cta {
-            text-align: center;
-        }
-        .final-cta .urgency {
-            color: #FFC300;
-            font-weight: 700;
-            font-size: 20px;
-        }
-        /* Alternating Section Backgrounds */
-        .problems {
-            background-color: #1A2332;
-        }
-        .modules {
-            background-color: #1A2332;
-        }
+        /* CSS moved to styles.css */
     </style>
+
+    <!-- Open Graph and Twitter Card data -->
+    <meta property="og:title" content="The Complete Indian Stock Investor - Master the Market with Lotuslion">
+    <meta property="og:description" content="Learn proven investment strategies from experienced investors. Build long-term wealth in Indian markets.">
+    <meta property="og:image" content="https://lotuslion.in/assets/og-image.jpg">
+    <meta property="og:url" content="https://lotuslion.in">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Complete Indian Stock Investor">
+    <meta name="twitter:description" content="Learn proven investment strategies from experienced investors.">
+    <meta name="twitter:image" content="https://lotuslion.in/assets/og-image.jpg">
+    <link rel="canonical" href="https://lotuslion.in">
+
+    <!-- Structured data for the course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "The Complete Indian Stock Investor",
+      "description": "Master proven investment strategies from experienced investors",
+      "provider": {
+        "@type": "Organization",
+        "name": "Lotuslion Venture LLP"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9999",
+        "priceCurrency": "INR"
+      }
+    }
+    </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -981,9 +98,9 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero" style="padding-top: 180px;">
+    <section class="hero" id="main-content" style="padding-top: 180px;">
         <div class="container animate-in">
-            <img src="assets/logo.webp" alt="LotusLion Ventures Logo" style="width: 80px; height: auto;">
+            <img src="assets/logo.webp" alt="LotusLion Ventures Logo" width="80" height="80" style="width: 80px; height: auto;">
             <!-- Hero Badge -->
             <div class="hero-badge">🎯 INSTITUTIONAL EXPERIENCE MEETS RETAIL ACCESSIBILITY</div>
             <h1>The Complete Indian Stock Investor</h1>
@@ -1007,21 +124,21 @@
                 Stop guessing. Start investing with confidence. Learn the exact institutional-grade strategies that have helped build wealth through multiple market cycles.
             </p>
             <!-- 48-Hour Rolling Countdown Timer -->
-            <div class="urgency-container">
+            <div class="urgency-container" role="timer" aria-live="polite">
                 <div class="urgency-badge">LAUNCH OFFER ENDS IN:</div>
                 <div class="countdown-timer">
                     <div class="countdown-item">
-                        <span class="countdown-number" id="hours">00</span>
+                        <time class="countdown-number" id="hero-hours" datetime="00">00</time>
                         <span class="countdown-label">HOURS</span>
                     </div>
                     <span class="countdown-separator">:</span>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">00</span>
+                        <time class="countdown-number" id="hero-minutes" datetime="00">00</time>
                         <span class="countdown-label">MINUTES</span>
                     </div>
                     <span class="countdown-separator">:</span>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">00</span>
+                        <time class="countdown-number" id="hero-seconds" datetime="00">00</time>
                         <span class="countdown-label">SECONDS</span>
                     </div>
                 </div>
@@ -1219,9 +336,7 @@
                               padding: 12px 24px; border-radius: 8px; color: #F4A261; text-decoration: none; 
                               border: 1px solid rgba(244, 162, 97, 0.3); transition: all 0.3s ease;">
                         <span>Verify on LinkedIn</span>
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                        </svg>
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                     </a>
                 </div>
             </div>
@@ -1235,13 +350,13 @@
             <p class="section-subtitle">Join 500+ investors who've transformed their financial future</p>
             
             <div class="testimonials-grid">
-                <div class="testimonial-card">
+                <article class="testimonial-card">
                     <div class="testimonial-header">
-                        <img src="assets/Arjun.webp" alt="Arjun Mehta" class="testimonial-avatar">
+                        <img src="assets/Arjun.webp" alt="Arjun Mehta" class="testimonial-avatar" width="60" height="60" loading="lazy">
                         <div class="testimonial-info">
                             <h4>Arjun Mehta</h4>
                             <p>IT Manager, Bengaluru</p>
-                            <div class="rating">★★★★★</div>
+                            <div class="rating" aria-label="5 out of 5 stars">★★★★★</div>
                         </div>
                     </div>
                     <p class="testimonial-text">
@@ -1251,15 +366,14 @@
                         <span class="metric-label">Portfolio Growth:</span>
                         <span class="metric-value">₹3.2L → ₹3.94L</span>
                     </div>
-                </div>
-
-                <div class="testimonial-card">
+                </article>
+                <article class="testimonial-card">
                     <div class="testimonial-header">
-                        <img src="assets/Priya.webp" alt="Priya Sharma" class="testimonial-avatar">
+                        <img src="assets/Priya.webp" alt="Priya Sharma" class="testimonial-avatar" width="60" height="60" loading="lazy">
                         <div class="testimonial-info">
                             <h4>Priya Sharma</h4>
                             <p>Doctor, Mumbai</p>
-                            <div class="rating">★★★★★</div>
+                            <div class="rating" aria-label="5 out of 5 stars">★★★★★</div>
                         </div>
                     </div>
                     <p class="testimonial-text">
@@ -1269,15 +383,14 @@
                         <span class="metric-label">Time to First Profit:</span>
                         <span class="metric-value">Just 3 weeks</span>
                     </div>
-                </div>
-
-                <div class="testimonial-card">
+                </article>
+                <article class="testimonial-card">
                     <div class="testimonial-header">
-                        <img src="assets/Rajesh.webp" alt="Rajesh Kumar" class="testimonial-avatar">
+                        <img src="assets/Rajesh.webp" alt="Rajesh Kumar" class="testimonial-avatar" width="60" height="60" loading="lazy">
                         <div class="testimonial-info">
                             <h4>Rajesh Kumar</h4>
                             <p>Business Owner, Delhi</p>
-                            <div class="rating">★★★★★</div>
+                            <div class="rating" aria-label="5 out of 5 stars">★★★★★</div>
                         </div>
                     </div>
                     <p class="testimonial-text">
@@ -1287,15 +400,14 @@
                         <span class="metric-label">Monthly Returns:</span>
                         <span class="metric-value">Avg 3-4% consistent</span>
                     </div>
-                </div>
-
-                <div class="testimonial-card">
+                </article>
+                <article class="testimonial-card">
                     <div class="testimonial-header">
-                        <img src="assets/Sneha.webp" alt="Sneha Patel" class="testimonial-avatar">
+                        <img src="assets/Sneha.webp" alt="Sneha Patel" class="testimonial-avatar" width="60" height="60" loading="lazy">
                         <div class="testimonial-info">
                             <h4>Sneha Patel</h4>
                             <p>CA, Ahmedabad</p>
-                            <div class="rating">★★★★★</div>
+                            <div class="rating" aria-label="5 out of 5 stars">★★★★★</div>
                         </div>
                     </div>
                     <p class="testimonial-text">
@@ -1305,15 +417,14 @@
                         <span class="metric-label">Best Pick:</span>
                         <span class="metric-value">HDFC Bank +68%</span>
                     </div>
-                </div>
-
-                <div class="testimonial-card">
+                </article>
+                <article class="testimonial-card">
                     <div class="testimonial-header">
-                        <img src="assets/Amit.webp" alt="Amit Agarwal" class="testimonial-avatar">
+                        <img src="assets/Amit.webp" alt="Amit Agarwal" class="testimonial-avatar" width="60" height="60" loading="lazy">
                         <div class="testimonial-info">
                             <h4>Amit Agarwal</h4>
                             <p>Startup Founder, Pune</p>
-                            <div class="rating">★★★★★</div>
+                            <div class="rating" aria-label="5 out of 5 stars">★★★★★</div>
                         </div>
                     </div>
                     <p class="testimonial-text">
@@ -1323,15 +434,14 @@
                         <span class="metric-label">Crisis Returns:</span>
                         <span class="metric-value">+15% in 2 months</span>
                     </div>
-                </div>
-
-                <div class="testimonial-card">
+                </article>
+                <article class="testimonial-card">
                     <div class="testimonial-header">
-                        <img src="assets/Kavita.webp" alt="Kavita Reddy" class="testimonial-avatar">
+                        <img src="assets/Kavita.webp" alt="Kavita Reddy" class="testimonial-avatar" width="60" height="60" loading="lazy">
                         <div class="testimonial-info">
                             <h4>Kavita Reddy</h4>
                             <p>Bank Manager, Hyderabad</p>
-                            <div class="rating">★★★★★</div>
+                            <div class="rating" aria-label="5 out of 5 stars">★★★★★</div>
                         </div>
                     </div>
                     <p class="testimonial-text">
@@ -1341,7 +451,7 @@
                         <span class="metric-label">Portfolio Growth:</span>
                         <span class="metric-value">16x in 18 months</span>
                     </div>
-                </div>
+                </article>
             </div>
 
             <div class="testimonial-stats">
@@ -1381,21 +491,21 @@
             </p>
 
             <!-- Second Countdown Timer -->
-            <div class="urgency-container">
+            <div class="urgency-container" role="timer" aria-live="polite">
                 <div class="urgency-badge">LAUNCH OFFER ENDS IN:</div>
                 <div class="countdown-timer">
                     <div class="countdown-item">
-                        <span class="countdown-number" id="final-hours">00</span>
+                        <time class="countdown-number" id="final-hours" datetime="00">00</time>
                         <span class="countdown-label">HOURS</span>
                     </div>
                     <span class="countdown-separator">:</span>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="final-minutes">00</span>
+                        <time class="countdown-number" id="final-minutes" datetime="00">00</time>
                         <span class="countdown-label">MINUTES</span>
                     </div>
                     <span class="countdown-separator">:</span>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="final-seconds">00</span>
+                        <time class="countdown-number" id="final-seconds" datetime="00">00</time>
                         <span class="countdown-label">SECONDS</span>
                     </div>
                 </div>
@@ -1421,7 +531,7 @@
                     Lotuslion Venture LLP
                 </p>
                 <div style="margin-bottom: 16px;">
-                    <a href="mailto:investoreducation@lotuslion.in">Contact Support</a>
+                    <a href="#" id="obf-email">Contact Support</a>
                     <span style="color: rgba(255, 255, 255, 0.3); margin: 0 8px;">|</span>
                     <a href="/terms.html">Terms & Conditions</a>
                     <span style="color: rgba(255, 255, 255, 0.3); margin: 0 8px;">|</span>
@@ -1588,13 +698,21 @@
                 const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                // Update hero countdown
+                const heroHours = document.getElementById('hero-hours');
+                const heroMinutes = document.getElementById('hero-minutes');
+                const heroSeconds = document.getElementById('hero-seconds');
+                if (heroHours) { heroHours.textContent = String(hours).padStart(2, '0'); heroHours.setAttribute('datetime', String(hours).padStart(2, '0')); }
+                if (heroMinutes) { heroMinutes.textContent = String(minutes).padStart(2, '0'); heroMinutes.setAttribute('datetime', String(minutes).padStart(2, '0')); }
+                if (heroSeconds) { heroSeconds.textContent = String(seconds).padStart(2, '0'); heroSeconds.setAttribute('datetime', String(seconds).padStart(2, '0')); }
 
-                document.getElementById('final-hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('final-minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('final-seconds').textContent = String(seconds).padStart(2, '0');
+                // Update final countdown
+                const finalHours = document.getElementById('final-hours');
+                const finalMinutes = document.getElementById('final-minutes');
+                const finalSeconds = document.getElementById('final-seconds');
+                if (finalHours) { finalHours.textContent = String(hours).padStart(2, '0'); finalHours.setAttribute('datetime', String(hours).padStart(2, '0')); }
+                if (finalMinutes) { finalMinutes.textContent = String(minutes).padStart(2, '0'); finalMinutes.setAttribute('datetime', String(minutes).padStart(2, '0')); }
+                if (finalSeconds) { finalSeconds.textContent = String(seconds).padStart(2, '0'); finalSeconds.setAttribute('datetime', String(seconds).padStart(2, '0')); }
             }
 
             updateCountdown();
@@ -1602,6 +720,32 @@
         }
 
         document.addEventListener('DOMContentLoaded', initCountdown);
+
+        // Add aria-label to icon-only elements
+        document.querySelectorAll('.guarantee-icon').forEach(function(icon) {
+            icon.setAttribute('aria-label', 'Guarantee');
+            icon.setAttribute('role', 'img');
+        });
+
+        // Email obfuscation for Contact Support
+        (function() {
+            var e = ['i','n','v','e','s','t','o','r','e','d','u','c','a','t','i','o','n','@','l','o','t','u','s','l','i','o','n','.','i','n'];
+            var email = e.join('');
+            var link = document.getElementById('obf-email');
+            if (link) {
+                link.setAttribute('href', 'mailto:' + email);
+                link.textContent = 'Contact Support';
+            }
+        })();
+
+        // Ensure all external links have rel="noopener"
+        document.querySelectorAll('a[target="_blank"]').forEach(function(link) {
+            if (!link.hasAttribute('rel')) {
+                link.setAttribute('rel', 'noopener');
+            } else if (!link.getAttribute('rel').includes('noopener')) {
+                link.setAttribute('rel', link.getAttribute('rel') + ' noopener');
+            }
+        });
     </script>
 
 </body>
