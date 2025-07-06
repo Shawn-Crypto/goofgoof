@@ -1007,17 +1007,17 @@
                 <div class="urgency-badge">LAUNCH OFFER ENDS IN:</div>
                 <div class="countdown-timer">
                     <div class="countdown-item">
-                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-number" id="hero-hours">00</span>
                         <span class="countdown-label">HOURS</span>
                     </div>
                     <span class="countdown-separator">:</span>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-number" id="hero-minutes">00</span>
                         <span class="countdown-label">MINUTES</span>
                     </div>
                     <span class="countdown-separator">:</span>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-number" id="hero-seconds">00</span>
                         <span class="countdown-label">SECONDS</span>
                     </div>
                 </div>
@@ -1453,9 +1453,9 @@
                 const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                document.getElementById('hero-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('hero-minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('hero-seconds').textContent = String(seconds).padStart(2, '0');
 
                 document.getElementById('final-hours').textContent = String(hours).padStart(2, '0');
                 document.getElementById('final-minutes').textContent = String(minutes).padStart(2, '0');
