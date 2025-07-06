@@ -975,7 +975,7 @@
 
     <!-- Fixed Urgent Banner -->
     <div class="urgent-banner" style="position: fixed; top: 0; left: 0; width: 100%; background: #FF5733; color: #FFF; text-align: center; padding: 12px 0; font-size: 16px; font-weight: bold; z-index: 1000;">
-        🚨 LIMITED TIME: Launch Special Ending Soon! Only First 100 Students Get 60% OFF 🚨
+        🚨 LIMITED TIME: <span id="current-month">July</span> Special Offer - First 100 Students Get 60% OFF 🚨
     </div>
 
     <!-- Hero Section -->
@@ -1540,7 +1540,9 @@
         
         // Set current year in copyright
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
-        
+        // Dynamically set current month in urgent banner
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        document.getElementById('current-month').textContent = monthNames[new Date().getMonth()];
         // Track button clicks
         document.querySelectorAll('.cta-button').forEach(button => {
             button.addEventListener('click', function(e) {
