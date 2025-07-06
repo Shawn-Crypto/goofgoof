@@ -1,6 +1,4 @@
-.module-stack {
-                grid-template-columns: 1fr;
-            }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1603,6 +1601,48 @@
 
         document.addEventListener('DOMContentLoaded', initCountdown);
     </script>
+    <script>
+    // Enhanced engagement tracking for Meta optimization
+    let engagementEvents = {
+        scroll25: false,
+        scroll50: false,
+        scroll75: false,
+        longSession: false
+    };
 
+    // Lead event on CTA clicks (high-value signal)
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('click', function() {
+            fbq('track', 'Lead', {
+                content_name: 'The Complete Indian Stock Investor',
+                value: 9999,
+                currency: 'INR'
+            });
+        });
+    });
+
+    // Engagement scroll tracking
+    window.addEventListener('scroll', function() {
+        const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+        
+        if (scrollPercent >= 25 && !engagementEvents.scroll25) {
+            fbq('trackCustom', 'DeepEngagement');
+            engagementEvents.scroll25 = true;
+        }
+        
+        if (scrollPercent >= 75 && !engagementEvents.scroll75) {
+            fbq('trackCustom', 'HighIntent');
+            engagementEvents.scroll75 = true;
+        }
+    });
+
+    // Long session tracking (2+ minutes = engaged user)
+    setTimeout(() => {
+        if (!engagementEvents.longSession) {
+            fbq('trackCustom', 'LongSession');
+            engagementEvents.longSession = true;
+        }
+    }, 120000);
+    </script>
 </body>
 </html>
