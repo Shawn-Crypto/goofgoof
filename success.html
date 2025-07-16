@@ -284,11 +284,14 @@
     </div>
     
     <script>
-        // Push purchase event to dataLayer
-        // Change from a value-based purchase event to a standard one.
-        // FROM: fbq('track', 'Purchase', {value: 4999.00, currency: 'INR'});
-        // TO:
-        fbq('track', 'Purchase');
+        // Push purchase event to dataLayer (Google Tag Manager)
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'purchase',
+          'ecommerce': {
+              'transaction_id': 'TRANSACTION_ID_PLACEHOLDER' // Replace with a dynamic transaction ID
+          }
+        });
         
         // Set current year in copyright
         document.getElementById('copyright-year-success').textContent = new Date().getFullYear();
