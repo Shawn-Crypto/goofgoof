@@ -596,10 +596,43 @@
         }
 
         .urgent-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 50px; /* Make space for close button */
+            background: linear-gradient(90deg, #FF5733, #FF8C00);
+            color: #FFF;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             animation: slideIn 0.5s ease-out forwards;
         }
 
+        .close-banner-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 5px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
 
+        .close-banner-btn:hover {
+            opacity: 1;
+        }
 
         /* Problems Section Grid and Card Styles */
         .problem-grid {
@@ -871,8 +904,9 @@
     </div>
 
     <!-- Fixed Offer Banner (no urgency) -->
-    <div class="urgent-banner" style="position: fixed; top: 0; left: 0; width: 100%; background: #FF5733; color: #FFF; text-align: center; padding: 12px 0; font-size: 16px; font-weight: bold; z-index: 1000;">
-        🚨 First 100 Students Get 60% OFF 🚨
+    <div class="urgent-banner">
+        <span>🚨 First 100 Students Get 60% OFF 🚨</span>
+        <button class="close-banner-btn" aria-label="Close banner">&times;</button>
     </div>
 
     <!-- Hero Section -->
@@ -1198,7 +1232,6 @@
         
         // Set current year in copyright
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
-        // ...existing code...
         // Track button clicks
         document.querySelectorAll('.cta-button').forEach(button => {
             button.addEventListener('click', function(e) {
@@ -1231,10 +1264,7 @@
             });
         });
 
-        // ...existing code...
-    </script>
-    <script>
-    // Enhanced engagement tracking for Meta optimization
+        // Enhanced engagement tracking for Meta optimization
     let engagementEvents = {
         scroll25: false,
         scroll50: false,
@@ -1271,6 +1301,15 @@
             engagementEvents.longSession = true;
         }
     }, 120000);
+
+        // Dismiss banner functionality
+        const banner = document.querySelector('.urgent-banner');
+        const closeBtn = document.querySelector('.close-banner-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                banner.style.display = 'none';
+            });
+        }
     </script>
 </body>
 </html>
