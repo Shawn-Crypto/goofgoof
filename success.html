@@ -285,20 +285,10 @@
     
     <script>
         // Push purchase event to dataLayer
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            'event': 'purchase',
-            'value': 1999,
-            'currency': 'INR',
-            'transaction_id': new Date().getTime(), // You can replace with actual transaction ID if available
-            'items': [{
-                'item_name': 'The Complete Indian Stock Investor',
-                'item_id': 'TCISI-001',
-                'price': 1999,
-                'item_category': 'Online Course',
-                'quantity': 1
-            }]
-        });
+        // Change from a value-based purchase event to a standard one.
+        // FROM: fbq('track', 'Purchase', {value: 4999.00, currency: 'INR'});
+        // TO:
+        fbq('track', 'Purchase');
         
         // Set current year in copyright
         document.getElementById('copyright-year-success').textContent = new Date().getFullYear();

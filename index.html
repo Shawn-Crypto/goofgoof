@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Complete Indian Stock Investor - Master the Market with Lotuslion</title>
-    <meta name="description" content="Learn proven investment strategies from experienced investors. Build long-term wealth in Indian markets.">
+    <meta name="description" content="Learn institutional-grade investment analysis with CSuite23. Our courses provide educational frameworks for enhancing financial literacy. This is not investment advice.">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="The Complete Indian Stock Investor - Master the Market with Lotuslion">
@@ -1098,6 +1098,9 @@
                 </div>
             </div>
             
+            <p class="footer-disclaimer" style="font-size: 0.9rem; color: #ccc; max-width: 800px; margin: 0 auto 1rem auto; padding: 0 1rem;">
+                <strong>Disclaimer:</strong> All content and courses are for educational purposes only and do not constitute investment advice. We are not SEBI registered. Trading and investing involve substantial risk of loss. Please read our full <a href="earnings_disclaimer.html" style="color: #fff; text-decoration: underline;">Earnings Disclaimer</a> before making any decisions.
+            </p>
             <p style="font-size: 14px; color: rgba(255, 255, 255, 0.5);">
                 &copy; <span id="copyright-year"></span> Lotuslion Venture LLP. All rights reserved.
             </p>
@@ -1255,14 +1258,10 @@
         longSession: false
     };
 
-    // Lead event on CTA clicks (high-value signal)
+    // Lead event on CTA clicks (standard lead, no value/currency)
     document.querySelectorAll('.cta-button').forEach(button => {
         button.addEventListener('click', function() {
-            fbq('track', 'Lead', {
-                content_name: 'The Complete Indian Stock Investor',
-                value: 9999,
-                currency: 'INR'
-            });
+            fbq('track', 'Lead');
         });
     });
 
