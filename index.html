@@ -66,6 +66,41 @@
             box-shadow: 0 4px 18px rgba(244,162,97,0.18);
             transform: scale(1.08);
         }
+
+        #nav-panel {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: rgba(13, 20, 33, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 80px 30px 30px;
+            transition: left 0.3s ease;
+            z-index: 1001;
+            overflow-y: auto;
+        }
+        
+        #nav-panel.active {
+            left: 0;
+        }
+        
+        #nav-panel a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        #nav-panel a:hover,
+        #nav-panel a.active {
+            color: #F4A261;
+            transform: translateX(10px);
+        }
+        
         .section-title {
             text-align: center;
             font-size: clamp(28px, 5vw, 42px);
@@ -746,6 +781,19 @@
         .modules {
             background-color: #1A2332;
         }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        section {
+            padding: 60px 40px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -787,7 +835,6 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero" style="padding-top: 180px;">
     <section class="hero" id="hero" style="padding-top: 180px;">
         <div class="container animate-in">
             <img src="assets/logo.webp" alt="LotusLion Ventures Logo" style="width: 80px; height: auto;">
