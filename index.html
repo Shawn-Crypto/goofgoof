@@ -229,6 +229,32 @@
             transform: translateX(100%);
             transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
+
+        .price-badge {
+            display: inline-block;
+            margin: 24px auto 32px auto;
+            padding: 24px 32px;
+            background: linear-gradient(135deg, rgba(244,162,97,0.1), rgba(255,255,255,0.05));
+            border: 1px solid #F4A261;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .price-badge .main-price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #F4A261;
+            line-height: 1.1;
+        }
+
+        .price-badge .emi-option {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 12px;
+            font-weight: 600;
+        }
         
         /* SPECIAL LAUNCH PRICE Floating Badge */
         .launch-badge {
@@ -915,6 +941,10 @@
             <img src="assets/logo.webp" alt="LotusLion Ventures Logo" style="width: 80px; height: auto;">
             <h1 class="hero-title">Master Institutional-Grade Investment Analysis</h1>
             <p class="hero-description">Learn the professional frameworks used by top financial analysts to evaluate investment opportunities and enhance your financial literacy.</p>
+            <div class="price-badge">
+                <div class="main-price">₹9,999</div>
+                <div class="emi-option">or ₹1,667/month (6 EMI)</div>
+            </div>
             <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
                 ENROLL NOW - ₹9,999
                 <span class="cta-subtext">Save ₹15,000 Today</span>
