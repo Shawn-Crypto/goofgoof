@@ -1,4 +1,4 @@
-# PART B: Content & Structural Overhaul - Sprint Plan
+# PART B: Content & Structural Overhaul - Sprint Plan (REVISED FOR META COMPLIANCE)
 
 ## Sprint 1: ✅ COMPLETED (July 16, 2025)
 **Focus:** Fix core CSS issues & add missing base styles
@@ -11,35 +11,48 @@
 - Added proper responsive styles
 - Created sprint1-updates.md with implementation guide
 
-## Sprint 2: "Who This Is For" and "Hidden Costs" sections
-**Focus:** Add target audience section and transform problems section
-- Create "Who This Is For" section after Hero
-- Transform Problems section to "The Hidden Cost of Not Knowing"
-- Add proper grid layouts and cards
-- Include icons and visual hierarchy
+## Sprint 2: ✅ COMPLETED (July 16, 2025)
+**Focus:** Meta-compliant audience and curriculum sections
+- Created "Who This Is For" section (education-focused)
+- Transformed Problems → "What You'll Master" (curriculum-based)
+- NO social proof (we don't have any)
+- NO income claims or financial outcomes
+- NO competitor comparisons
+- Created sprint2-updates.md with implementation guide
 
-## Sprint 3: "Curriculum Preview" with tabs and "Social Proof" section
-**Focus:** Interactive curriculum display and credibility building
-- Replace Solution section with tabbed curriculum interface
-- Add "Why Learn From Rohit?" section
-- Include institutional logos and achievements
-- Add LinkedIn verification button
+## Sprint 3: Curriculum Enhancement & FAQ
+**Focus:** Expand educational content
+- Enhance modules section with more detail
+- Add simple FAQ section (education-focused)
+- Improve solution section → "Our Teaching Method"
+- NO testimonials or social proof
+- NO comparison tables
 
-## Sprint 4: "Pricing", "Comparison Table", and "FAQ" sections
-**Focus:** Clear pricing structure and objection handling
-- Create dedicated pricing section with single tier
-- Add comparison table (YouTube vs Tips vs Course)
-- Implement FAQ accordion
-- Include progress bar for limited spots
+## Sprint 4: Pricing & Course Details
+**Focus:** Clear, compliant pricing presentation
+- Create simple, transparent pricing section
+- Add "What's Included" section
+- Course access details
+- Guarantee information
+- NO urgency/scarcity tactics
 
-## Sprint 5: "Final CTA" redesign and polish
-**Focus:** Complete the page and test everything
-- Redesign final CTA with choice framework
-- Add all visual assets
+## Sprint 5: Final Polish & Compliance Check
+**Focus:** Complete and review for compliance
+- Final CTA optimization
+- Add remaining visual elements
+- Complete content review
+- Ensure all claims are educational
 - Test all interactions
-- Polish animations and transitions
-- Final content review
 
 ---
 
-Each sprint builds on the previous one. Sprint 1 created the foundation. Ready for Sprint 2 when you are!
+## Meta Ads Compliance Checklist:
+- ✅ Focus on education, not outcomes
+- ✅ No fake testimonials or social proof
+- ✅ No income/financial result claims
+- ✅ No "get rich quick" messaging
+- ✅ No misleading urgency
+- ✅ Clear educational value proposition
+- ✅ Transparent about what course teaches
+
+Each sprint maintains strict compliance while building an effective landing page.
