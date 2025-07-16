@@ -177,7 +177,7 @@
             display: inline-block;
             background: linear-gradient(135deg, #F4A261, #E09C4A) !important;
             color: #0A2342 !important;
-            padding: 24px 56px !important;
+            padding: 24px 48px !important;
             font-size: 18px !important;
             font-weight: 800 !important;
             border-radius: 8px !important;
@@ -187,12 +187,47 @@
             transition: all 0.3s ease !important;
             border: none !important;
             text-decoration: none;
+            position: relative; /* For shimmer effect */
+            overflow: hidden; /* For shimmer effect */
+            text-align: center;
         }
 
         .cta-button:hover {
             transform: translateY(-4px) !important;
             box-shadow: 0 12px 40px rgba(244,162,97,0.6) !important;
             background: linear-gradient(135deg, #f5b681, #f2a85c) !important;
+        }
+        
+        .cta-subtext {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 8px;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+            text-transform: none;
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 80%);
+            transform: translateX(-100%);
+        }
+        
+        .cta-button:hover::after {
+            transform: translateX(100%);
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         
         /* SPECIAL LAUNCH PRICE Floating Badge */
@@ -846,7 +881,10 @@
             <img src="assets/logo.webp" alt="LotusLion Ventures Logo" style="width: 80px; height: auto;">
             <h1 class="hero-title">Master Institutional-Grade Investment Analysis</h1>
             <p class="hero-description">Learn the professional frameworks used by top financial analysts to evaluate investment opportunities and enhance your financial literacy.</p>
-            <a href="#pricing" class="cta-button">Start Your Learning Journey</a>
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
+                ENROLL NOW - ₹9,999
+                <span class="cta-subtext">Save ₹15,000 Today</span>
+            </a>
         </div>
     </section>
 <section class="disclaimer" style="background: #0d1b2a; color: #d3d3d3; padding: 40px 20px; text-align: center; border-top: 1px solid #1a2a3a;">
@@ -1008,6 +1046,7 @@
             <p class="urgency">⏰ Special Launch Price Ends Soon</p>
             <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
                 ENROLL NOW - ₹9,999
+                <span class="cta-subtext">Save ₹15,000 Today</span>
             </a>
             <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
                 Or just ₹1,667/month (6 EMI) • 48-Hour Money Back Guarantee
