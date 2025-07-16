@@ -61,107 +61,11 @@
         }
         
         .nav-trigger:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.18);
+            border-color: #F4A261;
+            box-shadow: 0 4px 18px rgba(244,162,97,0.18);
+            transform: scale(1.08);
         }
-        
-        .nav-trigger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: #ffffff;
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-        
-        #nav-panel {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background: rgba(13, 20, 33, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 80px 30px 30px;
-            transition: left 0.3s ease;
-            z-index: 1001;
-            overflow-y: auto;
-        }
-        
-        #nav-panel.active {
-            left: 0;
-        }
-        
-        #nav-panel a {
-            display: block;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        #nav-panel a:hover,
-        #nav-panel a.active {
-            color: #F4A261;
-            transform: translateX(10px);
-        }
-        
-        /* Progress Indicator */
-        .progress-indicator {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-        }
-        
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            margin: 20px 0;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .progress-dot.active {
-            background: #F4A261;
-            transform: scale(1.5);
-        }
-        
-        .progress-dot:hover::after {
-            content: attr(data-title);
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 4px;
-            white-space: nowrap;
-            font-size: 12px;
-        }
-        
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-        
-        /* Section Base */
-        section {
-            padding: 60px 40px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-        
-        /* Section Titles and Subtitles */
         .section-title {
             text-align: center;
             font-size: clamp(28px, 5vw, 42px);
@@ -983,9 +887,9 @@
         <div class="progress-dot" data-title="Enroll" data-section="final-cta"></div>
     </div>
 
-    <!-- Fixed Urgent Banner -->
+    <!-- Fixed Offer Banner (no urgency) -->
     <div class="urgent-banner" style="position: fixed; top: 0; left: 0; width: 100%; background: #FF5733; color: #FFF; text-align: center; padding: 12px 0; font-size: 16px; font-weight: bold; z-index: 1000;">
-        🚨 LIMITED TIME: <span id="current-month">July</span> Special Offer - First 100 Students Get 60% OFF 🚨
+        🚨 First 100 Students Get 60% OFF 🚨
     </div>
 
     <!-- Hero Section -->
@@ -1006,35 +910,11 @@
                     <span class="credential-number">100+</span>
                     <span class="credential-text">Companies Analyzed</span>
                 </div>
-                <div class="credential-highlight">
-                    <span class="credential-number">₹10+ Trn</span>
-                    <span class="credential-text">Institutional AUM Advised</span>
-                </div>
             </div>
             <p class="description">
                 Stop guessing. Start investing with confidence. Learn the exact institutional-grade strategies that have helped build wealth through multiple market cycles.
             </p>
-            <!-- 48-Hour Rolling Countdown Timer -->
-            <div class="urgency-container">
-                <div class="urgency-badge">LAUNCH OFFER ENDS IN:</div>
-                <div class="countdown-timer">
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hero-hours">00</span>
-                        <span class="countdown-label">HOURS</span>
-                    </div>
-                    <span class="countdown-separator">:</span>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hero-minutes">00</span>
-                        <span class="countdown-label">MINUTES</span>
-                    </div>
-                    <span class="countdown-separator">:</span>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hero-seconds">00</span>
-                        <span class="countdown-label">SECONDS</span>
-                    </div>
-                </div>
-                <div class="countdown-text">Hurry! Special price expires soon.</div>
-            </div>
+            <!-- ...existing code... -->
             <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button" style="display: inline-block; margin: 24px auto;">
                 ENROLL NOW - ₹9,999
             </a>
@@ -1072,9 +952,6 @@
             <div style="margin-top: 32px; text-align: center;">
                 <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); font-weight: 600; margin: 8px 0;">
                     🔒 Verified by Trusted Payment Gateways
-                </p>
-                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); font-weight: 600; margin: 8px 0;">
-                    🌟 Rated 4.8/5 by 500+ Students
                 </p>
             </div>
         </div>
@@ -1197,10 +1074,6 @@
                         <h3 style="color: #F4A261; font-size: 32px; margin-bottom: 8px;">20+ Sectors</h3>
                         <p style="color: rgba(255, 255, 255, 0.9);">Deep Domain Expertise</p>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 12px; text-align: center;">
-                        <h3 style="color: #F4A261; font-size: 32px; margin-bottom: 8px;">₹10+ Trn</h3>
-                        <p style="color: rgba(255, 255, 255, 0.9);">Institutional AUM Advised</p>
-                    </div>
                 </div>
                 
                 <div style="background: rgba(44,165,141,0.1); border-left: 4px solid #2CA58D; padding: 24px; margin-bottom: 32px;">
@@ -1255,27 +1128,7 @@
                 After payment, you'll receive access details via email within 5 minutes
             </p>
 
-            <!-- Second Countdown Timer -->
-            <div class="urgency-container">
-                <div class="urgency-badge">LAUNCH OFFER ENDS IN:</div>
-                <div class="countdown-timer">
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="final-hours">00</span>
-                        <span class="countdown-label">HOURS</span>
-                    </div>
-                    <span class="countdown-separator">:</span>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="final-minutes">00</span>
-                        <span class="countdown-label">MINUTES</span>
-                    </div>
-                    <span class="countdown-separator">:</span>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="final-seconds">00</span>
-                        <span class="countdown-label">SECONDS</span>
-                    </div>
-                </div>
-                <div class="countdown-text">Hurry! Special price expires soon.</div>
-            </div>
+            <!-- ...existing code... -->
 
             <!-- Repeat Guarantee Badge -->
             <div class="guarantee-badge">
@@ -1452,33 +1305,7 @@
             });
         });
 
-        // Countdown Timer Script
-        function initCountdown() {
-            function updateCountdown() {
-                const now = new Date();
-                const tomorrow = new Date(now);
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                tomorrow.setHours(23, 59, 59, 999);
-                const timeDiff = tomorrow.getTime() - now.getTime();
-
-                const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-                document.getElementById('hero-hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('hero-minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('hero-seconds').textContent = String(seconds).padStart(2, '0');
-
-                document.getElementById('final-hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('final-minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('final-seconds').textContent = String(seconds).padStart(2, '0');
-            }
-
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        }
-
-        document.addEventListener('DOMContentLoaded', initCountdown);
+        // ...existing code...
     </script>
     <script>
     // Enhanced engagement tracking for Meta optimization
