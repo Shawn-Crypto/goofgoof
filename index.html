@@ -180,7 +180,7 @@
             padding: 24px 48px !important;
             font-size: 18px !important;
             font-weight: 800 !important;
-            border-radius: 8px !important;
+            border-radius: 12px !important; /* Adjusted for consistency */
             box-shadow: 0 8px 32px rgba(244,162,97,0.4) !important;
             text-transform: uppercase !important;
             letter-spacing: 1px !important;
@@ -193,7 +193,7 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-4px) !important;
+            transform: translateY(-4px) scale(1.03) !important; /* Enhanced hover effect */
             box-shadow: 0 12px 40px rgba(244,162,97,0.6) !important;
             background: linear-gradient(135deg, #f5b681, #f2a85c) !important;
         }
@@ -686,6 +686,18 @@
             margin-bottom: 16px;
         }
 
+        .solution-content-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(8px);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
         /* Solution Section Checkmark List */
         .checkmark-list {
             list-style: none;
@@ -957,11 +969,11 @@
     <section class="problems" id="problems">
         <div class="container animate-in">
             <h2>Feeling Overwhelmed by Financial Information?</h2>
-            <div class="problem-item">
+            <div class="problem-card">
                 <h3>Lack of a Structured Framework</h3>
                 <p>The market is noisy. Without a clear analytical framework, it's difficult to separate signal from noise and build a consistent approach to investment analysis.</p>
             </div>
-            <div class="problem-item">
+            <div class="problem-card">
                 <h3>Complex Financial Jargon</h3>
                 <p>Annual reports and financial news are filled with terminology that can be intimidating. This knowledge gap can be a barrier to making informed decisions.</p>
             </div>
@@ -971,13 +983,15 @@
     <!-- Solution Section -->
     <section class="solution" id="solution">
         <div class="container animate-in">
-            <h2>The Lotuslion Educational Framework</h2>
-            <p>Our curriculum is designed to demystify complex financial topics. We focus on teaching you structured, repeatable frameworks for analysis, so you can build lasting investment knowledge and make decisions with confidence.</p>
-            <ul class="framework-points">
-                <li>Learn to read financial statements like an expert.</li>
-                <li>Master valuation techniques used by institutional investors.</li>
-                <li>Develop a disciplined, analytical approach to the markets.</li>
-            </ul>
+            <div class="solution-content-card">
+                <h2>The CSuite Solution</h2>
+                <p>CSuite provides a unified, blockchain-powered platform to streamline fund management, enhance transparency, and fortify security.</p>
+                <ul>
+                    <li><strong>Smart Contracts:</strong> Automate compliance, distribution, and reporting.</li>
+                    <li><strong>Decentralized Ledger:</strong> Offer stakeholders a real-time, immutable view of financial activities.</li>
+                    <li><strong>Tokenized Assets:</strong> Represent fund shares as digital tokens for improved liquidity and accessibility.</li>
+                </ul>
+            </div>
         </div>
     </section>
 
