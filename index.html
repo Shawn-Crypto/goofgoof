@@ -146,7 +146,6 @@
             letter-spacing: 1px !important;
             transition: all 0.3s ease !important;
             border: none !important;
-            animation: pulse 1.5s infinite;
             text-decoration: none;
         }
 
@@ -525,112 +524,7 @@
             animation: slideIn 0.5s ease-out forwards;
         }
 
-        /* Countdown Timer Styles */
-        .urgency-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(90deg, #FF5733, #FFC300);
-            padding: 16px;
-            border-radius: 12px;
-            margin-top: 24px;
-            color: #FFF;
-        }
 
-        .urgency-badge {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 8px 16px;
-            background: rgba(0, 0, 0, 0.3);
-            color: #FFFFFF;
-            border-radius: 8px;
-            animation: pulse 1.5s infinite;
-        }
-
-        .countdown-timer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 16px;
-            flex-wrap: nowrap;
-        }
-
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 2px solid #FFFFFF;
-            border-radius: 8px;
-            margin: 0 4px;
-        }
-
-        .countdown-number {
-            font-size: 32px;
-            font-weight: 900;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .countdown-label {
-            font-size: 14px;
-            color: #FFFFFF;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .countdown-separator {
-            font-size: 32px;
-            font-weight: bold;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin: 0 2px;
-        }
-
-        .countdown-text {
-            font-size: 16px;
-            margin-top: 8px;
-            color: #FFFFFF;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .urgency-container {
-                padding: 12px;
-            }
-            .urgency-badge {
-                font-size: 16px;
-                padding: 6px 12px;
-            }
-            .countdown-item {
-                padding: 6px 8px;
-            }
-            .countdown-number {
-                font-size: 24px;
-            }
-            .countdown-label {
-                font-size: 12px;
-            }
-            .countdown-separator {
-                font-size: 24px;
-            }
-            .countdown-text {
-                font-size: 14px;
-            }
-        }
 
         /* Problems Section Grid and Card Styles */
         .problem-grid {
@@ -894,13 +788,11 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero" style="padding-top: 180px;">
+    <section class="hero" id="hero" style="padding-top: 180px;">
         <div class="container animate-in">
             <img src="assets/logo.webp" alt="LotusLion Ventures Logo" style="width: 80px; height: auto;">
             <h1 class="hero-title">Master Institutional-Grade Investment Analysis</h1>
             <p class="hero-description">Learn the professional frameworks used by top financial analysts to evaluate investment opportunities and enhance your financial literacy.</p>
-            <div class="credential-box">
-                <p><strong>ICRA (Moody's) Leadership</strong></p>
-            </div>
             <a href="#pricing" class="cta-button">Start Your Learning Journey</a>
         </div>
     </section>
@@ -1028,8 +920,7 @@
                 </p>
                 <p>
                     <strong>The Key Difference:</strong> Every framework taught in this course has been tested with real money 
-                    across volatile market cycles. You'll learn the same institutional-grade analysis used by professionals 
-                    managing thousands of crores.
+                    across volatile market cycles. You'll learn the same institutional-grade analysis used by professionals.
                 </p>
                 <p>
                     "Most online creators offer opinions. I offer proven frameworks that have worked through multiple market cycles. 
@@ -1066,8 +957,6 @@
             <p style="margin-top: 16px; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
                 After payment, you'll receive access details via email within 5 minutes
             </p>
-
-            <!-- ...existing code... -->
 
             <!-- Repeat Guarantee Badge -->
             <div class="guarantee-badge">
@@ -1212,9 +1101,7 @@
         
         // Set current year in copyright
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
-        // Dynamically set current month in urgent banner
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        document.getElementById('current-month').textContent = monthNames[new Date().getMonth()];
+        // ...existing code...
         // Track button clicks
         document.querySelectorAll('.cta-button').forEach(button => {
             button.addEventListener('click', function(e) {
