@@ -1,0 +1,210 @@
+/* Sprint 3 Styles - Enhanced Teaching Method and FAQ Section */
+
+/* Teaching Method Section */
+.teaching-method {
+    padding: 80px 40px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.method-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1000px;
+    margin: 48px auto 0;
+}
+
+.method-card {
+    text-align: center;
+    padding: 32px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.method-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.method-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.method-card h3 {
+    color: #2CA58D;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.method-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+/* Enhanced Modules with Tabs */
+.modules-enhanced {
+    padding: 80px 40px;
+}
+
+.module-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+}
+
+.module-tab {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+}
+
+.module-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.module-tab.active {
+    background: #2CA58D;
+    border-color: #2CA58D;
+    color: #ffffff;
+}
+
+.module-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.module-content.active {
+    display: block;
+}
+
+.module-detail {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 48px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.module-detail h3 {
+    color: #F4A261;
+    font-size: 28px;
+    margin-bottom: 24px;
+}
+
+.module-topics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.topic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.topic-icon {
+    color: #2CA58D;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 80px 40px;
+    background-color: rgba(26, 35, 50, 0.3);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.faq-question {
+    padding: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.faq-toggle {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-toggle {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 300px;
+}
+
+.faq-answer-content {
+    padding: 0 24px 24px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .method-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .module-tabs {
+        gap: 8px;
+    }
+    
+    .module-tab {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    .module-topics {
+        grid-template-columns: 1fr;
+    }
+    
+    .module-detail {
+        padding: 32px 24px;
+    }
+}
