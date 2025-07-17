@@ -557,16 +557,28 @@
         }
         
         /* FAQ Accordion */
+
+        /* FAQ Accordion Styles Polish */
         .faq-item {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             margin-bottom: 16px;
             overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+            backdrop-filter: blur(8px); /* Subtle blur for depth */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow */
         }
-        
+
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #F4A261; /* Orange accent on hover */
+            transform: translateY(-4px); /* Slight lift on hover */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
         .faq-question {
-            padding: 24px;
+            padding: 24px 32px; /* More padding */
             cursor: pointer;
             font-weight: 600;
             font-size: 18px;
@@ -574,32 +586,54 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s ease;
+            color: #ffffff; /* Ensure white text */
         }
-        
+
         .faq-question:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #F4A261;
+            color: #F4A261; /* Orange on hover */
         }
-        
+
         .faq-icon {
-            font-size: 24px;
+            font-size: 28px; /* Larger icon */
             transition: transform 0.3s ease;
+            color: #F4A261; /* Orange color */
         }
-        
+
         .faq-item.active .faq-icon {
             transform: rotate(45deg);
         }
-        
+
         .faq-answer {
-            padding: 0 24px;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother accordion animation */
+            padding: 0 32px; /* Consistent padding */
         }
-        
+
         .faq-item.active .faq-answer {
-            padding: 0 24px 24px;
-            max-height: 200px;
+            max-height: 600px; /* Increased max-height for longer answers */
+            padding-bottom: 24px; /* Consistent padding */
+        }
+
+        .faq-answer-content {
+            padding: 0; /* Remove internal padding if present */
+            color: rgba(255, 255, 255, 0.85); /* Use global opacity */
+            line-height: 1.7;
+        }
+
+        /* Adjust specific text/lists inside FAQ answer content if needed */
+        .faq-answer-content p, .faq-answer-content ul, .faq-answer-content li {
+            opacity: 1; /* Ensure full opacity for readability within answers */
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                font-size: 16px;
+                padding: 18px 24px;
+            }
+            .faq-answer {
+                padding: 0 24px;
+            }
         }
         
         /* Footer */
@@ -776,6 +810,72 @@
         .module-accordion-container {
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        /* Access Details Redesign Styles */
+        .access-section .container {
+            text-align: center; /* Center the grid container */
+        }
+
+        .access-section .section-subtitle {
+            margin-bottom: 60px; /* More space below subtitle */
+        }
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Auto-fit columns */
+            gap: 32px;
+            max-width: 900px; /* Limit width of grid */
+            margin: 0 auto; /* Center the grid */
+        }
+
+        .access-feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .access-feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #F4A261; /* Orange accent on hover */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .access-feature-icon {
+            font-size: 56px; /* Larger icons */
+            color: #F4A261; /* Orange accent color */
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .access-feature-card h3 {
+            font-size: 24px;
+            color: #FFFFFF; /* Ensure white text */
+            margin-bottom: 12px;
+        }
+
+        .access-feature-card p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.85); /* Use global opacity */
+            line-height: 1.7;
+        }
+
+        /* Remove old access-visual if not needed anymore */
+        .access-visual {
+            display: none; /* Hide the old visual element */
+        }
+
+        @media (max-width: 768px) {
+            .access-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
         }
 
         .accordion-item {
@@ -1079,11 +1179,11 @@
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>This module builds your foundational understanding of investment, differentiating between investing and trading mindsets, and introducing essential financial terminology.</p>
                         <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur</li>
-                            <li>Adipiscing elit sed do eiusmod tempor</li>
-                            <li>Incididunt ut labore et dolore magna</li>
+                            <li>Understand investor vs. trader psychology</li>
+                            <li>Master key financial terms and metrics</li>
+                            <li>Develop a systematic market analysis approach</li>
                         </ul>
                     </div>
                 </div>
@@ -1094,11 +1194,11 @@
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Learn the 4-step professional company analysis process, including screening, deep-dive research, and fundamental valuation techniques used by institutional analysts.</p>
                         <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur</li>
-                            <li>Adipiscing elit sed do eiusmod tempor</li>
-                            <li>Incididunt ut labore et dolore magna</li>
+                            <li>Master financial statement interpretation</li>
+                            <li>Apply qualitative and quantitative research methods</li>
+                            <li>Understand core valuation frameworks (multiples, DCF)</li>
                         </ul>
                     </div>
                 </div>
@@ -1109,11 +1209,11 @@
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Apply your learned frameworks to real-world Indian company case studies. Analyze telecom, NBFC, and consumer goods sectors, learning from success stories and crisis navigation.</p>
                         <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur</li>
-                            <li>Adipiscing elit sed do eiusmod tempor</li>
-                            <li>Incididunt ut labore et dolore magna</li>
+                            <li>Analyze actual Indian companies</li>
+                            <li>Understand sector-specific dynamics</li>
+                            <li>Learn from market successes and failures</li>
                         </ul>
                     </div>
                 </div>
@@ -1124,11 +1224,11 @@
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Explore macroeconomic impacts on markets, learn sector rotation strategies, and develop insights into market timing and cycle analysis for informed decision-making.</p>
                         <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur</li>
-                            <li>Adipiscing elit sed do eiusmod tempor</li>
-                            <li>Incididunt ut labore et dolore magna</li>
+                            <li>Understand interest rate and inflation impacts</li>
+                            <li>Identify cyclical vs. defensive sector patterns</li>
+                            <li>Master market regime detection and global influences</li>
                         </ul>
                     </div>
                 </div>
@@ -1139,11 +1239,11 @@
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Build robust portfolio construction strategies. Learn position sizing, systematic risk controls, and essential maintenance for long-term wealth growth.</p>
                         <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur</li>
-                            <li>Adipiscing elit sed do eiusmod tempor</li>
-                            <li>Incididunt ut labore et dolore magna</li>
+                            <li>Design balanced portfolios with diversification</li>
+                            <li>Implement conviction-based position sizing</li>
+                            <li>Develop risk management protocols and tracking</li>
                         </ul>
                     </div>
                 </div>
@@ -1219,30 +1319,25 @@
             <h2 class="section-title">How You'll Access the Course</h2>
 
             <div class="access-grid">
-                <div class="access-content">
-                    <h3>Seamless Learning Experience</h3>
-                    <ul class="access-list">
-                        <li>
-                            <span class="access-icon">⚡</span>
-                            <span>Instant Access: Get login details delivered to your email within minutes of enrollment.</span>
-                        </li>
-                        <li>
-                            <span class="access-icon">🌐</span>
-                            <span>Online Platform: Access all video lessons, resources, and community features through our dedicated learning portal.</span>
-                        </li>
-                        <li>
-                            <span class="access-icon">📧</span>
-                            <span>Direct Communication: Receive important updates, session schedules, and bonus content directly in your inbox.</span>
-                        </li>
-                        <li>
-                            <span class="access-icon">🔐</span>
-                            <span>Secure & Private: Your data and learning progress are kept secure with industry-standard encryption.</span>
-                        </li>
-                    </ul>
+                <div class="access-feature-card">
+                    <span class="access-feature-icon"><i class="ph-light ph-lightning-fill"></i></span>
+                    <h3>Instant Access</h3>
+                    <p>Get login details delivered to your email within minutes of enrollment, so you can start learning immediately.</p>
                 </div>
-
-                <div class="access-visual">
-                    <span class="access-visual-icon">🎓</span>
+                <div class="access-feature-card">
+                    <span class="access-feature-icon"><i class="ph-light ph-globe-hemisphere-east"></i></span>
+                    <h3>Online Platform</h3>
+                    <p>Access all video lessons, downloadable resources, and community features through our dedicated, easy-to-use learning portal.</p>
+                </div>
+                <div class="access-feature-card">
+                    <span class="access-feature-icon"><i class="ph-light ph-envelope-simple"></i></span>
+                    <h3>Direct Communication</h3>
+                    <p>Receive important updates, session schedules, and bonus content directly in your inbox to keep you informed.</p>
+                </div>
+                <div class="access-feature-card">
+                    <span class="access-feature-icon"><i class="ph-light ph-lock-key"></i></span>
+                    <h3>Secure & Private</h3>
+                    <p>Your data and learning progress are kept secure with industry-standard encryption, ensuring a safe learning environment.</p>
                 </div>
             </div>
         </div>
@@ -1289,7 +1384,6 @@
                 <p style="font-size: 18px; line-height: 1.8; margin-bottom: 32px; color: rgba(255, 255, 255, 0.95);"><strong>From Institutional Boardrooms to Individual Empowerment:</strong> After years of advising institutional clients, Rohit recognized a critical gap-while institutional investors had access to sophisticated analytical frameworks, individual investors were left with tips, opinions, and simplified advice. This course bridges that gap, democratizing institutional-grade investment education for serious individual learners.</p>
                 <div style="text-align: center; margin-top: 32px;">
                     <a href="https://www.linkedin.com/in/rohit-ahuja-41710a4" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); padding: 12px 24px; border-radius: 8px; color: #F4A261; text-decoration: none; border: 1px solid rgba(244, 162, 97, 0.3); transition: all 0.3s ease;"><span>Verify Professional Background on LinkedIn</span><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                    </a>
                 </div>
                 <div style="margin-bottom: 16px;">
                     <a href="mailto:investoreducation@lotuslion.in">Contact Support</a>
