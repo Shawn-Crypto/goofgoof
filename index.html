@@ -20,6 +20,103 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
+
+// Ensure DOMContentLoaded is handled once for all new scripts
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth section transitions and staggered animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Stagger animations for child elements within the section
+                const animateElements = entry.target.querySelectorAll('.animate-in');
+                animateElements.forEach((el, i) => {
+                    // Only run animation if it's currently paused (i.e., not already animated)
+                    if (el.style.animationPlayState === 'paused') {
+                        setTimeout(() => {
+                            el.style.animationPlayState = 'running';
+                        }, i * 100); // Stagger by 100ms
+                    }
+                });
+                // Once section is visible, we can stop observing it for basic animation
+                // sectionObserver.unobserve(entry.target); // Re-enable if you only want animations once
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all sections (or specific ones with .animate-in if preferred)
+    document.querySelectorAll('section').forEach(section => {
+        sectionObserver.observe(section);
+    });
+    
+    // Parallax effect for hero section (optional, if you want background to scroll slower)
+    let tickingParallax = false;
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            // Adjust the 0.3 factor for more or less parallax effect
+            hero.style.backgroundPositionY = `${scrolled * 0.3}px`;
+        }
+        tickingParallax = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!tickingParallax) {
+            window.requestAnimationFrame(updateParallax);
+            tickingParallax = true;
+        }
+    });
+    
+    // Enhanced CTA button click feedback (Ripple Effect)
+    document.querySelectorAll('.cta-button').forEach(button => {
+        // Ensure the button has position: relative and overflow: hidden in CSS for ripple to work
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            setTimeout(() => ripple.remove(), 600); // Remove ripple after animation
+        });
+    });
+
+    // Dynamically add ripple effect styles to head
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5); /* White ripple */
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none; /* Ensure clicks pass through */
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4); /* Expand the ripple */
+                opacity: 0; /* Fade out */
+            }
+        }
+    `;
+    document.head.appendChild(rippleStyle);
+});
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,6 +128,510 @@
          * Created: January 2025
          * Feature ID: FEAT-001
          */
+
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation for Sections */
+        /* Note: The .animate-in class is already in your CSS, this ensures its paused state is correctly handled for observation. */
+        .animate-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-play-state: paused; /* Ensure it starts paused for JS to control */
+        }
+
+        /* Hover Effects for All Cards (Consolidated) */
+        /* This targets various card-like elements for consistent hover effects. */
+        .card,
+        .problem-card,
+        .module-card,
+        .audience-card,
+        .method-card,
+        .included-card,
+        .testimonial-card,
+        .credential-highlight {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Focus States for Accessibility */
+        a:focus,
+        button:focus,
+        .cta-button:focus,
+        .nav-link:focus,
+        .progress-dot:focus,
+        .faq-question:focus {
+            outline: 2px solid #F4A261;
+            outline-offset: 4px;
+            border-radius: 4px; /* For a cleaner look */
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-trigger,
+            #nav-panel,
+            .progress-indicator,
+            .urgent-banner {
+                display: none !important;
+            }
+            
+            section {
+                page-break-inside: avoid; /* Prevent sections from breaking across pages */
+            }
+            
+            body {
+                background: #fff;
+                color: #000;
+            }
+            
+            /* Ensure text is readable */
+            h1, h2, h3, h4, p, li, span {
+                color: #000 !important;
+            }
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            body {
+                background: Canvas !important;
+                color: CanvasText !important;
+            }
+            .cta-button {
+                border: 2px solid ButtonText !important;
+                background: ButtonFace !important;
+                color: ButtonText !important;
+            }
+            
+            .card,
+            .problem-card,
+            .module-card,
+            .audience-card,
+            .method-card,
+            .included-card,
+            .testimonial-card,
+            .credential-highlight,
+            .faq-item {
+                border: 2px solid CanvasText !important;
+                background: Canvas !important;
+                color: CanvasText !important;
+            }
+            
+            /* Ensure text is clearly visible */
+            h1, h2, h3, h4, p, span, li {
+                color: CanvasText !important;
+            }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Final Visual Polish */
+        /* Underline for section titles */
+        .section-title {
+            position: relative;
+            display: inline-block; /* To make ::after relative to text width */
+            padding-bottom: 12px; /* Space for underline */
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px; /* Wider underline */
+            height: 4px; /* Thicker underline */
+            background: linear-gradient(90deg, #F4A261, #E09C4A);
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        /* Progress Dots Enhancement */
+        .progress-dot {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-dot.active {
+            box-shadow: 0 4px 16px rgba(244, 162, 97, 0.4);
+            border: 1px solid #F4A261; /* Add a subtle border */
+        }
+
+        /* Enhanced Final CTA Section */
+        .final-cta-enhanced {
+            padding: 100px 40px;
+            background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.15) 0%, transparent 70%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta-enhanced::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(44, 165, 141, 0.05) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
+            50% { transform: translate(10%, 10%) rotate(180deg); }
+        }
+
+        .final-cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .final-cta-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #2CA58D, #43e9c6);
+            color: #0A2342;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .final-cta-enhanced h2 {
+            font-size: clamp(36px, 6vw, 56px);
+            margin-bottom: 24px;
+            font-weight: 800;
+        }
+
+        .final-cta-enhanced .subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .cta-features-row {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin: 48px 0;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-feature-icon {
+            color: #2CA58D;
+            font-size: 24px;
+        }
+
+        .final-price-display {
+            margin: 48px 0;
+        }
+
+        .final-price-display .price-slash {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            margin-right: 16px;
+        }
+
+        .final-price-display .price-current {
+            font-size: 48px;
+            color: #F4A261;
+            font-weight: 900;
+        }
+
+        .final-guarantee {
+            margin-top: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(44, 165, 141, 0.1);
+            padding: 16px 32px;
+            border-radius: 12px;
+            border: 1px solid rgba(44, 165, 141, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .cta-features-row {
+                flex-direction: column;
+                gap: 24px;
+            }
+            
+            .final-price-display .price-current {
+                font-size: 36px;
+            }
+        }
+
+        /* Access Details Section */
+        .access-section {
+            padding: 80px 40px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .access-content h3 {
+            color: #F4A261;
+            font-size: 32px;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .access-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .access-list li {
+            padding: 16px 0;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            font-size: 16px;
+        }
+
+        .access-icon {
+            color: #2CA58D;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .access-visual {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .access-visual-icon {
+            font-size: 120px;
+            color: #2CA58D;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .access-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .access-visual {
+                min-height: 200px;
+            }
+        }
+
+        /* What's Included Section */
+        .included-section {
+            padding: 80px 40px;
+            background-color: rgba(26, 35, 50, 0.3);
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1000px;
+            margin: 48px auto 0;
+        }
+
+        .included-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .included-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(44, 165, 141, 0.3);
+        }
+
+        .included-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+            color: #2CA58D;
+        }
+
+        .included-card h3 {
+            color: #ffffff;
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .included-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .included-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .pricing-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.1), rgba(255, 255, 255, 0.05));
+            border: 2px solid #F4A261;
+            border-radius: 24px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(244, 162, 97, 0.2);
+        }
+
+        .pricing-label {
+            background: #F4A261;
+            color: #0A2342;
+            padding: 8px 24px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .pricing-amount {
+            font-size: 64px;
+            font-weight: 900;
+            color: #F4A261;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .pricing-currency {
+            font-size: 32px;
+            vertical-align: top;
+        }
+
+        .pricing-original {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            margin-bottom: 32px;
+            display: block;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 32px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pricing-features .feature-icon {
+            color: #2CA58D;
+            font-size: 20px;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #F4A261, #E09C4A);
+            color: #0A2342;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 24px;
+        }
+
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(244, 162, 97, 0.4);
+        }
+
+        .pricing-guarantee {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .guarantee-badge-small {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #2CA58D;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card {
+                padding: 32px 24px;
+            }
+            
+            .pricing-amount {
+                font-size: 48px;
+            }
+        }
 
         /* ===== PROGRESS INDICATOR STYLES ===== */
         .progress-indicator {
@@ -268,105 +869,57 @@
 
     <!-- Main Navigation Panel -->
     <nav id="nav-panel">
-        <a href="#hero" class="nav-link">Home</a>
-        <a href="#who-this-is-for" class="nav-link">Who This Is For</a>
-        <a href="#problems" class="nav-link">What You'll Master</a>
-        <a href="#solution" class="nav-link">Teaching Method</a>
-        <a href="#modules" class="nav-link">Course Modules</a>
-        <a href="#instructor" class="nav-link">Your Instructor</a>
-        <a href="#faq" class="nav-link">FAQ</a>
-        <a href="#enroll" class="nav-link">Enroll Now</a>
-    </nav>
-
-    <!-- Progress Indicator -->
-    <div class="progress-indicator">
-        <div class="progress-dot" data-title="Home" data-section="hero"></div>
-        <div class="progress-dot" data-title="For You" data-section="who-this-is-for"></div>
-        <div class="progress-dot" data-title="Master" data-section="problems"></div>
-        <div class="progress-dot" data-title="Method" data-section="solution"></div>
-        <div class="progress-dot" data-title="Modules" data-section="modules"></div>
-        <div class="progress-dot" data-title="Instructor" data-section="instructor"></div>
-        <div class="progress-dot" data-title="FAQ" data-section="faq"></div>
-        <div class="progress-dot" data-title="Enroll" data-section="final-cta"></div>
-    </div>
-
-    <section class="hero" id="hero" style="padding-top: 180px;">
-        <div class="container animate-in">
-            <img src="assets/logo.webp" alt="LotusLion Ventures Logo" style="width: 80px; height: auto;">
+    <a href="#hero" class="nav-link">Home</a>
+    <a href="#who-this-is-for" class="nav-link">Who This Is For</a>
+    <a href="#problems" class="nav-link">What You'll Master</a>
+    <a href="#solution" class="nav-link">Teaching Method</a>
+    <a href="#modules" class="nav-link">Course Modules</a>
+    <a href="#whats-included" class="nav-link">What's Included</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#course-access" class="nav-link">Access Details</a>
+    <a href="#instructor" class="nav-link">Your Instructor</a>
+<section class="final-cta-enhanced" id="enroll">
+    <div class="container animate-in">
+        <div class="final-cta-content">
+            <span class="final-cta-badge">LOREM IPSUM READY</span>
             
-            <div class="hero-badge">🎯 INSTITUTIONAL EXPERIENCE MEETS EDUCATIONAL EXCELLENCE</div>
-            
-            <h1>Master Institutional-Grade Investment Analysis</h1>
-            
-            <p class="subtitle">Develop the analytical skills used by institutional investors through structured education</p>
-            
-            <div class="hero-credentials">
-                <div class="credential-highlight">
-                    <span class="credential-number">17+</span>
-                    <span class="credential-text">Years at Top Investment Banks</span>
-                </div>
-                <div class="credential-highlight">
-                    <span class="credential-number">100+</span>
-                    <span class="credential-text">Companies Analyzed</span>
-                </div>
-                <div class="credential-highlight">
-                    <span class="credential-number">₹10+ Trn</span>
-                    <span class="credential-text">Institutional AUM Advised</span>
-                </div>
-            </div>
-            
-            <p class="description">
-                Discover the systematic approach to investment analysis used by professionals at India's top financial institutions. This comprehensive course demystifies complex financial concepts and teaches you the exact frameworks used to evaluate companies, understand market dynamics, and make informed decisions.
+            <h2 class="section-title">Lorem Ipsum Dolor Sit Amet Consectetur?</h2>
+            <p class="subtitle">
+                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.
             </p>
             
-            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button" style="display: inline-block; margin: 24px auto;">
-                START LEARNING TODAY
+            <div class="cta-features-row">
+                <div class="cta-feature">
+                    <span class="cta-feature-icon">✓</span>
+                    <span>Lorem Ipsum Feature One</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="cta-feature-icon">✓</span>
+                    <span>Consectetur Adipiscing Elit</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="cta-feature-icon">✓</span>
+                    <span>Sed Do Eiusmod Tempor</span>
+                </div>
+            </div>
+            
+            <div class="final-price-display">
+                <span class="price-slash">₹24,999</span>
+                <span class="price-current">₹9,999</span>
+            </div>
+            
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
+                LOREM IPSUM ENROLL NOW
+                <span class="cta-subtext">Save ₹15,000 Today (Lorem Ipsum)</span>
             </a>
             
-            <div class="price-box">
-                <span class="original">₹24,999</span>
-                <span class="current">₹9,999</span>
-                <span class="discount">60% OFF - Limited Period</span>
-                <div class="emi-option">
-                    Or just <strong>₹1,667/month</strong> (6 EMI)
-                </div>
-                <div class="payment-security" style="text-align: center; margin-top: 24px;">
-                    <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
-                        🔒 100% Secure Payment
-                    </p>
-                    <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
-                        💳 All Cards • UPI • Net Banking
-                    </p>
-                    <p style="font-size: 16px; color: #FFF; font-weight: 600; margin: 8px 0;">
-                        📱 Easy EMI Available
-                    </p>
-                </div>
-            </div>
-            
-            <div class="guarantee-badge">
-                <span class="guarantee-icon">🛡️</span>
-                <div class="guarantee-text">
-                    <strong>48-Hour Money-Back Guarantee</strong>
-                    <span>No questions asked. 100% refund if not satisfied.</span>
-                </div>
-            </div>
-            
-            <div style="margin-top: 32px; text-align: center;">
-                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); font-weight: 600; margin: 8px 0;">
-                    🔒 Verified by Trusted Payment Gateways
-                </p>
-                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); font-weight: 600; margin: 8px 0;">
-                    🌟 Lifetime Access • 48-Hour Refund Policy
-                </p>
-            </div>
-            
-            <div style="margin-top: 24px; text-align: center;">
-                <p style="font-size: 14px; color: rgba(255, 255, 255, 0.6); font-style: italic;">
-                    This is an educational course designed to enhance financial literacy. Not personalized investment advice.
-                </p>
+            <div class="final-guarantee">
+                <span style="font-size: 24px;">�️</span>
+                <span>48-Hour Lorem Ipsum Guarantee - No questions asked.</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
         </section>
 
 <section class="faq" id="faq">
@@ -523,6 +1076,109 @@
                 <a href="mailto:investoreducation@lotuslion.in" class="cta-button">
                     Contact Support
                 </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pricing-section" id="pricing">
+    <div class="container animate-in">
+        <h2 class="section-title">Investment in Your Knowledge</h2>
+        <p class="section-subtitle">
+            Secure your access to institutional-grade investment education.
+        </p>
+        
+        <div class="pricing-container">
+            <div class="pricing-card">
+                <span class="pricing-label">Special Launch Offer</span>
+                
+                <div class="pricing-amount">
+                    <span class="pricing-currency">₹</span>9,999
+                </div>
+                
+                <span class="pricing-original">₹24,999</span>
+                
+                <ul class="pricing-features">
+                    <li>
+                        <span class="feature-icon">✓</span>
+                        Access to all 5 core modules
+                    </li>
+                    <li>
+                        <span class="feature-icon">✓</span>
+                        15+ hours of video lessons
+                    </li>
+                    <li>
+                        <span class="feature-icon">✓</span>
+                        Downloadable analysis templates
+                    </li>
+                    <li>
+                        <span class="feature-icon">✓</span>
+                        Real-world Indian case studies
+                    </li>
+                    <li>
+                        <span class="feature-icon">✓</span>
+                        Lifetime access & future updates
+                    </li>
+                    <li>
+                        <span class="feature-icon">✓</span>
+                        Access to student community
+                    </li>
+                </ul>
+                
+                <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
+                    ENROLL NOW
+                </a>
+                
+                <div class="pricing-guarantee">
+                    <span class="guarantee-badge-small">
+                        🛡️ 48-Hour Money Back Guarantee
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="included-section" id="whats-included">
+    <div class="container animate-in">
+        <h2 class="section-title">What's Included in Your Course</h2>
+        <p class="section-subtitle">
+            Every component designed to accelerate your learning journey and build lasting expertise.
+        </p>
+        
+        <div class="included-grid">
+            <div class="included-card">
+                <span class="included-icon">🎥</span>
+                <h3>Comprehensive Video Lessons</h3>
+                <p>Over 15 hours of high-definition video content, breaking down complex topics into easy-to-understand segments.</p>
+            </div>
+            
+            <div class="included-card">
+                <span class="included-icon">📱</span>
+                <h3>Mobile & Desktop Access</h3>
+                <p>Learn anytime, anywhere. Our platform is fully responsive, allowing seamless access from any device.</p>
+            </div>
+            
+            <div class="included-card">
+                <span class="included-icon">♾️</span>
+                <h3>Lifetime Access & Updates</h3>
+                <p>Enroll once, learn forever. Get permanent access to all course materials and future updates at no extra cost.</p>
+            </div>
+            
+            <div class="included-card">
+                <span class="included-icon">📄</span>
+                <h3>Downloadable Resources</h3>
+                <p>Access ready-to-use analysis worksheets, financial models, checklists, and quick reference guides.</p>
+            </div>
+            
+            <div class="included-card">
+                <span class="included-icon">🔄</span>
+                <h3>Real-World Case Studies</h3>
+                <p>Apply frameworks to actual Indian companies, solidifying your understanding through practical examples.</p>
+            </div>
+            
+            <div class="included-card">
+                <span class="included-icon">💬</span>
+                <h3>Exclusive Community Access</h3>
+                <p>Join a vibrant community of fellow learners. Share insights, ask questions, and grow together in a supportive environment.</p>
             </div>
         </div>
     </div>
