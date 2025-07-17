@@ -1,1159 +1,1359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>The Complete Indian Stock Investor - Master the Market with Lotuslion</title>
-   <meta name="description" content="Learn institutional-grade investment analysis with CSuite23. Our courses provide educational frameworks for enhancing financial literacy. This is not investment advice.">
-   
-   <!-- Open Graph Meta Tags -->
-   <meta property="og:title" content="The Complete Indian Stock Investor - Master the Market with Lotuslion">
-   <meta property="og:description" content="Learn institutional-grade investment analysis with CSuite23. Our courses provide educational frameworks for enhancing financial literacy. This is not investment advice.">
-   <meta property="og:url" content="https://lotuslion.in">
-   <meta property="og:type" content="website">
-   <meta property="og:image" content="https://lotuslion.in/assets/logo.webp">
-   
-   <!-- Twitter Card Meta Tags -->
-   <meta name="twitter:card" content="summary_large_image">
-   <meta name="twitter:title" content="The Complete Indian Stock Investor - Master the Market with Lotuslion">
-   <meta name="twitter:description" content="Learn institutional-grade investment analysis with CSuite23. Our courses provide educational frameworks for enhancing financial literacy. This is not investment advice.">
-   <meta name="twitter:image" content="https://lotuslion.in/assets/logo.webp">
-   
-   <!-- Canonical Link -->
-   <link rel="canonical" href="https://lotuslion.in">
-   
-   <!-- Google Tag Manager -->
-   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-   })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
-   <!-- End Google Tag Manager -->
-   
-   <!-- Inter Font -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-   
-   <style>
-       /* Core Reset and Base Styles */
-       * {
-           margin: 0;
-           padding: 0;
-           box-sizing: border-box;
-       }
-       
-       html {
-           scroll-behavior: smooth;
-       }
-       
-       body {
-           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-           background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%);
-           color: #ffffff;
-           line-height: 1.6;
-           overflow-x: hidden;
-       }
-       
-       /* Container */
-       .container {
-           max-width: 1200px;
-           margin: 0 auto;
-           padding: 0 40px;
-       }
-       
-       /* Section Base */
-       section {
-           padding: 80px 0;
-           min-height: auto;
-           position: relative;
-       }
-       
-       /* Navigation Trigger */
-       .nav-trigger {
-           position: fixed;
-           top: 20px;
-           left: 20px;
-           z-index: 1002;
-           background: rgba(255, 255, 255, 0.1);
-           border: 1px solid rgba(255, 255, 255, 0.2);
-           padding: 12px;
-           border-radius: 8px;
-           cursor: pointer;
-           transition: all 0.3s ease;
-           backdrop-filter: blur(10px);
-       }
-       
-       .nav-trigger:hover {
-           background: rgba(255, 255, 255, 0.2);
-           transform: scale(1.05);
-       }
-       
-       .nav-trigger span {
-           display: block;
-           width: 24px;
-           height: 2px;
-           background: #ffffff;
-           margin: 5px 0;
-           transition: 0.3s;
-       }
-       
-       .nav-trigger.active span:nth-child(1) {
-           transform: rotate(-45deg) translate(-5px, 6px);
-       }
-       
-       .nav-trigger.active span:nth-child(2) {
-           opacity: 0;
-       }
-       
-       .nav-trigger.active span:nth-child(3) {
-           transform: rotate(45deg) translate(-5px, -6px);
-       }
-       
-       /* Navigation Panel */
-       #nav-panel {
-           position: fixed;
-           top: 0;
-           left: -300px;
-           width: 300px;
-           height: 100%;
-           background: rgba(13, 20, 33, 0.95);
-           backdrop-filter: blur(20px);
-           padding: 80px 30px 30px;
-           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-           z-index: 1001;
-           overflow-y: auto;
-           box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
-       }
-       
-       #nav-panel.active {
-           left: 0;
-       }
-       
-       #nav-panel a {
-           display: block;
-           color: #ffffff;
-           text-decoration: none;
-           padding: 15px 0;
-           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-           transition: all 0.3s ease;
-           font-weight: 500;
-           position: relative;
-       }
-       
-       #nav-panel a:hover,
-       #nav-panel a.active {
-           color: #F4A261;
-           transform: translateX(10px);
-       }
-       
-       #nav-panel a:hover::before,
-       #nav-panel a.active::before {
-           content: '';
-           position: absolute;
-           left: -30px;
-           top: 50%;
-           transform: translateY(-50%);
-           width: 3px;
-           height: 20px;
-           background: #F4A261;
-           border-radius: 2px;
-       }
-       
-       /* Progress Indicator */
-       .progress-indicator {
-           position: fixed;
-           right: 30px;
-           top: 50%;
-           transform: translateY(-50%);
-           z-index: 1000;
-           display: flex;
-           flex-direction: column;
-           gap: 15px;
-       }
-       
-       .progress-dot {
-           width: 12px;
-           height: 12px;
-           background: rgba(255, 255, 255, 0.3);
-           border-radius: 50%;
-           cursor: pointer;
-           position: relative;
-           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-           border: 2px solid transparent;
-       }
-       
-       .progress-dot:hover {
-           background: rgba(244, 162, 97, 0.7);
-           transform: scale(1.3);
-           border-color: rgba(244, 162, 97, 0.3);
-       }
-       
-       .progress-dot.active {
-           background: #F4A261;
-           transform: scale(1.4);
-           box-shadow: 0 0 15px rgba(244, 162, 97, 0.4);
-       }
-       
-       .progress-dot:hover::after {
-           content: attr(data-title);
-           position: absolute;
-           right: 25px;
-           top: 50%;
-           transform: translateY(-50%);
-           background: rgba(0, 0, 0, 0.9);
-           color: #ffffff;
-           padding: 8px 12px;
-           border-radius: 6px;
-           white-space: nowrap;
-           font-size: 12px;
-           font-weight: 500;
-           opacity: 0;
-           animation: tooltipFade 0.3s ease forwards;
-           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-       }
-       
-       @keyframes tooltipFade {
-           to { opacity: 1; }
-       }
-       
-       /* Urgent Banner */
-       .urgent-banner {
-           position: fixed;
-           top: 0;
-           left: 0;
-           width: 100%;
-           background: linear-gradient(90deg, #F4A261 0%, #E09C4A 100%);
-           color: #0A2342;
-           text-align: center;
-           padding: 12px 0;
-           font-size: 14px;
-           font-weight: 700;
-           z-index: 999;
-           transform: translateY(-100%);
-           transition: transform 0.3s ease;
-           cursor: pointer;
-       }
-       
-       .urgent-banner.show {
-           transform: translateY(0);
-       }
-       
-       .urgent-banner .close-btn {
-           position: absolute;
-           right: 20px;
-           top: 50%;
-           transform: translateY(-50%);
-           background: none;
-           border: none;
-           font-size: 18px;
-           color: #0A2342;
-           cursor: pointer;
-           padding: 0;
-           width: 20px;
-           height: 20px;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-       }
-       
-       /* Loading Animation */
-       .loading {
-           opacity: 0;
-           transform: translateY(30px);
-           transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-       }
-       
-       .loading.loaded {
-           opacity: 1;
-           transform: translateY(0);
-       }
-       
-       /* Focus States */
-       button:focus,
-       a:focus,
-       input:focus,
-       textarea:focus {
-           outline: 2px solid #F4A261;
-           outline-offset: 2px;
-       }
-       
-       /* Section Titles with Underline */
-       .section-title {
-           font-size: clamp(28px, 5vw, 48px);
-           font-weight: 800;
-           margin-bottom: 24px;
-           text-align: center;
-           position: relative;
-           display: inline-block;
-           width: 100%;
-       }
-       
-       .section-title::after {
-           content: '';
-           position: absolute;
-           bottom: -8px;
-           left: 50%;
-           transform: translateX(-50%);
-           width: 60px;
-           height: 4px;
-           background: linear-gradient(90deg, #F4A261 0%, #2CA58D 100%);
-           border-radius: 2px;
-       }
-       
-       .section-subtitle {
-           font-size: 18px;
-           color: rgba(255, 255, 255, 0.8);
-           text-align: center;
-           margin-bottom: 48px;
-           max-width: 600px;
-           margin-left: auto;
-           margin-right: auto;
-       }
-       
-       /* Hero Section */
-       .hero {
-           padding-top: 120px;
-           text-align: center;
-           background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
-       }
-       
-       .hero h1 {
-           font-size: clamp(32px, 6vw, 64px);
-           font-weight: 800;
-           margin-bottom: 24px;
-           line-height: 1.1;
-           letter-spacing: -0.02em;
-           background: linear-gradient(135deg, #ffffff 0%, #F4A261 100%);
-           background-clip: text;
-           -webkit-background-clip: text;
-           -webkit-text-fill-color: transparent;
-       }
-       
-       .hero .subtitle {
-           font-size: clamp(18px, 3vw, 24px);
-           color: #2CA58D;
-           margin-bottom: 32px;
-           font-weight: 600;
-       }
-       
-       .hero .description {
-           font-size: 18px;
-           color: rgba(255, 255, 255, 0.9);
-           margin-bottom: 48px;
-           max-width: 600px;
-           margin-left: auto;
-           margin-right: auto;
-           line-height: 1.7;
-       }
-       
-       /* CTA Button */
-       .cta-button {
-           display: inline-block;
-           background: linear-gradient(135deg, #F4A261 0%, #E09C4A 100%);
-           color: #0A2342;
-           padding: 20px 48px;
-           font-size: 18px;
-           font-weight: 700;
-           text-decoration: none;
-           border-radius: 8px;
-           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-           box-shadow: 0 8px 32px rgba(244, 162, 97, 0.3);
-           text-transform: uppercase;
-           letter-spacing: 1px;
-           position: relative;
-           overflow: hidden;
-       }
-       
-       .cta-button::before {
-           content: '';
-           position: absolute;
-           top: 0;
-           left: -100%;
-           width: 100%;
-           height: 100%;
-           background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-           transition: left 0.5s ease;
-       }
-       
-       .cta-button:hover::before {
-           left: 100%;
-       }
-       
-       .cta-button:hover {
-           transform: translateY(-4px);
-           box-shadow: 0 12px 40px rgba(244, 162, 97, 0.5);
-           background: linear-gradient(135deg, #f5b681 0%, #f2a85c 100%);
-       }
-       
-       /* Card Styles */
-       .card {
-           background: rgba(255, 255, 255, 0.05);
-           border: 1px solid rgba(255, 255, 255, 0.1);
-           border-radius: 16px;
-           padding: 32px;
-           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-           backdrop-filter: blur(10px);
-       }
-       
-       .card:hover {
-           transform: translateY(-8px);
-           background: rgba(255, 255, 255, 0.08);
-           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-           border-color: rgba(244, 162, 97, 0.3);
-       }
-       
-       .card h3 {
-           font-size: 24px;
-           font-weight: 700;
-           margin-bottom: 16px;
-           color: #F4A261;
-       }
-       
-       .card p {
-           color: rgba(255, 255, 255, 0.8);
-           line-height: 1.7;
-       }
-       
-       /* Grid Layouts */
-       .grid-2 {
-           display: grid;
-           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-           gap: 32px;
-       }
-       
-       .grid-3 {
-           display: grid;
-           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-           gap: 32px;
-       }
-       
-       /* List Styles */
-       .checkmark-list {
-           list-style: none;
-           padding: 0;
-           margin: 0;
-       }
-       
-       .checkmark-list li {
-           position: relative;
-           padding-left: 40px;
-           margin-bottom: 16px;
-           font-size: 16px;
-           color: rgba(255, 255, 255, 0.9);
-       }
-       
-       .checkmark-list li::before {
-           content: '✓';
-           position: absolute;
-           left: 0;
-           top: 0;
-           color: #2CA58D;
-           font-size: 20px;
-           font-weight: bold;
-       }
-       
-       /* Module Cards */
-       .module-card {
-           background: rgba(255, 255, 255, 0.05);
-           border: 1px solid rgba(255, 255, 255, 0.1);
-           border-left: 4px solid #2CA58D;
-           border-radius: 12px;
-           padding: 32px;
-           margin-bottom: 24px;
-           transition: all 0.3s ease;
-       }
-       
-       .module-card:hover {
-           transform: translateX(8px);
-           background: rgba(255, 255, 255, 0.08);
-           border-left-color: #F4A261;
-       }
-       
-       .module-card h3 {
-           color: #2CA58D;
-           font-size: 22px;
-           margin-bottom: 16px;
-           font-weight: 700;
-       }
-       
-       .module-card ul {
-           list-style: none;
-           padding: 0;
-       }
-       
-       .module-card li {
-           padding: 8px 0;
-           padding-left: 24px;
-           position: relative;
-           color: rgba(255, 255, 255, 0.9);
-       }
-       
-       .module-card li::before {
-           content: "→";
-           position: absolute;
-           left: 0;
-           color: #F4A261;
-           font-weight: bold;
-       }
-       
-       /* Pricing Card */
-       .pricing-card {
-           background: linear-gradient(135deg, rgba(244, 162, 97, 0.1) 0%, rgba(44, 165, 141, 0.1) 100%);
-           border: 2px solid rgba(244, 162, 97, 0.3);
-           border-radius: 20px;
-           padding: 48px 32px;
-           text-align: center;
-           position: relative;
-           overflow: hidden;
-       }
-       
-       .pricing-card::before {
-           content: '';
-           position: absolute;
-           top: -50%;
-           left: -50%;
-           width: 200%;
-           height: 200%;
-           background: radial-gradient(circle, rgba(244, 162, 97, 0.1) 0%, transparent 50%);
-           animation: rotate 20s linear infinite;
-       }
-       
-       @keyframes rotate {
-           0% { transform: rotate(0deg); }
-           100% { transform: rotate(360deg); }
-       }
-       
-       .pricing-card .content {
-           position: relative;
-           z-index: 1;
-       }
-       
-       .price {
-           font-size: 48px;
-           font-weight: 900;
-           color: #F4A261;
-           margin: 24px 0;
-       }
-       
-       .price-note {
-           font-size: 14px;
-           color: rgba(255, 255, 255, 0.7);
-           margin-top: 16px;
-       }
-       
-       /* FAQ Accordion */
-       .faq-item {
-           background: rgba(255, 255, 255, 0.05);
-           border: 1px solid rgba(255, 255, 255, 0.1);
-           border-radius: 12px;
-           margin-bottom: 16px;
-           overflow: hidden;
-       }
-       
-       .faq-question {
-           padding: 24px;
-           cursor: pointer;
-           font-weight: 600;
-           font-size: 18px;
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-           transition: all 0.3s ease;
-       }
-       
-       .faq-question:hover {
-           background: rgba(255, 255, 255, 0.08);
-           color: #F4A261;
-       }
-       
-       .faq-icon {
-           font-size: 24px;
-           transition: transform 0.3s ease;
-       }
-       
-       .faq-item.active .faq-icon {
-           transform: rotate(45deg);
-       }
-       
-       .faq-answer {
-           padding: 0 24px;
-           max-height: 0;
-           overflow: hidden;
-           transition: all 0.3s ease;
-       }
-       
-       .faq-item.active .faq-answer {
-           padding: 0 24px 24px;
-           max-height: 200px;
-       }
-       
-       /* Footer */
-       footer {
-           background: rgba(0, 0, 0, 0.5);
-           padding: 60px 0 40px;
-           border-top: 1px solid rgba(255, 255, 255, 0.1);
-       }
-       
-       .footer-content {
-           display: grid;
-           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-           gap: 40px;
-           margin-bottom: 40px;
-       }
-       
-       .footer-section h4 {
-           color: #F4A261;
-           font-size: 18px;
-           font-weight: 600;
-           margin-bottom: 16px;
-       }
-       
-       .footer-section a {
-           color: rgba(255, 255, 255, 0.7);
-           text-decoration: none;
-           display: block;
-           margin-bottom: 8px;
-           transition: color 0.3s ease;
-       }
-       
-       .footer-section a:hover {
-           color: #F4A261;
-       }
-       
-       .footer-bottom {
-           text-align: center;
-           padding-top: 40px;
-           border-top: 1px solid rgba(255, 255, 255, 0.1);
-           color: rgba(255, 255, 255, 0.6);
-           font-size: 14px;
-       }
-       
-       /* Enhanced Final CTA */
-       .final-cta {
-           background: linear-gradient(135deg, rgba(244, 162, 97, 0.2) 0%, rgba(44, 165, 141, 0.2) 100%);
-           text-align: center;
-           position: relative;
-           overflow: hidden;
-       }
-       
-       .final-cta::before {
-           content: '';
-           position: absolute;
-           top: 0;
-           left: 0;
-           right: 0;
-           bottom: 0;
-           background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
-           z-index: 0;
-       }
-       
-       .final-cta .container {
-           position: relative;
-           z-index: 1;
-       }
-       
-       /* Mobile Responsive */
-       @media (max-width: 768px) {
-           .container {
-               padding: 0 20px;
-           }
-           
-           section {
-               padding: 60px 0;
-           }
-           
-           .hero {
-               padding-top: 100px;
-           }
-           
-           .progress-indicator {
-               display: none;
-           }
-           
-           .nav-trigger {
-               top: 10px;
-               left: 10px;
-           }
-           
-           #nav-panel {
-               width: 280px;
-               left: -280px;
-           }
-           
-           .grid-2,
-           .grid-3 {
-               grid-template-columns: 1fr;
-               gap: 24px;
-           }
-           
-           .section-title {
-               font-size: clamp(24px, 5vw, 36px);
-           }
-           
-           .card {
-               padding: 24px;
-           }
-           
-           .module-card {
-               padding: 24px;
-           }
-           
-           .pricing-card {
-               padding: 32px 24px;
-           }
-           
-           .footer-content {
-               grid-template-columns: 1fr;
-               gap: 30px;
-           }
-       }
-       
-       /* Print Styles */
-       @media print {
-           .nav-trigger,
-           .progress-indicator,
-           .urgent-banner,
-           .cta-button {
-               display: none !important;
-           }
-           
-           body {
-               background: white !important;
-               color: black !important;
-           }
-           
-           .card,
-           .module-card,
-           .pricing-card {
-               border: 1px solid #ccc !important;
-               background: white !important;
-           }
-       }
-       
-       /* High Contrast Mode */
-       @media (prefers-contrast: high) {
-           .card,
-           .module-card {
-               border-width: 2px;
-           }
-           
-           .section-title::after {
-               height: 6px;
-           }
-       }
-       
-       /* Reduced Motion */
-       @media (prefers-reduced-motion: reduce) {
-           *,
-           *::before,
-           *::after {
-               animation-duration: 0.01ms !important;
-               animation-iteration-count: 1 !important;
-               transition-duration: 0.01ms !important;
-           }
-           
-           html {
-               scroll-behavior: auto;
-           }
-       }
-   </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Complete Indian Stock Investor - Master the Market with Lotuslion</title>
+    <meta name="description" content="Learn institutional-grade investment analysis with CSuite23. Our courses provide educational frameworks for enhancing financial literacy. This is not investment advice.">
+    
+    <meta property="og:title" content="The Complete Indian Stock Investor - Master the Market with Lotuslion">
+    <meta property="og:description" content="Learn institutional-grade investment analysis frameworks. Educational course on stock market fundamentals. Not investment advice.">
+    <meta property="og:url" content="https://lotuslion.in">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://lotuslion.in/assets/logo.webp">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Complete Indian Stock Investor - Master the Market with Lotuslion">
+    <meta name="twitter:description" content="Learn institutional-grade investment analysis with CSuite23. Our courses provide educational frameworks for enhancing financial literacy. This is not investment advice.">
+    <meta name="twitter:image" content="https://lotuslion.in/assets/logo.webp">
+    
+    <link rel="canonical" href="https://lotuslion.in">
+    
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Core Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Section Base */
+        section {
+            padding: 80px 0;
+            min-height: auto;
+            position: relative;
+        }
+        
+        /* Navigation Trigger */
+        .nav-trigger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1002;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-trigger:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .nav-trigger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #ffffff;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+        
+        .nav-trigger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .nav-trigger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-trigger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        /* Navigation Panel */
+        #nav-panel {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: rgba(13, 20, 33, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 80px 30px 30px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            overflow-y: auto;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        #nav-panel.active {
+            left: 0;
+        }
+        
+        #nav-panel a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        #nav-panel a:hover,
+        #nav-panel a.active {
+            color: #F4A261;
+            transform: translateX(10px);
+        }
+        
+        #nav-panel a:hover::before,
+        #nav-panel a.active::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background: #F4A261;
+            border-radius: 2px;
+        }
+        
+        /* Progress Indicator */
+        .progress-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .progress-dot:hover {
+            background: rgba(244, 162, 97, 0.7);
+            transform: scale(1.3);
+            border-color: rgba(244, 162, 97, 0.3);
+        }
+        
+        .progress-dot.active {
+            background: #F4A261;
+            transform: scale(1.4);
+            box-shadow: 0 0 15px rgba(244, 162, 97, 0.4);
+        }
+        
+        .progress-dot:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0;
+            animation: tooltipFade 0.3s ease forwards;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes tooltipFade {
+            to { opacity: 1; }
+        }
+        
+        /* Urgent Banner */
+        .urgent-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #F4A261 0%, #E09C4A 100%);
+            color: #0A2342;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 700;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .urgent-banner.show {
+            transform: translateY(0);
+        }
+        
+        .urgent-banner .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #0A2342;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .loading.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Focus States */
+        button:focus,
+        a:focus,
+        input:focus,
+        textarea:focus {
+            outline: 2px solid #F4A261;
+            outline-offset: 2px;
+        }
+        
+        /* Section Titles with Underline */
+        .section-title {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #F4A261 0%, #2CA58D 100%);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 120px;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero h1 {
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #F4A261 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero .subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: #2CA58D;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+        
+        .hero .description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #F4A261 0%, #E09C4A 100%);
+            color: #0A2342;
+            padding: 20px 48px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(244, 162, 97, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(244, 162, 97, 0.5);
+            background: linear-gradient(135deg, #f5b681 0%, #f2a85c 100%);
+        }
+        
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(244, 162, 97, 0.3);
+        }
+        
+        .card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #F4A261;
+        }
+        
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+        
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        /* List Styles */
+        .checkmark-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .checkmark-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .checkmark-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #2CA58D;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        /* Module Cards */
+        .module-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #2CA58D;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            transform: translateX(8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-left-color: #F4A261;
+        }
+        
+        .module-card h3 {
+            color: #2CA58D;
+            font-size: 22px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        .module-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .module-card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .module-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #F4A261;
+            font-weight: bold;
+        }
+        
+        /* Pricing Card */
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.1) 0%, rgba(44, 165, 141, 0.1) 100%);
+            border: 2px solid rgba(244, 162, 97, 0.3);
+            border-radius: 20px;
+            padding: 48px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(244, 162, 97, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .pricing-card .content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 900;
+            color: #F4A261;
+            margin: 24px 0;
+        }
+        
+        .price-note {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 16px;
+        }
+        
+        /* FAQ Accordion */
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 24px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #F4A261;
+        }
+        
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 24px 24px;
+            max-height: 200px;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 60px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            color: #F4A261;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #F4A261;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        /* Enhanced Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.2) 0%, rgba(44, 165, 141, 0.2) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .final-cta .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding-top: 100px;
+            }
+            
+            .progress-indicator {
+                display: none;
+            }
+            
+            .nav-trigger {
+                top: 10px;
+                left: 10px;
+            }
+            
+            #nav-panel {
+                width: 280px;
+                left: -280px;
+            }
+            
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .section-title {
+                font-size: clamp(24px, 5vw, 36px);
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .module-card {
+                padding: 24px;
+            }
+            
+            .pricing-card {
+                padding: 32px 24px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .nav-trigger,
+            .progress-indicator,
+            .urgent-banner,
+            .cta-button {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .card,
+            .module-card,
+            .pricing-card {
+                border: 1px solid #ccc !important;
+                background: white !important;
+            }
+        }
+        
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            .card,
+            .module-card {
+                border-width: 2px;
+            }
+            
+            .section-title::after {
+                height: 6px;
+            }
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-   <!-- Google Tag Manager (noscript) -->
-   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
-   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-   <!-- End Google Tag Manager (noscript) -->
-   
-   <!-- Navigation Trigger -->
-   <div class="nav-trigger" onclick="toggleNav()" aria-label="Toggle navigation menu">
-       <span></span>
-       <span></span>
-       <span></span>
-   </div>
-   
-   <!-- Navigation Panel -->
-   <nav id="nav-panel" role="navigation" aria-label="Main navigation">
-       <a href="#hero" class="nav-link">Lorem Ipsum</a>
-       <a href="#who-this-is-for" class="nav-link">Lorem Ipsum</a>
-       <a href="#problems" class="nav-link">Lorem Ipsum</a>
-       <a href="#solution" class="nav-link">Lorem Ipsum</a>
-       <a href="#modules" class="nav-link">Lorem Ipsum</a>
-       <a href="#whats-included" class="nav-link">Lorem Ipsum</a>
-       <a href="#pricing" class="nav-link">Lorem Ipsum</a>
-       <a href="#course-access" class="nav-link">Lorem Ipsum</a>
-       <a href="#instructor" class="nav-link">Lorem Ipsum</a>
-       <a href="#faq" class="nav-link">Lorem Ipsum</a>
-       <a href="#enroll" class="nav-link">Lorem Ipsum</a>
-   </nav>
-   
-   <!-- Progress Indicator -->
-   <div class="progress-indicator" role="navigation" aria-label="Page progress">
-       <div class="progress-dot" data-title="Lorem" data-section="hero"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="who-this-is-for"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="problems"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="solution"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="modules"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="whats-included"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="pricing"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="course-access"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="instructor"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="faq"></div>
-       <div class="progress-dot" data-title="Lorem" data-section="enroll"></div>
-   </div>
-   
-   <!-- Urgent Banner -->
-   <div class="urgent-banner" id="urgent-banner">
-       <span>Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
-       <button class="close-btn" onclick="closeBanner()" aria-label="Close banner">&times;</button>
-   </div>
-   
-   <!-- Hero Section -->
-   <section class="hero" id="hero">
-       <div class="container loading">
-           <img src="assets/logo.webp" alt="Lorem ipsum logo" style="width: 80px; height: auto; margin-bottom: 24px;">
-           <h1>Lorem Ipsum Dolor Sit Amet</h1>
-           <p class="subtitle">Lorem ipsum dolor sit amet consectetur</p>
-           <p class="description">
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-           </p>
-           <a href="#pricing" class="cta-button">Lorem Ipsum</a>
-       </div>
-   </section>
-   
-   <!-- Who This Is For Section -->
-   <section id="who-this-is-for">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div class="grid-2">
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-           </div>
-       </div>
-   </section>
-   
-   <!-- What You'll Master Section -->
-   <section id="problems">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div class="grid-3">
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-           </div>
-       </div>
-   </section>
-   
-   <!-- Teaching Method Section -->
-   <section id="solution">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-               <ul class="checkmark-list" style="text-align: left; margin: 48px auto;">
-                   <li>Lorem ipsum dolor sit amet consectetur adipiscing elit</li>
-                   <li>Sed do eiusmod tempor incididunt ut labore et dolore</li>
-                   <li>Magna aliqua ut enim ad minim veniam quis nostrud</li>
-                   <li>Exercitation ullamco laboris nisi ut aliquip ex ea</li>
-                   <li>Commodo consequat duis aute irure dolor in reprehenderit</li>
-               </ul>
-               <a href="#modules" class="cta-button">Lorem Ipsum</a>
-           </div>
-       </div>
-   </section>
-   
-   <!-- Modules Section -->
-   <section id="modules">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div style="max-width: 900px; margin: 0 auto;">
-               <div class="module-card">
-                   <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                   <ul>
-                       <li>Lorem ipsum dolor sit amet consectetur</li>
-                       <li>Adipiscing elit sed do eiusmod tempor</li>
-                       <li>Incididunt ut labore et dolore magna</li>
-                       <li>Aliqua ut enim ad minim veniam</li>
-                   </ul>
-               </div>
-               <div class="module-card">
-                   <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                   <ul>
-                       <li>Lorem ipsum dolor sit amet consectetur</li>
-                       <li>Adipiscing elit sed do eiusmod tempor</li>
-                       <li>Incididunt ut labore et dolore magna</li>
-                       <li>Aliqua ut enim ad minim veniam</li>
-                   </ul>
-               </div>
-               <div class="module-card">
-                   <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                   <ul>
-                       <li>Lorem ipsum dolor sit amet consectetur</li>
-                       <li>Adipiscing elit sed do eiusmod tempor</li>
-                       <li>Incididunt ut labore et dolore magna</li>
-                       <li>Aliqua ut enim ad minim veniam</li>
-                   </ul>
-               </div>
-               <div class="module-card">
-                   <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                   <ul>
-                       <li>Lorem ipsum dolor sit amet consectetur</li>
-                       <li>Adipiscing elit sed do eiusmod tempor</li>
-                       <li>Incididunt ut labore et dolore magna</li>
-                       <li>Aliqua ut enim ad minim veniam</li>
-                   </ul>
-               </div>
-               <div class="module-card">
-                   <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                   <ul>
-                       <li>Lorem ipsum dolor sit amet consectetur</li>
-                       <li>Adipiscing elit sed do eiusmod tempor</li>
-                       <li>Incididunt ut labore et dolore magna</li>
-                       <li>Aliqua ut enim ad minim veniam</li>
-                   </ul>
-               </div>
-           </div>
-       </div>
-   </section>
-   
-   <!-- What's Included Section -->
-   <section id="whats-included">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div class="grid-2">
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <ul class="checkmark-list">
-                       <li>Lorem ipsum dolor sit amet</li>
-                       <li>Consectetur adipiscing elit</li>
-                       <li>Sed do eiusmod tempor</li>
-                       <li>Incididunt ut labore</li>
-                   </ul>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <ul class="checkmark-list">
-                       <li>Lorem ipsum dolor sit amet</li>
-                       <li>Consectetur adipiscing elit</li>
-                       <li>Sed do eiusmod tempor</li>
-                       <li>Incididunt ut labore</li>
-                   </ul>
-               </div>
-           </div>
-       </div>
-   </section>
-   
-   <!-- Pricing Section -->
-   <section id="pricing">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div style="max-width: 500px; margin: 0 auto;">
-               <div class="pricing-card">
-                   <div class="content">
-                       <h3 style="font-size: 28px; margin-bottom: 16px;">Lorem Ipsum Course</h3>
-                       <div class="price">Lorem ₹99</div>
-                       <p style="margin-bottom: 32px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-                       <a href="#" class="cta-button">Lorem Ipsum</a>
-                       <p class="price-note">Lorem ipsum dolor sit amet consectetur</p>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </section>
-   
-   <!-- Course Access Details Section -->
-   <section id="course-access">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div class="grid-3">
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-               <div class="card">
-                   <h3>Lorem Ipsum</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
-           </div>
-       </div>
-   </section>
-   
-   <!-- Instructor Section -->
-   <section id="instructor">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-               <div class="grid-3" style="margin-bottom: 40px;">
-                   <div class="card">
-                       <h3 style="font-size: 32px; margin-bottom: 8px;">Lorem+</h3>
-                       <p>Lorem ipsum dolor sit</p>
-                   </div>
-                   <div class="card">
-                       <h3 style="font-size: 32px; margin-bottom: 8px;">Lorem+</h3>
-                       <p>Lorem ipsum dolor sit</p>
-                   </div>
-                   <div class="card">
-                       <h3 style="font-size: 32px; margin-bottom: 8px;">Lorem+</h3>
-                       <p>Lorem ipsum dolor sit</p>
-                   </div>
-               </div>
-               <div style="background: rgba(44, 165, 141, 0.1); border-left: 4px solid #2CA58D; padding: 24px; margin-bottom: 32px; text-align: left;">
-                   <p style="font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #2CA58D;">Lorem Ipsum Experience</p>
-                   <p>• Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
-                   <p>• Sed do eiusmod tempor incididunt ut labore et dolore</p>
-                   <p>• Magna aliqua ut enim ad minim veniam quis nostrud</p>
-               </div>
-               <p style="margin-bottom: 24px;">
-                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-               </p>
-               <p style="margin-bottom: 24px;">
-                   <strong>Lorem Ipsum:</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-               </p>
-               <p style="margin-bottom: 32px;">
-                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." - Lorem Ipsum
-               </p>
-           </div>
-       </div>
-   </section>
-   
-   <!-- FAQ Section -->
-   <section id="faq">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit</h2>
-           <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-           <div style="max-width: 800px; margin: 0 auto;">
-               <div class="faq-item">
-                   <div class="faq-question">
-                       <span>Lorem ipsum dolor sit amet consectetur adipiscing elit?</span>
-                       <span class="faq-icon">+</span>
-                   </div>
-                   <div class="faq-answer">
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                   </div>
-               </div>
-               <div class="faq-item">
-                   <div class="faq-question">
-                       <span>Sed do eiusmod tempor incididunt ut labore?</span>
-                       <span class="faq-icon">+</span>
-                   </div>
-                   <div class="faq-answer">
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                   </div>
-               </div>
-               <div class="faq-item">
-                   <div class="faq-question">
-                       <span>Magna aliqua ut enim ad minim veniam?</span>
-                       <span class="faq-icon">+</span>
-                   </div>
-                   <div class="faq-answer">
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                   </div>
-               </div>
-               <div class="faq-item">
-                   <div class="faq-question">
-                       <span>Quis nostrud exercitation ullamco laboris?</span>
-                       <span class="faq-icon">+</span>
-                   </div>
-                   <div class="faq-answer">
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                   </div>
-               </div>
-               <div class="faq-item">
-                   <div class="faq-question">
-                       <span>Nisi ut aliquip ex ea commodo consequat?</span>
-                       <span class="faq-icon">+</span>
-                   </div>
-                   <div class="faq-answer">
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </section>
-   
-   <!-- Final CTA Section -->
-   <section class="final-cta" id="enroll">
-       <div class="container loading">
-           <h2 class="section-title">Lorem Ipsum Dolor Sit Amet?</h2>
-           <p style="font-size: 20px; margin-bottom: 32px; color: rgba(255, 255, 255, 0.9);">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod</p>
-           <a href="#" class="cta-button" style="font-size: 24px; padding: 24px 56px;">Lorem Ipsum</a>
-           <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
-               Lorem ipsum dolor sit amet • Lorem ipsum dolor sit
-           </p>
-           <p style="margin-top: 16px; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-           </p>
-       </div>
-   </section>
-   
-   <!-- Footer -->
-   <footer>
-       <div class="container">
-           <div class="footer-content">
-               <div class="footer-section">
-                   <h4>Lorem Ipsum</h4>
-                   <a href="mailto:lorem@ipsum.com">Lorem Ipsum</a>
-                   <a href="/terms.html">Lorem Ipsum</a>
-                   <a href="/privacy.html">Lorem Ipsum</a>
-                   <a href="/refund.html">Lorem Ipsum</a>
-               </div>
-               <div class="footer-section">
-                   <h4>Lorem Ipsum</h4>
-                   <a href="#hero">Lorem Ipsum</a>
-                   <a href="#modules">Lorem Ipsum</a>
-                   <a href="#pricing">Lorem Ipsum</a>
-                   <a href="#instructor">Lorem Ipsum</a>
-               </div>
-               <div class="footer-section">
-                   <h4>Lorem Ipsum</h4>
-                   <a href="#" target="_blank">Lorem Ipsum</a>
-                   <a href="#" target="_blank">Lorem Ipsum</a>
-                   <a href="#" target="_blank">Lorem Ipsum</a>
-               </div>
-           </div>
-           <div class="footer-bottom">
-               <p>&copy; <span id="copyright-year"></span> Lorem Ipsum Dolor. Lorem ipsum dolor sit amet.</p>
-               <p style="margin-top: 8px;">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
-           </div>
-       </div>
-   </footer>
-   
-   <!-- External JavaScript Files -->
-   <script src="js/main-scripts.js"></script>
-   <script src="js/faq-accordion.js"></script>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="nav-trigger" onclick="toggleNav()" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <nav id="nav-panel" role="navigation" aria-label="Main navigation">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#who-this-is-for" class="nav-link">Who This Is For</a>
+        <a href="#problems" class="nav-link">What You'll Master</a>
+        <a href="#solution" class="nav-link">Teaching Method</a>
+        <a href="#modules" class="nav-link">Course Modules</a>
+        <a href="#whats-included" class="nav-link">What's Included</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#course-access" class="nav-link">Access Details</a>
+        <a href="#instructor" class="nav-link">Your Instructor</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#enroll" class="nav-link">Enroll Now</a>
+    </nav>
+    
+    <div class="progress-indicator" role="navigation" aria-label="Page progress">
+        <div class="progress-dot" data-title="Home" data-section="hero"></div>
+        <div class="progress-dot" data-title="For You" data-section="who-this-is-for"></div>
+        <div class="progress-dot" data-title="Master" data-section="problems"></div>
+        <div class="progress-dot" data-title="Method" data-section="solution"></div>
+        <div class="progress-dot" data-title="Modules" data-section="modules"></div>
+        <div class="progress-dot" data-title="Included" data-section="whats-included"></div>
+        <div class="progress-dot" data-title="Pricing" data-section="pricing"></div>
+        <div class="progress-dot" data-title="Access" data-section="course-access"></div>
+        <div class="progress-dot" data-title="Instructor" data-section="instructor"></div>
+        <div class="progress-dot" data-title="FAQ" data-section="faq"></div>
+        <div class="progress-dot" data-title="Enroll" data-section="enroll"></div>
+    </div>
+    
+    <div class="urgent-banner" id="urgent-banner">
+        <span>Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
+        <button class="close-btn" onclick="closeBanner()" aria-label="Close banner">&times;</button>
+    </div>
+    
+    <section class="hero" id="hero">
+        <div class="container loading">
+            <img src="assets/logo.webp" alt="Lorem ipsum logo" style="width: 80px; height: auto; margin-bottom: 24px;">
+
+            <div class="hero-badge">📚 LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
+
+            <h1>Master Institutional-Grade Investment Analysis</h1>
+
+            <p class="subtitle">Develop the analytical skills used by institutional investors through structured education</p>
+
+            <div class="hero-credentials">
+                <div class="credential-highlight">
+                    <span class="credential-number">17+</span>
+                    <span class="credential-text">Years at Top Investment Banks</span>
+                </div>
+                <div class="credential-highlight">
+                    <span class="credential-number">100+</span>
+                    <span class="credential-text">Companies Analyzed</span>
+                </div>
+                <div class="credential-highlight">
+                    <span class="credential-number">₹10+ Trn</span>
+                    <span class="credential-text">Institutional AUM Advised</span>
+                </div>
+            </div>
+
+            <p class="description">
+                Discover the systematic approach to investment analysis used by professionals at India's top financial institutions. This comprehensive course demystifies complex financial concepts and teaches you the exact frameworks used to evaluate companies, understand market dynamics, and make informed decisions.
+            </p>
+
+            <p style="font-size: 14px; color: rgba(255, 255, 255, 0.6); margin-bottom: 24px;">
+                This is an educational course designed to enhance financial literacy. Not personalized investment advice.
+            </p>
+
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">
+                START LEARNING TODAY
+                <span class="cta-subtext">Lifetime Access • 48-Hour Refund Policy</span>
+            </a>
+
+            <div class="price-box">
+                <span class="original">₹24,999</span>
+                <span class="current">₹9,999</span>
+                <span class="discount">60% OFF - Limited Period</span>
+                <div class="emi-option">
+                    Or just <strong>₹1,667/month</strong> (6 EMI)
+                </div>
+            </div>
+
+            <div class="guarantee-badge">
+                <span class="guarantee-icon">🛡️</span>
+                <div class="guarantee-text">
+                    <strong>48-Hour Money-Back Guarantee</strong>
+                    <span>No questions asked. 100% refund if not satisfied.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="audience-section" id="who-this-is-for">
+        <div class="container loading">
+            <h2 class="section-title">Who This Course Is Perfect For</h2>
+            <p class="section-subtitle">
+                This educational course is designed for professionals who want to understand institutional investment frameworks
+            </p>
+
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <h3><span class="audience-icon">💼</span> Working Professionals</h3>
+                    <ul>
+                        <li>• Want to understand financial markets better</li>
+                        <li>• Seeking structured learning approach</li>
+                        <li>• Limited time for extensive research</li>
+                    </ul>
+                </div>
+
+                <div class="audience-card">
+                    <h3><span class="audience-icon">📊</span> Finance Enthusiasts</h3>
+                    <ul>
+                        <li>• Interested in fundamental analysis</li>
+                        <li>• Want to read financial statements</li>
+                        <li>• Seeking systematic frameworks</li>
+                    </ul>
+                </div>
+
+                <div class="audience-card">
+                    <h3><span class="audience-icon">🎯</span> Serious Learners</h3>
+                    <ul>
+                        <li>• Committed to long-term learning</li>
+                        <li>• Want institutional-grade knowledge</li>
+                        <li>• Prefer depth over quick tips</li>
+                    </ul>
+                </div>
+
+                <div class="audience-card">
+                    <h3><span class="audience-icon">🔍</span> Research-Oriented Minds</h3>
+                    <ul>
+                        <li>• Enjoy analyzing companies</li>
+                        <li>• Want to understand valuation</li>
+                        <li>• Seek data-driven approaches</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problems" id="problems">
+        <div class="container loading">
+            <h2 class="section-title">What You'll Master</h2>
+            <p class="section-subtitle">
+                Four core competencies that form the foundation of professional investment analysis
+            </p>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>📈 Financial Statement Analysis</h3>
+                    <p>Learn to read and interpret balance sheets, income statements, and cash flow statements like institutional analysts do.</p>
+                </div>
+
+                <div class="problem-card">
+                    <h3>🎯 Valuation Frameworks</h3>
+                    <p>Master multiple valuation methodologies including DCF, relative valuation, and asset-based approaches.</p>
+                </div>
+
+                <div class="problem-card">
+                    <h3>🔄 Sector Analysis</h3>
+                    <p>Understand how to analyze different sectors, their key metrics, and what drives performance in each industry.</p>
+                </div>
+
+                <div class="problem-card">
+                    <h3>📊 Risk Assessment</h3>
+                    <p>Develop frameworks for evaluating business risk, financial risk, and portfolio risk management strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="teaching-method" id="solution">
+        <div class="container loading">
+            <h2 class="section-title">Our Educational Framework</h2>
+            <p class="section-subtitle">
+                A structured approach to learning institutional investment analysis
+            </p>
+
+            <div class="method-grid">
+                <div class="method-card">
+                    <span class="method-icon">📚</span>
+                    <h3>Structured Learning</h3>
+                    <p>Progressive curriculum designed to build foundational knowledge before advancing to complex concepts and practical applications.</p>
+                </div>
+
+                <div class="method-card">
+                    <span class="method-icon">🎯</span>
+                    <h3>Practical Application</h3>
+                    <p>Every theory is reinforced with real-world examples and case studies from actual companies and market scenarios.</p>
+                </div>
+
+                <div class="method-card">
+                    <span class="method-icon">🔄</span>
+                    <h3>Continuous Learning</h3>
+                    <p>Gain lifetime access to materials, regular updates, and a supportive community to ensure your growth continues beyond the course.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules" id="modules">
+        <div class="container loading">
+            <h2 class="section-title">Your Learning Journey</h2>
+            <div class="module-stack">
+                <div class="module-card">
+                    <h3>Module 1: Foundation - Building Your Investment Mindset</h3>
+                    <div style="color: #F4A261; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Duration: 3-4 hours</div>
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #2CA58D;">Learning Objectives:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Understand the difference between investing and trading</li>
+                            <li>Learn the core principles of value creation</li>
+                            <li>Develop a systematic approach to market analysis</li>
+                            <li>Master essential financial terminology</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #2CA58D;">Key Topics:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>The Investor's Mindset:</strong> Long-term thinking vs. short-term speculation, market psychology, building discipline</li>
+                            <li><strong>Financial Literacy Essentials:</strong> Reading financial statements, key metrics, industry terminology</li>
+                            <li><strong>India's Economic Landscape:</strong> Sector overview, growth drivers, regulatory environment</li>
+                            <li><strong>Setting Your Framework:</strong> Defining your approach, risk assessment, investment criteria</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h3>Module 2: The Analysis Framework - Professional Evaluation Methods</h3>
+                    <div style="color: #F4A261; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Duration: 4-5 hours</div>
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #2CA58D;">Learning Objectives:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Master the 4-step company analysis process</li>
+                            <li>Understand quality metrics and what they reveal</li>
+                            <li>Learn professional valuation techniques</li>
+                            <li>Develop your analytical toolkit</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #2CA58D;">Key Topics:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Screening & Filtering:</strong> Building effective screens, quality indicators (ROCE, ROE, FCF), red flags</li>
+                            <li><strong>Deep Dive Analysis:</strong> Business model evaluation, competitive advantage assessment, management quality</li>
+                            <li><strong>Financial Statement Mastery:</strong> Beyond the numbers, forensic accounting basics, cash flow analysis</li>
+                            <li><strong>Valuation Frameworks:</strong> Multiple-based valuation, DCF fundamentals, relative valuation techniques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h3>Module 3: Case Studies - Learning from Real Examples</h3>
+                    <div style="color: #F4A261; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Duration: 4-5 hours</div>
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #2CA58D;">Learning Objectives:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Apply frameworks to real companies</li>
+                            <li>Understand sector-specific dynamics</li>
+                            <li>Learn from both successes and failures</li>
+                            <li>Develop pattern recognition skills</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #2CA58D;">Key Topics:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Sector Deep Dives:</strong> Telecom transformation (Bharti Airtel), NBFC evolution (Bajaj Finance), consumer goods</li>
+                            <li><strong>Turnaround Analysis:</strong> Identifying recovery potential, catalyst recognition, risk-reward assessment</li>
+                            <li><strong>Crisis Navigation:</strong> Market crash responses, opportunity identification, risk management in practice</li>
+                            <li><strong>Growth Story Decoding:</strong> Sustainable growth identification, scalability assessment, execution track record</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h3>Module 4: Market Dynamics - Understanding the Bigger Picture</h3>
+                    <div style="color: #F4A261; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Duration: 3-4 hours</div>
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #2CA58D;">Learning Objectives:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Understand macroeconomic impacts</li>
+                            <li>Learn sector rotation strategies</li>
+                            <li>Develop market timing insights</li>
+                            <li>Master cycle analysis</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #2CA58D;">Key Topics:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Economic Indicators:</strong> Interest rate impacts, inflation dynamics, currency considerations</li>
+                            <li><strong>Sector Dynamics:</strong> Cyclical vs. defensive sectors, rotation patterns, theme identification</li>
+                            <li><strong>Market Regimes:</strong> Bull vs. bear characteristics, sideways market strategies, volatility navigation</li>
+                            <li><strong>Global Influences:</strong> FII/DII dynamics, global market correlations, event impact analysis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <h3>Module 5: Portfolio Construction - Building Your Strategy</h3>
+                    <div style="color: #F4A261; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Duration: 3-4 hours</div>
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #2CA58D;">Learning Objectives:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Design a balanced portfolio</li>
+                            <li>Implement position sizing strategies</li>
+                            <li>Develop risk management protocols</li>
+                            <li>Create monitoring systems</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: #2CA58D;">Key Topics:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Portfolio Architecture:</strong> Diversification principles, concentration vs. diversification, asset allocation basics</li>
+                            <li><strong>Position Sizing:</strong> Conviction-based allocation, risk-based sizing, pyramiding strategies</li>
+                            <li><strong>Risk Management:</strong> Systematic risk controls, hedging basics, drawdown management</li>
+                            <li><strong>Portfolio Maintenance:</strong> Rebalancing strategies, performance tracking, tax considerations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(244, 162, 97, 0.08); padding: 32px; border-radius: 16px; margin-top: 32px; border: 1px solid rgba(244, 162, 97, 0.2);">
+                    <h4 style="color: #F4A261; font-size: 20px; margin-bottom: 20px; font-weight: 700;">
+                        Additional Resources Included
+                    </h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div>
+                            <strong style="color: #2CA58D;">Downloadable Templates:</strong>
+                            <ul style="margin-top: 8px; color: rgba(255, 255, 255, 0.9);">
+                                <li>Analysis worksheets</li>
+                                <li>Screening tools</li>
+                                <li>Portfolio trackers</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong style="color: #2CA58D;">Quick Reference Guides:</strong>
+                            <ul style="margin-top: 8px; color: rgba(255, 255, 255, 0.9);">
+                                <li>Formula sheets</li>
+                                <li>Ratio interpretations</li>
+                                <li>Analysis checklists</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong style="color: #2CA58D;">Bonus Content:</strong>
+                            <ul style="margin-top: 8px; color: rgba(255, 255, 255, 0.9);">
+                                <li>Behavioral finance primer</li>
+                                <li>Excel for investors</li>
+                                <li>Industry deep dives</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(44, 165, 141, 0.08); padding: 32px; border-radius: 16px; margin-top: 24px; border: 1px solid rgba(44, 165, 141, 0.2); text-align: center;">
+                    <h4 style="color: #2CA58D; font-size: 20px; margin-bottom: 16px; font-weight: 700;">
+                        Learning Outcomes
+                    </h4>
+                    <p style="font-size: 18px; line-height: 1.7; color: rgba(255, 255, 255, 0.9);">
+                        By completing this curriculum, you'll possess the knowledge and tools to analyze companies systematically, understand market dynamics, and build a structured approach to investment decision-making. This education empowers you to think independently and make informed choices based on fundamental analysis, not tips or speculation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="included-section" id="whats-included">
+        <div class="container loading">
+            <h2 class="section-title">What's Included in Your Course</h2>
+            <p class="section-subtitle">Every component designed to accelerate your learning journey and build lasting expertise.</p>
+            <div class="included-grid">
+                <div class="included-card">
+                    <span class="included-icon">🎥</span>
+                    <h3>Comprehensive Video Lessons</h3>
+                    <p>Over 15 hours of high-definition video content, breaking down complex topics into easy-to-understand segments.</p>
+                </div>
+                <div class="included-card">
+                    <span class="included-icon">📱</span>
+                    <h3>Mobile & Desktop Access</h3>
+                    <p>Learn anytime, anywhere. Our platform is fully responsive, allowing seamless access from any device.</p>
+                </div>
+                <div class="included-card">
+                    <span class="included-icon">♾️</span>
+                    <h3>Lifetime Access & Updates</h3>
+                    <p>Enroll once, learn forever. Get permanent access to all course materials and future updates at no extra cost.</p>
+                </div>
+                <div class="included-card">
+                    <span class="included-icon">📄</span>
+                    <h3>Downloadable Resources</h3>
+                    <p>Access ready-to-use analysis worksheets, financial models, checklists, and quick reference guides.</p>
+                </div>
+                <div class="included-card">
+                    <span class="included-icon">🔄</span>
+                    <h3>Real-World Case Studies</h3>
+                    <p>Apply frameworks to actual Indian companies, solidifying your understanding through practical examples.</p>
+                </div>
+                <div class="included-card">
+                    <span class="included-icon">💬</span>
+                    <h3>Exclusive Community Access</h3>
+                    <p>Join a vibrant community of fellow learners. Share insights, ask questions, and grow together in a supportive environment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing-section" id="pricing">
+        <div class="container loading">
+            <h2 class="section-title">Investment in Your Knowledge</h2>
+            <p class="section-subtitle">Secure your access to institutional-grade investment education.</p>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <span class="pricing-label">Special Launch Offer</span>
+                    <div class="pricing-amount"><span class="pricing-currency">₹</span>9,999</div>
+                    <span class="pricing-original">₹24,999</span>
+                    <ul class="pricing-features">
+                        <li><span class="feature-icon">✓</span>Access to all 5 core modules</li>
+                        <li><span class="feature-icon">✓</span>15+ hours of video lessons</li>
+                        <li><span class="feature-icon">✓</span>Downloadable analysis templates</li>
+                        <li><span class="feature-icon">✓</span>Real-world Indian case studies</li>
+                        <li><span class="feature-icon">✓</span>Lifetime access & future updates</li>
+                        <li><span class="feature-icon">✓</span>Access to student community</li>
+                    </ul>
+                    <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">ENROLL NOW</a>
+                    <div class="pricing-guarantee"><span class="guarantee-badge-small">🛡️ 48-Hour Money Back Guarantee</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="access-section" id="course-access">
+        <div class="container loading">
+            <h2 class="section-title">How You'll Access the Course</h2>
+            <div class="access-grid">
+                <div class="access-content">
+                    <h3>Seamless Learning Experience</h3>
+                    <ul class="access-list">
+                        <li><span class="access-icon">⚡</span><span>Instant Access: Get login details delivered to your email within minutes of enrollment.</span></li>
+                        <li><span class="access-icon">🌐</span><span>Online Platform: Access all video lessons, resources, and community features through our dedicated learning portal.</span></li>
+                        <li><span class="access-icon">📧</span><span>Direct Communication: Receive important updates, session schedules, and bonus content directly in your inbox.</span></li>
+                        <li><span class="access-icon">🔐</span><span>Secure & Private: Your data and learning progress are kept secure with industry-standard encryption.</span></li>
+                    </ul>
+                </div>
+                <div class="access-visual"><span class="access-visual-icon">🎓</span></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="instructor" id="instructor">
+        <div class="container loading">
+            <h2 class="section-title">Learn from Institutional Experience</h2>
+            <div class="instructor-content">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); max-width: 600px; margin: 0 auto 40px auto; gap: 24px;">
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #F4A261; font-size: 32px; margin-bottom: 8px;">17+ Years</h3>
+                        <p style="color: rgba(255, 255, 255, 0.9);">Institutional Equity Research</p>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #F4A261; font-size: 32px; margin-bottom: 8px;">100+</h3>
+                        <p style="color: rgba(255, 255, 255, 0.9);">Companies Analyzed</p>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #F4A261; font-size: 32px; margin-bottom: 8px;">20+ Sectors</h3>
+                        <p style="color: rgba(255, 255, 255, 0.9);">Deep Domain Expertise</p>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: #F4A261; font-size: 32px; margin-bottom: 8px;">₹10+ Trn</h3>
+                        <p style="color: rgba(255, 255, 255, 0.9);">Institutional AUM Advised</p>
+                    </div>
+                </div>
+                <div style="background: rgba(44,165,141,0.1); border-left: 4px solid #2CA58D; padding: 24px; margin-bottom: 32px;">
+                    <p style="font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #2CA58D;">Leadership Experience - Rohit Ahuja</p>
+                    <p>• Head of Research at ICRA (Moody's Company)</p>
+                    <p>• Head of Research at Bank of Baroda Capital Markets</p>
+                    <p>• MBA Finance + B.Sc. Mathematics from Mumbai University</p>
+                </div>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);">Rohit Ahuja brings an unparalleled combination of institutional expertise and educational passion to investment analysis. With over 17 years of experience at India's premier financial institutions, he has developed and refined analytical frameworks that have guided investment decisions worth over ₹10 trillion.</p>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>From Wall Street Methodologies to Indian Markets:</strong> Rohit's career spans leadership roles at ICRA (Moody's subsidiary) and Bank of Baroda Capital Markets, where he pioneered research methodologies that combined global best practices with deep understanding of Indian market dynamics. His analytical frameworks have been used to evaluate companies across 20+ sectors, from traditional manufacturing to emerging fintech.</p>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>The Academic Foundation:</strong> Armed with an MBA in Finance and B.Sc. in Mathematics from Mumbai University, Rohit approaches market analysis with both quantitative rigor and qualitative insight. This rare combination allows him to break down complex institutional concepts into frameworks that individual investors can understand and apply.</p>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>Tested Through Market Cycles:</strong> Having navigated the 2008 financial crisis, the 2016 demonetization impact, and the COVID-19 market volatility, Rohit's frameworks have been stress-tested across multiple economic cycles. His approach emphasizes not just identifying opportunities, but understanding and managing the risks that institutional investors face daily.</p>
+                <div style="background: rgba(244, 162, 97, 0.08); border-radius: 12px; padding: 24px; margin: 32px 0; border: 1px solid rgba(244, 162, 97, 0.2);">
+                    <h4 style="color: #F4A261; font-size: 20px; margin-bottom: 16px; font-weight: 700;">Why Institutional Experience Matters for Individual Investors</h4>
+                    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 16px;">"Most online educators teach theory or share opinions. I teach the actual methodologies used by professionals managing billions of rupees. These aren't just academic concepts—they're battle-tested frameworks that have created real wealth across market cycles."</p>
+                    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; font-style: italic;">"My goal isn't to make you dependent on tips or market timing. It's to give you the analytical independence that institutional investors possess—the ability to make informed decisions based on fundamental analysis, risk assessment, and systematic thinking."</p>
+                </div>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>The Teaching Philosophy:</strong> Unlike content creators who focus on entertainment or quick wins, Rohit's approach mirrors institutional training programs—systematic, comprehensive, and designed to build lasting analytical skills. Every concept taught in this course has been used in real institutional settings to evaluate actual investment opportunities.</p>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 32px; color: rgba(255, 255, 255, 0.95);"><strong>From Institutional Boardrooms to Individual Empowerment:</strong> After years of advising institutional clients, Rohit recognized a critical gap—while institutional investors had access to sophisticated analytical frameworks, individual investors were left with tips, opinions, and simplified advice. This course bridges that gap, democratizing institutional-grade investment education for serious individual learners.</p>
+                <div style="text-align: center; margin-top: 32px;">
+                    <a href="https://www.linkedin.com/in/rohit-ahuja-41710a4" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); padding: 12px 24px; border-radius: 8px; color: #F4A261; text-decoration: none; border: 1px solid rgba(244, 162, 97, 0.3); transition: all 0.3s ease;"><span>Verify Professional Background on LinkedIn</span><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    </a>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <a href="mailto:investoreducation@lotuslion.in">Contact Support</a>
+                    <span style="color: rgba(255, 255, 255, 0.3); margin: 0 8px;">|</span>
+                    <a href="/terms.html">Terms & Conditions</a>
+                    <span style="color: rgba(255, 255, 255, 0.3); margin: 0 8px;">|</span>
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <span style="color: rgba(255, 255, 255, 0.3); margin: 0 8px;">|</span>
+                    <a href="/refund.html">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq">
+        <div class="container loading">
+            <div class="faq-container">
+                <div class="faq-intro">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p>Get answers to common questions about our course, learning approach, and what you can expect from your investment education journey.</p>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">Is this course suitable for complete beginners?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Absolutely.</strong> This course is designed to take you from zero knowledge to confident analysis. We start with the fundamental concepts that every investor needs to understand, then gradually build your expertise using the same progression used to train institutional analysts.</p><p>No prior finance background is required—just a commitment to learning and the patience to work through the material systematically.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">How is this different from free YouTube content?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Structure and depth.</strong> While YouTube offers scattered tips and opinions, this course provides a comprehensive, sequential curriculum based on institutional methodologies.</p><p>You'll learn:</p><ul><li>The exact frameworks used at top investment firms</li><li>How concepts connect and build upon each other</li><li>Practical application through real case studies</li><li>Professional-grade analysis techniques simplified for individual learners</li></ul><p>Think of it as the difference between reading random articles about medicine versus taking a structured medical course.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">What makes Rohit qualified to teach this?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>17+ years of institutional experience.</strong> Rohit has held senior research positions at ICRA (Moody's company) and Bank of Baroda Capital Markets, where he advised on over ₹10 trillion in institutional assets.</p><p>Key qualifications:</p><ul><li>Head of Research at leading institutional firms</li><li>MBA Finance + B.Sc. Mathematics from Mumbai University</li><li>Direct experience analyzing 100+ companies across 20+ sectors</li><li>Proven track record through multiple market cycles</li></ul><p>Unlike content creators who theorize, Rohit teaches from actual institutional experience.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">How much time do I need to dedicate?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Flexible, but consistent.</strong> The total content is approximately 17-20 hours, but you can learn at your own pace.</p><p>Recommended approach:</p><ul><li><strong>Intensive:</strong> 1-2 hours daily for 2-3 weeks</li><li><strong>Steady:</strong> 3-4 hours weekly for 6-8 weeks</li><li><strong>Casual:</strong> 1-2 hours weekly for 3-4 months</li></ul><p>The key is consistency rather than speed. You have lifetime access, so you can revisit concepts as needed.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">Will this help me pick winning stocks?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>This course teaches analysis, not stock picking.</strong> We focus on building your analytical skills so you can make informed decisions based on your own research and risk tolerance.</p><p>You'll learn to:</p><ul><li>Evaluate company quality and business models</li><li>Understand valuation and fair pricing</li><li>Assess risks and make informed decisions</li><li>Build systematic approaches to analysis</li></ul><p><strong>Important:</strong> This is educational content, not investment advice. All investment decisions remain your responsibility.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">Is the content updated for current market conditions?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Yes.</strong> While the fundamental frameworks remain timeless, the course includes current examples and case studies relevant to today's Indian market.</p><p>The content covers:</p><ul><li>Recent market dynamics and regulatory changes</li><li>Current sector themes and opportunities</li><li>Modern valuation considerations</li><li>Updated financial reporting standards</li></ul><p>Plus, you'll receive updates to keep the content fresh and relevant.</p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">What if I'm not satisfied with the course?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>48-hour money-back guarantee.</strong> If you're not completely satisfied within 48 hours of purchase, simply contact our support team for a full refund, no questions asked.</p><p>This brief window ensures you have time to evaluate the content quality while maintaining the course's exclusivity for serious learners.</p><p>Contact: <strong>investoreducation@lotuslion.in</strong></p></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">Can I access the course on mobile devices?</button>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Fully optimized for mobile.</strong> The entire course is designed for busy professionals who learn on-the-go.</p><p>Features include:</p><ul><li>Mobile-responsive video player</li><li>Downloadable resources for offline access</li><li>Progress tracking across devices</li><li>Clean, touch-friendly interface</li></ul><p>Whether you're commuting, traveling, or learning from home, you'll have full access to all course materials.</p></div></div>
+                    </div>
+                </div>
+                <div class="faq-cta">
+                    <h3>Still Have Questions?</h3>
+                    <p>We're here to help! Reach out to our support team and we'll get back to you within 24 hours.</p>
+                    <a href="mailto:investoreducation@lotuslion.in" class="cta-button">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta" id="enroll">
+        <div class="container loading">
+            <h2 class="section-title">Lorem Ipsum Dolor Sit Amet?</h2>
+            <p style="font-size: 20px; margin-bottom: 32px; color: rgba(255, 255, 255, 0.9);">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod</p>
+            <a href="#" class="cta-button" style="font-size: 24px; padding: 24px 56px;">Lorem Ipsum</a>
+            <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
+                Lorem ipsum dolor sit amet • Lorem ipsum dolor sit
+            </p>
+            <p style="margin-top: 16px; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            </p>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lorem Ipsum</h4>
+                    <a href="mailto:lorem@ipsum.com">Lorem Ipsum</a>
+                    <a href="/terms.html">Lorem Ipsum</a>
+                    <a href="/privacy.html">Lorem Ipsum</a>
+                    <a href="/refund.html">Lorem Ipsum</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Lorem Ipsum</h4>
+                    <a href="#hero">Lorem Ipsum</a>
+                    <a href="#modules">Lorem Ipsum</a>
+                    <a href="#pricing">Lorem Ipsum</a>
+                    <a href="#instructor">Lorem Ipsum</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Lorem Ipsum</h4>
+                    <a href="#" target="_blank">Lorem Ipsum</a>
+                    <a href="#" target="_blank">Lorem Ipsum</a>
+                    <a href="#" target="_blank">Lorem Ipsum</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="copyright-year"></span> Lorem Ipsum Dolor. Lorem ipsum dolor sit amet.</p>
+                <p style="margin-top: 8px;">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/main-scripts.js"></script>
+    <script src="js/faq-accordion.js"></script>
 </body>
 </html>
