@@ -315,6 +315,24 @@
         }
         
         /* Section Titles with Underline */
+
+        /* Remove default bullets and spacing for all ul elements */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* For lists with custom icons/bullets, ensure proper padding and no default bullets */
+        .checkmark-list li,
+        .module-card li,
+        .pricing-features li,
+        .access-list li,
+        .footer-section a,
+        .faq-answer-content ul li {
+            list-style: none;
+            /* Add or adjust padding-left as needed for custom icons */
+        }
         .section-title {
             font-size: clamp(28px, 5vw, 48px);
             font-weight: 800;
@@ -847,11 +865,21 @@
             box-shadow: 0 12px 25px rgba(0,0,0,0.2);
         }
 
+
         .access-feature-icon {
             font-size: 56px; /* Larger icons */
             color: #F4A261; /* Orange accent color */
             margin-bottom: 20px;
             display: block;
+        }
+
+        .access-feature-icon i {
+            font-family: 'Phosphor Icons' !important;
+            font-weight: 300 !important;
+            speak-as: none;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .access-feature-card h3 {
@@ -963,6 +991,7 @@
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
     <div class="nav-trigger" onclick="toggleNav()" aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
@@ -1384,6 +1413,7 @@
                 <p style="font-size: 18px; line-height: 1.8; margin-bottom: 32px; color: rgba(255, 255, 255, 0.95);"><strong>From Institutional Boardrooms to Individual Empowerment:</strong> After years of advising institutional clients, Rohit recognized a critical gap-while institutional investors had access to sophisticated analytical frameworks, individual investors were left with tips, opinions, and simplified advice. This course bridges that gap, democratizing institutional-grade investment education for serious individual learners.</p>
                 <div style="text-align: center; margin-top: 32px;">
                     <a href="https://www.linkedin.com/in/rohit-ahuja-41710a4" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); padding: 12px 24px; border-radius: 8px; color: #F4A261; text-decoration: none; border: 1px solid rgba(244, 162, 97, 0.3); transition: all 0.3s ease;"><span>Verify Professional Background on LinkedIn</span><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    </a>
                 </div>
                 <div style="margin-bottom: 16px;">
                     <a href="mailto:investoreducation@lotuslion.in">Contact Support</a>
@@ -1452,7 +1482,7 @@
         <div class="container loading">
             <h2 class="section-title">Ready to Master Investment Analysis?</h2>
             <p style="font-size: 20px; margin-bottom: 32px; color: rgba(255, 255, 255, 0.9);">Join professionals who've enhanced their financial analysis skills through structured, institutional-grade education.</p>
-            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button" style="font-size: 24px; padding: 24px 56px;">ENROLL NOW - ₹9,999</a>
+            <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">ENROLL NOW - ₹9,999</a>
             <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
                 Lifetime Access • Mobile Compatible • 48-Hour Refund Policy
             </p>
@@ -1467,7 +1497,7 @@
                 <p style="color: rgba(255, 255, 255, 0.8); font-size: 14px; line-height: 1.6; margin-bottom: 16px;">
                     After enrollment, you'll receive immediate access to all course materials and can begin learning the same analytical frameworks used by institutional investors.
                 </p>
-                <p style="color: rgba(255, 255, 255, 0.7); font-size: 12px; text-align: center;">
+                <p style="font-size: 12px; color: rgba(255, 255, 255, 0.7); text-align: center;">
                     Educational content only • Not personalized investment advice • Results may vary
                 </p>
             </div>
@@ -1508,4 +1538,5 @@
     <script src="js/main-scripts.js"></script>
     <script src="js/faq-accordion.js"></script>
 </body>
+</html>
 </html>
