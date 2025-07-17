@@ -30,6 +30,27 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css" />
     
     <style>
+        .audience-card {
+            background: linear-gradient(135deg, rgba(44, 165, 141, 0.05), rgba(255, 255, 255, 0.02)); /* Subtle green gradient */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px); /* Add a slight blur for depth */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow */
+        }
+
+        .audience-card:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(135deg, rgba(44, 165, 141, 0.08), rgba(255, 255, 255, 0.04)); /* Darker hover gradient */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2); /* More prominent shadow on hover */
+            border-color: #2CA58D; /* Green accent border on hover */
+        }
+
+        /* Adjust icon color for Audience Cards for consistency */
+        .audience-icon {
+            color: #2CA58D; /* Make icons consistently green for this section */
+        }
         /* Core Reset and Base Styles */
         * {
             margin: 0;
@@ -47,6 +68,27 @@
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
+            font-weight: 300; /* Ensure light weight for general text */
+        }
+
+        /* Apply to all headings for consistent tight letter spacing and heavier weight */
+        h1, h2, h3, h4 {
+            letter-spacing: -0.03em; /* Tighten letter spacing for headings */
+            font-weight: 700; /* Ensure headings have strong weight */
+        }
+
+        /* General text opacity for softer look */
+        p, li, span {
+            opacity: 0.85; /* Slightly lower opacity for non-headings */
+            line-height: 1.7; /* Ensure good readability */
+        }
+
+        /* Adjust specific elements if needed, e.g., for contrast */
+        .section-subtitle,
+        .cta-subtext,
+        .price-note,
+        .footer-bottom p {
+            opacity: 0.7; /* Can be even lower for secondary info */
         }
         
         /* Container */
@@ -348,7 +390,8 @@
         
         /* CTA Button */
         .cta-button {
-            display: inline-block;
+            display: block; /* Change from inline-block to block */
+            margin: 0 auto; /* Center horizontally */
             background: linear-gradient(135deg, #F4A261 0%, #E09C4A 100%);
             color: #0A2342;
             padding: 20px 48px;
@@ -1259,11 +1302,11 @@
                 <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>Tested Through Market Cycles:</strong> Having navigated the 2008 financial crisis, the 2016 demonetization impact, and the COVID-19 market volatility, Rohit's frameworks have been stress-tested across multiple economic cycles. His approach emphasizes not just identifying opportunities, but understanding and managing the risks that institutional investors face daily.</p>
                 <div style="background: rgba(244, 162, 97, 0.08); border-radius: 12px; padding: 24px; margin: 32px 0; border: 1px solid rgba(244, 162, 97, 0.2);">
                     <h4 style="color: #F4A261; font-size: 20px; margin-bottom: 16px; font-weight: 700;">Why Institutional Experience Matters for Individual Investors</h4>
-                    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 16px;">"Most online educators teach theory or share opinions. I teach the actual methodologies used by professionals managing billions of rupees. These aren't just academic concepts—they're battle-tested frameworks that have created real wealth across market cycles."</p>
-                    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; font-style: italic;">"My goal isn't to make you dependent on tips or market timing. It's to give you the analytical independence that institutional investors possess—the ability to make informed decisions based on fundamental analysis, risk assessment, and systematic thinking."</p>
+                    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 16px;">"Most online educators teach theory or share opinions. I teach the actual methodologies used by professionals managing billions of rupees. These aren't just academic concepts-they're battle-tested frameworks that have created real wealth across market cycles."</p>
+                    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; font-style: italic;">"My goal isn't to make you dependent on tips or market timing. It's to give you the analytical independence that institutional investors possess-the ability to make informed decisions based on fundamental analysis, risk assessment, and systematic thinking."</p>
                 </div>
-                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>The Teaching Philosophy:</strong> Unlike content creators who focus on entertainment or quick wins, Rohit's approach mirrors institutional training programs—systematic, comprehensive, and designed to build lasting analytical skills. Every concept taught in this course has been used in real institutional settings to evaluate actual investment opportunities.</p>
-                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 32px; color: rgba(255, 255, 255, 0.95);"><strong>From Institutional Boardrooms to Individual Empowerment:</strong> After years of advising institutional clients, Rohit recognized a critical gap—while institutional investors had access to sophisticated analytical frameworks, individual investors were left with tips, opinions, and simplified advice. This course bridges that gap, democratizing institutional-grade investment education for serious individual learners.</p>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>The Teaching Philosophy:</strong> Unlike content creators who focus on entertainment or quick wins, Rohit's approach mirrors institutional training programs-systematic, comprehensive, and designed to build lasting analytical skills. Every concept taught in this course has been used in real institutional settings to evaluate actual investment opportunities.</p>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 32px; color: rgba(255, 255, 255, 0.95);"><strong>From Institutional Boardrooms to Individual Empowerment:</strong> After years of advising institutional clients, Rohit recognized a critical gap-while institutional investors had access to sophisticated analytical frameworks, individual investors were left with tips, opinions, and simplified advice. This course bridges that gap, democratizing institutional-grade investment education for serious individual learners.</p>
                 <div style="text-align: center; margin-top: 32px;">
                     <a href="https://www.linkedin.com/in/rohit-ahuja-41710a4" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); padding: 12px 24px; border-radius: 8px; color: #F4A261; text-decoration: none; border: 1px solid rgba(244, 162, 97, 0.3); transition: all 0.3s ease;"><span>Verify Professional Background on LinkedIn</span><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                     </a>
@@ -1291,7 +1334,7 @@
                 <div class="faq-grid">
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">Is this course suitable for complete beginners?</button>
-                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Absolutely.</strong> This course is designed to take you from zero knowledge to confident analysis. We start with the fundamental concepts that every investor needs to understand, then gradually build your expertise using the same progression used to train institutional analysts.</p><p>No prior finance background is required—just a commitment to learning and the patience to work through the material systematically.</p></div></div>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Absolutely.</strong> This course is designed to take you from zero knowledge to confident analysis. We start with the fundamental concepts that every investor needs to understand, then gradually build your expertise using the same progression used to train institutional analysts.</p><p>No prior finance background is required-just a commitment to learning and the patience to work through the material systematically.</p></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">How is this different from free YouTube content?</button>
