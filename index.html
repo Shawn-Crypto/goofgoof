@@ -310,6 +310,11 @@
             padding-top: 120px;
             text-align: center;
             background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.1) 0%, transparent 70%);
+            animation: heroBackgroundPulse 10s ease-in-out infinite alternate;
+        @keyframes heroBackgroundPulse {
+            0% { background: radial-gradient(ellipse at center, rgba(244, 162, 97, 0.1) 0%, transparent 70%); }
+            100% { background: radial-gradient(ellipse at center, rgba(44, 165, 141, 0.1) 0%, transparent 70%); }
+        }
         }
         
         .hero h1 {
@@ -355,23 +360,23 @@
             box-shadow: 0 8px 32px rgba(244, 162, 97, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
+            position: relative; /* Ensure this is present */
+            overflow: hidden;   /* Ensure this is present */
         }
         
         .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
+            left: -100%; /* Start off-screen to the left */
+            width: 100%; /* Cover the button's width */
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+            transition: left 0.5s ease; /* Transition for the shimmer */
         }
         
         .cta-button:hover::before {
-            left: 100%;
+            left: 100%; /* Move across the button on hover */
         }
         
         .cta-button:hover {
@@ -797,9 +802,10 @@
     
     <section class="hero" id="hero">
         <div class="container loading">
+
             <img src="assets/logo.webp" alt="Lotuslion Venture - Investment Education Platform" style="width: 80px; height: auto; margin-bottom: 24px;">
 
-            <div class="hero-badge">📚 LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
+            <div class="hero-badge"><i class="ph-light ph-books"></i> LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
 
             <h1>Master Institutional-Grade Investment Analysis</h1>
 
