@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.animationPlayState = 'running';
+                entry.target.classList.add('loaded'); // THIS IS THE CRITICAL CHANGE
                 animationObserver.unobserve(entry.target);
             }
         });
@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
         rootMargin: '0px 0px -100px 0px'
     });
 
-    // Observe all animate-in elements
-    document.querySelectorAll('.animate-in').forEach(el => {
+    // Observe all loading elements for animation
+    document.querySelectorAll('.loading').forEach(el => {
         animationObserver.observe(el);
     });
 
