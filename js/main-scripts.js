@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
         copyrightYear.textContent = new Date().getFullYear();
     }
 
-    // IntersectionObserver for animations
+    // IntersectionObserver for loading animations
     const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('loaded'); // THIS IS THE CRITICAL CHANGE
+                entry.target.classList.add('loaded'); /* Adds 'loaded' class */
                 animationObserver.unobserve(entry.target);
             }
         });
@@ -78,10 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Navigation panel functionality
+    // Navigation panel functionality (toggleNav)
     window.toggleNav = function() {
         const navPanel = document.getElementById('nav-panel');
-        navPanel.classList.toggle('active');
+        const navTrigger = document.querySelector('.nav-trigger');
+        if (navPanel) { navPanel.classList.toggle('active'); }
+        if (navTrigger) { navTrigger.classList.toggle('active'); }
     };
 
     // Close nav when clicking outside
@@ -93,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             !navPanel.contains(event.target) && 
             navTrigger && !navTrigger.contains(event.target)) {
             navPanel.classList.remove('active');
+            navTrigger.classList.remove('active');
         }
     });
 
@@ -100,9 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             const navPanel = document.getElementById('nav-panel');
-            if (navPanel) {
-                navPanel.classList.remove('active');
-            }
+            const navTrigger = document.querySelector('.nav-trigger');
+            if (navPanel) { navPanel.classList.remove('active'); }
+            if (navTrigger) { navTrigger.classList.remove('active'); }
         });
     });
 
@@ -139,6 +142,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Banner functionality
+    window.closeBanner = function() {
+        const banner = document.getElementById('urgent-banner');
+        if (banner) {
+            banner.style.transform = 'translateY(-100%)';
+        }
+    };
+
+    // Show banner on load after 2 seconds
+    window.addEventListener('load', function() {
+        const banner = document.getElementById('urgent-banner');
+        if (banner) {
+            setTimeout(() => {
+                banner.classList.add('show');
+            }, 2000);
+        }
+    });
+
     // Generic Accordion Functionality (for FAQ and Modules)
     window.toggleAccordion = function(buttonElement) {
         const accordionItem = buttonElement.parentElement;
@@ -169,4 +190,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     };
-});
+
+    // Ensure current year in copyright is set (from footer)
+    const copyrightYearSpan = document.getElementById('copyright-year');
+    if (copyrightYearSpan) {
+        copyrightYearSpan.textContent = new Date().getFullYear();
+    }
+
+}); // End of DOMContentLoaded
