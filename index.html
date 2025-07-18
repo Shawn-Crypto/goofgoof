@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>The Complete Indian Stock Investor - Master the Market with Lotuslion</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://payments.cashfree.com" crossorigin>
     <meta name="description" content="Learn institutional-grade investment analysis with CSuite23. Our courses provide educational frameworks for enhancing financial literacy. This is not investment advice.">
 
     <meta property="og:title" content="The Complete Indian Stock Investor - Master the Market with Lotuslion">
@@ -19,11 +22,92 @@
 
     <link rel="canonical" href="https://lotuslion.in">
 
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
+    <!-- Optimized GTM implementation for better performance -->
+    <script>
+    // Optimized GTM loading with performance considerations
+    (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+        
+        // Load GTM after critical content is loaded
+        function loadGTM() {
+            var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.defer=true;  // Add defer for better performance
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+        }
+        
+        // Load GTM after page content is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadGTM);
+        } else {
+            // Small delay to ensure critical content renders first
+            setTimeout(loadGTM, 100);
+        }
+        
+    })(window,document,'script','dataLayer','GTM-M3JWN37C');
+    </script>
+
+    <!-- Optimized dataLayer events -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+
+    // Batch dataLayer pushes for better performance
+    let pendingEvents = [];
+    let pushTimeout;
+
+    function batchDataLayerPush(event) {
+        pendingEvents.push(event);
+        
+        clearTimeout(pushTimeout);
+        pushTimeout = setTimeout(() => {
+            if (pendingEvents.length > 0) {
+                pendingEvents.forEach(evt => window.dataLayer.push(evt));
+                pendingEvents = [];
+            }
+        }, 100);
+    }
+
+    // Enhanced engagement tracking with performance optimization
+    let engagementTracked = {
+        viewContent: false,
+        deepEngagement: false,
+        longSession: false
+    };
+
+    // Track ViewContent after 3 seconds (not 10) for better signal
+    setTimeout(() => {
+        if (!engagementTracked.viewContent) {
+            batchDataLayerPush({
+                'event': 'enhanced_view_content',
+                'content_type': 'course_landing',
+                'engagement_level': 'initial'
+            });
+            engagementTracked.viewContent = true;
+        }
+    }, 3000);
+
+    // Track deep engagement at 25% scroll
+    const deepEngagementObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !engagementTracked.deepEngagement) {
+                batchDataLayerPush({
+                    'event': 'deep_engagement',
+                    'engagement_level': 'medium'
+                });
+                engagementTracked.deepEngagement = true;
+                deepEngagementObserver.disconnect();
+            }
+        });
+    }, { threshold: 0.25 });
+
+    // Observe page for deep engagement
+    if (document.querySelector('.teaching-method')) {
+        deepEngagementObserver.observe(document.querySelector('.teaching-method'));
+    }
+    </script>
     <!-- Optimized Font Loading with font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,6 +131,28 @@
     <link rel="preload" as="style" href="css/fonts-optimized.css">
     <link rel="preload" as="style" href="css/phosphor-subset.css">
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+    <!-- Additional performance optimizations -->
+    <link rel="preload" href="assets/logo.webp" as="image" type="image/webp">
+    <link rel="preconnect" href="https://payments.cashfree.com" crossorigin>
+    
+    <!-- Resource hints for better performance -->
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+
+    <!-- Optimize images with proper attributes -->
+    <link rel="preload" href="assets/Arjun.webp" as="image" type="image/webp">
+    <link rel="preload" href="assets/Priya.webp" as="image" type="image/webp">
+    <link rel="preload" href="assets/Rajesh.webp" as="image" type="image/webp">
+
+    <!-- Critical CSS inlined for hero section -->
+    <style>
+    /* Critical CSS for hero section - inline this */
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(180deg,#0D1421 0%,#1A2332 100%);color:#fff;line-height:1.6;overflow-x:hidden}
+    .hero{position:relative;text-align:center;padding-top:180px}
+    .container{max-width:1200px;margin:0 auto;padding:0 40px}
+    .hero h1{font-size:clamp(36px,8vw,64px);font-weight:800;margin-bottom:24px;line-height:1.1;letter-spacing:-0.02em}
+    </style>
     
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="https://payments.cashfree.com">
@@ -1182,6 +1288,10 @@
             }
         }
     </style>
+
+    <!-- Load non-critical CSS asynchronously -->
+    <link rel="preload" href="styles/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles/main.css"></noscript>
 </head>
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
@@ -1757,16 +1867,125 @@
         </div>
     </footer>
 
-    <!-- Critical performance script for LCP optimization -->
+    <!-- Optimized JavaScript for better performance -->
     <script>
-        // Immediately trigger animation for hero section to help with LCP
-        document.addEventListener('DOMContentLoaded', function() {
+        // Debounced scroll handler for better performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Scroll tracking variables
+        const scrollPoints = [25, 50, 75, 90];
+        let scrolled = [];
+
+        // Optimized scroll tracking
+        const debouncedScrollHandler = debounce(() => {
+            const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+            
+            scrollPoints.forEach(point => {
+                if (scrollPercent >= point && !scrolled.includes(point)) {
+                    scrolled.push(point);
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'scroll_depth', {
+                            'scroll_percent': point,
+                            'event_category': 'engagement'
+                        });
+                    }
+                }
+            });
+        }, 250);
+
+        // Use passive listeners for better performance
+        window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
+
+        // Lazy load non-critical animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    animationObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Initialize animations only when page is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Immediately trigger animation for hero section to help with LCP
             const heroElement = document.querySelector('.hero .animate-hidden');
             if (heroElement) {
                 // Add show class immediately for above-the-fold content
                 setTimeout(() => heroElement.classList.add('show'), 16);
             }
+
+            // Initialize intersection observer for other animations
+            document.querySelectorAll('.animate-in').forEach(el => {
+                animationObserver.observe(el);
+            });
         });
+
+        // Optimized countdown timer with requestAnimationFrame
+        function optimizedCountdown() {
+            let lastUpdate = 0;
+            
+            function updateTimer(timestamp) {
+                if (timestamp - lastUpdate >= 1000) { // Update every second
+                    const now = new Date();
+                    const tomorrow = new Date(now);
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    tomorrow.setHours(23, 59, 59, 999);
+                    const timeDiff = tomorrow.getTime() - now.getTime();
+
+                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                    // Use batch DOM updates
+                    requestAnimationFrame(() => {
+                        const elements = {
+                            hours: document.getElementById('hours'),
+                            minutes: document.getElementById('minutes'),
+                            seconds: document.getElementById('seconds'),
+                            finalHours: document.getElementById('final-hours'),
+                            finalMinutes: document.getElementById('final-minutes'),
+                            finalSeconds: document.getElementById('final-seconds')
+                        };
+
+                        if (elements.hours) elements.hours.textContent = String(hours).padStart(2, '0');
+                        if (elements.minutes) elements.minutes.textContent = String(minutes).padStart(2, '0');
+                        if (elements.seconds) elements.seconds.textContent = String(seconds).padStart(2, '0');
+                        if (elements.finalHours) elements.finalHours.textContent = String(hours).padStart(2, '0');
+                        if (elements.finalMinutes) elements.finalMinutes.textContent = String(minutes).padStart(2, '0');
+                        if (elements.finalSeconds) elements.finalSeconds.textContent = String(seconds).padStart(2, '0');
+                    });
+
+                    lastUpdate = timestamp;
+                }
+                
+                requestAnimationFrame(updateTimer);
+            }
+            
+            requestAnimationFrame(updateTimer);
+        }
+
+        // Start countdown when page is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', optimizedCountdown);
+        } else {
+            optimizedCountdown();
+        }
     </script>
 
     <script src="js/main-scripts.js" defer></script>
