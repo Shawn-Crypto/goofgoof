@@ -298,14 +298,19 @@
             justify-content: center;
         }
 
-        /* Loading Animation */
-        .loading {
+        /* Initial state for elements that should animate in */
+        .animate-hidden {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .loading.loaded {
+        /* Transition for elements that should animate in */
+        .animate-in {
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* State after animation, applied by JavaScript */
+        .animate-hidden.show {
             opacity: 1;
             transform: translateY(0);
         }
@@ -1198,7 +1203,7 @@
     </div>
 
     <section class="hero" id="hero">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
 
             <img src="assets/logo.webp" alt="Lotuslion Venture - Investment Education Platform" style="width: 80px; height: auto; margin-bottom: 24px;" width="80" height="80"> <div class="hero-badge"><i class="ph-light ph-books"></i> LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
 
@@ -1254,7 +1259,7 @@
     </section>
 
     <section class="audience-section" id="who-this-is-for">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">Who This Course Is Perfect For</h2>
             <p class="section-subtitle">
                 This educational course is designed for professionals who want to understand institutional investment frameworks
@@ -1264,32 +1269,44 @@
                 <div class="audience-card">
                     <h3><span class="audience-icon">💼</span> Working Professionals</h3>
                     <ul>
-                        <li>Want to understand financial markets better</li> <li>Seeking structured learning approach</li> <li>Limited time for extensive research</li> </ul>
+                        <li>Want to understand financial markets better</li>
+                        <li>Seeking structured learning approach</li>
+                        <li>Limited time for extensive research</li>
+                    </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">📊</span> Finance Enthusiasts</h3>
                     <ul>
-                        <li>Want to read financial statements</li> <li>Seeking systematic frameworks</li> <li>Interested in fundamental analysis</li> </ul>
+                        <li>Want to read financial statements</li>
+                        <li>Seeking systematic frameworks</li>
+                        <li>Interested in fundamental analysis</li>
+                    </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">🎯</span> Serious Learners</h3>
                     <ul>
-                        <li>Committed to long-term learning</li> <li>Want institutional-grade knowledge</li> <li>Prefer depth over quick tips</li> </ul>
+                        <li>Committed to long-term learning</li>
+                        <li>Want institutional-grade knowledge</li>
+                        <li>Prefer depth over quick tips</li>
+                    </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">🔍</span> Research-Oriented Minds</h3>
                     <ul>
-                        <li>Enjoy analyzing companies</li> <li>Want to understand valuation</li> <li>Seek data-driven approaches</li> </ul>
+                        <li>Enjoy analyzing companies</li>
+                        <li>Want to understand valuation</li>
+                        <li>Seek data-driven approaches</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="problems" id="problems">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">What You'll Master</h2>
             <p class="section-subtitle">
                 Four core competencies that form the foundation of professional investment analysis
@@ -1320,7 +1337,7 @@
     </section>
 
     <section class="teaching-method" id="solution">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">Our Educational Framework</h2>
             <p class="section-subtitle">
                 A structured approach to learning institutional investment analysis
@@ -1349,7 +1366,7 @@
     </section>
 
     <section class="modules" id="modules">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">Your Learning Journey</h2>
             <p class="section-subtitle">Navigate through the comprehensive curriculum designed to build your expertise step-by-step.</p>
 
@@ -1433,7 +1450,7 @@
     </section>
 
     <section class="included-section" id="whats-included">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">What's Included in Your Course</h2>
             <p class="section-subtitle">Every component designed to accelerate your learning journey and build lasting expertise.</p>
             <div class="included-grid">
@@ -1472,7 +1489,7 @@
     </section>
 
     <section class="pricing-section" id="pricing">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">Investment in Your Knowledge</h2>
             <p class="section-subtitle">Secure your access to institutional-grade investment education.</p>
             <div class="pricing-container">
@@ -1496,7 +1513,7 @@
     </section>
 
     <section class="access-section" id="course-access">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">How You'll Access the Course</h2>
 
             <div class="access-grid">
@@ -1525,7 +1542,7 @@
     </section>
 
     <section class="instructor" id="instructor">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">Learn from Institutional Experience</h2>
             <div class="instructor-content">
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); max-width: 600px; margin: 0 auto 40px auto; gap: 24px;">
@@ -1572,7 +1589,7 @@
     </section>
 
     <section class="faq" id="faq">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <div class="faq-container">
                 <div class="faq-intro">
                     <h2 class="section-title">Frequently Asked Questions</h2>
@@ -1646,7 +1663,7 @@
     </section>
 
     <section class="final-cta" id="enroll">
-        <div class="container loading">
+        <div class="container animate-hidden animate-in">
             <h2 class="section-title">Ready to Master Investment Analysis?</h2>
             <p style="font-size: 20px; margin-bottom: 32px; color: rgba(255, 255, 255, 0.9);">Join professionals who've enhanced their financial analysis skills through structured, institutional-grade education.</p>
             <a href="https://payments.cashfree.com/forms/lotuslion-course" class="cta-button">ENROLL NOW - ₹9,999</a>
@@ -1704,145 +1721,5 @@
 
     <script src="js/main-scripts.js"></script>
     <script src="js/faq-accordion.js"></script>
-
-    <script>
-        // Placeholder for main-scripts.js content for local testing if external files are not linked
-        // In a real deployment, this would be in js/main-scripts.js
-        document.addEventListener('DOMContentLoaded', () => {
-            const currentYear = new Date().getFullYear();
-            const copyrightYearElement = document.getElementById('copyright-year');
-            if (copyrightYearElement) {
-                copyrightYearElement.textContent = currentYear;
-            }
-
-
-            // Simple intersection observer for loading animation
-            const sections = document.querySelectorAll('section');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const loadingElement = entry.target.querySelector('.loading');
-                        if (loadingElement) {
-                            loadingElement.classList.add('loaded');
-                        }
-                        // observer.unobserve(entry.target); // Optional: Unobserve once loaded
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-
-            // Progress Indicator Logic
-            const progressDots = document.querySelectorAll('.progress-dot');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            const updateProgressIndicator = () => {
-                let currentSectionId = '';
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    // Determine if the section is mostly in view
-                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                        currentSectionId = section.id;
-                    }
-                });
-
-                progressDots.forEach(dot => {
-                    if (dot.dataset.section === currentSectionId) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href && href.substring(1) === currentSectionId) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                });
-            };
-
-            const scrollToSection = (sectionId) => {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                }
-            };
-
-            progressDots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    scrollToSection(dot.dataset.section);
-                });
-            });
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionId = link.getAttribute('href')?.substring(1);
-                    if (sectionId) {
-                        scrollToSection(sectionId);
-                        toggleNav(); // Close nav panel on click
-                    }
-                });
-            });
-
-            window.addEventListener('scroll', updateProgressIndicator);
-            updateProgressIndicator(); // Initial call to set active dot on load
-
-            // Urgent Banner Logic
-            const urgentBanner = document.getElementById('urgent-banner');
-            if (urgentBanner) {
-                setTimeout(() => {
-                    urgentBanner.classList.add('show');
-                }, 1000); // Show after 1 second
-            }
-
-            window.closeBanner = () => {
-                if (urgentBanner) {
-                    urgentBanner.classList.remove('show');
-                }
-            };
-        });
-
-        // Toggle Navigation (for nav-trigger)
-        function toggleNav() {
-            const navPanel = document.getElementById('nav-panel');
-            const navTrigger = document.querySelector('.nav-trigger');
-            if (navPanel && navTrigger) {
-                navPanel.classList.toggle('active');
-                navTrigger.classList.toggle('active');
-                // Add/remove aria-expanded attribute for accessibility
-                const isExpanded = navPanel.classList.contains('active');
-                navTrigger.setAttribute('aria-expanded', isExpanded);
-                navPanel.setAttribute('aria-hidden', !isExpanded);
-            }
-        }
-
-        // Accordion functionality for Modules (re-using toggleAccordion function)
-        function toggleAccordion(buttonElement) {
-            const item = buttonElement.closest('.accordion-item');
-            if (item) {
-                item.classList.toggle('active');
-            }
-        }
-
-        // FAQ Accordion functionality (same as toggleAccordion)
-        function toggleFAQ(buttonElement) {
-            const item = buttonElement.closest('.faq-item');
-            if (item) {
-                item.classList.toggle('active');
-            }
-        }
-    </script>
 </body>
 </html>

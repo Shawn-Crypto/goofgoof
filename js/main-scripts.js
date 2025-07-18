@@ -10,19 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('loaded'); /* THIS IS THE CRITICAL CHANGE */
-                // entry.target.style.animationDelay = '0.2s'; // Removed as requested
-                // entry.target.style.animationPlayState = 'running'; // Removed as requested
-                animationObserver.unobserve(entry.target);
+                entry.target.classList.add('show'); // Add 'show' class to reveal and animate
+                animationObserver.unobserve(entry.target); // Stop observing once animated
             }
         });
     }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0.1, // Element is considered intersecting when 10% visible
+        rootMargin: '0px 0px -100px 0px' // Extend detection area slightly beyond viewport
     });
 
-    // Observe all loading elements for animation
-    document.querySelectorAll('.loading').forEach(el => {
+    // Observe all elements that should animate into view
+    document.querySelectorAll('.animate-hidden').forEach(el => {
         animationObserver.observe(el);
     });
 
