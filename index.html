@@ -60,11 +60,21 @@
 
         /* Specifically ensure bullets are shown for FAQ and accordion content */
         .faq-answer-content ul,
-        .accordion-content ul,
-        .audience-card ul { /* Fix 2: Ensure bullets are shown for audience cards */
+        .accordion-content ul {
             list-style: disc !important;
             padding-left: 20px !important;
         }
+
+        /* Fix 2: Ensure audience cards do NOT have bullets */
+        .audience-card ul {
+            list-style: none !important;
+            padding: 0 !important;
+        }
+        .audience-card li {
+            text-align: center; /* Center list items within the card */
+            padding: 4px 0; /* Adjust padding for list items */
+        }
+
 
         /* Apply to all headings for consistent tight letter spacing and heavier weight */
         h1, h2, h3, h4 {
@@ -385,8 +395,8 @@
 
         /* CTA Button */
         .cta-button {
-            display: block; /* Change from inline-block to block */
-            margin: 0 auto; /* Center horizontally */
+            display: block;
+            margin: 0 auto;
             background: linear-gradient(135deg, #F4A261 0%, #E09C4A 100%);
             color: #0A2342;
             padding: 20px 48px;
@@ -398,23 +408,23 @@
             box-shadow: 0 8px 32px rgba(244, 162, 97, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative; /* Ensure this is present */
-            overflow: hidden;   /* Ensure this is present */
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%; /* Start off-screen to the left */
-            width: 100%; /* Cover the button's width */
+            left: -100%;
+            width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease; /* Transition for the shimmer */
+            transition: left 0.5s ease;
         }
 
         .cta-button:hover::before {
-            left: 100%; /* Move across the button on hover */
+            left: 100%;
         }
 
         .cta-button:hover {
@@ -423,7 +433,7 @@
             background: linear-gradient(135deg, #f5b681 0%, #f2a85c 100%);
         }
 
-        /* Card Styles */
+        /* Card Styles - General */
         .card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -431,23 +441,30 @@
             padding: 32px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow */
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(244, 162, 97, 0.3);
         }
 
-        /* Missing grid layouts (from Debug Report) */
+        /* Grid Layouts */
         .audience-grid,
         .problem-grid,
-        .method-grid, /* Fix 4: Added method-grid */
-        .included-grid { /* Fix 5: Added included-grid */
+        .method-grid, /* Fix 4: Ensure grid display */
+        .included-grid { /* Fix 5: Ensure grid display */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
             gap: 32px;
             margin-top: 32px; /* Space from section title/subtitle */
         }
 
-        /* Missing card styles (from Debug Report) */
+        /* Specific Card Styles (Audience, Method, Included) */
         .audience-card,
-        .method-card, /* Fix 4: Added method-card */
-        .included-card { /* Fix 5: Added included-card */
+        .method-card, /* Fix 4: Apply card styles */
+        .included-card { /* Fix 5: Apply card styles */
             background: rgba(255, 255, 255, 0.05); /* Base card background */
             border: 1px solid rgba(255, 255, 255, 0.1); /* Base card border */
             border-radius: 16px;
@@ -459,196 +476,51 @@
         }
 
         .audience-card:hover,
-        .method-card:hover, /* Fix 4: Added method-card hover */
-        .included-card:hover { /* Fix 5: Added included-card hover */
+        .method-card:hover, /* Fix 4: Apply hover styles */
+        .included-card:hover { /* Fix 5: Apply hover styles */
             transform: translateY(-8px); /* Lift on hover */
             background: rgba(255, 255, 255, 0.08); /* Darker background on hover */
             border-color: rgba(244, 162, 97, 0.3); /* Orange accent on hover */
             box-shadow: 0 12px 25px rgba(0,0,0,0.2); /* Stronger shadow on hover */
         }
 
-        /* Fix 4: Styles for method icons */
-        .method-icon {
-            font-size: 56px; /* Larger icons */
-            color: #2CA58D; /* Green accent color */
+        /* Icons for Method and Included sections */
+        .method-icon { /* Fix 4: Styles for method icons */
+            font-size: 56px;
+            color: #2CA58D;
             margin-bottom: 20px;
             display: block;
-            text-align: center;
         }
-
-        /* Fix 5: Styles for included icons */
-        .included-icon {
-            font-size: 56px; /* Larger icons */
-            color: #F4A261; /* Orange accent color */
-            margin-bottom: 20px;
-            display: block;
-            text-align: center;
-        }
-
-
-        /* Missing pricing styles (from Debug Report) */
-        .pricing-container { /* Fix 6: Ensure pricing container centers content */
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Vertically center if height is defined */
-            margin-top: 32px;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-        }
-
-        .pricing-card { /* Fix 6: Enhanced pricing card styles */
-            background: linear-gradient(135deg, rgba(244, 162, 97, 0.1) 0%, rgba(44, 165, 141, 0.1) 100%);
-            border: 2px solid rgba(244, 162, 97, 0.3);
-            border-radius: 20px;
-            padding: 48px 32px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            max-width: 400px; /* Limit width for better appearance */
-            width: 100%; /* Take full width within max-width */
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2); /* Add shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .pricing-card:hover { /* Fix 6: Hover effect for pricing card */
-            transform: translateY(-8px);
-            box-shadow: 0 15px 45px rgba(0,0,0,0.3);
-        }
-
-        .pricing-card::before { /* Fix 6: Background animation for pricing card */
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(244, 162, 97, 0.1) 0%, transparent 50%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate { /* Fix 6: Keyframes for pricing card background */
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .pricing-card .content { /* Fix 6: Ensure content is above pseudo-element */
-            position: relative;
-            z-index: 1;
-        }
-
-        .pricing-label { /* Fix 6: Style for pricing label */
-            display: inline-block;
-            background: #2CA58D;
-            color: #FFFFFF;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .pricing-amount { /* Fix 6: Style for pricing amount */
-            font-size: 48px;
-            font-weight: 900;
+        .included-icon { /* Fix 5: Styles for included icons */
+            font-size: 56px;
             color: #F4A261;
-            margin: 24px 0 8px;
-            line-height: 1;
-        }
-
-        .pricing-currency { /* Fix 6: Style for pricing currency */
-            font-size: 0.7em;
-            vertical-align: super;
-            margin-right: 5px;
-            font-weight: 700;
-        }
-
-        .pricing-original { /* Fix 6: Style for original price */
-            text-decoration: line-through;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 18px;
-            font-weight: 500;
             margin-bottom: 20px;
             display: block;
-        }
-
-        .price-note {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 16px;
-        }
-
-        .pricing-features { /* Fix 6: Style for pricing features list */
-            list-style: none;
-            padding: 0;
-            margin: 24px 0;
-            text-align: left;
-            max-width: 280px; /* Adjust width of features list */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .pricing-features li { /* Fix 6: Style for individual pricing features */
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 16px;
-        }
-
-        .feature-icon { /* Fix 6: Style for feature icons */
-            color: #2CA58D; /* Green for checkmarks */
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .pricing-guarantee { /* Fix 6: Style for guarantee badge */
-            margin-top: 24px;
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .guarantee-badge-small { /* Fix 6: Style for small guarantee badge */
-            background: rgba(244, 162, 97, 0.2);
-            border-radius: 5px;
-            padding: 4px 10px;
-            color: #F4A261;
-            font-weight: 600;
-            font-size: 13px;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(244, 162, 97, 0.3);
         }
 
         /* Problem Cards */
         .problem-card {
-            background: linear-gradient(135deg, rgba(244, 162, 97, 0.05), rgba(255, 255, 255, 0.02)); /* Subtle orange gradient */
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.05), rgba(255, 255, 255, 0.02));
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 32px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px); /* Add a slight blur for depth */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .problem-card:hover {
             transform: translateY(-8px);
-            background: linear-gradient(135deg, rgba(244, 162, 97, 0.08), rgba(255, 255, 255, 0.04)); /* Darker hover gradient */
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2); /* More prominent shadow on hover */
-            border-color: #F4A261; /* Orange accent border on hover */
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.08), rgba(255, 255, 255, 0.04));
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+            border-color: #F4A261;
         }
 
-        /* Adjust icon color for Problem Cards for consistency */
         .problem-card h3 {
-            color: #F4A261; /* Make icons consistently orange for this section */
+            color: #F4A261;
         }
 
+        /* Module Cards */
         .module-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -692,48 +564,177 @@
             font-weight: bold;
         }
 
-        /* Pricing Card - Duplicated and refined from earlier, removed for consolidated fix.
-           Please refer to the .pricing-container, .pricing-card, etc. definitions above. */
+        /* Pricing Card */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.1) 0%, rgba(44, 165, 141, 0.1) 100%);
+            border: 2px solid rgba(244, 162, 97, 0.3);
+            border-radius: 20px;
+            padding: 48px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.3);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(244, 162, 97, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .pricing-card .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-label {
+            display: inline-block;
+            background: #2CA58D;
+            color: #FFFFFF;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .pricing-amount {
+            font-size: 48px;
+            font-weight: 900;
+            color: #F4A261;
+            margin: 24px 0 8px;
+            line-height: 1;
+        }
+
+        .pricing-currency {
+            font-size: 0.7em;
+            vertical-align: super;
+            margin-right: 5px;
+            font-weight: 700;
+        }
+
+        .pricing-original {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .price-note {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 16px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+            text-align: left;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+
+        .feature-icon {
+            color: #2CA58D;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .pricing-guarantee {
+            margin-top: 24px;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .guarantee-badge-small {
+            background: rgba(244, 162, 97, 0.2);
+            border-radius: 5px;
+            padding: 4px 10px;
+            color: #F4A261;
+            font-weight: 600;
+            font-size: 13px;
+        }
 
         /* FAQ Accordion */
-
-        /* FAQ Accordion Styles Polish */
         .faq-item {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             margin-bottom: 16px;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
-            backdrop-filter: blur(8px); /* Subtle blur for depth */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow */
-            width: 100%; /* Fix 3: Ensure full width */
-            box-sizing: border-box; /* Include padding in width calculation */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        /* FAQ Container & Grid Styles (from Debug Report) */
+        /* FAQ Container & Grid Styles */
         .faq-container {
-            max-width: 900px; /* Keep this for overall content width control */
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px; /* Add some horizontal padding to the container itself */
+            padding: 0 20px;
         }
 
         .faq-grid {
-            display: flex; /* Use flexbox for vertical stacking of items */
+            display: flex;
             flex-direction: column;
-            gap: 16px; /* Space between FAQ items */
-            width: 100%; /* Ensure it takes full width of its container */
+            gap: 16px;
+            width: 100%; /* Fix 3: Ensure FAQ grid takes full width of its container */
         }
 
         .faq-item:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-color: #F4A261; /* Orange accent on hover */
-            transform: translateY(-4px); /* Slight lift on hover */
+            border-color: #F4A261;
+            transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         .faq-question {
-            padding: 24px 32px; /* More padding */
+            padding: 24px 32px;
             cursor: pointer;
             font-weight: 600;
             font-size: 18px;
@@ -741,22 +742,22 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s ease;
-            color: #ffffff; /* Ensure white text */
-            width: 100%; /* Fix 3: Ensure full width within its container */
-            box-sizing: border-box; /* Include padding in width calculation */
+            color: #ffffff;
+            width: 100%;
+            box-sizing: border-box;
             background: none;
             border: none;
             text-align: left;
         }
 
         .faq-question:hover {
-            color: #F4A261; /* Orange on hover */
+            color: #F4A261;
         }
 
         .faq-icon {
             font-size: 28px;
             transition: transform 0.3s ease;
-            color: #F4A261; /* Orange color */
+            color: #F4A261;
         }
 
         .faq-item.active .faq-icon {
@@ -766,49 +767,52 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother accordion animation */
-            padding: 0 32px; /* Consistent padding */
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 32px;
         }
 
         .faq-item.active .faq-answer {
-            max-height: 600px; /* Increased max-height for longer answers */
-            padding-bottom: 24px; /* Consistent padding */
+            max-height: 600px;
+            padding-bottom: 24px;
         }
 
         .faq-answer-content {
-            padding: 0; /* Remove internal padding if present */
-            color: rgba(255, 255, 255, 0.85); /* Use global opacity */
+            padding: 0;
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.7;
         }
 
-        /* Adjust specific text/lists inside FAQ answer content if needed */
         .faq-answer-content p, .faq-answer-content ul, .faq-answer-content li {
-            opacity: 1; /* Ensure full opacity for readability within answers */
+            opacity: 1;
         }
 
-        /* FAQ CTA Centering (from Debug Report) */
+        /* FAQ CTA Centering */
         .faq-cta {
-            text-align: center; /* Fix 7: Ensure contents are centered */
+            text-align: center;
             margin-top: 48px;
             padding: 32px 0;
-            background: rgba(255, 255, 255, 0.05); /* Add background for the CTA box */
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; /* Fix 7: Use flexbox for centering */
+            flex-direction: column;
+            align-items: center; /* Center items horizontally in flex container */
+            justify-content: center;
         }
 
         .faq-cta h3 {
             margin-bottom: 16px;
-            color: #ffffff; /* Ensure text color */
+            color: #ffffff;
         }
 
         .faq-cta p {
             margin-bottom: 24px;
-            color: rgba(255, 255, 255, 0.8); /* Ensure text color */
+            color: rgba(255, 255, 255, 0.8);
         }
 
         @media (max-width: 768px) {
             .faq-container {
-                padding: 0 10px; /* Reduce padding on mobile for more width */
+                padding: 0 10px;
             }
             .faq-question {
                 font-size: 16px;
@@ -997,19 +1001,19 @@
 
         /* Access Details Redesign Styles */
         .access-section .container {
-            text-align: center; /* Center the grid container */
+            text-align: center;
         }
 
         .access-section .section-subtitle {
-            margin-bottom: 60px; /* More space below subtitle */
+            margin-bottom: 60px;
         }
 
         .access-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Auto-fit columns */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 32px;
-            max-width: 900px; /* Limit width of grid */
-            margin: 0 auto; /* Center the grid */
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .access-feature-card {
@@ -1026,14 +1030,13 @@
         .access-feature-card:hover {
             transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.08);
-            border-color: #F4A261; /* Orange accent on hover */
+            border-color: #F4A261;
             box-shadow: 0 12px 25px rgba(0,0,0,0.2);
         }
 
-
         .access-feature-icon {
-            font-size: 56px; /* Larger icons */
-            color: #F4A261; /* Orange accent color */
+            font-size: 56px;
+            color: #F4A261;
             margin-bottom: 20px;
             display: block;
         }
@@ -1049,19 +1052,18 @@
 
         .access-feature-card h3 {
             font-size: 24px;
-            color: #FFFFFF; /* Ensure white text */
+            color: #FFFFFF;
             margin-bottom: 12px;
         }
 
         .access-feature-card p {
             font-size: 16px;
-            color: rgba(255, 255, 255, 0.85); /* Use global opacity */
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.7;
         }
 
-        /* Remove old access-visual if not needed anymore */
         .access-visual {
-            display: none; /* Hide the old visual element */
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -1098,7 +1100,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: left; /* Ensure text aligns left */
+            text-align: left;
         }
 
         .accordion-header:hover {
@@ -1119,26 +1121,25 @@
             max-height: 0;
             overflow: hidden;
             transition: all 0.3s ease-out;
-            padding: 0 32px; /* Add padding here for content */
+            padding: 0 32px;
         }
 
         .accordion-item.active .accordion-content {
-            max-height: 500px; /* Increased max-height for longer answers */
-            padding-bottom: 24px; /* Consistent padding */
+            max-height: 500px;
+            padding-bottom: 24px;
         }
 
         .accordion-content p, .accordion-content ul {
-            color: rgba(255, 255, 255, 0.85); /* Use global opacity but ensure visibility */
+            color: rgba(255, 255, 255, 0.85);
             margin-top: 16px;
             margin-bottom: 0;
         }
 
         .accordion-content ul {
-            list-style: disc; /* Use bullets for lists inside accordion */
+            list-style: disc;
             padding-left: 20px;
         }
 
-        /* Responsive adjustments for accordions */
         @media (max-width: 768px) {
             .accordion-header {
                 font-size: 18px;
@@ -1199,9 +1200,7 @@
     <section class="hero" id="hero">
         <div class="container loading">
 
-            <img src="assets/logo.webp" alt="Lotuslion Venture - Investment Education Platform" style="width: 80px; height: auto; margin-bottom: 24px;">
-
-            <div class="hero-badge"><i class="ph-light ph-books"></i> LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
+            <img src="assets/logo.webp" alt="Lotuslion Venture - Investment Education Platform" style="width: 80px; height: auto; margin-bottom: 24px;" width="80" height="80"> <div class="hero-badge"><i class="ph-light ph-books"></i> LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
 
             <h1>Master Institutional-Grade Investment Analysis</h1>
 
@@ -1265,37 +1264,25 @@
                 <div class="audience-card">
                     <h3><span class="audience-icon">💼</span> Working Professionals</h3>
                     <ul>
-                        <li>Want to understand financial markets better</li>
-                        <li>Seeking structured learning approach</li>
-                        <li>Limited time for extensive research</li>
-                    </ul>
+                        <li>Want to understand financial markets better</li> <li>Seeking structured learning approach</li> <li>Limited time for extensive research</li> </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">📊</span> Finance Enthusiasts</h3>
                     <ul>
-                        <li>Want to read financial statements</li>
-                        <li>Seeking systematic frameworks</li>
-                        <li>Interested in fundamental analysis</li>
-                    </ul>
+                        <li>Want to read financial statements</li> <li>Seeking systematic frameworks</li> <li>Interested in fundamental analysis</li> </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">🎯</span> Serious Learners</h3>
                     <ul>
-                        <li>Committed to long-term learning</li>
-                        <li>Want institutional-grade knowledge</li>
-                        <li>Prefer depth over quick tips</li>
-                    </ul>
+                        <li>Committed to long-term learning</li> <li>Want institutional-grade knowledge</li> <li>Prefer depth over quick tips</li> </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">🔍</span> Research-Oriented Minds</h3>
                     <ul>
-                        <li>Enjoy analyzing companies</li>
-                        <li>Want to understand valuation</li>
-                        <li>Seek data-driven approaches</li>
-                    </ul>
+                        <li>Enjoy analyzing companies</li> <li>Want to understand valuation</li> <li>Seek data-driven approaches</li> </ul>
                 </div>
             </div>
         </div>
@@ -1604,35 +1591,35 @@
                             How is this different from free YouTube content?
                             <span class="faq-icon">+</span>
                         </button>
-                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Structure and depth.</strong> While YouTube offers scattered tips and opinions, this course provides a comprehensive, sequential curriculum based on institutional methodologies.</p><p>You'll learn:</p><ul><li>The exact frameworks used at top investment firms</li><li>How concepts connect and build upon each other</li><li>Practical application through real case studies</li><li>Professional-grade analysis techniques simplified for individual learners</li></ul><p>Think of it as the difference between reading random articles about medicine versus taking a structured medical course.</p></div></div>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Structure and depth.</strong> While YouTube offers scattered tips and opinions, this course provides a comprehensive, sequential curriculum based on institutional methodologies.</p><ul><li>The exact frameworks used at top investment firms</li><li>How concepts connect and build upon each other</li><li>Practical application through real case studies</li><li>Professional-grade analysis techniques simplified for individual learners</li></ul><p>Think of it as the difference between reading random articles about medicine versus taking a structured medical course.</p></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">
                             What makes Rohit qualified to teach this?
                             <span class="faq-icon">+</span>
                         </button>
-                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>17+ years of institutional experience.</strong> Rohit has held senior research positions at ICRA (Moody's company) and Bank of Baroda Capital Markets, where he advised on over ₹10 trillion in institutional assets.</p><p>Key qualifications:</p><ul><li>Head of Research at leading institutional firms</li><li>MBA Finance + B.Sc. Mathematics from Mumbai University</li><li>Direct experience analyzing 100+ companies across 20+ sectors</li><li>Proven track record through multiple market cycles</li></ul><p>Unlike content creators who theorize, Rohit teaches from actual institutional experience.</p></div></div>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>17+ years of institutional experience.</strong> Rohit has held senior research positions at ICRA (Moody's company) and Bank of Baroda Capital Markets, where he advised on over ₹10 trillion in institutional assets.</p><ul><li>Head of Research at leading institutional firms</li><li>MBA Finance + B.Sc. Mathematics from Mumbai University</li><li>Direct experience analyzing 100+ companies across 20+ sectors</li><li>Proven track record through multiple market cycles</li></ul><p>Unlike content creators who theorize, Rohit teaches from actual institutional experience.</p></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">
                             How much time do I need to dedicate?
                             <span class="faq-icon">+</span>
                         </button>
-                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Flexible, but consistent.</strong> The total content is approximately 17-20 hours, but you can learn at your own pace.</p><p>Recommended approach:</p><ul><li><strong>Intensive:</strong> 1-2 hours daily for 2-3 weeks</li><li><strong>Steady:</strong> 3-4 hours weekly for 6-8 weeks</li><li><strong>Casual:</strong> 1-2 hours weekly for 3-4 months</li></ul><p>The key is consistency rather than speed. You have lifetime access, so you can revisit concepts as needed.</p></div></div>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Flexible, but consistent.</strong> The total content is approximately 17-20 hours, but you can learn at your own pace.</p><ul><li><strong>Intensive:</strong> 1-2 hours daily for 2-3 weeks</li><li><strong>Steady:</strong> 3-4 hours weekly for 6-8 weeks</li><li><strong>Casual:</strong> 1-2 hours weekly for 3-4 months</li></ul><p>The key is consistency rather than speed. You have lifetime access, so you can revisit concepts as needed.</p></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">
                             Will this help me pick winning stocks?
                             <span class="faq-icon">+</span>
                         </button>
-                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>This course teaches analysis, not stock picking.</strong> We focus on building your analytical skills so you can make informed decisions based on your own research and risk tolerance.</p><p>You'll learn to:</p><ul><li>Evaluate company quality and business models</li><li>Understand valuation and fair pricing</li><li>Assess risks and make informed decisions</li><li>Build systematic approaches to analysis</li></ul><p><strong>Important:</strong> This is educational content, not investment advice. All investment decisions remain your responsibility.</p></div></div>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>This course teaches analysis, not stock picking.</strong> We focus on building your analytical skills so you can make informed decisions based on your own research and risk tolerance.</p><ul><li>Evaluate company quality and business models</li><li>Understand valuation and fair pricing</li><li>Assess risks and make informed decisions</li><li>Build systematic approaches to analysis</li></ul><p><strong>Important:</strong> This is educational content, not investment advice. All investment decisions remain your responsibility.</p></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">
                             Is the content updated for current market conditions?
                             <span class="faq-icon">+</span>
                         </button>
-                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Yes.</strong> While the fundamental frameworks remain timeless, the course includes current examples and case studies relevant to today's Indian market.</p><p>The content covers:</p><ul><li>Recent market dynamics and regulatory changes</li><li>Current sector themes and opportunities</li><li>Modern valuation considerations</li><li>Updated financial reporting standards</li></ul><p>Plus, you'll receive updates to keep the content fresh and relevant.</p></div></div>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Yes.</strong> While the fundamental frameworks remain timeless, the course includes current examples and case studies relevant to today's Indian market.</p><ul><li>Recent market dynamics and regulatory changes</li><li>Current sector themes and opportunities</li><li>Modern valuation considerations</li><li>Updated financial reporting standards</li></ul><p>Plus, you'll receive updates to keep the content fresh and relevant.</p></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question" onclick="toggleFAQ(this)">
@@ -1646,7 +1633,7 @@
                             Can I access the course on mobile devices?
                             <span class="faq-icon">+</span>
                         </button>
-                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Fully optimized for mobile.</strong> The entire course is designed for busy professionals who learn on-the-go.</p><p>Features include:</p><ul><li>Mobile-responsive video player</li><li>Downloadable resources for offline access</li><li>Progress tracking across devices</li><li>Clean, touch-friendly interface</li></ul><p>Whether you're commuting, traveling, or learning from home, you'll have full access to all course materials.</p></div></div>
+                        <div class="faq-answer"><div class="faq-answer-content"><p><strong>Fully optimized for mobile.</strong> The entire course is designed for busy professionals who learn on-the-go.</p><ul><li>Mobile-responsive video player</li><li>Downloadable resources for offline access</li><li>Progress tracking across devices</li><li>Clean, touch-friendly interface</li></ul><p>Whether you're commuting, traveling, or learning from home, you'll have full access to all course materials.</p></div></div>
                     </div>
                 </div>
                 <div class="faq-cta">
@@ -1715,12 +1702,19 @@
         </div>
     </footer>
 
+    <script src="js/main-scripts.js"></script>
+    <script src="js/faq-accordion.js"></script>
+
     <script>
-        // Fix 1: Removed misplaced instructor section links from HTML. These are now correctly only in the footer.
-        // Fix 2: Updated HTML for audience-card lists to remove literal bullet characters, relying solely on CSS for bullets.
+        // Placeholder for main-scripts.js content for local testing if external files are not linked
+        // In a real deployment, this would be in js/main-scripts.js
         document.addEventListener('DOMContentLoaded', () => {
             const currentYear = new Date().getFullYear();
-            document.getElementById('copyright-year').textContent = currentYear;
+            const copyrightYearElement = document.getElementById('copyright-year');
+            if (copyrightYearElement) {
+                copyrightYearElement.textContent = currentYear;
+            }
+
 
             // Simple intersection observer for loading animation
             const sections = document.querySelectorAll('section');
@@ -1733,7 +1727,10 @@
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.querySelector('.loading')?.classList.add('loaded');
+                        const loadingElement = entry.target.querySelector('.loading');
+                        if (loadingElement) {
+                            loadingElement.classList.add('loaded');
+                        }
                         // observer.unobserve(entry.target); // Optional: Unobserve once loaded
                     }
                 });
@@ -1766,7 +1763,8 @@
                 });
 
                 navLinks.forEach(link => {
-                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    const href = link.getAttribute('href');
+                    if (href && href.substring(1) === currentSectionId) {
                         link.classList.add('active');
                     } else {
                         link.classList.remove('active');
@@ -1775,7 +1773,10 @@
             };
 
             const scrollToSection = (sectionId) => {
-                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
             };
 
             progressDots.forEach(dot => {
@@ -1787,9 +1788,11 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const sectionId = link.getAttribute('href').substring(1);
-                    scrollToSection(sectionId);
-                    toggleNav(); // Close nav panel on click
+                    const sectionId = link.getAttribute('href')?.substring(1);
+                    if (sectionId) {
+                        scrollToSection(sectionId);
+                        toggleNav(); // Close nav panel on click
+                    }
                 });
             });
 
@@ -1798,13 +1801,16 @@
 
             // Urgent Banner Logic
             const urgentBanner = document.getElementById('urgent-banner');
-            // Show banner after a delay
-            setTimeout(() => {
-                urgentBanner.classList.add('show');
-            }, 1000); // Show after 1 second
+            if (urgentBanner) {
+                setTimeout(() => {
+                    urgentBanner.classList.add('show');
+                }, 1000); // Show after 1 second
+            }
 
             window.closeBanner = () => {
-                urgentBanner.classList.remove('show');
+                if (urgentBanner) {
+                    urgentBanner.classList.remove('show');
+                }
             };
         });
 
@@ -1812,12 +1818,14 @@
         function toggleNav() {
             const navPanel = document.getElementById('nav-panel');
             const navTrigger = document.querySelector('.nav-trigger');
-            navPanel.classList.toggle('active');
-            navTrigger.classList.toggle('active');
-            // Add/remove aria-expanded attribute for accessibility
-            const isExpanded = navPanel.classList.contains('active');
-            navTrigger.setAttribute('aria-expanded', isExpanded);
-            navPanel.setAttribute('aria-hidden', !isExpanded);
+            if (navPanel && navTrigger) {
+                navPanel.classList.toggle('active');
+                navTrigger.classList.toggle('active');
+                // Add/remove aria-expanded attribute for accessibility
+                const isExpanded = navPanel.classList.contains('active');
+                navTrigger.setAttribute('aria-expanded', isExpanded);
+                navPanel.setAttribute('aria-hidden', !isExpanded);
+            }
         }
 
         // Accordion functionality for Modules (re-using toggleAccordion function)
@@ -1828,21 +1836,13 @@
             }
         }
 
-        // FAQ Accordion functionality (separate function if needed, or unify)
-        // Using the same toggleAccordion function for FAQ as well, assuming structure is similar
+        // FAQ Accordion functionality (same as toggleAccordion)
         function toggleFAQ(buttonElement) {
             const item = buttonElement.closest('.faq-item');
             if (item) {
                 item.classList.toggle('active');
             }
         }
-
-        // Fix 2: Additional JS to remove literal bullets in instructor section if any, though HTML fix is primary.
-        document.querySelectorAll('.instructor-content p').forEach(p => {
-            if (p.textContent.startsWith('• ')) {
-                p.textContent = p.textContent.substring(2);
-            }
-        });
     </script>
 </body>
 </html>
