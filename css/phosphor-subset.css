@@ -1,0 +1,38 @@
+/* Optimized Phosphor Icons Subset with font-display: swap */
+@font-face {
+  font-family: 'PhosphorIcons';
+  src: url('https://unpkg.com/@phosphor-icons/web/dist/fonts/phosphor.woff2') format('woff2'),
+       url('https://unpkg.com/@phosphor-icons/web/dist/fonts/phosphor.woff') format('woff');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ph-light::before,
+.ph-light {
+  font-family: 'PhosphorIcons' !important;
+  font-weight: 300 !important;
+  font-style: normal;
+  speak-as: never;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Only icons actually used on the site */
+.ph-light.ph-books::before { content: "\f041"; }
+.ph-light.ph-lightning-fill::before { content: "\f154"; }
+.ph-light.ph-globe-hemisphere-east::before { content: "\f0f7"; }
+.ph-light.ph-envelope-simple::before { content: "\f0d3"; }
+.ph-light.ph-lock-key::before { content: "\f16c"; }
+
+/* Fallback styles if font fails to load */
+@supports not (font-display: swap) {
+  .ph-light::before {
+    content: "";
+  }
+  .ph-light.ph-books::before { content: "📚"; }
+  .ph-light.ph-lightning-fill::before { content: "⚡"; }
+  .ph-light.ph-globe-hemisphere-east::before { content: "🌐"; }
+  .ph-light.ph-envelope-simple::before { content: "✉️"; }
+  .ph-light.ph-lock-key::before { content: "🔒"; }
+}

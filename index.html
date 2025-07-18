@@ -24,16 +24,28 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-M3JWN37C');</script>
+    <!-- Optimized Font Loading with font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp5zPzWl.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://unpkg.com/@phosphor-icons/web/dist/fonts/phosphor.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Local optimized fonts with font-display: swap -->
+    <link rel="stylesheet" type="text/css" href="css/fonts-optimized.css">
+    <!-- Fallback to Google Fonts if local fonts fail -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
+    <!-- Optimized Phosphor Icons subset with font-display: swap -->
+    <link rel="stylesheet" type="text/css" href="css/phosphor-subset.css">
+    <!-- Fallback to full Phosphor CSS for any missing icons -->
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@latest/dist/phosphor.css" media="print" onload="this.media='all'"/>
     <noscript><link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@latest/dist/phosphor.css" /></noscript>
 
     <!-- Performance optimizations for LCP -->
-    <link rel="preload" as="image" href="assets/logo.webp">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="preload" as="image" href="assets/optimized/logo-critical-80w.webp" type="image/webp">
+    <link rel="preload" as="image" href="assets/optimized/logo-80w.png" type="image/png">
+    <link rel="preload" as="style" href="css/fonts-optimized.css">
+    <link rel="preload" as="style" href="css/phosphor-subset.css">
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     
     <!-- DNS prefetch for external resources -->
@@ -1215,9 +1227,24 @@
     </div>
 
     <section class="hero" id="hero">
-        <div class="container animate-hidden animate-in">
+        <div class="container">
 
-            <img src="assets/logo.webp" alt="Lotuslion Venture - Investment Education Platform" style="width: 80px; height: auto; margin-bottom: 24px;" width="80" height="80" loading="eager" fetchpriority="high"> <div class="hero-badge"><i class="ph-light ph-books"></i> LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
+            <picture>
+                <source srcset="assets/optimized/logo-80w.webp 80w,
+                               assets/optimized/logo-120w.webp 120w,
+                               assets/optimized/logo-160w.webp 160w,
+                               assets/optimized/logo-240w.webp 240w,
+                               assets/optimized/logo-320w.webp 320w,
+                               assets/optimized/logo-480w.webp 480w"
+                        sizes="(max-width: 768px) 80px, (max-width: 1200px) 80px, 80px"
+                        type="image/webp">
+                <img src="assets/optimized/logo-80w.png" 
+                     alt="Lotuslion Venture - Investment Education Platform" 
+                     style="width: 80px; height: auto; margin-bottom: 24px;" 
+                     width="80" height="45" 
+                     loading="eager" 
+                     fetchpriority="high">
+            </picture> <div class="hero-badge"><i class="ph-light ph-books"></i> LEARN FROM 17+ YEARS OF PROFESSIONAL EXPERIENCE</div>
 
             <h1>Master Institutional-Grade Investment Analysis</h1>
 
@@ -1744,5 +1771,6 @@
 
     <script src="js/main-scripts.js" defer></script>
     <script src="js/faq-accordion.js" defer></script>
+    <script src="js/lazy-loading.js" defer></script>
 </body>
 </html>
