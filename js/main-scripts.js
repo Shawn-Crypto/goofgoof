@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('loaded'); /* Adds 'loaded' class */
+                entry.target.classList.add('loaded'); /* THIS IS THE CRITICAL CHANGE */
+                // entry.target.style.animationDelay = '0.2s'; // Removed as requested
+                // entry.target.style.animationPlayState = 'running'; // Removed as requested
                 animationObserver.unobserve(entry.target);
             }
         });
