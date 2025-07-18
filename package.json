@@ -1,5 +1,6 @@
 {
   "name": "csuite23-optimized",
+  "type": "module",
   "version": "1.0.0",
   "description": "Optimized build system for Lotuslion Investment Course Platform",
   "main": "index.js",
