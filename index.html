@@ -60,6 +60,20 @@
             font-weight: 300; /* Ensure light weight for general text */
         }
 
+        /* Global list reset to remove bullet points for most content */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Specifically ensure bullets are shown for FAQ and accordion content */
+        .faq-answer-content ul,
+        .accordion-content ul {
+            list-style: disc !important;
+            padding-left: 20px !important;
+        }
+
         /* Apply to all headings for consistent tight letter spacing and heavier weight */
         h1, h2, h3, h4 {
             letter-spacing: -0.03em; /* Tighten letter spacing for headings */
@@ -622,8 +636,9 @@
 
         /* FAQ Container & Grid Styles (from Debug Report) */
         .faq-container {
-            max-width: 900px; /* Adjust as needed for desired max width */
+            max-width: 900px; /* Keep this for overall content width control */
             margin: 0 auto;
+            padding: 0 20px; /* Add some horizontal padding to the container itself */
         }
 
         .faq-grid {
@@ -650,6 +665,11 @@
             align-items: center;
             transition: all 0.3s ease;
             color: #ffffff; /* Ensure white text */
+            width: 100%; /* Ensure full width within its container */
+            box-sizing: border-box; /* Include padding in width calculation */
+            background: none;
+            border: none;
+            text-align: left;
         }
 
         .faq-question:hover {
@@ -691,9 +711,12 @@
 
         /* FAQ CTA Centering (from Debug Report) */
         .faq-cta {
-            text-align: center; /* Center the CTA button */
-            margin-top: 48px; /* Add margin to separate from FAQ items */
-            padding: 32px 0; /* Add padding for visual space */
+            text-align: center; /* Ensure contents are centered */
+            margin-top: 48px;
+            padding: 32px 0;
+            background: rgba(255, 255, 255, 0.05); /* Add background for the CTA box */
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .faq-cta h3 {
@@ -707,6 +730,9 @@
         }
 
         @media (max-width: 768px) {
+            .faq-container {
+                padding: 0 10px; /* Reduce padding on mobile for more width */
+            }
             .faq-question {
                 font-size: 16px;
                 padding: 18px 24px;
@@ -1162,36 +1188,36 @@
                 <div class="audience-card">
                     <h3><span class="audience-icon">💼</span> Working Professionals</h3>
                     <ul>
-                        <li>• Want to understand financial markets better</li>
-                        <li>• Seeking structured learning approach</li>
-                        <li>• Limited time for extensive research</li>
+                        <li>Want to understand financial markets better</li>
+                        <li>Seeking structured learning approach</li>
+                        <li>Limited time for extensive research</li>
                     </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">📊</span> Finance Enthusiasts</h3>
                     <ul>
-                        <li>• Interested in fundamental analysis</li>
-                        <li>• Want to read financial statements</li>
-                        <li>• Seeking systematic frameworks</li>
+                        <li>Interested in fundamental analysis</li>
+                        <li>Want to read financial statements</li>
+                        <li>Seeking systematic frameworks</li>
                     </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">🎯</span> Serious Learners</h3>
                     <ul>
-                        <li>• Committed to long-term learning</li>
-                        <li>• Want institutional-grade knowledge</li>
-                        <li>• Prefer depth over quick tips</li>
+                        <li>Committed to long-term learning</li>
+                        <li>Want institutional-grade knowledge</li>
+                        <li>Prefer depth over quick tips</li>
                     </ul>
                 </div>
 
                 <div class="audience-card">
                     <h3><span class="audience-icon">🔍</span> Research-Oriented Minds</h3>
                     <ul>
-                        <li>• Enjoy analyzing companies</li>
-                        <li>• Want to understand valuation</li>
-                        <li>• Seek data-driven approaches</li>
+                        <li>Enjoy analyzing companies</li>
+                        <li>Want to understand valuation</li>
+                        <li>Seek data-driven approaches</li>
                     </ul>
                 </div>
             </div>
@@ -1458,9 +1484,9 @@
                 </div>
                 <div style="background: rgba(44,165,141,0.1); border-left: 4px solid #2CA58D; padding: 24px; margin-bottom: 32px;">
                     <p style="font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #2CA58D;">Leadership Experience - Rohit Ahuja</p>
-                    <p>• Head of Research at ICRA (Moody's Company)</p>
-                    <p>• Head of Research at Bank of Baroda Capital Markets</p>
-                    <p>• MBA Finance + B.Sc. Mathematics from Mumbai University</p>
+                    <p>Head of Research at ICRA (Moody's Company)</p>
+                    <p>Head of Research at Bank of Baroda Capital Markets</p>
+                    <p>MBA Finance + B.Sc. Mathematics from Mumbai University</p>
                 </div>
                 <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);">Rohit Ahuja brings an unparalleled combination of institutional expertise and educational passion to investment analysis. With over 17 years of experience at India's premier financial institutions, he has developed and refined analytical frameworks that have guided investment decisions worth over ₹10 trillion.</p>
                 <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px; color: rgba(255, 255, 255, 0.95);"><strong>From Wall Street Methodologies to Indian Markets:</strong> Rohit's career spans leadership roles at ICRA (Moody's subsidiary) and Bank of Baroda Capital Markets, where he pioneered research methodologies that combined global best practices with deep understanding of Indian market dynamics. His analytical frameworks have been used to evaluate companies across 20+ sectors, from traditional manufacturing to emerging fintech.</p>
@@ -1490,35 +1516,59 @@
                 </div>
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">Is this course suitable for complete beginners?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Is this course suitable for complete beginners?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>Absolutely.</strong> This course is designed to take you from zero knowledge to confident analysis. We start with the fundamental concepts that every investor needs to understand, then gradually build your expertise using the same progression used to train institutional analysts.</p><p>No prior finance background is required-just a commitment to learning and the patience to work through the material systematically.</p></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">How is this different from free YouTube content?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            How is this different from free YouTube content?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>Structure and depth.</strong> While YouTube offers scattered tips and opinions, this course provides a comprehensive, sequential curriculum based on institutional methodologies.</p><p>You'll learn:</p><ul><li>The exact frameworks used at top investment firms</li><li>How concepts connect and build upon each other</li><li>Practical application through real case studies</li><li>Professional-grade analysis techniques simplified for individual learners</li></ul><p>Think of it as the difference between reading random articles about medicine versus taking a structured medical course.</p></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">What makes Rohit qualified to teach this?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            What makes Rohit qualified to teach this?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>17+ years of institutional experience.</strong> Rohit has held senior research positions at ICRA (Moody's company) and Bank of Baroda Capital Markets, where he advised on over ₹10 trillion in institutional assets.</p><p>Key qualifications:</p><ul><li>Head of Research at leading institutional firms</li><li>MBA Finance + B.Sc. Mathematics from Mumbai University</li><li>Direct experience analyzing 100+ companies across 20+ sectors</li><li>Proven track record through multiple market cycles</li></ul><p>Unlike content creators who theorize, Rohit teaches from actual institutional experience.</p></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">How much time do I need to dedicate?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            How much time do I need to dedicate?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>Flexible, but consistent.</strong> The total content is approximately 17-20 hours, but you can learn at your own pace.</p><p>Recommended approach:</p><ul><li><strong>Intensive:</strong> 1-2 hours daily for 2-3 weeks</li><li><strong>Steady:</strong> 3-4 hours weekly for 6-8 weeks</li><li><strong>Casual:</strong> 1-2 hours weekly for 3-4 months</li></ul><p>The key is consistency rather than speed. You have lifetime access, so you can revisit concepts as needed.</p></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">Will this help me pick winning stocks?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Will this help me pick winning stocks?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>This course teaches analysis, not stock picking.</strong> We focus on building your analytical skills so you can make informed decisions based on your own research and risk tolerance.</p><p>You'll learn to:</p><ul><li>Evaluate company quality and business models</li><li>Understand valuation and fair pricing</li><li>Assess risks and make informed decisions</li><li>Build systematic approaches to analysis</li></ul><p><strong>Important:</strong> This is educational content, not investment advice. All investment decisions remain your responsibility.</p></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">Is the content updated for current market conditions?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Is the content updated for current market conditions?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>Yes.</strong> While the fundamental frameworks remain timeless, the course includes current examples and case studies relevant to today's Indian market.</p><p>The content covers:</p><ul><li>Recent market dynamics and regulatory changes</li><li>Current sector themes and opportunities</li><li>Modern valuation considerations</li><li>Updated financial reporting standards</li></ul><p>Plus, you'll receive updates to keep the content fresh and relevant.</p></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">What if I'm not satisfied with the course?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            What if I'm not satisfied with the course?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>48-hour money-back guarantee.</strong> If you're not completely satisfied within 48 hours of purchase, simply contact our support team for a full refund, no questions asked.</p><p>This brief window ensures you have time to evaluate the content quality while maintaining the course's exclusivity for serious learners.</p><p>Contact: <strong>investoreducation@lotuslion.in</strong></p></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">Can I access the course on mobile devices?</button>
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            Can I access the course on mobile devices?
+                            <span class="faq-icon">+</span>
+                        </button>
                         <div class="faq-answer"><div class="faq-answer-content"><p><strong>Fully optimized for mobile.</strong> The entire course is designed for busy professionals who learn on-the-go.</p><p>Features include:</p><ul><li>Mobile-responsive video player</li><li>Downloadable resources for offline access</li><li>Progress tracking across devices</li><li>Clean, touch-friendly interface</li></ul><p>Whether you're commuting, traveling, or learning from home, you'll have full access to all course materials.</p></div></div>
                     </div>
                 </div>
