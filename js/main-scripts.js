@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, {
-        threshold: 0.1, // Element is considered intersecting when 10% visible
-        rootMargin: '0px 0px -100px 0px' // Extend detection area slightly beyond viewport
+        threshold: 0, // Element triggers as soon as any part enters the viewport
+        rootMargin: '0px' // Ensure no negative root margin, effectively no margin
     });
 
     // Observe all elements that should animate into view
