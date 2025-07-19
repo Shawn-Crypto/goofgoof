@@ -132,11 +132,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // CTA button tracking
     document.querySelectorAll('.cta-button').forEach(button => {
         button.addEventListener('click', function() {
+            // CTA click tracking
             if (window.dataLayer) {
                 window.dataLayer.push({
                     'event': 'cta_click',
                     'button_text': this.textContent.trim(),
                     'button_location': this.closest('section').id || 'unknown'
+                });
+                // Payment button tracking
+                window.dataLayer.push({
+                    'event': 'begin_checkout',
+                    'currency': 'INR',
+                    'value': 1499,
+                    'button_location': this.closest('section').id || 'unknown'
+                });
+            }
+            // Meta Pixel equivalent
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout', {
+                    content_ids: ['beyond-deck-course'],
+                    value: 1499,
+                    currency: 'INR'
                 });
             }
         });
