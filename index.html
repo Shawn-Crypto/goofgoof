@@ -1336,21 +1336,6 @@
     <!-- END TEMPORARY IMAGE CHECK SCRIPT -->
     
     <!-- Simple analytics without external dependencies -->
-    <script>
-      // Simple analytics without external dependencies
-      console.log('Analytics: Page loaded successfully');
-      // Track page performance
-      window.addEventListener('load', function() {
-        const loadTime = performance.now();
-        console.log('Page Load Time:', Math.round(loadTime) + 'ms');
-      });
-      // Track button clicks
-      document.addEventListener('click', function(e) {
-        if (e.target.matches('.cta-button, [href*="payment"], [href*="enroll"]')) {
-          console.log('CTA Clicked:', e.target.textContent || 'Button');
-        }
-      });
-    </script>
 
     
 
