@@ -1312,10 +1312,82 @@
     </style>
 
     <!-- Load non-critical CSS asynchronously -->
+
+    <!-- TEMPORARY: Add this to your HTML to debug image issues -->
+    <!-- Remove after fixing -->
+    <script>
+      // Debug image loading issues
+      document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('img');
+        images.forEach((img, index) => {
+          img.addEventListener('error', function() {
+            console.error(`Image ${index + 1} failed to load:`, this.src);
+            // Try fallback: remove Vercel optimization
+            if (this.src.includes('/_vercel/image')) {
+              const originalUrl = new URL(this.src).searchParams.get('url');
+              console.log(`Trying fallback for image ${index + 1}:`, originalUrl);
+              this.src = originalUrl;
+            }
+          });
+          img.addEventListener('load', function() {
+            console.log(`Image ${index + 1} loaded successfully:`, this.src);
+          });
+        });
+      });
+    </script>
 </head>
 <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3JWN37C"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- Vercel Analytics - Fixed Version -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+
+    <!-- Alternative Vercel Analytics Loading (if main one fails) -->
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        script.src = '/_vercel/insights/script.js';
+        script.defer = true;
+        script.onerror = function() {
+          console.log('Vercel insights script failed to load');
+        };
+        document.head.appendChild(script);
+      })();
+    </script>
+
+    <!-- Simplified Web Vitals Tracking (without external imports) -->
+    <script>
+      // Simple performance tracking without external dependencies
+      window.addEventListener('load', function() {
+        // Track basic performance metrics
+        setTimeout(function() {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          const loadTime = perfData.loadEventEnd - perfData.fetchStart;
+          
+          console.log('Page Load Time:', loadTime + 'ms');
+          
+          // Send to Vercel Analytics if available
+          if (window.va) {
+            window.va('track', 'page-load', {
+              loadTime: loadTime,
+              page: window.location.pathname
+            });
+          }
+        }, 1000);
+      });
+      
+      // Track user interactions
+      document.addEventListener('click', function(e) {
+        if (e.target.matches('.cta-button, [href*="payment"], [href*="enroll"]')) {
+          if (window.va) {
+            window.va('track', 'cta-click', {
+              element: e.target.textContent || e.target.alt || 'unknown',
+              page: window.location.pathname
+            });
+          }
+        }
+      });
+    </script>
 
     <div class="nav-trigger" onclick="toggleNav()" aria-label="Toggle navigation menu">
         <span></span>
