@@ -1335,6 +1335,42 @@
         });
       });
     </script>
+    <!-- DIAGNOSTIC SCRIPT: Shows image, script, and performance info in console -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🔍 === DIAGNOSTIC START ===');
+      // 1. Check all images
+      console.log('📷 IMAGES FOUND:');
+      document.querySelectorAll('img').forEach((img, i) => {
+        console.log(`Image ${i+1}:`, img.src);
+        img.addEventListener('error', function() {
+          console.error(`❌ Image ${i+1} FAILED:`, this.src);
+        });
+        img.addEventListener('load', function() {
+          console.log(`✅ Image ${i+1} SUCCESS:`, this.src);
+        });
+      });
+      // 2. Check all scripts
+      console.log('📜 SCRIPTS FOUND:');
+      document.querySelectorAll('script[src]').forEach((script, i) => {
+        console.log(`Script ${i+1}:`, script.src);
+      });
+      // 3. Check for missing assets in console
+      console.log('🌐 CHECKING NETWORK ERRORS...');
+      // 4. Performance info
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          console.log('⚡ PERFORMANCE:');
+          const perfData = performance.getEntriesByType('navigation')[0];
+          if (perfData) {
+            console.log('- Load Time:', Math.round(perfData.loadEventEnd - perfData.fetchStart) + 'ms');
+            console.log('- DOM Ready:', Math.round(perfData.domContentLoadedEventEnd - perfData.fetchStart) + 'ms');
+          }
+          console.log('🔍 === DIAGNOSTIC END ===');
+        }, 2000);
+      });
+    });
+    </script
 </head>
 <body>
     <!-- Vercel Analytics - Fixed Version -->
