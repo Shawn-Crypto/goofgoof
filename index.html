@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Beyond the Deck: Master the Investor Pitch to Get Funded - LFG Ventures</title>
-    <!-- Removed Google Fonts links -->
-    <!-- Using system fonts for better performance -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://payments.cashfree.com" crossorigin>
     <meta name="description" content="Learn proven frameworks to secure funding from investors. Master pitch psychology, investor communication, and fundraising strategies from someone who's raised ₹16 crores and deployed ₹100+ crores.">
@@ -23,7 +21,6 @@
 
     <link rel="canonical" href="https://lfgventures.in">
 
-    <!-- Optimized GTM implementation for better performance -->
     <script>
     // Optimized GTM loading with performance considerations
     (function(w,d,s,l,i){
@@ -51,10 +48,6 @@
     })(window,document,'script','dataLayer','GTM-M3JWN37C');
     </script>
 
-    <!-- Vercel Speed Insights -->
-    
-
-    <!-- Enhanced Web Vitals Tracking (replaces the component) -->
     <script type="module">
       // Import Web Vitals library
       import {getCLS, getFID, getFCP, getLCP, getTTFB} from 'https://unpkg.com/web-vitals@3/dist/web-vitals.js';
@@ -95,22 +88,6 @@
       });
     </script>
 
-    <!-- Vercel insights fallback loader (to be deleted) -->
-    <!--
-    <script>
-      (function() {
-        var script = document.createElement('script');
-        script.src = '/_vercel/insights/script.js';
-        script.defer = true;
-        script.onerror = function() {
-          console.log('Vercel insights script failed to load');
-        };
-        document.head.appendChild(script);
-      })();
-    </script>
-    -->
-
-    <!-- Optimized dataLayer events -->
     <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -169,17 +146,13 @@
     }
     </script>
     
-    <!-- Performance optimizations for LCP -->
     <link rel="preconnect" href="https://payments.cashfree.com" crossorigin>
 
-    <!-- Additional performance optimizations -->
     <link rel="preconnect" href="https://payments.cashfree.com" crossorigin>
     
-    <!-- Resource hints for better performance -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
     <link rel="dns-prefetch" href="https://connect.facebook.net">
 
-    <!-- Critical CSS inlined for hero section -->
     <style>
     /* Critical CSS for hero section - inline this */
     body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";background:linear-gradient(180deg,#0D1421 0%,#1A2332 100%);color:#fff;line-height:1.6;overflow-x:hidden}
@@ -188,7 +161,6 @@
     .hero h1{font-size:clamp(36px,8vw,64px);font-weight:800;margin-bottom:24px;line-height:1.1;letter-spacing:-0.02em}
     </style>
     
-    <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="https://payments.cashfree.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://payments.cashfree.com" crossorigin>
@@ -273,6 +245,31 @@
         .audience-card li {
         text-align: left; /* Left-align list items for better readability */
         padding: 4px 0; /* Adjust padding for list items */
+        }
+
+        /* ADDED CSS for Fix #3 */
+        .audience-card {
+            text-align: center; /* Keep card title centered */
+        }
+
+        .audience-card ul {
+            text-align: left; /* But make list items left-aligned */
+            margin-top: 16px;
+        }
+
+        /* ADDED CSS for Fix #3 */
+        .included-card p,
+        .method-card p,
+        .problem-card p {
+            text-align: left;
+            margin-top: 12px;
+        }
+
+        /* ADDED CSS for Fix #3 */
+        .included-card h3,
+        .method-card h3,
+        .problem-card h3 {
+            text-align: center; /* Keep titles centered */
         }
 
 
@@ -602,6 +599,45 @@
             background: linear-gradient(135deg, #f5b681 0%, #f2a85c 100%);
         }
 
+        /* Hero Credentials Styling (FIX #5) */
+        .hero-credentials {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+
+        .credential-highlight {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(244, 162, 97, 0.3);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .credential-highlight:hover {
+            transform: translateY(-4px);
+            background: rgba(244, 162, 97, 0.1);
+            border-color: rgba(244, 162, 97, 0.5);
+        }
+
+        .credential-number {
+            display: block;
+            font-size: 24px;
+            font-weight: 800;
+            color: #F4A261;
+            margin-bottom: 4px;
+        }
+
+        .credential-text {
+            display: block;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         /* Card Styles - General */
         .card {
             background: rgba(255, 255, 255, 0.05);
@@ -620,15 +656,24 @@
         }
 
         /* Grid Layouts */
+        /* FIX #2: 2x2 Grid for sections with exactly 4 cards */
         .audience-grid,
-        .problem-grid,
-        .method-grid, /* Fix 4: Ensure grid display */
-        .included-grid { /* Fix 5: Ensure grid display */
+        .problem-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
             gap: 32px;
-            margin-top: 32px; /* Space from section title/subtitle */
+            margin-top: 32px;
         }
+
+        /* Keep auto-fit for other sections */
+        .method-grid,
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+
 
         /* Specific Card Styles (Audience, Method, Included) */
         .audience-card,
@@ -990,6 +1035,24 @@
             .faq-answer {
                 padding: 0 24px;
             }
+
+            /* FIX #2: Mobile responsive */
+            .audience-grid,
+            .problem-grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+
+            .hero-credentials { /* FIX #5 */
+                gap: 16px;
+            }
+            
+            .credential-highlight { /* FIX #5 */
+                padding: 12px 16px;
+            }
+            
+            .credential-number { /* FIX #5 */
+                font-size: 20px;
+            }
         }
 
         /* Footer */
@@ -1323,21 +1386,9 @@
         }
     </style>
 
-    <!-- Load non-critical CSS asynchronously -->
-
-    <!-- Simple analytics without external dependencies -->
-    <!-- Simple analytics without external dependencies -->
-</head>
+    </head>
 <body>
 
-
-    <!-- ADD THIS TEMPORARY SCRIPT TO CHECK WHAT IMAGES EXIST -->
-    <!-- Remove after debugging -->
-    <!-- END TEMPORARY IMAGE CHECK SCRIPT -->
-    
-    <!-- Simple analytics without external dependencies -->
-
-    
 
     <div class="nav-trigger" onclick="toggleNav()" aria-label="Toggle navigation menu">
         <span></span>
@@ -1374,7 +1425,7 @@
     </div>
 
     <div class="urgent-banner" id="urgent-banner">
-        <span>� Master Investor Pitching - Limited Time Educational Pricing Available</span>
+        <span>Master Investor Pitching - Limited Time Educational Pricing Available</span>
         <button class="close-btn" onclick="closeBanner()" aria-label="Close banner">&times;</button>
     </div>
 
@@ -1397,10 +1448,6 @@
 
             <div class="hero-credentials">
                 <div class="credential-highlight">
-                    <span class="credential-number">Partner</span>
-                    <span class="credential-text">at LFG Ventures</span>
-                </div>
-                <div class="credential-highlight">
                     <span class="credential-number">₹16 Cr</span>
                     <span class="credential-text">Raised as Founder</span>
                 </div>
@@ -1408,14 +1455,10 @@
                     <span class="credential-number">₹100+ Cr</span>
                     <span class="credential-text">Deployed as Investor</span>
                 </div>
-                <div class="credential-highlight">
-                    <span class="credential-number">500+</span>
-                    <span class="credential-text">Pitches Evaluated</span>
-                </div>
             </div>
 
             <p class="description">
-                Master investor pitching from both sides of the table—learn proven frameworks from an instructor who’s raised ₹16 crores as a founder and deployed ₹100+ crores as an investor. Get the psychology, preparation, and confidence you need to turn meetings into term sheets.
+                Learn proven frameworks from someone who's been on both sides of the table. Master the psychology and confidence you need to turn meetings into term sheets.
             </p>
 
             <p style="font-size: 14px; color: rgba(255, 255, 255, 0.6); margin-bottom: 24px;">
@@ -1656,17 +1699,18 @@
                     <h3>Comprehensive Learning Modules</h3>
                     <p>5 detailed modules covering fundraising psychology, pitch frameworks, and investor communication strategies with actionable takeaways.</p>
                 </div>
+                <div class="included-card">
                     <span class="included-icon">🎯</span>
                     <h3>Q&A Preparation Toolkit</h3>
                     <p>Complete list of investor questions with proven response frameworks, plus practice scenarios to build confidence.</p>
                 </div>
                 <div class="included-card">
-                    <span class="included-icon">�</span>
+                    <span class="included-icon">💡</span>
                     <h3>Real Fundraising Case Studies</h3>
                     <p>Behind-the-scenes analysis of successful funding rounds, including what worked and what didn't in actual investor meetings.</p>
                 </div>
                 <div class="included-card">
-                    <span class="included-icon">�</span>
+                    <span class="included-icon">🤝</span>
                     <h3>Private Founder Community</h3>
                     <p>Join an exclusive community of ambitious founders. Share insights, practice pitches, and get feedback from peers.</p>
                 </div>
@@ -1924,7 +1968,6 @@
         </div>
     </footer>
 
-    <!-- Optimized JavaScript for better performance -->
     <script>
         // Debounced scroll handler for better performance
         function debounce(func, wait) {
