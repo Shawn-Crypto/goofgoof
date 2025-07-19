@@ -51,6 +51,53 @@
     })(window,document,'script','dataLayer','GTM-M3JWN37C');
     </script>
 
+    <!-- Vercel Speed Insights -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <!-- Enhanced Web Vitals Tracking (replaces the component) -->
+    <script type="module">
+      // Import Web Vitals library
+      import {getCLS, getFID, getFCP, getLCP, getTTFB} from 'https://unpkg.com/web-vitals@3/dist/web-vitals.js';
+
+      function sendToVercelAnalytics(metric) {
+        // Send to Vercel Speed Insights
+        if (window.va) {
+          window.va('track', 'web-vital', {
+            name: metric.name,
+            value: metric.value,
+            id: metric.id,
+            delta: metric.delta,
+            rating: metric.rating
+          });
+        }
+
+        // Also log for debugging
+        console.log(`${metric.name}: ${metric.value} (${metric.rating})`);
+      }
+
+      // Track all Core Web Vitals
+      getCLS(sendToVercelAnalytics);
+      getFID(sendToVercelAnalytics);
+      getFCP(sendToVercelAnalytics);
+      getLCP(sendToVercelAnalytics);
+      getTTFB(sendToVercelAnalytics);
+
+      // Track page performance
+      window.addEventListener('load', () => {
+        const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+        
+        if (window.va) {
+          window.va('track', 'page-load-time', {
+            value: loadTime,
+            page: window.location.pathname
+          });
+        }
+      });
+    </script>
+
     <!-- Optimized dataLayer events -->
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -1312,12 +1359,20 @@
     <section class="hero" id="hero">
         <div class="container">
 
-            <img src="assets/optimized/logo-80w.webp" 
-                 alt="LFG Ventures - Fundraising Education Platform" 
-                 style="width: 60px; height: auto; margin-bottom: 24px;" 
-                 width="60" 
-                 height="34" 
-                 loading="eager" 
+            <!-- Vercel Optimized Logo Images -->
+            <img src="/_vercel/image?url=/assets/optimized/logo-80w.webp&w=80&q=85&f=webp"
+                 alt="LFG Ventures - Fundraising Education Platform"
+                 style="width: 60px; height: auto; margin-bottom: 24px;"
+                 width="60"
+                 height="34"
+                 loading="eager"
+                 fetchpriority="high">
+            <img src="/_vercel/image?url=/assets/optimized/logo-80w.webp&w=120&q=85&f=webp"
+                 alt="LFG Ventures - Fundraising Education Platform"
+                 style="width: 60px; height: auto; margin-bottom: 24px;"
+                 width="60"
+                 height="34"
+                 loading="eager"
                  fetchpriority="high">
             
             <div class="hero-badge">🎯 DUAL-PERSPECTIVE EXPERTISE: FOUNDER + INVESTOR</div>
