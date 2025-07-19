@@ -1327,54 +1327,12 @@
 
     <!-- Simple analytics without external dependencies -->
     <!-- Simple analytics without external dependencies -->
-    <script>
-      // Simple analytics without external dependencies
-      console.log('Analytics: Page loaded successfully');
-      // Track page performance
-      window.addEventListener('load', function() {
-        const loadTime = performance.now();
-        console.log('Page Load Time:', Math.round(loadTime) + 'ms');
-      });
-      // Track button clicks
-      document.addEventListener('click', function(e) {
-        if (e.target.matches('.cta-button, [href*="payment"], [href*="enroll"]')) {
-          console.log('CTA Clicked:', e.target.textContent || 'Button');
-        }
-      });
-    </script>
 </head>
 <body>
 
 
     <!-- ADD THIS TEMPORARY SCRIPT TO CHECK WHAT IMAGES EXIST -->
     <!-- Remove after debugging -->
-    <script>
-      // Check what images actually exist on your server
-      const imagesToCheck = [
-        '/assets/hero-logo.webp',
-        '/assets/optimized/logo-80w.webp', 
-        '/assets/optimized/logo-120w.webp',
-        '/assets/logo.png',
-        '/assets/logo.jpg',
-        '/assets/logo.webp'
-      ];
-      
-      console.log('🔍 CHECKING WHICH IMAGES EXIST:');
-      
-      imagesToCheck.forEach(imagePath => {
-        fetch(imagePath, { method: 'HEAD' })
-          .then(response => {
-            if (response.ok) {
-              console.log(`✅ EXISTS: ${imagePath}`);
-            } else {
-              console.log(`❌ NOT FOUND: ${imagePath} (${response.status})`);
-            }
-          })
-          .catch(error => {
-            console.log(`❌ ERROR: ${imagePath}`, error);
-          });
-      });
-    </script>
     <!-- END TEMPORARY IMAGE CHECK SCRIPT -->
     
     <!-- Simple analytics without external dependencies -->
