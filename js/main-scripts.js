@@ -1,4 +1,4 @@
-// Main Scripts for Lotuslion Course Platform
+// Main Scripts for LFG Ventures Course Platform
 document.addEventListener('DOMContentLoaded', function() {
     // Set current year in copyright
     const copyrightYear = document.getElementById('copyright-year');
