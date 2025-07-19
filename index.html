@@ -52,10 +52,7 @@
     </script>
 
     <!-- Vercel Speed Insights -->
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
+    
 
     <!-- Enhanced Web Vitals Tracking (replaces the component) -->
     <script type="module">
@@ -97,6 +94,21 @@
         }
       });
     </script>
+
+    <!-- Vercel insights fallback loader (to be deleted) -->
+    <!--
+    <script>
+      (function() {
+        var script = document.createElement('script');
+        script.src = '/_vercel/insights/script.js';
+        script.defer = true;
+        script.onerror = function() {
+          console.log('Vercel insights script failed to load');
+        };
+        document.head.appendChild(script);
+      })();
+    </script>
+    -->
 
     <!-- Optimized dataLayer events -->
     <script>
@@ -1313,6 +1325,7 @@
 
     <!-- Load non-critical CSS asynchronously -->
 
+    <!-- Simple analytics without external dependencies -->
     <!-- Simple analytics without external dependencies -->
     <script>
       // Simple analytics without external dependencies
