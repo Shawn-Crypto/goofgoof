@@ -130,16 +130,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // CTA button tracking
-    document.querySelectorAll('.cta-button').forEach(button => {
-        button.addEventListener('click', function() {
-            // CTA click tracking
+// CTA button tracking with delay for external redirects
+document.querySelectorAll('.cta-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+        // Only add delay if this links to external payment page
+        const href = this.getAttribute('href');
+        const isExternalPayment = href && href.includes('cashfree.com');
+        
+        if (isExternalPayment) {
+            e.preventDefault(); // Prevent immediate redirect
+            
+            // Track events first
             if (window.dataLayer) {
                 window.dataLayer.push({
                     'event': 'cta_click',
                     'button_text': this.textContent.trim(),
                     'button_location': this.closest('section').id || 'unknown'
                 });
-                // Payment button tracking
                 window.dataLayer.push({
                     'event': 'begin_checkout',
                     'currency': 'INR',
@@ -147,7 +154,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     'button_location': this.closest('section').id || 'unknown'
                 });
             }
-            // Meta Pixel equivalent
+            
+            // Meta Pixel tracking
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'InitiateCheckout', {
                     content_ids: ['beyond-deck-course'],
@@ -155,8 +163,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     currency: 'INR'
                 });
             }
-        });
+            
+            // Redirect after small delay to ensure tracking fires
+            setTimeout(() => {
+                window.location.href = href;
+            }, 300); // 300ms delay
+        } else {
+            // For non-external links, track normally without delay
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    'event': 'cta_click',
+                    'button_text': this.textContent.trim(),
+                    'button_location': this.closest('section').id || 'unknown'
+                });
+            }
+        }
     });
+});
 
     // Banner functionality
     window.closeBanner = function() {
