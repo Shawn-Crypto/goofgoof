@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Successful - Beyond the Deck</title>
     <meta name="description" content="Thank you for enrolling in Beyond the Deck: Master the Investor Pitch to Get Funded course.">
-    
-    <!-- Google Tag Manager -->
+
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-MQXT4TQ6');</script>
-    <!-- End Google Tag Manager -->
-    
-    <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -30,246 +26,51 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1438462720811682&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%);
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        /* Debug styles */
-        .debug-box {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: left;
-            font-family: monospace;
-            font-size: 14px;
-        }
-        
-        .success { color: #2CA58D; }
-        .warning { color: #F4A261; }
-        .error { color: #ff6b6b; }
-        
-        /* Success Animation */
-        @keyframes checkmark {
-            0% { stroke-dashoffset: 100; }
-            100% { stroke-dashoffset: 0; }
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .success-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 40px;
-            background: rgba(44, 165, 141, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeInUp 0.6s ease;
-        }
-        
-        .success-icon svg {
-            width: 60px;
-            height: 60px;
-        }
-        
-        .success-icon svg path {
-            stroke: #2CA58D;
-            stroke-width: 3;
-            stroke-dasharray: 100;
-            stroke-dashoffset: 100;
-            animation: checkmark 0.8s ease 0.3s forwards;
-        }
-        
-        h1 {
-            font-size: clamp(32px, 6vw, 48px);
-            font-weight: 800;
-            margin-bottom: 24px;
-            color: #2CA58D;
-            animation: fadeInUp 0.6s ease 0.2s both;
-        }
-        
-        .subtitle {
-            font-size: 24px;
-            margin-bottom: 48px;
-            color: rgba(255, 255, 255, 0.9);
-            animation: fadeInUp 0.6s ease 0.3s both;
-        }
-        
-        .info-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.6s ease 0.4s both;
-        }
-        
-        .info-box h2 {
-            font-size: 28px;
-            margin-bottom: 24px;
-            color: #F4A261;
-        }
-        
-        .info-box p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 16px;
-        }
-        
-        .steps {
-            text-align: left;
-            max-width: 500px;
-            margin: 32px auto;
-        }
-        
-        .step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 24px;
-            animation: fadeInUp 0.6s ease 0.5s both;
-        }
-        
-        .step-number {
-            background: #F4A261;
-            color: #0A2342;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-right: 16px;
-        }
-        
-        .step-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        
-        .support-section {
-            margin-top: 48px;
-            padding-top: 48px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeInUp 0.6s ease 0.6s both;
-        }
-        
-        .support-section h3 {
-            font-size: 24px;
-            margin-bottom: 16px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .support-section p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 24px;
-        }
-        
-        .button {
-            display: inline-block;
-            padding: 16px 32px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 0 8px;
-        }
-        
-        .button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .button.primary {
-            background: #F4A261;
-            color: #0A2342;
-            border-color: #F4A261;
-        }
-        
-        .button.primary:hover {
-            background: #f5b681;
-            border-color: #f5b681;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .container { padding: 20px; }
-            .info-box { padding: 24px; }
-            .steps { margin: 24px auto; }
-            .button { display: block; margin: 8px 0; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%); color: #ffffff; line-height: 1.6; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px; text-align: center; }
+        @keyframes checkmark { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .success-icon { width: 120px; height: 120px; margin: 0 auto 40px; background: rgba(44, 165, 141, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: fadeInUp 0.6s ease; }
+        .success-icon svg { width: 60px; height: 60px; }
+        .success-icon svg path { stroke: #2CA58D; stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 100; animation: checkmark 0.8s ease 0.3s forwards; }
+        h1 { font-size: clamp(32px, 6vw, 48px); font-weight: 800; margin-bottom: 24px; color: #2CA58D; animation: fadeInUp 0.6s ease 0.2s both; }
+        .subtitle { font-size: 24px; margin-bottom: 48px; color: rgba(255, 255, 255, 0.9); animation: fadeInUp 0.6s ease 0.3s both; }
+        .info-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px; margin-bottom: 40px; animation: fadeInUp 0.6s ease 0.4s both; }
+        .info-box h2 { font-size: 28px; margin-bottom: 24px; color: #F4A261; }
+        .info-box p { font-size: 18px; line-height: 1.8; color: rgba(255, 255, 255, 0.8); margin-bottom: 16px; }
+        .steps { text-align: left; max-width: 500px; margin: 32px auto; }
+        .step { display: flex; align-items: flex-start; margin-bottom: 24px; animation: fadeInUp 0.6s ease 0.5s both; }
+        .step-number { background: #F4A261; color: #0A2342; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; margin-right: 16px; }
+        .step-text { color: rgba(255, 255, 255, 0.9); font-size: 16px; line-height: 1.6; }
+        .support-section { margin-top: 48px; padding-top: 48px; border-top: 1px solid rgba(255, 255, 255, 0.1); animation: fadeInUp 0.6s ease 0.6s both; }
+        .support-section h3 { font-size: 24px; margin-bottom: 16px; color: rgba(255, 255, 255, 0.9); }
+        .support-section p { color: rgba(255, 255, 255, 0.7); margin-bottom: 24px; }
+        .button { display: inline-block; padding: 16px 32px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; margin: 0 8px; }
+        .button:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+        .button.primary { background: #F4A261; color: #0A2342; border-color: #F4A261; }
+        .button.primary:hover { background: #f5b681; border-color: #f5b681; }
+        @media (max-width: 768px) { .container { padding: 20px; } .info-box { padding: 24px; } .steps { margin: 24px auto; } .button { display: block; margin: 8px 0; } }
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQXT4TQ6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
     <div class="container">
-        <!-- DEBUG SECTION - Shows what's working -->
-        <div class="debug-box">
-            <h3>🔍 Tracking Debug Info:</h3>
-            <p><strong>Current URL:</strong> <span id="current-url"></span></p>
-            <p><strong>Order ID Found:</strong> <span id="order-id-status"></span></p>
-            <p><strong>Transaction ID Used:</strong> <span id="transaction-id"></span></p>
-            <p><strong>Meta Pixel Status:</strong> <span id="meta-status"></span></p>
-            <p><strong>GTM Status:</strong> <span id="gtm-status"></span></p>
-            <p><strong>Meta Purchase Event:</strong> <span id="meta-event-status">Not fired yet</span></p>
-            <p><strong>GTM Purchase Event:</strong> <span id="gtm-event-status">Not fired yet</span></p>
-        </div>
-        
-        <!-- Success Icon -->
         <div class="success-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
-        
-        <!-- Success Message -->
+
         <h1>Payment Successful!</h1>
         <p class="subtitle">Welcome to Beyond the Deck: Master the Investor Pitch to Get Funded</p>
-        
-        <!-- Info Box -->
+
         <div class="info-box">
             <h2>You're In! Get ready to start mastering investor psychology!</h2>
             <p>Thank you for enrolling in the course. Your payment has been successfully processed.</p>
-            
+
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
@@ -284,7 +85,7 @@
                     <div class="step-text">Once you receive your credentials, you can immediately start your learning journey!</div>
                 </div>
             </div>
-            
+
             <p style="margin-top: 32px; font-size: 16px; color: rgba(255, 255, 255, 0.6);">
                 <strong>Note:</strong> Please check your spam folder if you don't see our emails in your inbox.
             </p>
@@ -292,8 +93,7 @@
                 &copy; <span id="copyright-year-success"></span> LFG Ventures LLP. All rights reserved.
             </p>
         </div>
-        
-        <!-- Support Section -->
+
         <div class="support-section">
             <h3>Need Help?</h3>
             <p>If you have any questions or don't receive your access within 24 hours, please contact us:</p>
@@ -301,46 +101,16 @@
             <a href="/" class="button">Return to Homepage</a>
         </div>
     </div>
-    
-    <script>
-        // DEBUGGING FUNCTIONS
-        function updateDebugInfo(elementId, message, className) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.textContent = message;
-                element.className = className;
-            }
-        }
-        
-        // Show current URL
-        updateDebugInfo('current-url', window.location.href, 'success');
-        
-        // STEP 1: Get transaction ID from URL
-        function getTransactionId() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const orderId = urlParams.get('order_id') || 
-                           urlParams.get('orderId') || 
-                           urlParams.get('transaction_id') || 
-                           urlParams.get('cf_order_id');
-                           
-            if (orderId) {
-                updateDebugInfo('order-id-status', '✅ Found: ' + orderId, 'success');
-                return orderId;
-            } else {
-                updateDebugInfo('order-id-status', '❌ Not found - using fallback', 'error');
-                return 'order_' + Date.now();
-            }
-        }
 
-        // STEP 2: Get the actual transaction ID
-        var transactionId = getTransactionId();
-        updateDebugInfo('transaction-id', transactionId, transactionId.startsWith('order_') && transactionId.length > 20 ? 'warning' : 'success');
-        
-        // STEP 3: Check if Meta Pixel loaded and fire event
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Since we can't get a real order ID from Cashfree Forms, we use a timestamp as a fallback.
+        // This is not perfect for deduplication if the user reloads, but it's the best we can do.
+        // The main fix is removing the duplicate pixel firing from GTM.
+        var transactionId = 'order_' + Date.now();
+
+        // Fire Meta Purchase Event
         if (typeof fbq !== 'undefined') {
-            updateDebugInfo('meta-status', '✅ Meta Pixel loaded successfully', 'success');
-            
-            // Fire Meta Purchase Event
             fbq('track', 'Purchase', {
                 value: 1499,
                 currency: 'INR',
@@ -350,18 +120,11 @@
             }, {
                 'eventID': transactionId
             });
-            
-            updateDebugInfo('meta-event-status', '✅ Purchase event fired with ID: ' + transactionId, 'success');
-        } else {
-            updateDebugInfo('meta-status', '❌ Meta Pixel failed to load', 'error');
-            updateDebugInfo('meta-event-status', '❌ Failed - Pixel not loaded', 'error');
+            console.log('Meta Purchase Event Fired with Fallback ID:', transactionId);
         }
-        
-        // STEP 4: Check if GTM loaded and fire event
+
+        // Fire GTM Purchase Event (for Google Analytics, etc.)
         if (typeof dataLayer !== 'undefined') {
-            updateDebugInfo('gtm-status', '✅ GTM loaded successfully', 'success');
-            
-            // Fire GTM Purchase Event
             window.dataLayer.push({
                 'event': 'purchase',
                 'ecommerce': {
@@ -378,15 +141,15 @@
                 },
                 'event_id': transactionId
             });
-            
-            updateDebugInfo('gtm-event-status', '✅ Purchase event pushed to dataLayer', 'success');
-        } else {
-            updateDebugInfo('gtm-status', '❌ GTM failed to load', 'error');
-            updateDebugInfo('gtm-event-status', '❌ Failed - GTM not loaded', 'error');
+            console.log('GTM Purchase Event Pushed with Fallback ID:', transactionId);
         }
-        
+
         // Set current year
-        document.getElementById('copyright-year-success').textContent = new Date().getFullYear();
+        const copyrightYear = document.getElementById('copyright-year-success');
+        if (copyrightYear) {
+            copyrightYear.textContent = new Date().getFullYear();
+        }
+    });
     </script>
 </body>
 </html>
