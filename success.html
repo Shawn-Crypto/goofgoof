@@ -57,6 +57,7 @@
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQXT4TQ6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
     <div class="container">
         <div class="success-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,31 +105,16 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Since we can't get a real order ID from Cashfree Forms, we use a timestamp as a fallback.
-        // This is not perfect for deduplication if the user reloads, but it's the best we can do.
-        // The main fix is removing the duplicate pixel firing from GTM.
-        var transactionId = 'order_' + Date.now();
-
-        // Fire Meta Purchase Event
-        if (typeof fbq !== 'undefined') {
-            fbq('track', 'Purchase', {
-                value: 1499,
-                currency: 'INR',
-                content_ids: ['beyond-deck-course'],
-                content_type: 'product',
-                content_name: 'Beyond the Deck Course'
-            }, {
-                'eventID': transactionId
-            });
-            console.log('Meta Purchase Event Fired with Fallback ID:', transactionId);
-        }
-
-        // Fire GTM Purchase Event (for Google Analytics, etc.)
+        // We push to the dataLayer for Google Analytics and other GTM tags.
+        // The Meta Pixel Purchase event is now handled by Cashfree's server-side integration.
+        // This prevents duplicate tracking.
         if (typeof dataLayer !== 'undefined') {
             window.dataLayer.push({
                 'event': 'purchase',
                 'ecommerce': {
-                    'transaction_id': transactionId,
+                    // We use a timestamp as a fallback transaction_id for GA,
+                    // as Cashfree Forms doesn't provide a real one on the client-side.
+                    'transaction_id': 'order_' + Date.now(),
                     'value': 1499,
                     'currency': 'INR',
                     'items': [{
@@ -138,13 +124,11 @@
                         'quantity': 1,
                         'price': 1499
                     }]
-                },
-                'event_id': transactionId
+                }
             });
-            console.log('GTM Purchase Event Pushed with Fallback ID:', transactionId);
+            console.log('GTM Purchase Event Pushed for Google Analytics.');
         }
 
-        // Set current year
         const copyrightYear = document.getElementById('copyright-year-success');
         if (copyrightYear) {
             copyrightYear.textContent = new Date().getFullYear();
