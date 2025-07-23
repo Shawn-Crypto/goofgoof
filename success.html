@@ -14,6 +14,24 @@
     })(window,document,'script','dataLayer','GTM-MQXT4TQ6');</script>
     <!-- End Google Tag Manager -->
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1438462720811682');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1438462720811682&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <style>
         * {
             margin: 0;
@@ -279,19 +297,59 @@
     </div>
     
     <script>
-        // Push purchase event to dataLayer (Google Tag Manager)
+        // STEP 1: Get transaction ID from URL or generate fallback
+        function getTransactionId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Try different parameter names that Cashfree might use
+            return urlParams.get('order_id') || 
+                   urlParams.get('orderId') || 
+                   urlParams.get('transaction_id') || 
+                   urlParams.get('cf_order_id') ||
+                   'order_' + Date.now(); // Fallback to timestamp
+        }
+
+        // STEP 2: Get the actual transaction ID
+        var transactionId = getTransactionId();
+        
+        // STEP 3: Enhanced Meta Pixel Purchase Event (YOUR CODE + IMPROVEMENTS)
+        fbq('track', 'Purchase', {
+            value: 1499,
+            currency: 'INR',
+            content_ids: ['beyond-deck-course'],
+            content_type: 'product',
+            content_name: 'Beyond the Deck Course'
+        }, {
+            'eventID': transactionId  // YOUR DEDUPLICATION KEY
+        });
+        
+        // STEP 4: Enhanced GTM dataLayer Push (YOUR CODE + IMPROVEMENTS)
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          'event': 'purchase',
-          'ecommerce': {
-              'transaction_id': 'TRANSACTION_ID_PLACEHOLDER' // Replace with a dynamic transaction ID
-          }
+            'event': 'purchase',
+            'ecommerce': {
+                'transaction_id': transactionId,
+                'value': 1499,
+                'currency': 'INR',
+                'items': [{
+                    'item_id': 'beyond-deck-course',
+                    'item_name': 'Beyond the Deck: Master the Investor Pitch to Get Funded',
+                    'category': 'Online Course',
+                    'quantity': 1,
+                    'price': 1499
+                }]
+            },
+            'event_id': transactionId // YOUR EVENT ID FOR GTM
         });
         
         // Set current year in copyright
         document.getElementById('copyright-year-success').textContent = new Date().getFullYear();
         
-        console.log('Payment successful! Purchase event tracked.');
+        // Enhanced logging
+        console.log('Payment successful! Purchase event with eventID tracked.');
+        console.log('Transaction ID used:', transactionId);
+        console.log('Meta Pixel ID: 1438462720811682');
+        console.log('GTM Container: GTM-MQXT4TQ6');
     </script>
 </body>
 </html>
