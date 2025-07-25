@@ -129,10 +129,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // CTA button tracking
+    // CTA button tracking with loading states
 // CTA button tracking with delay for external redirects
 document.querySelectorAll('.cta-button').forEach(button => {
     button.addEventListener('click', function(e) {
+        // Store original text and show loading state immediately
+        const originalText = this.textContent.trim();
+        this.textContent = 'Processing...';
+        this.style.opacity = '0.7';
+        this.disabled = true;
+        
         // Only add delay if this links to external payment page
         const href = this.getAttribute('href');
         const isExternalPayment = href && href.includes('cashfree.com');
@@ -144,7 +150,7 @@ document.querySelectorAll('.cta-button').forEach(button => {
             if (window.dataLayer) {
                 window.dataLayer.push({
                     'event': 'cta_click',
-                    'button_text': this.textContent.trim(),
+                    'button_text': originalText,
                     'button_location': this.closest('section').id || 'unknown'
                 });
                 window.dataLayer.push({
@@ -173,11 +179,20 @@ document.querySelectorAll('.cta-button').forEach(button => {
             if (window.dataLayer) {
                 window.dataLayer.push({
                     'event': 'cta_click',
-                    'button_text': this.textContent.trim(),
+                    'button_text': originalText,
                     'button_location': this.closest('section').id || 'unknown'
                 });
             }
         }
+        
+        // Reset loading state after 3 seconds if no navigation occurs
+        setTimeout(() => {
+            if (this && this.textContent === 'Processing...') {
+                this.textContent = originalText;
+                this.style.opacity = '1';
+                this.disabled = false;
+            }
+        }, 3000);
     });
 });
 
