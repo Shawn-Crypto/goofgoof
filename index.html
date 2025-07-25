@@ -584,6 +584,9 @@
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            min-height: 56px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(244, 162, 97, 0.3);
         }
 
         .cta-button::before {
@@ -605,6 +608,10 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(244, 162, 97, 0.5);
             background: linear-gradient(135deg, #f5b681 0%, #f2a85c 100%);
+        }
+
+        .cta-button:active {
+            transform: translateY(2px) scale(0.98);
         }
 
         /* Hero Credentials Styling (FIX #5) */
@@ -1345,6 +1352,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: left;
+            font-family: inherit;
         }
 
         .accordion-header:hover {
@@ -1460,6 +1468,10 @@
                     <span class="credential-number">₹100+ Cr</span>
                     <span class="credential-text">Deployed as Investor</span>
                 </div>
+            </div>
+
+            <div style="background: linear-gradient(90deg, #F4A261, #E09C4A); color: #0A2342; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600; margin: 24px 0;">
+                ⏰ Special Price Ends Soon - Only ₹1,499 (Regular: ₹4,999)
             </div>
 
             <p class="description">
@@ -1613,7 +1625,7 @@
 
             <div class="module-accordion-container">
                 <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" type="button" onclick="toggleAccordion(this)" aria-expanded="false">
                         <h3>Module 1: Foundation - Building Your Fundraising Mindset</h3>
                         <span class="accordion-icon">+</span>
                     </button>
@@ -1628,7 +1640,7 @@
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" type="button" onclick="toggleAccordion(this)" aria-expanded="false">
                         <h3>Module 2: Frame Control - Taking Charge of the Conversation</h3>
                         <span class="accordion-icon">+</span>
                     </button>
@@ -1643,7 +1655,7 @@
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" type="button" onclick="toggleAccordion(this)" aria-expanded="false">
                         <h3>Module 3: Storytelling Mastery - Crafting Compelling Narratives</h3>
                         <span class="accordion-icon">+</span>
                     </button>
@@ -1658,7 +1670,7 @@
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" type="button" onclick="toggleAccordion(this)" aria-expanded="false">
                         <h3>Module 4: Q&A Domination - Turning Objections into Opportunities</h3>
                         <span class="accordion-icon">+</span>
                     </button>
@@ -1673,7 +1685,7 @@
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" type="button" onclick="toggleAccordion(this)" aria-expanded="false">
                         <h3>Module 5: Closing the Loop - From Meeting to Term Sheet</h3>
                         <span class="accordion-icon">+</span>
                     </button>
