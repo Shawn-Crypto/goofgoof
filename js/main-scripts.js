@@ -196,6 +196,21 @@ document.querySelectorAll('.cta-button').forEach(button => {
     });
 });
 
+    // Make credential cards clickable - scroll to instructor section
+    document.querySelectorAll('.credential-highlight').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function() {
+            // Smooth scroll to instructor section
+            const instructorSection = document.getElementById('instructor');
+            if (instructorSection) {
+                instructorSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
     // Banner functionality
     window.closeBanner = function() {
         const banner = document.getElementById('urgent-banner');
