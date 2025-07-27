@@ -1408,6 +1408,14 @@
 
     </head>
 <body>
+<script>
+if (window.location.hostname.includes('vercel.app')) {
+    const password = prompt('Staging Password:');
+    if (password !== 'btd_staging_2025') {
+        document.body.innerHTML = '<h1>Access Denied</h1>';
+    }
+}
+</script>
 
 
     <div class="nav-trigger" onclick="toggleNav()" aria-label="Toggle navigation menu">
