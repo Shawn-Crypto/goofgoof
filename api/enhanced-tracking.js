@@ -108,7 +108,7 @@ export default async function handler(request) {
           ...(hashedLastName && { ln: hashedLastName }),
           ...(fbCookies._fbc && { fbc: fbCookies._fbc }),
           ...(fbCookies._fbp && { fbp: fbCookies._fbp }),
-          country: params.get('country') || 'IN',
+          country: await hashData(params.get('country') || 'IN'),
           ct: await hashData(params.get('city') || 'Mumbai'),
           st: await hashData(params.get('state') || 'Maharashtra')
         },
