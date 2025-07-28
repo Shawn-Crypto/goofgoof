@@ -132,6 +132,64 @@
         if (copyrightYear) {
             copyrightYear.textContent = new Date().getFullYear();
         }
+
+        // Enhanced Facebook EMQ Tracking on Purchase Success
+        // Extract customer data from URL parameters if available
+        const urlParams = new URLSearchParams(window.location.search);
+        const customerEmail = urlParams.get('email') || '';
+        const customerPhone = urlParams.get('phone') || '';
+        const firstName = urlParams.get('first_name') || '';
+        const lastName = urlParams.get('last_name') || '';
+        const orderId = urlParams.get('order_id') || 'order_' + Date.now();
+        
+        // Call enhanced tracking on purchase success
+        if (customerEmail || customerPhone) {
+            const trackingParams = new URLSearchParams({
+                email: customerEmail,
+                phone: customerPhone,
+                first_name: firstName,
+                last_name: lastName,
+                order_id: orderId,
+                amount: '1499',
+                currency: 'INR',
+                source_url: window.location.href,
+                country: 'IN',
+                city: 'Mumbai',
+                state: 'Maharashtra'
+            });
+            
+            fetch(`/api/enhanced-tracking?${trackingParams}`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        console.log('✅ Enhanced Facebook EMQ tracking sent successfully:', result.event_id);
+                        console.log('📊 EMQ Parameters captured:', result.emq_parameters);
+                    } else {
+                        console.error('❌ Enhanced tracking failed:', result.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ Enhanced tracking request failed:', error);
+                });
+        } else {
+            // Fallback: Call with minimal data if no customer info available
+            const fallbackParams = new URLSearchParams({
+                order_id: 'order_' + Date.now(),
+                amount: '1499',
+                currency: 'INR',
+                source_url: window.location.href,
+                country: 'IN'
+            });
+            
+            fetch(`/api/enhanced-tracking?${fallbackParams}`)
+                .then(response => response.json())
+                .then(result => {
+                    console.log('✅ Enhanced tracking sent (minimal data):', result.event_id);
+                })
+                .catch(error => {
+                    console.error('❌ Enhanced tracking failed:', error);
+                });
+        }
     });
     </script>
 </body>
