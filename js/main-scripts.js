@@ -172,7 +172,30 @@ document.querySelectorAll('.cta-button').forEach(button => {
             
             // Redirect after small delay to ensure tracking fires
             setTimeout(() => {
-                window.location.href = href;
+                // Get tracking parameters from localStorage/sessionStorage
+                let trackingParams = {};
+                try {
+                    trackingParams = JSON.parse(localStorage.getItem('trackingParams') || sessionStorage.getItem('trackingParams') || '{}');
+                } catch (e) {
+                    console.error('Error parsing tracking params:', e);
+                }
+                
+                // Build URL with tracking parameters
+                const url = new URL(href);
+                
+                // Add tracking parameters to URL
+                if (trackingParams.fbc) url.searchParams.set('fbc', trackingParams.fbc);
+                if (trackingParams.fbp) url.searchParams.set('fbp', trackingParams.fbp);
+                if (trackingParams.user_agent) url.searchParams.set('user_agent', trackingParams.user_agent);
+                if (trackingParams.referrer) url.searchParams.set('referrer', trackingParams.referrer);
+                
+                // Add timestamp
+                url.searchParams.set('click_timestamp', Date.now());
+                
+                // Log the final URL for debugging
+                console.log('Redirecting to:', url.toString());
+                
+                window.location.href = url.toString();
             }, 300); // 300ms delay
         } else {
             // For non-external links, track normally without delay
