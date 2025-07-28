@@ -24,16 +24,33 @@ export default async function handler(request) {
     const url = new URL(request.url);
     const params = url.searchParams;
     
-    // Get customer data from URL parameters
-    const customerData = {
-      email: params.get('email') || '',
-      phone: params.get('phone') || '',
-      first_name: params.get('first_name') || '',
-      last_name: params.get('last_name') || '',
-      order_id: params.get('order_id') || `order_${Date.now()}`,
-      amount: parseFloat(params.get('amount') || '1499'),
-      currency: params.get('currency') || 'INR'
-    };
+    // Get customer data from URL parameters OR POST body
+    let customerData = {};
+
+    if (request.method === 'POST') {
+      // Read POST form data from Zapier
+      const formData = await request.formData();
+      customerData = {
+        email: formData.get('email') || '',
+        phone: formData.get('phone') || '',
+        first_name: formData.get('first_name') || '',
+        last_name: formData.get('last_name') || '',
+        order_id: formData.get('order_id') || `order_${Date.now()}`,
+        amount: parseFloat(formData.get('amount') || '1499'),
+        currency: formData.get('currency') || 'INR'
+      };
+    } else {
+      // Read URL parameters from success page calls
+      customerData = {
+        email: params.get('email') || '',
+        phone: params.get('phone') || '',
+        first_name: params.get('first_name') || '',
+        last_name: params.get('last_name') || '',
+        order_id: params.get('order_id') || `order_${Date.now()}`,
+        amount: parseFloat(params.get('amount') || '1499'),
+        currency: params.get('currency') || 'INR'
+      };
+    }
 
     // 🚨 DEBUG: Log what we're actually receiving
     console.log('DEBUG - Customer data received:', customerData);
