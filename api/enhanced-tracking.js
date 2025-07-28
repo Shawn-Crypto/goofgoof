@@ -35,6 +35,11 @@ export default async function handler(request) {
       currency: params.get('currency') || 'INR'
     };
 
+    // 🚨 DEBUG: Log what we're actually receiving
+    console.log('DEBUG - Customer data received:', customerData);
+    console.log('DEBUG - Email check:', !!customerData.email, customerData.email);
+    console.log('DEBUG - Phone check:', !!customerData.phone, customerData.phone);
+
     // Extract server-side data from headers
     const headers = request.headers;
     const clientIP = headers.get('x-forwarded-for') || 
