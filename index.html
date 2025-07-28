@@ -2149,5 +2149,43 @@ document.addEventListener('DOMContentLoaded', collectTrackingParameters);
 setTimeout(collectTrackingParameters, 2000);
 </script>
 
+<script>
+// Force attach enhanced click handlers to CTA buttons
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get tracking params
+                let trackingParams = {};
+                try {
+                    trackingParams = JSON.parse(localStorage.getItem('trackingParams') || sessionStorage.getItem('trackingParams') || '{}');
+                } catch (e) {
+                    console.error('Error parsing tracking params:', e);
+                }
+                
+                // Build enhanced URL
+                const baseUrl = 'https://payments.cashfree.com/forms/beyond-deck-course';
+                const url = new URL(baseUrl);
+                
+                if (trackingParams.fbp) url.searchParams.set('fbp', trackingParams.fbp);
+                if (trackingParams.fbc) url.searchParams.set('fbc', trackingParams.fbc);
+                if (trackingParams.user_agent) url.searchParams.set('user_agent', trackingParams.user_agent);
+                if (trackingParams.referrer) url.searchParams.set('referrer', trackingParams.referrer);
+                url.searchParams.set('click_timestamp', Date.now());
+                
+                console.log('Enhanced URL:', url.toString());
+                
+                // Open enhanced URL
+                window.open(url.toString(), '_blank');
+            });
+        });
+        
+        console.log('✅ Enhanced click handlers attached!');
+    }, 1000);
+});
+</script>
+
 </body>
 </html>
