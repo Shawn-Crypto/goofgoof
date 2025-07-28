@@ -2114,43 +2114,9 @@ if (window.location.hostname.includes('vercel.app')) {
     <script src="js/faq-accordion.js" defer></script>
     <script src="js/lazy-loading.js" defer></script>
 
-<script>
-// Enhanced tracking parameter collection for EMQ improvement
-function collectTrackingParameters() {
-    const params = {
-        fbc: getCookie('_fbc') || '',
-        fbp: getCookie('_fbp') || '',
-        user_agent: navigator.userAgent,
-        timestamp: Date.now(),
-        page_url: window.location.href,
-        referrer: document.referrer
-    };
-    
-    // Store in sessionStorage
-    sessionStorage.setItem('trackingParams', JSON.stringify(params));
-    
-    // Also store in localStorage as backup
-    localStorage.setItem('trackingParams', JSON.stringify(params));
-    
-    console.log('Tracking parameters collected:', params);
-}
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
-}
-
-// Collect parameters when page loads
-document.addEventListener('DOMContentLoaded', collectTrackingParameters);
-
-// Re-collect after 2 seconds (gives Meta Pixel time to set cookies)
-setTimeout(collectTrackingParameters, 2000);
-</script>
 
 <script>
-// Enhanced CTA click handlers with tracking and loading states
+// CTA click handlers with tracking and loading states
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         document.querySelectorAll('.cta-button').forEach(button => {
@@ -2187,29 +2153,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 
-                // Get tracking params
-                let trackingParams = {};
-                try {
-                    trackingParams = JSON.parse(localStorage.getItem('trackingParams') || sessionStorage.getItem('trackingParams') || '{}');
-                } catch (e) {
-                    console.error('Error parsing tracking params:', e);
-                }
-                
-                // Build enhanced URL
-                const baseUrl = 'https://payments.cashfree.com/forms/beyond-deck-course';
-                const url = new URL(baseUrl);
-                
-                if (trackingParams.fbp) url.searchParams.set('fbp', trackingParams.fbp);
-                if (trackingParams.fbc) url.searchParams.set('fbc', trackingParams.fbc);
-                if (trackingParams.user_agent) url.searchParams.set('user_agent', trackingParams.user_agent);
-                if (trackingParams.referrer) url.searchParams.set('referrer', trackingParams.referrer);
-                url.searchParams.set('click_timestamp', Date.now());
-                
-                console.log('Enhanced URL:', url.toString());
-                
-                // Open enhanced URL in new tab after delay
+                // Open simple Cashfree URL in new tab after delay
                 setTimeout(() => {
-                    window.open(url.toString(), '_blank');
+                    window.open('https://payments.cashfree.com/forms/beyond-deck-course', '_blank');
                 }, 300);
                 
                 // Reset loading state after 3 seconds
@@ -2223,7 +2169,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        console.log('✅ Enhanced click handlers attached!');
+        console.log('✅ CTA click handlers attached!');
     }, 1000);
 });
 </script>
