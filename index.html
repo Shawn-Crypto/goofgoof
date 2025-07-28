@@ -2150,12 +2150,42 @@ setTimeout(collectTrackingParameters, 2000);
 </script>
 
 <script>
-// Force attach enhanced click handlers to CTA buttons
+// Enhanced CTA click handlers with tracking and loading states
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         document.querySelectorAll('.cta-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
+                
+                // Store original text and show loading state
+                const originalText = this.textContent.trim();
+                this.textContent = 'Processing...';
+                this.style.opacity = '0.7';
+                this.disabled = true;
+                
+                // Track events first
+                if (window.dataLayer) {
+                    window.dataLayer.push({
+                        'event': 'cta_click',
+                        'button_text': originalText,
+                        'button_location': this.closest('section').id || 'unknown'
+                    });
+                    window.dataLayer.push({
+                        'event': 'begin_checkout',
+                        'currency': 'INR',
+                        'value': 1499,
+                        'button_location': this.closest('section').id || 'unknown'
+                    });
+                }
+                
+                // Meta Pixel tracking
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'InitiateCheckout', {
+                        content_ids: ['beyond-deck-course'],
+                        value: 1499,
+                        currency: 'INR'
+                    });
+                }
                 
                 // Get tracking params
                 let trackingParams = {};
@@ -2177,8 +2207,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 console.log('Enhanced URL:', url.toString());
                 
-                // Open enhanced URL
-                window.open(url.toString(), '_blank');
+                // Open enhanced URL in new tab after delay
+                setTimeout(() => {
+                    window.open(url.toString(), '_blank');
+                }, 300);
+                
+                // Reset loading state after 3 seconds
+                setTimeout(() => {
+                    if (this && this.textContent === 'Processing...') {
+                        this.textContent = originalText;
+                        this.style.opacity = '1';
+                        this.disabled = false;
+                    }
+                }, 3000);
             });
         });
         
