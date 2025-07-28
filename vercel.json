@@ -1,6 +1,11 @@
 {
   "buildCommand": "echo 'Static site ready'",
   "outputDirectory": "./",
+  "functions": {
+    "api/enhanced-tracking.js": {
+      "runtime": "edge"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
