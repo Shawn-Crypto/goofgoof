@@ -169,21 +169,26 @@ export default async function handler(request) {
       facebook_response: facebookResult
     };
 
-    // Send to Zapier webhook
+    // Only call Zapier if we have real customer data
     let zapierResponse = null;
-    try {
-      const zapierFetch = await fetch(process.env.ZAPIER_WEBHOOK_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(zapierPayload)
-      });
-      zapierResponse = await zapierFetch.json();
-      console.log('Zapier Webhook Response:', zapierResponse);
-    } catch (zapierError) {
-      console.error('Zapier webhook failed:', zapierError);
-      zapierResponse = { error: zapierError.message };
+    if (customerData.email && customerData.phone) {
+      try {
+        const zapierFetch = await fetch(process.env.ZAPIER_WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(zapierPayload)
+        });
+        zapierResponse = await zapierFetch.json();
+        console.log('Zapier Webhook Response:', zapierResponse);
+      } catch (zapierError) {
+        console.error('Zapier webhook failed:', zapierError);
+        zapierResponse = { error: zapierError.message };
+      }
+    } else {
+      zapierResponse = { status: 'skipped', reason: 'no customer data' };
+      console.log('Zapier webhook skipped - no customer email/phone data');
     }
 
     // Return comprehensive response
