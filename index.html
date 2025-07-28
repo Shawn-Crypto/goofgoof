@@ -2128,5 +2128,41 @@ if (window.location.hostname.includes('vercel.app')) {
     <script src="js/main-scripts.js" defer></script>
     <script src="js/faq-accordion.js" defer></script>
     <script src="js/lazy-loading.js" defer></script>
+
+<script>
+// Enhanced tracking parameter collection for EMQ improvement
+function collectTrackingParameters() {
+    const params = {
+        fbc: getCookie('_fbc') || '',
+        fbp: getCookie('_fbp') || '',
+        user_agent: navigator.userAgent,
+        timestamp: Date.now(),
+        page_url: window.location.href,
+        referrer: document.referrer
+    };
+    
+    // Store in sessionStorage
+    sessionStorage.setItem('trackingParams', JSON.stringify(params));
+    
+    // Also store in localStorage as backup
+    localStorage.setItem('trackingParams', JSON.stringify(params));
+    
+    console.log('Tracking parameters collected:', params);
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+// Collect parameters when page loads
+document.addEventListener('DOMContentLoaded', collectTrackingParameters);
+
+// Re-collect after 2 seconds (gives Meta Pixel time to set cookies)
+setTimeout(collectTrackingParameters, 2000);
+</script>
+
 </body>
 </html>
