@@ -105,22 +105,25 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Read order details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order_id') || 'order_' + Date.now();
+        const orderAmount = urlParams.get('order_amount');
+        
         // Push purchase event to dataLayer for Google Analytics tracking
         if (typeof dataLayer !== 'undefined') {
             window.dataLayer.push({
                 'event': 'purchase',
                 'ecommerce': {
-                    // Use timestamp as fallback transaction_id since Cashfree Forms 
-                    // doesn't provide real transaction ID on client-side
-                    'transaction_id': 'order_' + Date.now(),
-                    'value': 1499,
+                    'transaction_id': orderId,
+                    'value': parseFloat(orderAmount) || 1499,
                     'currency': 'INR',
                     'items': [{
                         'item_id': 'beyond-deck-course',
                         'item_name': 'Beyond the Deck: Master the Investor Pitch to Get Funded',
                         'category': 'Online Course',
                         'quantity': 1,
-                        'price': 1499
+                        'price': parseFloat(orderAmount) || 1499
                     }]
                 }
             });
@@ -134,6 +137,23 @@
         }
 
         // Enhanced Facebook EMQ Tracking on Purchase Success
+        
+        /**
+         * Reads a cookie's value from the browser's document.cookie.
+         * @param {string} name The name of the cookie to read.
+         * @returns {string|null} The cookie's value or null if not found.
+         */
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+          return null;
+        }
+
+        // Capture the Facebook browser and click identifiers
+        const fbp = getCookie('_fbp');
+        const fbc = getCookie('_fbc');
+        
         // Extract customer data from URL parameters if available
         const urlParams = new URLSearchParams(window.location.search);
         const customerEmail = urlParams.get('email') || '';
@@ -141,24 +161,31 @@
         const firstName = urlParams.get('first_name') || '';
         const lastName = urlParams.get('last_name') || '';
         const orderId = urlParams.get('order_id') || 'order_' + Date.now();
+        const orderAmount = urlParams.get('order_amount');
         
         // Call enhanced tracking on purchase success
         if (customerEmail || customerPhone) {
-            const trackingParams = new URLSearchParams({
-                email: customerEmail,
-                phone: customerPhone,
-                first_name: firstName,
-                last_name: lastName,
-                order_id: orderId,
-                amount: '1499',
-                currency: 'INR',
-                source_url: window.location.href,
-                country: 'IN',
-                city: 'Mumbai',
-                state: 'Maharashtra'
-            });
-            
-            fetch(`/api/enhanced-tracking?${trackingParams}`)
+            fetch('/api/enhanced-tracking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: customerEmail,
+                    phone: customerPhone,
+                    first_name: firstName,
+                    last_name: lastName,
+                    order_id: orderId,
+                    amount: parseFloat(orderAmount) || 1499,
+                    currency: 'INR',
+                    source_url: window.location.href,
+                    country: 'IN',
+                    city: 'Mumbai',
+                    state: 'Maharashtra',
+                    fbp: fbp,
+                    fbc: fbc
+                })
+            })
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
@@ -173,15 +200,21 @@
                 });
         } else {
             // Fallback: Call with minimal data if no customer info available
-            const fallbackParams = new URLSearchParams({
-                order_id: 'order_' + Date.now(),
-                amount: '1499',
-                currency: 'INR',
-                source_url: window.location.href,
-                country: 'IN'
-            });
-            
-            fetch(`/api/enhanced-tracking?${fallbackParams}`)
+            fetch('/api/enhanced-tracking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    order_id: orderId,
+                    amount: parseFloat(orderAmount) || 1499,
+                    currency: 'INR',
+                    source_url: window.location.href,
+                    country: 'IN',
+                    fbp: fbp,
+                    fbc: fbc
+                })
+            })
                 .then(response => response.json())
                 .then(result => {
                     console.log('✅ Enhanced tracking sent (minimal data):', result.event_id);

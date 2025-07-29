@@ -2115,12 +2115,14 @@ if (window.location.hostname.includes('vercel.app')) {
     <script src="js/lazy-loading.js" defer></script>
 
 
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+
 <script>
 // CTA click handlers with tracking and loading states
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function(e) {
+            button.addEventListener('click', async function(e) {
                 e.preventDefault();
                 
                 // Store original text and show loading state
@@ -2153,19 +2155,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 
-                // Open simple Cashfree URL in new tab after delay
-                setTimeout(() => {
-                    window.open('https://payments.cashfree.com/forms/beyond-deck-course', '_blank');
-                }, 300);
-                
-                // Reset loading state after 3 seconds
-                setTimeout(() => {
-                    if (this && this.textContent === 'Processing...') {
-                        this.textContent = originalText;
-                        this.style.opacity = '1';
-                        this.disabled = false;
+                try {
+                    // Call the new API endpoint
+                    const response = await fetch('/api/create-payment', { method: 'POST' });
+                    const order = await response.json();
+                    
+                    if (order.payment_session_id) {
+                        const cashfree = Cashfree({ mode: "production" });
+                        cashfree.checkout({
+                            paymentSessionId: order.payment_session_id,
+                            redirectTarget: "_self",
+                        });
+                    } else {
+                        throw new Error('Payment Session ID not received.');
                     }
-                }, 3000);
+                } catch (error) {
+                    console.error('Payment initiation failed:', error);
+                    alert('Could not initiate payment. Please try again.');
+                    
+                    // Reset button state
+                    this.textContent = originalText;
+                    this.style.opacity = '1';
+                    this.disabled = false;
+                }
             });
         });
         

@@ -26,19 +26,54 @@ export default async function handler(request) {
     
     // Get customer data from URL parameters OR POST body
     let customerData = {};
+    let fbp = null;
+    let fbc = null;
+    let source_url = '';
+    let country = 'IN';
+    let city = 'Mumbai';
+    let state = 'Maharashtra';
 
     if (request.method === 'POST') {
-      // Read POST form data from Zapier
-      const formData = await request.formData();
-      customerData = {
-        email: formData.get('email') || '',
-        phone: formData.get('phone') || '',
-        first_name: formData.get('first_name') || '',
-        last_name: formData.get('last_name') || '',
-        order_id: formData.get('order_id') || `order_${Date.now()}`,
-        amount: parseFloat(formData.get('amount') || '1499'),
-        currency: formData.get('currency') || 'INR'
-      };
+      // Check content type to determine how to parse
+      const contentType = request.headers.get('content-type') || '';
+      
+      if (contentType.includes('application/json')) {
+        // Read JSON data from success page
+        const jsonData = await request.json();
+        customerData = {
+          email: jsonData.email || '',
+          phone: jsonData.phone || '',
+          first_name: jsonData.first_name || '',
+          last_name: jsonData.last_name || '',
+          order_id: jsonData.order_id || `order_${Date.now()}`,
+          amount: parseFloat(jsonData.amount || '1499'),
+          currency: jsonData.currency || 'INR'
+        };
+        fbp = jsonData.fbp || null;
+        fbc = jsonData.fbc || null;
+        source_url = jsonData.source_url || 'https://beyondthedeck.com';
+        country = jsonData.country || 'IN';
+        city = jsonData.city || 'Mumbai';
+        state = jsonData.state || 'Maharashtra';
+      } else {
+        // Read POST form data from Zapier
+        const formData = await request.formData();
+        customerData = {
+          email: formData.get('email') || '',
+          phone: formData.get('phone') || '',
+          first_name: formData.get('first_name') || '',
+          last_name: formData.get('last_name') || '',
+          order_id: formData.get('order_id') || `order_${Date.now()}`,
+          amount: parseFloat(formData.get('amount') || '1499'),
+          currency: formData.get('currency') || 'INR'
+        };
+        fbp = formData.get('fbp') || null;
+        fbc = formData.get('fbc') || null;
+        source_url = formData.get('source_url') || 'https://beyondthedeck.com';
+        country = formData.get('country') || 'IN';
+        city = formData.get('city') || 'Mumbai';
+        state = formData.get('state') || 'Maharashtra';
+      }
     } else {
       // Read URL parameters from success page calls
       customerData = {
@@ -50,6 +85,12 @@ export default async function handler(request) {
         amount: parseFloat(params.get('amount') || '1499'),
         currency: params.get('currency') || 'INR'
       };
+      fbp = params.get('fbp') || null;
+      fbc = params.get('fbc') || null;
+      source_url = params.get('source_url') || 'https://beyondthedeck.com';
+      country = params.get('country') || 'IN';
+      city = params.get('city') || 'Mumbai';
+      state = params.get('state') || 'Maharashtra';
     }
 
     // 🚨 DEBUG: Log what we're actually receiving
@@ -109,8 +150,8 @@ export default async function handler(request) {
     const hashedFirstName = await hashData(customerData.first_name);
     const hashedLastName = await hashData(customerData.last_name);
 
-    // Create unique event ID for deduplication
-    const eventId = `purchase_${customerData.order_id}_${Date.now()}`;
+    // Use order_id as event_id for deduplication
+    const eventId = customerData.order_id;
     const eventTime = Math.floor(Date.now() / 1000);
 
     // Prepare Facebook Conversions API payload
@@ -118,9 +159,9 @@ export default async function handler(request) {
       data: [{
         event_name: 'Purchase',
         event_time: eventTime,
-        event_id: eventId,
+        event_id: eventId, // Using order_id directly for deduplication
         action_source: 'website',
-        event_source_url: params.get('source_url') || 'https://beyondthedeck.com',
+        event_source_url: source_url,
         user_data: {
           client_ip_address: clientIP.split(',')[0].trim(), // Take first IP if multiple
           client_user_agent: userAgent,
@@ -128,11 +169,11 @@ export default async function handler(request) {
           ...(hashedPhone && { ph: hashedPhone }),
           ...(hashedFirstName && { fn: hashedFirstName }),
           ...(hashedLastName && { ln: hashedLastName }),
-          ...(fbCookies._fbc && { fbc: fbCookies._fbc }),
-          ...(fbCookies._fbp && { fbp: fbCookies._fbp }),
-          country: await hashData(params.get('country') || 'IN'),
-          ct: await hashData(params.get('city') || 'Mumbai'),
-          st: await hashData(params.get('state') || 'Maharashtra')
+          ...(fbc && { fbc: fbc }), // Use fbc from request body
+          ...(fbp && { fbp: fbp }), // Use fbp from request body
+          country: await hashData(country),
+          ct: await hashData(city),
+          st: await hashData(state)
         },
         custom_data: {
           currency: customerData.currency,
@@ -184,9 +225,9 @@ export default async function handler(request) {
       tracking: {
         client_ip: clientIP,
         user_agent: userAgent,
-        facebook_cookies: fbCookies,
+        facebook_cookies: { _fbp: fbp, _fbc: fbc },
         event_id: eventId,
-        source_url: params.get('source_url') || 'https://beyondthedeck.com'
+        source_url: source_url
       },
       facebook_response: facebookResult
     };
@@ -230,7 +271,7 @@ export default async function handler(request) {
       tracking_data: {
         client_ip: clientIP,
         user_agent: userAgent.substring(0, 100) + '...', // Truncate for response
-        facebook_cookies: fbCookies,
+        facebook_cookies: { _fbp: fbp, _fbc: fbc },
         customer_data_hashed: {
           email: !!hashedEmail,
           phone: !!hashedPhone,
@@ -240,8 +281,8 @@ export default async function handler(request) {
       emq_parameters: {
         client_ip_address: '✅ Captured',
         client_user_agent: '✅ Captured',
-        fbc: fbCookies._fbc ? '✅ Captured' : '❌ Missing',
-        fbp: fbCookies._fbp ? '✅ Captured' : '❌ Missing',
+        fbc: fbc ? '✅ Captured' : '❌ Missing',
+        fbp: fbp ? '✅ Captured' : '❌ Missing',
         hashed_email: hashedEmail ? '✅ Captured' : '❌ Missing',
         hashed_phone: hashedPhone ? '✅ Captured' : '❌ Missing',
         geographic_data: '✅ Included'
