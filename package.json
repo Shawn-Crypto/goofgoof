@@ -116,5 +116,8 @@
     "app/api/track/[...slug].js": {
       "maxDuration": 10
     }
+  },
+  "dependencies": {
+    "cashfree-pg": "^5.0.8"
   }
 }
