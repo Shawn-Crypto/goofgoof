@@ -1928,15 +1928,7 @@ if (window.location.hostname.includes('vercel.app')) {
         <div class="container animate-hidden animate-in">
             <h2 class="section-title">Ready to Master Your Investor Pitch?</h2>
             <p style="font-size: 20px; margin-bottom: 32px; color: rgba(255, 255, 255, 0.9);">Join 200+ founders who've transformed their fundraising approach with 'Beyond the Deck'.</p>
-<button 
-   class="cta-button"
-   id="payment-cta-final"
-   data-location="final"
-   data-course="beyond-deck-course"
-   data-value="1499"
-   data-currency="INR">
-    ENROLL NOW - GET INSTANT ACCESS
-</button>
+<a href="https://payments.cashfree.com/forms/beyond-deck-course" class="cta-button" id="payment-cta-final">ENROLL NOW - GET INSTANT ACCESS</a>
             <p style="margin-top: 24px; color: rgba(255, 255, 255, 0.8); font-size: 16px;">
                 <span style="font-weight: 600;">Instant Access</span> after payment • <span style="font-weight: 600;">Lifetime Access</span> to all materials
             </p>
@@ -2115,14 +2107,12 @@ if (window.location.hostname.includes('vercel.app')) {
     <script src="js/lazy-loading.js" defer></script>
 
 
-<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
-
 <script>
 // CTA click handlers with tracking and loading states
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', async function(e) {
+            button.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 // Store original text and show loading state
@@ -2155,29 +2145,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 
-                try {
-                    // Call the new API endpoint
-                    const response = await fetch('/api/create-payment', { method: 'POST' });
-                    const order = await response.json();
-                    
-                    if (order.payment_session_id) {
-                        const cashfree = Cashfree({ mode: "production" });
-                        cashfree.checkout({
-                            paymentSessionId: order.payment_session_id,
-                            redirectTarget: "_self",
-                        });
-                    } else {
-                        throw new Error('Payment Session ID not received.');
+                // Open simple Cashfree URL in new tab after delay
+                setTimeout(() => {
+                    window.open('https://payments.cashfree.com/forms/beyond-deck-course', '_blank');
+                }, 300);
+                
+                // Reset loading state after 3 seconds
+                setTimeout(() => {
+                    if (this && this.textContent === 'Processing...') {
+                        this.textContent = originalText;
+                        this.style.opacity = '1';
+                        this.disabled = false;
                     }
-                } catch (error) {
-                    console.error('Payment initiation failed:', error);
-                    alert('Could not initiate payment. Please try again.');
-                    
-                    // Reset button state
-                    this.textContent = originalText;
-                    this.style.opacity = '1';
-                    this.disabled = false;
-                }
+                }, 3000);
             });
         });
         
