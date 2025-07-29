@@ -1,11 +1,11 @@
 import { Cashfree } from "cashfree-pg";
 
-// Correct Initialization for the current SDK version
+// Initialize an INSTANCE of the SDK
 const cashfree = new Cashfree({
-    env: 'PRODUCTION', // Note: 'env' not 'mode'
+    env: 'PRODUCTION',
     appId: process.env.CASHFREE_CLIENT_ID,
     secretKey: process.env.CASHFREE_CLIENT_SECRET,
-    apiVersion: '2023-08-01' // Specify API version here
+    apiVersion: '2023-08-01'
 });
 
 export default async function handler(req, res) {
@@ -27,8 +27,8 @@ export default async function handler(req, res) {
             order_note: "Beyond the Deck Course",
         };
 
-        // Use the instance to call the method
-        const order = await cashfree.orders.create(request);
+        // Call PGCreateOrder on the INSTANCE, not the static class
+        const order = await cashfree.PGCreateOrder(request);
         
         res.status(200).json(order.data);
 
