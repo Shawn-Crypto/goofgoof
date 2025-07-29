@@ -15,8 +15,8 @@ export default async function handler(req, res) {
             order_amount: 1499.00,
             order_currency: "INR",
             customer_details: {
-                customer_id: "customer_" + Date.now(), // Simple unique ID
-                customer_email: "customer@example.com", // You can pass this from frontend if needed
+                customer_id: "customer_" + Date.now(),
+                customer_email: "customer@example.com",
                 customer_phone: "9999999999",
             },
             order_meta: {
@@ -24,10 +24,14 @@ export default async function handler(req, res) {
             },
             order_note: "Beyond the Deck Course",
         };
-        const order = await cashfree.orders.create(request);
+
+        // CORRECTED LINE: Use the PGCreateOrder method
+        const order = await cashfree.PGCreateOrder(request);
+
         res.status(200).json(order.data);
+
     } catch (error) {
-        console.error("Error creating Cashfree order:", error);
+        console.error("Error creating Cashfree order:", error.response?.data || error.message);
         res.status(500).json({ error: "Failed to create payment order" });
     }
 }
