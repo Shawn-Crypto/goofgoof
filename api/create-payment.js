@@ -1,9 +1,12 @@
 import { Cashfree } from "cashfree-pg";
 
-// Correct, static initialization
-Cashfree.XClientId = process.env.CASHFREE_CLIENT_ID;
-Cashfree.XClientSecret = process.env.CASHFREE_CLIENT_SECRET;
-Cashfree.XEnvironment = "PRODUCTION"; // Corrected: Use a simple string
+// Correct Initialization for the current SDK version
+const cashfree = new Cashfree({
+    env: 'PRODUCTION', // Note: 'env' not 'mode'
+    appId: process.env.CASHFREE_CLIENT_ID,
+    secretKey: process.env.CASHFREE_CLIENT_SECRET,
+    apiVersion: '2023-08-01' // Specify API version here
+});
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -24,7 +27,8 @@ export default async function handler(req, res) {
             order_note: "Beyond the Deck Course",
         };
 
-        const order = await Cashfree.PGCreateOrder("2023-08-01", request);
+        // Use the instance to call the method
+        const order = await cashfree.orders.create(request);
         
         res.status(200).json(order.data);
 
