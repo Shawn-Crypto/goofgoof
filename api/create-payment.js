@@ -3,7 +3,7 @@ import { Cashfree } from "cashfree-pg";
 // Correct, static initialization
 Cashfree.XClientId = process.env.CASHFREE_CLIENT_ID;
 Cashfree.XClientSecret = process.env.CASHFREE_CLIENT_SECRET;
-Cashfree.XEnvironment = Cashfree.Environment.PRODUCTION;
+Cashfree.XEnvironment = "PRODUCTION"; // Corrected: Use a simple string
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -24,13 +24,11 @@ export default async function handler(req, res) {
             order_note: "Beyond the Deck Course",
         };
 
-        // Pass the required API version as the first argument
         const order = await Cashfree.PGCreateOrder("2023-08-01", request);
         
         res.status(200).json(order.data);
 
     } catch (error) {
-        // Enhanced error logging
         console.error("Cashfree Error:", error.response?.data || error.message);
         res.status(500).json({ error: "Failed to create payment order" });
     }
