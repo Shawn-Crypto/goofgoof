@@ -1,10 +1,9 @@
 import { Cashfree } from "cashfree-pg";
 
-const cashfree = new Cashfree({
-    mode: "production",
-    api_key: process.env.CASHFREE_CLIENT_ID,
-    api_secret: process.env.CASHFREE_CLIENT_SECRET,
-});
+// Correct, static initialization
+Cashfree.XClientId = process.env.CASHFREE_CLIENT_ID;
+Cashfree.XClientSecret = process.env.CASHFREE_CLIENT_SECRET;
+Cashfree.XEnvironment = Cashfree.Environment.PRODUCTION;
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -16,7 +15,7 @@ export default async function handler(req, res) {
             order_currency: "INR",
             customer_details: {
                 customer_id: "customer_" + Date.now(),
-                customer_email: "customer@example.com",
+                customer_email: "test@example.com",
                 customer_phone: "9999999999",
             },
             order_meta: {
@@ -25,13 +24,14 @@ export default async function handler(req, res) {
             order_note: "Beyond the Deck Course",
         };
 
-        // CORRECTED LINE: Use the PGCreateOrder method
-        const order = await cashfree.PGCreateOrder(request);
-
+        // Pass the required API version as the first argument
+        const order = await Cashfree.PGCreateOrder("2023-08-01", request);
+        
         res.status(200).json(order.data);
 
     } catch (error) {
-        console.error("Error creating Cashfree order:", error.response?.data || error.message);
+        // Enhanced error logging
+        console.error("Cashfree Error:", error.response?.data || error.message);
         res.status(500).json({ error: "Failed to create payment order" });
     }
 }
