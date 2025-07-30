@@ -118,6 +118,6 @@
     }
   },
   "dependencies": {
-    "cashfree-pg": "^2.0.0"
+    "cashfree-pg": "^5.0.8"
   }
 }
