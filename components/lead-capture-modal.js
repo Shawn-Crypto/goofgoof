@@ -4,7 +4,7 @@ class LeadCaptureModal {
     this.originalCashfreeURL = 'https://payments.cashfree.com/forms/beyond-deck-course';
     this.apiEndpoint = '/api/create-payment'; // For Phase 2
     this.webhookURL = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/'; // Configure this
-    this.useAPI = false; // Toggle this when API is ready
+    this.useAPI = true; // Enable API flow
     this.init();
   }
 
