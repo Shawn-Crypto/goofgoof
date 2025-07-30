@@ -45,15 +45,30 @@
             id="firstName" 
             name="firstName" 
             type="text" 
-            placeholder="Your first name" 
+            placeholder="First name" 
             required 
           />
         </div>
         
-        <!-- Phone Field -->
+        <!-- Last Name Field -->
+        <div class="space-y-2 form-group">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="lastName">
+            Last Name *
+          </label>
+          <input 
+            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
+            id="lastName" 
+            name="lastName" 
+            type="text" 
+            placeholder="Last name" 
+            required 
+          />
+        </div>
+        
+        <!-- Mobile Number Field -->
         <div class="space-y-2 form-group">
           <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="phone">
-            Phone Number (Optional)
+            Mobile Number *
           </label>
           <input 
             class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
@@ -62,45 +77,31 @@
             type="tel" 
             placeholder="+91 98765 43210"
             pattern="[+]?[0-9]{10,15}"
-          />
-          <p class="text-sm text-muted-foreground help-text">For faster checkout processing</p>
-        </div>
-        
-        <!-- Company Field -->
-        <div class="space-y-2 form-group">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="company">
-            Company/Startup Name (Optional)
-          </label>
-          <input 
-            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
-            id="company" 
-            name="company" 
-            type="text" 
-            placeholder="Your company name" 
+            required
           />
         </div>
         
         <!-- Checkboxes -->
         <div class="space-y-3 checkbox-group">
-          <div class="flex items-center space-x-2">
-            <button type="button" role="checkbox" aria-checked="true" data-state="checked" value="on" class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground checkbox-custom" id="bonusContent" name="bonusContent" data-checked="true">
+          <div class="flex items-start space-x-3">
+            <button type="button" role="checkbox" aria-checked="true" data-state="checked" value="on" class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground checkbox-custom mt-0.5" id="bonusContent" name="bonusContent" data-checked="true">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark">
                 <path d="m8.5 2.5-5 5L1 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer" for="bonusContent">
-              ✅ Send me bonus pitch templates
+              Send me bonus pitch templates
             </label>
           </div>
           
-          <div class="flex items-center space-x-2">
-            <button type="button" role="checkbox" aria-checked="true" data-state="checked" value="on" class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground checkbox-custom" id="updates" name="updates" data-checked="true">
+          <div class="flex items-start space-x-3">
+            <button type="button" role="checkbox" aria-checked="true" data-state="checked" value="on" class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground checkbox-custom mt-0.5" id="updates" name="updates" data-checked="true">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark">
                 <path d="m8.5 2.5-5 5L1 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
             <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer" for="updates">
-              ✅ Notify me of future course updates
+              Notify me of future course updates
             </label>
           </div>
         </div>

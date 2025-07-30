@@ -194,9 +194,10 @@ class LeadCaptureModal {
     // Validate required fields
     const email = formData.get('email');
     const firstName = formData.get('firstName');
-    const phone = formData.get('phone') || ''; // Add phone field to form
+    const lastName = formData.get('lastName');
+    const phone = formData.get('phone');
     
-    if (!email || !firstName) {
+    if (!email || !firstName || !lastName || !phone) {
       alert('Please fill in all required fields');
       return;
     }
@@ -219,8 +220,8 @@ class LeadCaptureModal {
       const leadData = {
         email: email,
         firstName: firstName,
+        lastName: lastName,
         phone: phone,
-        company: formData.get('company') || '',
         bonusContent: bonusContentCheckbox?.getAttribute('data-state') === 'checked',
         updates: updatesCheckbox?.getAttribute('data-state') === 'checked',
         timestamp: new Date().toISOString(),
@@ -274,6 +275,7 @@ class LeadCaptureModal {
         await this.processAPIPayment({
           email: email,
           firstName: firstName,
+          lastName: lastName,
           phone: phone
         });
       } else {
@@ -296,7 +298,7 @@ class LeadCaptureModal {
         },
         body: JSON.stringify({
           customer_email: customerData.email,
-          customer_name: customerData.firstName,
+          customer_name: `${customerData.firstName} ${customerData.lastName || ''}`.trim(),
           customer_phone: customerData.phone || '+91' + Math.floor(Math.random() * 9000000000 + 1000000000), // Fallback phone
           order_amount: 1499.00,
           order_currency: 'INR'
