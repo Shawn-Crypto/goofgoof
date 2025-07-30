@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Modal - Simple Test</title>
+    <link rel="stylesheet" href="components/lead-capture-modal.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #4285f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px 10px 10px 0;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <h1>🐛 Modal Debug Tool</h1>
+    
+    <div class="debug-section">
+        <h2>Quick Test Buttons</h2>
+        <p>Click any button below to trigger the modal:</p>
+        
+        <!-- Test buttons that should trigger the modal -->
+        <a href="https://payments.cashfree.com/forms/beyond-deck-course" class="test-button" id="test1">
+            Test Button 1 (Cashfree Link)
+        </a>
+        
+        <button class="test-button cta-button" id="test2">
+            Test Button 2 (CTA Class)
+        </button>
+        
+        <button class="test-button" onclick="window.leadCaptureModal.showModal()" id="test3">
+            Test Button 3 (Direct Call)
+        </button>
+        
+        <button class="test-button" onclick="debugModal()" id="test4">
+            Test Button 4 (Debug)
+        </button>
+    </div>
+
+    <div class="debug-section">
+        <h2>🔍 Debug Information</h2>
+        <div id="debugInfo">
+            <div class="status warning">Debug info will appear here...</div>
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h2>Console Commands</h2>
+        <p>Open browser console and try these commands:</p>
+        <div class="debug-info">
+// Check if modal system is loaded<br>
+console.log('Modal system:', window.leadCaptureModal);<br><br>
+
+// Show modal directly<br>
+window.leadCaptureModal.showModal();<br><br>
+
+// Check if modal HTML exists<br>
+console.log('Modal element:', document.getElementById('leadCaptureModal'));<br><br>
+
+// Check intercepted buttons<br>
+console.log('CTA buttons:', document.querySelectorAll('a[href*="cashfree"], .cta-button'));
+        </div>
+    </div>
+
+    <!-- Include the modal components -->
+    <script src="components/lead-capture-modal.js"></script>
+    
+    <script>
+        // Debug function
+        function debugModal() {
+            const debugDiv = document.getElementById('debugInfo');
+            let debugHTML = '';
+            
+            // Check if modal system loaded
+            if (window.leadCaptureModal) {
+                debugHTML += '<div class="status success">✅ Modal system loaded</div>';
+            } else {
+                debugHTML += '<div class="status error">❌ Modal system NOT loaded</div>';
+                debugDiv.innerHTML = debugHTML;
+                return;
+            }
+            
+            // Check if modal HTML exists
+            const modalElement = document.getElementById('leadCaptureModal');
+            if (modalElement) {
+                debugHTML += '<div class="status success">✅ Modal HTML exists</div>';
+            } else {
+                debugHTML += '<div class="status error">❌ Modal HTML missing</div>';
+            }
+            
+            // Check intercepted buttons
+            const buttons = document.querySelectorAll('a[href*="cashfree"], .cta-button');
+            debugHTML += '<div class="status success">✅ Found ' + buttons.length + ' buttons to intercept</div>';
+            
+            // Check CSS loaded
+            const cssLoaded = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+            if (cssLoaded) {
+                debugHTML += '<div class="status success">✅ ShadCN CSS variables loaded</div>';
+            } else {
+                debugHTML += '<div class="status warning">⚠️ CSS variables may not be loaded</div>';
+            }
+            
+            debugDiv.innerHTML = debugHTML;
+            
+            // Try to show modal
+            try {
+                window.leadCaptureModal.showModal();
+                debugHTML += '<div class="status success">✅ Modal show() called successfully</div>';
+            } catch (error) {
+                debugHTML += '<div class="status error">❌ Error showing modal: ' + error.message + '</div>';
+            }
+            
+            debugDiv.innerHTML = debugHTML;
+        }
+        
+        // Auto-run debug on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Debug page loaded');
+            
+            // Wait a bit for modal system to initialize
+            setTimeout(() => {
+                debugModal();
+            }, 2000);
+        });
+        
+        // Override gtag for testing
+        if (typeof gtag === 'undefined') {
+            window.gtag = function() {
+                console.log('GTM Event:', arguments);
+            };
+        }
+    </script>
+</body>
+</html>
