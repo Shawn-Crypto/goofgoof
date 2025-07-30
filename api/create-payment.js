@@ -104,7 +104,7 @@ export default async function handler(req, res) {
             success: true,
             order_id: orderResponse.data.order_id,
             payment_session_id: orderResponse.data.payment_session_id,
-            payment_url: orderResponse.data.payment_links?.web, // Provide the payment URL from Cashfree
+            // MODIFIED: Removed payment_url field, as it's undefined
             customer_prefilled: true,
             customer_details: { // Echo back customer details for frontend confirmation
                 email: customer_email,
@@ -113,8 +113,7 @@ export default async function handler(req, res) {
             },
             amount: order_amount,
             currency: order_currency,
-            // Include other relevant data from the Cashfree response if needed by the frontend
-            cashfree_response_data: orderResponse.data 
+            cashfree_response_data: orderResponse.data // Keep full response for debugging if needed
         });
 
     } catch (error) {

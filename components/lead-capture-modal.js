@@ -5,6 +5,7 @@ class LeadCaptureModal {
     this.apiEndpoint = '/api/create-payment'; // For Phase 2
     this.webhookURL = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/'; // Configure this
     this.useAPI = true; // Enable API flow
+    this.cashfreeSDK = null; // To hold the Cashfree SDK instance
     this.init();
   }
 
@@ -74,9 +75,37 @@ class LeadCaptureModal {
       
       // Insert modal HTML at end of body
       document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+      // MODIFIED: Dynamically load Cashfree JS SDK
+      await this.loadCashfreeJSSDK();
+
     } catch (error) {
-      console.error('Failed to load modal HTML:', error);
+      console.error('Failed to load modal HTML or Cashfree SDK:', error);
     }
+  }
+
+  // MODIFIED: New method to load Cashfree JS SDK
+  async loadCashfreeJSSDK() {
+    return new Promise((resolve, reject) => {
+      if (window.Cashfree) { // Check if already loaded
+        this.cashfreeSDK = window.Cashfree({ mode: 'production' });
+        return resolve(this.cashfreeSDK);
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js'; // Official Cashfree JS SDK CDN
+      script.onload = () => {
+        // Initialize the Cashfree client-side SDK after script loads
+        // Using production mode since your backend uses PRODUCTION environment
+        this.cashfreeSDK = window.Cashfree({ mode: 'production' });
+        resolve(this.cashfreeSDK);
+      };
+      script.onerror = (e) => {
+        console.error('Failed to load Cashfree JS SDK:', e);
+        reject(e);
+      };
+      document.head.appendChild(script);
+    });
   }
 
   showModal() {
@@ -320,13 +349,15 @@ class LeadCaptureModal {
         });
       }
 
-      // Check if payment_url is provided by the API response
-      if (paymentData.payment_url) { // MODIFIED: Added check for payment_url existence
-          window.location.href = paymentData.payment_url; 
+      // MODIFIED: Use Cashfree SDK checkout method with paymentSessionId
+      if (this.cashfreeSDK && paymentData.payment_session_id) {
+          this.cashfreeSDK.checkout({
+              paymentSessionId: paymentData.payment_session_id,
+              redirectTarget: "_self" // Opens in the same window
+          });
       } else {
-          // If payment_url is missing from the API response, log an error and fall back.
-          console.error('CRITICAL ERROR: payment_url is missing from Cashfree API response!', paymentData);
-          alert('Failed to get payment link. Redirecting to generic payment page.'); // MODIFIED: More specific alert
+          console.error('Cashfree SDK not loaded or payment_session_id missing!', { sdkLoaded: !!this.cashfreeSDK, paymentSessionId: paymentData.payment_session_id });
+          alert('Failed to initiate secure payment. Redirecting to generic payment page.');
           this.redirectToPayment(); // Fallback to the generic Cashfree form
       }
 
