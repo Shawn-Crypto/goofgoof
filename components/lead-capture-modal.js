@@ -87,15 +87,16 @@ class LeadCaptureModal {
   // MODIFIED: New method to load Cashfree JS SDK
   async loadCashfreeJSSDK() {
     return new Promise((resolve, reject) => {
-      // Log the environment variable value during frontend build/runtime
-      console.log('Frontend: process.env.CASHFREE_ENVIRONMENT during SDK load:', process.env.CASHFREE_ENVIRONMENT); // ADDED LOG
+      // Check for Vercel environment variable first, then hardcode to production
+      const cashfreeEnv = window.CASHFREE_ENVIRONMENT || 'PRODUCTION';
+      console.log('Frontend: CASHFREE_ENVIRONMENT:', cashfreeEnv);
 
-      // Since process.env is not available in browser, hardcode to production
-      const sdkMode = 'production'; // Hardcoded since your backend uses PRODUCTION
+      // Map to SDK mode: PRODUCTION -> 'production', anything else -> 'sandbox'
+      const sdkMode = cashfreeEnv === 'PRODUCTION' ? 'production' : 'sandbox';
 
       if (window.Cashfree) { // Check if already loaded
         this.cashfreeSDK = window.Cashfree({ mode: sdkMode });
-        console.log('Cashfree JS SDK already loaded, initialized with mode:', sdkMode); // ADDED LOG
+        console.log('Cashfree JS SDK already loaded, initialized with mode:', sdkMode);
         return resolve(this.cashfreeSDK);
       }
 
@@ -104,7 +105,7 @@ class LeadCaptureModal {
       script.onload = () => {
         // Initialize the Cashfree client-side SDK after script loads
         this.cashfreeSDK = window.Cashfree({ mode: sdkMode });
-        console.log('Cashfree JS SDK loaded dynamically, initialized with mode:', sdkMode); // ADDED LOG
+        console.log('Cashfree JS SDK loaded dynamically, initialized with mode:', sdkMode);
         resolve(this.cashfreeSDK);
       };
       script.onerror = (e) => {

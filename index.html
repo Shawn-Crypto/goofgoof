@@ -2150,6 +2150,12 @@ document.addEventListener('DOMContentLoaded', collectTrackingParameters);
 setTimeout(collectTrackingParameters, 2000);
 </script>
 
+<!-- Inject Cashfree environment for client-side SDK -->
+<script>
+// Make CASHFREE_ENVIRONMENT available to client-side JavaScript
+window.CASHFREE_ENVIRONMENT = 'PRODUCTION';
+</script>
+
 <script src="components/lead-capture-modal.js"></script>
 </body>
 </html>
