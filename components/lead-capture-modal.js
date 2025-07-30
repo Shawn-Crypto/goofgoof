@@ -83,6 +83,9 @@ class LeadCaptureModal {
     const modal = document.getElementById('leadCaptureModal');
     modal.style.display = 'flex';
     
+    // Add loading button class functionality
+    this.setupButtonLoading();
+    
     // Focus on first input
     setTimeout(() => {
       document.getElementById('email').focus();
@@ -90,6 +93,26 @@ class LeadCaptureModal {
     
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
+  }
+
+  setupButtonLoading() {
+    // Add loading state functionality to button
+    const button = document.getElementById('continueToPayment');
+    if (button) {
+      button.originalText = button.textContent;
+      
+      button.setLoading = (loading) => {
+        if (loading) {
+          button.textContent = 'Processing...';
+          button.disabled = true;
+          button.classList.add('loading');
+        } else {
+          button.textContent = button.originalText;
+          button.disabled = false;
+          button.classList.remove('loading');
+        }
+      };
+    }
   }
 
   closeModal() {
@@ -111,12 +134,57 @@ class LeadCaptureModal {
       const modal = document.getElementById('leadCaptureModal');
       if (modal) {
         modal.addEventListener('click', (e) => {
-          if (e.target.classList.contains('modal-overlay')) {
+          if (e.target.id === 'leadCaptureModal') {
             this.closeModal();
           }
         });
       }
+      
+      // Add ShadCN checkbox functionality
+      this.initializeCheckboxes();
     }, 1000);
+  }
+
+  initializeCheckboxes() {
+    // Handle custom checkbox interactions
+    const checkboxes = document.querySelectorAll('.checkbox-custom');
+    
+    checkboxes.forEach(checkbox => {
+      // Set initial state
+      const isChecked = checkbox.dataset.checked === 'true';
+      this.updateCheckboxState(checkbox, isChecked);
+      
+      // Add click handler
+      checkbox.addEventListener('click', (e) => {
+        e.preventDefault();
+        const currentState = checkbox.getAttribute('data-state') === 'checked';
+        const newState = !currentState;
+        this.updateCheckboxState(checkbox, newState);
+      });
+      
+      // Add label click handler
+      const label = document.querySelector(`label[for="${checkbox.id}"]`);
+      if (label) {
+        label.addEventListener('click', (e) => {
+          e.preventDefault();
+          const currentState = checkbox.getAttribute('data-state') === 'checked';
+          const newState = !currentState;
+          this.updateCheckboxState(checkbox, newState);
+        });
+      }
+    });
+  }
+
+  updateCheckboxState(checkbox, isChecked) {
+    if (isChecked) {
+      checkbox.setAttribute('data-state', 'checked');
+      checkbox.setAttribute('aria-checked', 'true');
+      checkbox.dataset.checked = 'true';
+    } else {
+      checkbox.setAttribute('data-state', 'unchecked');
+      checkbox.setAttribute('aria-checked', 'false');
+      checkbox.dataset.checked = 'false';
+    }
   }
 
   async submitLeadAndProceed() {
@@ -135,19 +203,26 @@ class LeadCaptureModal {
 
     // Show loading state
     const submitButton = document.getElementById('continueToPayment');
-    const originalText = submitButton.textContent;
-    submitButton.textContent = 'Processing...';
-    submitButton.disabled = true;
+    if (submitButton.setLoading) {
+      submitButton.setLoading(true);
+    } else {
+      submitButton.textContent = 'Processing...';
+      submitButton.disabled = true;
+    }
 
     try {
+      // Get checkbox states from ShadCN checkboxes
+      const bonusContentCheckbox = document.getElementById('bonusContent');
+      const updatesCheckbox = document.getElementById('updates');
+      
       // Prepare enhanced lead data
       const leadData = {
         email: email,
         firstName: firstName,
         phone: phone,
         company: formData.get('company') || '',
-        bonusContent: formData.get('bonusContent') !== null,
-        updates: formData.get('updates') !== null,
+        bonusContent: bonusContentCheckbox?.getAttribute('data-state') === 'checked',
+        updates: updatesCheckbox?.getAttribute('data-state') === 'checked',
         timestamp: new Date().toISOString(),
         source: 'pre_payment_capture',
         intent: 'high', // They clicked to buy
@@ -184,8 +259,12 @@ class LeadCaptureModal {
       console.error('Lead capture failed:', error);
       
       // Reset button state
-      submitButton.textContent = originalText;
-      submitButton.disabled = false;
+      if (submitButton.setLoading) {
+        submitButton.setLoading(false);
+      } else {
+        submitButton.textContent = submitButton.originalText || 'Continue to Payment →';
+        submitButton.disabled = false;
+      }
       
       // Still proceed to payment even if lead capture fails
       alert('We\'ll proceed to payment. Don\'t worry, your information is saved!');

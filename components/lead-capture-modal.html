@@ -1,60 +1,124 @@
-<!-- Modal Container -->
-<div id="leadCaptureModal" class="modal-overlay" style="display: none;">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>🎉 You're 30 seconds away from mastering investor pitches!</h2>
-      <button class="modal-close" onclick="closeLCModal()">&times;</button>
+<!-- ShadCN Enhanced Modal -->
+<div id="leadCaptureModal" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" style="display: none;">
+  <div class="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg md:w-full modal-content">
+    
+    <!-- Header -->
+    <div class="flex flex-col space-y-1.5 text-center sm:text-left modal-header">
+      <h2 class="text-lg font-semibold leading-none tracking-tight">
+        🎉 You're 30 seconds away from mastering investor pitches!
+      </h2>
+      <button class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground modal-close" onclick="closeLCModal()">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="m11.7816 4.03157c.0824-.08241.0824-.21597 0-.29838-.0824-.08241-.2160-.08241-.2984 0L7.50000 7.70711 3.51472 3.72183c-.08241-.08241-.21597-.08241-.29838 0-.08241.08241-.08241.21597 0 .29838L7.20711 8.00000 3.21472 11.9853c-.08241.0824-.08241.2160 0 .2984.08241.0824.21597.0824.29838 0L7.50000 8.29289l3.9853 3.98529c.0824.0824.2160.0824.2984 0 .0824-.0824.0824-.2160 0-.2984L8.29289 8.00000 11.7816 4.03157Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+        </svg>
+      </button>
     </div>
     
-    <div class="modal-body">
-      <p>Before we process your ₹1,499 payment:</p>
+    <!-- Content -->
+    <div class="space-y-4 modal-body">
+      <p class="text-sm text-muted-foreground">Before we process your ₹1,499 payment:</p>
       
-      <form id="leadCaptureForm">
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" name="email" required 
-                 placeholder="your@email.com">
-        </div>
-        
-        <div class="form-group">
-          <label for="firstName">First Name *</label>
-          <input type="text" id="firstName" name="firstName" required 
-                 placeholder="Your first name">
-        </div>
-
-        <!-- ENHANCED: Phone field for API pre-fill -->
-        <div class="form-group">
-          <label for="phone">Phone Number (Optional)</label>
-          <input type="tel" id="phone" name="phone" 
-                 placeholder="+91 98765 43210"
-                 pattern="[+]?[0-9]{10,15}">
-          <small class="help-text">For faster checkout processing</small>
-        </div>
-        
-        <div class="form-group">
-          <label for="company">Company/Startup Name (Optional)</label>
-          <input type="text" id="company" name="company" 
-                 placeholder="Your company name">
-        </div>
-        
-        <div class="checkbox-group">
-          <label>
-            <input type="checkbox" id="bonusContent" name="bonusContent" checked>
-            ✅ Send me bonus pitch templates
+      <!-- Form Fields -->
+      <form id="leadCaptureForm" class="space-y-4">
+        <!-- Email Field -->
+        <div class="space-y-2 form-group">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="email">
+            Email Address *
           </label>
-          <label>
-            <input type="checkbox" id="updates" name="updates" checked>
-            ✅ Notify me of future course updates
+          <input 
+            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
+            id="email" 
+            name="email" 
+            type="email" 
+            placeholder="your@email.com" 
+            required 
+          />
+        </div>
+        
+        <!-- First Name Field -->
+        <div class="space-y-2 form-group">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="firstName">
+            First Name *
           </label>
+          <input 
+            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
+            id="firstName" 
+            name="firstName" 
+            type="text" 
+            placeholder="Your first name" 
+            required 
+          />
+        </div>
+        
+        <!-- Phone Field -->
+        <div class="space-y-2 form-group">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="phone">
+            Phone Number (Optional)
+          </label>
+          <input 
+            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
+            id="phone" 
+            name="phone" 
+            type="tel" 
+            placeholder="+91 98765 43210"
+            pattern="[+]?[0-9]{10,15}"
+          />
+          <p class="text-sm text-muted-foreground help-text">For faster checkout processing</p>
+        </div>
+        
+        <!-- Company Field -->
+        <div class="space-y-2 form-group">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="company">
+            Company/Startup Name (Optional)
+          </label>
+          <input 
+            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
+            id="company" 
+            name="company" 
+            type="text" 
+            placeholder="Your company name" 
+          />
+        </div>
+        
+        <!-- Checkboxes -->
+        <div class="space-y-3 checkbox-group">
+          <div class="flex items-center space-x-2">
+            <button type="button" role="checkbox" aria-checked="true" data-state="checked" value="on" class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground checkbox-custom" id="bonusContent" name="bonusContent" data-checked="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark">
+                <path d="m8.5 2.5-5 5L1 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer" for="bonusContent">
+              ✅ Send me bonus pitch templates
+            </label>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <button type="button" role="checkbox" aria-checked="true" data-state="checked" value="on" class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground checkbox-custom" id="updates" name="updates" data-checked="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark">
+                <path d="m8.5 2.5-5 5L1 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer" for="updates">
+              ✅ Notify me of future course updates
+            </label>
+          </div>
         </div>
       </form>
       
+      <!-- CTA Button -->
       <div class="modal-footer">
-        <button id="continueToPayment" class="primary-button" onclick="submitLeadAndProceed()">
+        <button 
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-primary/90 h-12 px-6 py-2 w-full text-lg font-semibold primary-button" 
+          style="background-color: #4285f4; color: white;"
+          id="continueToPayment" 
+          onclick="submitLeadAndProceed()"
+        >
           Continue to Payment →
         </button>
-        <!-- ENHANCED: Dynamic help text based on API availability -->
-        <p class="help-text" id="helpText">
+        
+        <!-- Help Text -->
+        <p class="text-sm text-muted-foreground text-center mt-3 help-text" id="helpText">
           💡 Your information will pre-fill the checkout for faster payment
         </p>
       </div>
