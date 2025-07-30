@@ -1,0 +1,302 @@
+// Enhanced Lead Capture Modal System with API Pre-fill Support
+class LeadCaptureModal {
+  constructor() {
+    this.originalCashfreeURL = 'https://payments.cashfree.com/forms/beyond-deck-course';
+    this.apiEndpoint = '/api/create-payment'; // For Phase 2
+    this.webhookURL = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/'; // Configure this
+    this.useAPI = false; // Toggle this when API is ready
+    this.init();
+  }
+
+  init() {
+    // Check if API endpoint is available
+    this.checkAPIAvailability();
+    
+    // Intercept all CTA button clicks
+    this.interceptCTAButtons();
+    
+    // Add modal HTML to page
+    this.injectModalHTML();
+    
+    // Add event listeners
+    this.addEventListeners();
+  }
+
+  async checkAPIAvailability() {
+    try {
+      const response = await fetch('/api/health-check', { method: 'HEAD' });
+      this.useAPI = response.ok;
+      console.log(`Payment API ${this.useAPI ? 'available' : 'not available'} - using ${this.useAPI ? 'API flow' : 'direct redirect'}`);
+      
+      // Update help text based on API availability
+      setTimeout(() => {
+        const helpText = document.getElementById('helpText');
+        if (helpText && !this.useAPI) {
+          helpText.textContent = '💡 Why? If payment fails, we\'ll help you complete your purchase';
+        }
+      }, 1000);
+    } catch (error) {
+      this.useAPI = false;
+      console.log('Payment API not available - using direct redirect flow');
+    }
+  }
+
+  interceptCTAButtons() {
+    // Find all CTA buttons that point to Cashfree
+    const ctaButtons = document.querySelectorAll('a[href*="cashfree"], button[onclick*="cashfree"], .cta-button');
+    
+    ctaButtons.forEach(button => {
+      // Remove original href/onclick
+      button.removeAttribute('href');
+      button.removeAttribute('onclick');
+      
+      // Add new click handler
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.showModal();
+        
+        // Track modal show event
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'lead_capture_modal_shown', {
+            'event_category': 'engagement',
+            'event_label': 'pre_payment_capture'
+          });
+        }
+      });
+    });
+  }
+
+  async injectModalHTML() {
+    try {
+      // Fetch the modal HTML from the component file
+      const response = await fetch('components/lead-capture-modal.html');
+      const modalHTML = await response.text();
+      
+      // Insert modal HTML at end of body
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+    } catch (error) {
+      console.error('Failed to load modal HTML:', error);
+    }
+  }
+
+  showModal() {
+    const modal = document.getElementById('leadCaptureModal');
+    modal.style.display = 'flex';
+    
+    // Focus on first input
+    setTimeout(() => {
+      document.getElementById('email').focus();
+    }, 100);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal() {
+    const modal = document.getElementById('leadCaptureModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  addEventListeners() {
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeModal();
+      }
+    });
+
+    // Close modal on overlay click
+    setTimeout(() => {
+      const modal = document.getElementById('leadCaptureModal');
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target.classList.contains('modal-overlay')) {
+            this.closeModal();
+          }
+        });
+      }
+    }, 1000);
+  }
+
+  async submitLeadAndProceed() {
+    const form = document.getElementById('leadCaptureForm');
+    const formData = new FormData(form);
+    
+    // Validate required fields
+    const email = formData.get('email');
+    const firstName = formData.get('firstName');
+    const phone = formData.get('phone') || ''; // Add phone field to form
+    
+    if (!email || !firstName) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    // Show loading state
+    const submitButton = document.getElementById('continueToPayment');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Processing...';
+    submitButton.disabled = true;
+
+    try {
+      // Prepare enhanced lead data
+      const leadData = {
+        email: email,
+        firstName: firstName,
+        phone: phone,
+        company: formData.get('company') || '',
+        bonusContent: formData.get('bonusContent') !== null,
+        updates: formData.get('updates') !== null,
+        timestamp: new Date().toISOString(),
+        source: 'pre_payment_capture',
+        intent: 'high', // They clicked to buy
+        amount: '1499',
+        currency: 'INR'
+      };
+
+      // Send to webhook for lead tracking
+      await this.sendLeadData(leadData);
+      
+      // Track successful lead capture
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'lead_captured', {
+          'event_category': 'conversion',
+          'event_label': 'pre_payment',
+          'value': 1499
+        });
+      }
+
+      // Store in localStorage for payment failure recovery
+      localStorage.setItem('leadCaptureData', JSON.stringify(leadData));
+      
+      // Close modal
+      this.closeModal();
+
+      // Choose payment flow based on API availability
+      if (this.useAPI) {
+        await this.processAPIPayment(leadData);
+      } else {
+        this.redirectToPayment();
+      }
+
+    } catch (error) {
+      console.error('Lead capture failed:', error);
+      
+      // Reset button state
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+      
+      // Still proceed to payment even if lead capture fails
+      alert('We\'ll proceed to payment. Don\'t worry, your information is saved!');
+      this.closeModal();
+      
+      if (this.useAPI) {
+        await this.processAPIPayment({
+          email: email,
+          firstName: firstName,
+          phone: phone
+        });
+      } else {
+        this.redirectToPayment();
+      }
+    }
+  }
+
+  // PHASE 2: API-driven payment flow with pre-fill
+  async processAPIPayment(customerData) {
+    try {
+      // Show processing state
+      document.body.style.cursor = 'wait';
+      
+      // Call backend API to create payment session
+      const response = await fetch(this.apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customer_email: customerData.email,
+          customer_name: customerData.firstName,
+          customer_phone: customerData.phone || '+91' + Math.floor(Math.random() * 9000000000 + 1000000000), // Fallback phone
+          order_amount: 1499.00,
+          order_currency: 'INR'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+
+      const paymentData = await response.json();
+      
+      // Track API payment initiation
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'api_payment_initiated', {
+          'event_category': 'ecommerce',
+          'event_label': 'pre_filled_checkout',
+          'value': 1499
+        });
+      }
+
+      // Redirect to pre-filled Cashfree checkout
+      window.location.href = paymentData.payment_session_id ? 
+        `https://payments.cashfree.com/form/${paymentData.payment_session_id}` : 
+        paymentData.payment_url;
+
+    } catch (error) {
+      console.error('API payment failed:', error);
+      
+      // Fallback to direct payment link
+      alert('Processing your request... redirecting to secure payment.');
+      this.redirectToPayment();
+      
+    } finally {
+      document.body.style.cursor = 'default';
+    }
+  }
+
+  async sendLeadData(leadData) {
+    // Skip if webhook URL is not configured
+    if (this.webhookURL.includes('YOUR_WEBHOOK_ID')) {
+      console.warn('Webhook URL not configured. Skipping lead submission.');
+      return;
+    }
+
+    const response = await fetch(this.webhookURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(leadData)
+    });
+
+    if (!response.ok) {
+      throw new Error('Webhook submission failed');
+    }
+
+    return response;
+  }
+
+  // PHASE 1: Direct redirect (current method)
+  redirectToPayment() {
+    // Add delay to ensure lead data is processed
+    setTimeout(() => {
+      window.location.href = this.originalCashfreeURL;
+    }, 500);
+  }
+}
+
+// Global functions for modal interactions
+function closeLCModal() {
+  window.leadCaptureModal.closeModal();
+}
+
+function submitLeadAndProceed() {
+  window.leadCaptureModal.submitLeadAndProceed();
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  window.leadCaptureModal = new LeadCaptureModal();
+});

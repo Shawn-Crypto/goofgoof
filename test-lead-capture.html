@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Capture Modal Test</title>
+    <link rel="stylesheet" href="components/lead-capture-modal.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #4285f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px 10px 10px 0;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #3367d6;
+        }
+        .cta-button {
+            background: #28a745;
+        }
+        .cta-button:hover {
+            background: #218838;
+        }
+        h1 {
+            color: #333;
+        }
+        .instructions {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+        }
+        .instructions ul {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lead Capture Modal Test Page</h1>
+    
+    <div class="instructions">
+        <h3>Enhanced Testing Instructions:</h3>
+        <ul>
+            <li><strong>Phase 1 Testing:</strong> Click any test button to trigger the modal</li>
+            <li><strong>Form Testing:</strong> Test validation by leaving required fields empty</li>
+            <li><strong>Phone Field:</strong> Try with/without phone number (optional field)</li>
+            <li><strong>Modal Interactions:</strong> Test closing with X button, Escape key, or clicking outside</li>
+            <li><strong>Console Monitoring:</strong> Check browser console for API detection and tracking events</li>
+            <li><strong>API Detection:</strong> Look for "Payment API not available - using direct redirect flow" message</li>
+            <li><strong>Note:</strong> Webhook submission will skip if not configured (Phase 1 ready)</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Buttons with Different Configurations</h2>
+        
+        <h3>1. Link with href to Cashfree</h3>
+        <a href="https://payments.cashfree.com/forms/beyond-deck-course" class="test-button">
+            Original CTA Link
+        </a>
+        
+        <h3>2. Button with onclick to Cashfree</h3>
+        <button onclick="window.location.href='https://payments.cashfree.com/forms/beyond-deck-course'" class="test-button">
+            Button with onclick
+        </button>
+        
+        <h3>3. Link with cta-button class</h3>
+        <a href="#" class="test-button cta-button">
+            CTA Button Class
+        </a>
+        
+        <h3>4. Multiple test buttons</h3>
+        <a href="https://payments.cashfree.com/forms/beyond-deck-course" class="test-button">
+            Test Button 1
+        </a>
+        <a href="https://payments.cashfree.com/forms/beyond-deck-course" class="test-button">
+            Test Button 2
+        </a>
+        <button class="test-button cta-button">
+            Test Button 3
+        </button>
+    </div>
+
+    <div class="test-section">
+        <h2>Console Output</h2>
+        <p>Open your browser's developer console to see:</p>
+        <ul>
+            <li>Modal initialization logs</li>
+            <li>Button interception logs</li>
+            <li>Form submission data</li>
+            <li>GTM event tracking (if available)</li>
+            <li>Any errors or warnings</li>
+        </ul>
+    </div>
+
+    <!-- Include the lead capture modal script -->
+    <script src="components/lead-capture-modal.js"></script>
+    
+    <!-- Additional test logging -->
+    <script>
+        console.log('Test page loaded');
+        
+        // Override gtag for testing if not available
+        if (typeof gtag === 'undefined') {
+            window.gtag = function() {
+                console.log('GTM Event:', arguments);
+            };
+        }
+        
+        // Log when modal is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, modal system should be initialized');
+            
+            // Add some debug info
+            setTimeout(() => {
+                const modal = document.getElementById('leadCaptureModal');
+                console.log('Modal element found:', !!modal);
+                
+                const buttons = document.querySelectorAll('a[href*="cashfree"], button[onclick*="cashfree"], .cta-button');
+                console.log('Buttons intercepted:', buttons.length);
+            }, 500);
+        });
+    </script>
+</body>
+</html>

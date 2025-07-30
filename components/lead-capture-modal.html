@@ -1,0 +1,63 @@
+<!-- Modal Container -->
+<div id="leadCaptureModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>🎉 You're 30 seconds away from mastering investor pitches!</h2>
+      <button class="modal-close" onclick="closeLCModal()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <p>Before we process your ₹1,499 payment:</p>
+      
+      <form id="leadCaptureForm">
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required 
+                 placeholder="your@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName" required 
+                 placeholder="Your first name">
+        </div>
+
+        <!-- ENHANCED: Phone field for API pre-fill -->
+        <div class="form-group">
+          <label for="phone">Phone Number (Optional)</label>
+          <input type="tel" id="phone" name="phone" 
+                 placeholder="+91 98765 43210"
+                 pattern="[+]?[0-9]{10,15}">
+          <small class="help-text">For faster checkout processing</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="company">Company/Startup Name (Optional)</label>
+          <input type="text" id="company" name="company" 
+                 placeholder="Your company name">
+        </div>
+        
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="bonusContent" name="bonusContent" checked>
+            ✅ Send me bonus pitch templates
+          </label>
+          <label>
+            <input type="checkbox" id="updates" name="updates" checked>
+            ✅ Notify me of future course updates
+          </label>
+        </div>
+      </form>
+      
+      <div class="modal-footer">
+        <button id="continueToPayment" class="primary-button" onclick="submitLeadAndProceed()">
+          Continue to Payment →
+        </button>
+        <!-- ENHANCED: Dynamic help text based on API availability -->
+        <p class="help-text" id="helpText">
+          💡 Your information will pre-fill the checkout for faster payment
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
