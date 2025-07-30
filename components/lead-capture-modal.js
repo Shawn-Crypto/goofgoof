@@ -87,8 +87,15 @@ class LeadCaptureModal {
   // MODIFIED: New method to load Cashfree JS SDK
   async loadCashfreeJSSDK() {
     return new Promise((resolve, reject) => {
+      // Log the environment variable value during frontend build/runtime
+      console.log('Frontend: process.env.CASHFREE_ENVIRONMENT during SDK load:', process.env.CASHFREE_ENVIRONMENT); // ADDED LOG
+
+      // Since process.env is not available in browser, hardcode to production
+      const sdkMode = 'production'; // Hardcoded since your backend uses PRODUCTION
+
       if (window.Cashfree) { // Check if already loaded
-        this.cashfreeSDK = window.Cashfree({ mode: 'production' });
+        this.cashfreeSDK = window.Cashfree({ mode: sdkMode });
+        console.log('Cashfree JS SDK already loaded, initialized with mode:', sdkMode); // ADDED LOG
         return resolve(this.cashfreeSDK);
       }
 
@@ -96,8 +103,8 @@ class LeadCaptureModal {
       script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js'; // Official Cashfree JS SDK CDN
       script.onload = () => {
         // Initialize the Cashfree client-side SDK after script loads
-        // Using production mode since your backend uses PRODUCTION environment
-        this.cashfreeSDK = window.Cashfree({ mode: 'production' });
+        this.cashfreeSDK = window.Cashfree({ mode: sdkMode });
+        console.log('Cashfree JS SDK loaded dynamically, initialized with mode:', sdkMode); // ADDED LOG
         resolve(this.cashfreeSDK);
       };
       script.onerror = (e) => {
@@ -350,6 +357,11 @@ class LeadCaptureModal {
       }
 
       // MODIFIED: Use Cashfree SDK checkout method with paymentSessionId
+      console.log('Attempting Cashfree SDK checkout...'); // ADDED LOG
+      console.log('SDK instance:', this.cashfreeSDK); // ADDED LOG
+      console.log('Payment Session ID:', paymentData.payment_session_id); // ADDED LOG
+      console.log('Full payment data response:', paymentData); // ADDED LOG
+
       if (this.cashfreeSDK && paymentData.payment_session_id) {
           this.cashfreeSDK.checkout({
               paymentSessionId: paymentData.payment_session_id,
