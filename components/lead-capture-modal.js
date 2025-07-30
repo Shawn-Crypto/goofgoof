@@ -320,10 +320,9 @@ class LeadCaptureModal {
         });
       }
 
-      // Redirect to pre-filled Cashfree checkout
-      window.location.href = paymentData.payment_session_id ? 
-        `https://payments.cashfree.com/form/${paymentData.payment_session_id}` : 
-        paymentData.payment_url;
+      // MODIFIED: Redirect directly to paymentData.payment_url
+      // This URL is provided by the backend and is the correct hosted checkout page.
+      window.location.href = paymentData.payment_url;
 
     } catch (error) {
       console.error('API payment failed:', error);
