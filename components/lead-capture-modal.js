@@ -320,16 +320,22 @@ class LeadCaptureModal {
         });
       }
 
-      // MODIFIED: Redirect directly to paymentData.payment_url
-      // This URL is provided by the backend and is the correct hosted checkout page.
-      window.location.href = paymentData.payment_url;
+      // Check if payment_url is provided by the API response
+      if (paymentData.payment_url) { // MODIFIED: Added check for payment_url existence
+          window.location.href = paymentData.payment_url; 
+      } else {
+          // If payment_url is missing from the API response, log an error and fall back.
+          console.error('CRITICAL ERROR: payment_url is missing from Cashfree API response!', paymentData);
+          alert('Failed to get payment link. Redirecting to generic payment page.'); // MODIFIED: More specific alert
+          this.redirectToPayment(); // Fallback to the generic Cashfree form
+      }
 
     } catch (error) {
       console.error('API payment failed:', error);
       
-      // Fallback to direct payment link
+      // Fallback to direct payment link for any API call failure
       alert('Processing your request... redirecting to secure payment.');
-      this.redirectToPayment();
+      this.redirectToPayment(); // This redirects to the original Cashfree form
       
     } finally {
       document.body.style.cursor = 'default';
