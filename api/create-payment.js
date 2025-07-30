@@ -1,15 +1,15 @@
 // Enhanced Payment API Endpoint for Phase 2
 // This file aligns with Cashfree tech team suggestions for SDK usage.
 
-import { Cashfree } from "cashfree-pg";
+import { Cashfree, CFEnvironment } from "cashfree-pg"; // MODIFIED: Import CFEnvironment
 
 // Use the instance-based initialization as recommended by Cashfree
-const cashfree = new Cashfree({
-    env: process.env.CASHFREE_ENVIRONMENT === 'PRODUCTION' ? 'PRODUCTION' : 'SANDBOX', // Use environment variable
-    appId: process.env.CASHFREE_CLIENT_ID,
-    secretKey: process.env.CASHFREE_CLIENT_SECRET,
-    apiVersion: '2023-08-01' // Specify API version here during initialization
-});
+// MODIFIED: Pass env, appId, secretKey as direct arguments to the constructor
+const cashfree = new Cashfree(
+    process.env.CASHFREE_ENVIRONMENT === 'PRODUCTION' ? CFEnvironment.PRODUCTION : CFEnvironment.SANDBOX, // Use CFEnvironment enum
+    process.env.CASHFREE_CLIENT_ID,
+    process.env.CASHFREE_CLIENT_SECRET
+);
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -80,23 +80,23 @@ export default async function handler(req, res) {
             amount: order_amount
         });
 
-        // Call the 'create' method on the 'orders' object of the Cashfree instance
-        // This aligns with Cashfree tech team's suggestion to pass only the request object.
-        const order = await cashfree.orders.create(request);
+        // MODIFIED: Call PGCreateOrder directly on the cashfree instance
+        // This aligns with the SDK's expected usage for creating orders.
+        const orderResponse = await cashfree.PGCreateOrder(request); 
         
         console.log('Cashfree order created successfully:', {
-            order_id: order.data.order_id,
-            payment_session_id: order.data.payment_session_id,
-            status: order.data.order_status,
+            order_id: orderResponse.data.order_id,
+            payment_session_id: orderResponse.data.payment_session_id,
+            status: orderResponse.data.order_status,
             customer_email: customer_email,
             amount: order_amount
         });
 
         res.status(200).json({
             success: true,
-            order_id: order.data.order_id,
-            payment_session_id: order.data.payment_session_id,
-            payment_url: order.data.payment_links?.web, // Provide the payment URL from Cashfree
+            order_id: orderResponse.data.order_id,
+            payment_session_id: orderResponse.data.payment_session_id,
+            payment_url: orderResponse.data.payment_links?.web, // Provide the payment URL from Cashfree
             customer_prefilled: true,
             customer_details: { // Echo back customer details for frontend confirmation
                 email: customer_email,
@@ -106,7 +106,7 @@ export default async function handler(req, res) {
             amount: order_amount,
             currency: order_currency,
             // Include other relevant data from the Cashfree response if needed by the frontend
-            cashfree_response_data: order.data 
+            cashfree_response_data: orderResponse.data 
         });
 
     } catch (error) {
