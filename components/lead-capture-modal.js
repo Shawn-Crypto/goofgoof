@@ -24,22 +24,17 @@ class LeadCaptureModal {
   }
 
   async checkAPIAvailability() {
-    try {
-      const response = await fetch('/api/health-check', { method: 'HEAD' });
-      this.useAPI = response.ok;
-      console.log(`Payment API ${this.useAPI ? 'available' : 'not available'} - using ${this.useAPI ? 'API flow' : 'direct redirect'}`);
-      
-      // Update help text based on API availability
-      setTimeout(() => {
-        const helpText = document.getElementById('helpText');
-        if (helpText && !this.useAPI) {
-          helpText.textContent = '💡 Why? If payment fails, we\'ll help you complete your purchase';
-        }
-      }, 1000);
-    } catch (error) {
-      this.useAPI = false;
-      console.log('Payment API not available - using direct redirect flow');
-    }
+    // Skip health check - API is always available
+    // this.useAPI is already set to true in constructor
+    console.log(`Payment API available - using API flow`);
+    
+    // Update help text based on API availability
+    setTimeout(() => {
+      const helpText = document.getElementById('helpText');
+      if (helpText && this.useAPI) {
+        helpText.textContent = '💡 Your information will pre-fill the checkout for faster payment';
+      }
+    }, 1000);
   }
 
   interceptCTAButtons() {
