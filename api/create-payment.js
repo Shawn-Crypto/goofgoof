@@ -37,15 +37,20 @@ export default async function handler(req, res) {
         // Generate a unique order ID
         const orderId = `BTD_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-        // Prepare phone number with a robust fallback and formatting
-        let phoneNumber = customer_phone;
-        if (!phoneNumber || phoneNumber.length < 10) {
-            // Fallback to a default valid number if not provided or too short
-            phoneNumber = '9999999999'; 
-        }
-        // Ensure phone number starts with country code if not already present (assuming India)
-        if (!phoneNumber.startsWith('+91') && phoneNumber.length === 10) {
-            phoneNumber = '+91' + phoneNumber;
+        // MODIFIED: Robust phone number validation and formatting
+        let cleanPhoneNumber = String(customer_phone || '').replace(/\D/g, ''); // Remove all non-digits
+        
+        let formattedPhoneNumber;
+        if (cleanPhoneNumber.length === 10) {
+            formattedPhoneNumber = `+91${cleanPhoneNumber}`; // Prepend +91 for 10-digit Indian numbers
+        } else if (cleanPhoneNumber.startsWith('91') && cleanPhoneNumber.length === 12) {
+             formattedPhoneNumber = `+${cleanPhoneNumber}`; // If it starts with 91 and is 12 digits, assume it's already Indian formatted
+        } else if (cleanPhoneNumber.length > 10) {
+            // For international or longer numbers, just add a + if not present
+            formattedPhoneNumber = cleanPhoneNumber.startsWith('+') ? cleanPhoneNumber : `+${cleanPhoneNumber}`;
+        } else {
+            // Fallback for numbers shorter than 10 digits or unrecognisable format
+            formattedPhoneNumber = '+919999999999'; 
         }
 
         const request = {
@@ -55,7 +60,7 @@ export default async function handler(req, res) {
             customer_details: {
                 customer_id: "customer_" + Date.now(), // Unique ID for Cashfree
                 customer_email: customer_email,
-                customer_phone: phoneNumber,
+                customer_phone: formattedPhoneNumber, // Use the newly formatted number
                 customer_name: customer_name
             },
             order_meta: {
@@ -101,7 +106,7 @@ export default async function handler(req, res) {
             customer_details: { // Echo back customer details for frontend confirmation
                 email: customer_email,
                 name: customer_name,
-                phone: phoneNumber
+                phone: formattedPhoneNumber
             },
             amount: order_amount,
             currency: order_currency,
