@@ -84,6 +84,9 @@ export default async function handler(req, res) {
         // This aligns with the SDK's expected usage for creating orders.
         const orderResponse = await cashfree.PGCreateOrder(request); 
         
+        // MODIFIED: Log the full orderResponse object for debugging
+        console.log('Full Cashfree API response:', JSON.stringify(orderResponse, null, 2));
+
         console.log('Cashfree order created successfully:', {
             order_id: orderResponse.data.order_id,
             payment_session_id: orderResponse.data.payment_session_id,
