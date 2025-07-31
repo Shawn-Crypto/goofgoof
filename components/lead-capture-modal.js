@@ -71,12 +71,16 @@ class LeadCaptureModal {
       const response = await fetch('components/lead-capture-modal.html');
       const modalHTML = await response.text();
       document.body.insertAdjacentHTML('beforeend', modalHTML);
+      console.log('Modal HTML injected into DOM.'); // ADDED LOG
 
       await this.loadCashfreeJSSDK();
       this.populateCountryCodes();
 
-      // ***FIX***: Attach event listeners to modal buttons AFTER injection to ensure they exist.
-      this.attachModalButtonListeners();
+      // Ensure button listeners are attached only after the modal is fully in DOM
+      // Use a slight delay or DOMContentLoaded equivalent if needed for elements rendered later
+      setTimeout(() => { // Using setTimeout to ensure elements are fully rendered/parsed by browser
+        this.attachModalButtonListeners();
+      }, 0); // Execute as soon as possible after current task queue clears
 
     } catch (error) {
       console.error('Failed to load modal HTML or Cashfree SDK:', error);
@@ -200,21 +204,32 @@ class LeadCaptureModal {
     return cleanNumber.length >= 10 && cleanNumber.length <= 15;
   }
 
-  // ***FIX***: New method to attach listeners to the modal's internal buttons.
+  // NEW METHOD: Attach listeners to modal's internal buttons
   attachModalButtonListeners() {
-      const continueButton = document.getElementById('continueToPayment');
-      if (continueButton) {
-          continueButton.addEventListener('click', () => {
-              console.log('Continue button click listener triggered. Attempting to call submitLeadAndProceed...'); // MODIFIED LOG
-              debugger; // TEMPORARY: Uncomment this line to pause execution right here
-              this.submitLeadAndProceed();
-              console.log('submitLeadAndProceed call initiated (from listener).'); // ADDED LOG
-          });
-      }
+      console.log('Attempting to attach modal button listeners...'); // ADDED LOG
+      try {
+          const continueButton = document.getElementById('continueToPayment');
+          if (continueButton) {
+              console.log('Found #continueToPayment button.'); // ADDED LOG
+              continueButton.addEventListener('click', () => {
+                  console.log('Continue button click listener triggered.');
+                  this.submitLeadAndProceed();
+              });
+              console.log('Attached click listener to #continueToPayment.'); // ADDED LOG
+          } else {
+              console.warn('WARNING: #continueToPayment button not found in DOM.'); // ADDED LOG
+          }
 
-      const closeButton = document.getElementById('closeLCModalButton');
-      if (closeButton) {
-          closeButton.addEventListener('click', () => this.closeModal());
+          const closeButton = document.getElementById('closeLCModalButton');
+          if (closeButton) {
+              console.log('Found #closeLCModalButton button.'); // ADDED LOG
+              closeButton.addEventListener('click', () => this.closeModal());
+              console.log('Attached click listener to #closeLCModalButton.'); // ADDED LOG
+          } else {
+              console.warn('WARNING: #closeLCModalButton button not found in DOM.'); // ADDED LOG
+          }
+      } catch (e) {
+          console.error('ERROR: Failed to attach modal button listeners:', e); // ADDED ERROR CATCH
       }
   }
 
@@ -340,6 +355,16 @@ class LeadCaptureModal {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// Global functions for modal interactions
+function closeLCModal() {
+  window.leadCaptureModal.closeModal();
+}
+
+function submitLeadAndProceed() {
+  window.leadCaptureModal.submitLeadAndProceed(); // FIXED TYPO
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
   window.leadCaptureModal = new LeadCaptureModal();
 });
