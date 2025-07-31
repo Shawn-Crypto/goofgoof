@@ -95,7 +95,9 @@ export default async function handler(req, res) {
             status: orderResponse.data.order_status,
             customer_email: customer_email,
             amount: order_amount,
-            environment: process.env.CASHFREE_ENVIRONMENT
+            environment: process.env.CASHFREE_ENVIRONMENT,
+            cf_environment: process.env.CASHFREE_ENVIRONMENT === 'PRODUCTION' ? CFEnvironment.PRODUCTION : CFEnvironment.SANDBOX,
+            session_format: orderResponse.data.payment_session_id?.length || 'unknown'
         });
 
         res.status(200).json({

@@ -105,26 +105,19 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Push purchase event to dataLayer for Google Analytics tracking
-        if (typeof dataLayer !== 'undefined') {
-            window.dataLayer.push({
-                'event': 'purchase',
-                'ecommerce': {
-                    // Use timestamp as fallback transaction_id since Cashfree Forms 
-                    // doesn't provide real transaction ID on client-side
-                    'transaction_id': 'order_' + Date.now(),
-                    'value': 1499,
-                    'currency': 'INR',
-                    'items': [{
-                        'item_id': 'beyond-deck-course',
-                        'item_name': 'Beyond the Deck: Master the Investor Pitch to Get Funded',
-                        'category': 'Online Course',
-                        'quantity': 1,
-                        'price': 1499
-                    }]
-                }
-            });
-            console.log('✅ Google Analytics purchase event pushed to dataLayer');
+        // Extract order_id from URL parameters (Cashfree appends it to return_url)
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order_id');
+        
+        console.log('Order ID from return URL:', orderId);
+        
+        // Verify payment status if order_id is present
+        if (orderId) {
+            verifyPaymentStatus(orderId);
+        } else {
+            console.warn('No order_id found in URL parameters');
+            // Still push analytics event with fallback data
+            pushAnalyticsEvent('order_' + Date.now(), 1499);
         }
 
         // Set copyright year
@@ -133,6 +126,117 @@
             copyrightYear.textContent = new Date().getFullYear();
         }
     });
+
+    async function verifyPaymentStatus(orderId) {
+        try {
+            console.log('Verifying payment status for order:', orderId);
+            
+            const response = await fetch(`/api/verify-payment?order_id=${orderId}`);
+            const result = await response.json();
+            
+            console.log('Payment verification result:', result);
+            
+            if (result.success && result.order_status === 'Success') {
+                // Payment verified successfully
+                console.log('✅ Payment verified successfully');
+                
+                // Push accurate purchase event to dataLayer
+                pushAnalyticsEvent(
+                    result.payment_details.cf_payment_id || orderId,
+                    result.payment_details.amount || 1499
+                );
+                
+                // Update page content with verified payment details
+                updatePageContent(result);
+                
+            } else if (result.order_status === 'Pending') {
+                // Payment pending
+                console.log('⏳ Payment is pending verification');
+                showPendingStatus(result);
+                
+            } else {
+                // Payment failed
+                console.log('❌ Payment verification failed');
+                showFailureStatus(result);
+            }
+            
+        } catch (error) {
+            console.error('Payment verification error:', error);
+            // Fallback to showing success page (user reached here via return_url)
+            pushAnalyticsEvent('order_' + Date.now(), 1499);
+        }
+    }
+
+    function pushAnalyticsEvent(transactionId, amount) {
+        // Push purchase event to dataLayer for Google Analytics tracking
+        if (typeof dataLayer !== 'undefined') {
+            window.dataLayer.push({
+                'event': 'purchase',
+                'ecommerce': {
+                    'transaction_id': transactionId,
+                    'value': amount,
+                    'currency': 'INR',
+                    'items': [{
+                        'item_id': 'beyond-deck-course',
+                        'item_name': 'Beyond the Deck: Master the Investor Pitch to Get Funded',
+                        'category': 'Online Course',
+                        'quantity': 1,
+                        'price': amount
+                    }]
+                }
+            });
+            console.log('✅ Google Analytics purchase event pushed to dataLayer');
+        }
+        
+        // Facebook Pixel Purchase Event
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Purchase', {
+                value: amount,
+                currency: 'INR',
+                content_ids: ['beyond-deck-course'],
+                content_type: 'product'
+            });
+            console.log('✅ Facebook Pixel purchase event tracked');
+        }
+    }
+
+    function updatePageContent(verificationResult) {
+        // Update page with verified payment details
+        const paymentDetails = verificationResult.payment_details;
+        
+        // You can update specific elements with verified payment info
+        console.log('Payment Method:', paymentDetails.payment_method);
+        console.log('Payment Time:', paymentDetails.payment_time);
+        console.log('CF Payment ID:', paymentDetails.cf_payment_id);
+    }
+
+    function showPendingStatus(result) {
+        // Update page to show pending status
+        const titleElement = document.querySelector('h1');
+        const subtitleElement = document.querySelector('.subtitle');
+        
+        if (titleElement) titleElement.textContent = 'Payment Processing...';
+        if (subtitleElement) subtitleElement.textContent = 'Your payment is being processed. Please wait.';
+        
+        // You could add a refresh mechanism here
+        setTimeout(() => {
+            window.location.reload();
+        }, 30000); // Refresh after 30 seconds
+    }
+
+    function showFailureStatus(result) {
+        // Update page to show failure status
+        const titleElement = document.querySelector('h1');
+        const subtitleElement = document.querySelector('.subtitle');
+        
+        if (titleElement) {
+            titleElement.textContent = 'Payment Issue Detected';
+            titleElement.style.color = '#F4A261';
+        }
+        if (subtitleElement) {
+            subtitleElement.textContent = 'Please contact support for assistance with your payment.';
+        }
+    }
     </script>
 </body>
 </html>
