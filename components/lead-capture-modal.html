@@ -1,111 +1,48 @@
-<!-- ShadCN Enhanced Modal -->
-<div id="leadCaptureModal" class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" style="display: none;">
-  <div class="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg md:w-full modal-content">
+<div id="leadCaptureModal" class="fixed inset-0 z-50 bg-black/80" style="display: none;">
+  <div class="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg sm:rounded-lg md:w-full modal-content">
     
-    <!-- Header -->
     <div class="flex flex-col space-y-1.5 text-center sm:text-left modal-header">
       <h2 class="text-lg font-semibold leading-none tracking-tight">
         🎉 You're 30 seconds away from mastering investor pitches!
       </h2>
-      <button class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground modal-close" id="closeLCModalButton">
+      <button class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none" id="closeLCModalButton">
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="m11.7816 4.03157c.0824-.08241.0824-.21597 0-.29838-.0824-.08241-.2160-.08241-.2984 0L7.50000 7.70711 3.51472 3.72183c-.08241-.08241-.21597-.08241-.29838 0-.08241.08241-.08241.21597 0 .29838L7.20711 8.00000 3.21472 11.9853c-.08241.0824-.08241.2160 0 .2984.08241.0824.21597.0824.29838 0L7.50000 8.29289l3.9853 3.98529c.0824.0824.2160.0824.2984 0 .0824-.0824.0824-.2160 0-.2984L8.29289 8.00000 11.7816 4.03157Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
         </svg>
       </button>
     </div>
     
-    <!-- Content -->
     <div class="space-y-4 modal-body">
       <p class="text-sm text-muted-foreground">Before we process your ₹1,499 payment:</p>
       
-      <!-- Form Fields -->
       <form id="leadCaptureForm" class="space-y-4">
-        <!-- Email Field -->
         <div class="space-y-2 form-group">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="email">
-            Email Address *
-          </label>
-          <input 
-            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
-            id="email" 
-            name="email" 
-            type="email" 
-            placeholder="your@email.com" 
-            required 
-          />
+          <label class="text-sm font-medium leading-none" for="email">Email Address *</label>
+          <input class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" id="email" name="email" type="email" placeholder="your@email.com" required />
         </div>
         
-        <!-- First Name Field -->
         <div class="space-y-2 form-group">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="firstName">
-            First Name *
-          </label>
-          <input 
-            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
-            id="firstName" 
-            name="firstName" 
-            type="text" 
-            placeholder="First name" 
-            required 
-          />
+          <label class="text-sm font-medium leading-none" for="firstName">First Name *</label>
+          <input class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" id="firstName" name="firstName" type="text" placeholder="First name" required />
         </div>
         
-        <!-- Last Name Field -->
         <div class="space-y-2 form-group">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="lastName">
-            Last Name *
-          </label>
-          <input 
-            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
-            id="lastName" 
-            name="lastName" 
-            type="text" 
-            placeholder="Last name" 
-            required 
-          />
+          <label class="text-sm font-medium leading-none" for="lastName">Last Name *</label>
+          <input class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" id="lastName" name="lastName" type="text" placeholder="Last name" required />
         </div>
         
-        <!-- Mobile Number Field -->
         <div class="space-y-2 form-group">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="phone">
-            Mobile Number *
-          </label>
-          <div class="flex space-x-2"> <select
-              id="countryCode"
-              name="countryCode"
-              class="flex h-11 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              style="width: 100px; flex-shrink: 0;"
-              required
-            >
-              </select>
-            <input 
-              class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1 min-w-0" 
-              id="phoneNumber" 
-              name="phoneNumber" 
-              type="tel" 
-              placeholder="98765 43210"
-              pattern="[0-9]{10,15}"
-              required
-            />
+          <label class="text-sm font-medium leading-none" for="phone">Mobile Number *</label>
+          <div class="flex space-x-2">
+            <select id="countryCode" name="countryCode" class="flex h-11 rounded-md border border-input bg-background px-3 py-2 text-sm" style="width: 100px; flex-shrink: 0;" required></select>
+            <input class="flex h-11 rounded-md border border-input bg-background px-3 py-2 text-sm flex-1 min-w-0" id="phoneNumber" name="phoneNumber" type="tel" placeholder="98765 43210" pattern="[0-9]{10,15}" required />
           </div>
         </div>
-        
       </form>
       
-      <!-- CTA Button -->
       <div class="modal-footer">
-        <button 
-          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-primary/90 h-12 px-6 py-2 w-full text-lg font-semibold primary-button" 
-          style="background-color: #4285f4; color: white;"
-          id="continueToPayment"
-        >
-          Continue to Payment →
-        </button>
-        
-        <!-- Help Text -->
-        <p class="text-sm text-muted-foreground text-center mt-3 help-text" id="helpText">
-          💡 Your information will pre-fill the checkout for faster payment
-        </p>
+        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium h-12 px-6 py-2 w-full text-lg font-semibold primary-button" style="background-color: #4285f4; color: white;" id="continueToPayment">Continue to Payment →</button>
+        <p class="text-sm text-muted-foreground text-center mt-3 help-text" id="helpText">💡 Your information will pre-fill the checkout for faster payment</p>
       </div>
     </div>
   </div>
