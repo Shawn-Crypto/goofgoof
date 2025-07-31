@@ -204,7 +204,10 @@ class LeadCaptureModal {
   attachModalButtonListeners() {
       const continueButton = document.getElementById('continueToPayment');
       if (continueButton) {
-          continueButton.addEventListener('click', () => this.submitLeadAndProceed());
+          continueButton.addEventListener('click', () => {
+              console.log('Continue button click listener triggered.'); // ADDED LOG
+              this.submitLeadAndProceed();
+          });
       }
 
       const closeButton = document.getElementById('closeLCModalButton');
@@ -214,6 +217,7 @@ class LeadCaptureModal {
   }
 
   async submitLeadAndProceed() {
+    console.log('submitLeadAndProceed function entered.'); // ADDED LOG
     const form = document.getElementById('leadCaptureForm');
     const formData = new FormData(form);
     
