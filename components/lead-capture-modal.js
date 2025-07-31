@@ -205,8 +205,10 @@ class LeadCaptureModal {
       const continueButton = document.getElementById('continueToPayment');
       if (continueButton) {
           continueButton.addEventListener('click', () => {
-              console.log('Continue button click listener triggered.'); // ADDED LOG
+              console.log('Continue button click listener triggered. Attempting to call submitLeadAndProceed...'); // MODIFIED LOG
+              debugger; // TEMPORARY: Uncomment this line to pause execution right here
               this.submitLeadAndProceed();
+              console.log('submitLeadAndProceed call initiated (from listener).'); // ADDED LOG
           });
       }
 
