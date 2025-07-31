@@ -241,9 +241,7 @@ class LeadCaptureModal {
 
       localStorage.setItem('leadCaptureData', JSON.stringify(leadData));
       
-      this.closeModal();
-      
-      // Use API-based payment processing
+      // Use API-based payment processing (modal will be closed before redirect)
       await this.processAPIPayment(leadData);
 
     } catch (error) {
@@ -257,9 +255,8 @@ class LeadCaptureModal {
       }
       
       alert('We\'ll proceed to payment. Don\'t worry, your information is saved!');
-      this.closeModal();
       
-      // Use API-based payment processing even on lead capture error
+      // Use API-based payment processing even on lead capture error (modal will be closed before redirect)
       await this.processAPIPayment({
         email: email,
         firstName: firstName,
@@ -372,9 +369,20 @@ class LeadCaptureModal {
 
       console.log('Starting Cashfree checkout with options:', checkoutOptions);
 
-      cashfree.checkout(checkoutOptions);
+      // Ensure modal is closed before checkout
+      this.closeModal();
       
-      console.log('Cashfree checkout initiated successfully');
+      // Small delay to ensure modal is fully closed
+      setTimeout(() => {
+        try {
+          cashfree.checkout(checkoutOptions);
+          console.log('Cashfree checkout initiated successfully');
+        } catch (checkoutError) {
+          console.error('Cashfree checkout failed:', checkoutError);
+          // Immediate fallback to direct URL
+          window.location.href = `https://payments.cashfree.com/pay/${payment_session_id}`;
+        }
+      }, 100);
       
       if (typeof gtag !== 'undefined') {
         gtag('event', 'cashfree_sdk_checkout_success', {
@@ -428,8 +436,13 @@ class LeadCaptureModal {
       
       console.log('Alternative URLs to try:', alternativeURLs);
       
+      // Ensure modal is closed before redirect
+      this.closeModal();
+      
       // Use the first alternative URL for now
-      window.location.href = alternativeURLs[0];
+      setTimeout(() => {
+        window.location.href = alternativeURLs[0];
+      }, 100);
     }
   }
 
@@ -521,7 +534,10 @@ class LeadCaptureModal {
         });
       }
       
-      // Small delay to ensure tracking events are sent
+      // Ensure modal is closed before redirect
+      this.closeModal();
+      
+      // Small delay to ensure tracking events are sent and modal is closed
       setTimeout(() => {
         window.location.href = paymentURL;
       }, 300);
