@@ -105,29 +105,19 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Read order details from URL parameters
+        // Extract order_id from URL parameters (Cashfree appends it to return_url)
         const urlParams = new URLSearchParams(window.location.search);
-        const orderId = urlParams.get('order_id') || 'order_' + Date.now();
-        const orderAmount = urlParams.get('order_amount');
+        const orderId = urlParams.get('order_id');
         
-        // Push purchase event to dataLayer for Google Analytics tracking
-        if (typeof dataLayer !== 'undefined') {
-            window.dataLayer.push({
-                'event': 'purchase',
-                'ecommerce': {
-                    'transaction_id': orderId,
-                    'value': parseFloat(orderAmount) || 1499,
-                    'currency': 'INR',
-                    'items': [{
-                        'item_id': 'beyond-deck-course',
-                        'item_name': 'Beyond the Deck: Master the Investor Pitch to Get Funded',
-                        'category': 'Online Course',
-                        'quantity': 1,
-                        'price': parseFloat(orderAmount) || 1499
-                    }]
-                }
-            });
-            console.log('✅ Google Analytics purchase event pushed to dataLayer');
+        console.log('Order ID from return URL:', orderId);
+        
+        // Verify payment status if order_id is present
+        if (orderId) {
+            verifyPaymentStatus(orderId);
+        } else {
+            console.warn('No order_id found in URL parameters');
+            // Still push analytics event with fallback data
+            pushAnalyticsEvent('order_' + Date.now(), 1499);
         }
 
         // Set copyright year
@@ -135,95 +125,118 @@
         if (copyrightYear) {
             copyrightYear.textContent = new Date().getFullYear();
         }
-
-        // Enhanced Facebook EMQ Tracking on Purchase Success
-        
-        /**
-         * Reads a cookie's value from the browser's document.cookie.
-         * @param {string} name The name of the cookie to read.
-         * @returns {string|null} The cookie's value or null if not found.
-         */
-        function getCookie(name) {
-          const value = `; ${document.cookie}`;
-          const parts = value.split(`; ${name}=`);
-          if (parts.length === 2) return parts.pop().split(';').shift();
-          return null;
-        }
-
-        // Capture the Facebook browser and click identifiers
-        const fbp = getCookie('_fbp');
-        const fbc = getCookie('_fbc');
-        
-        // Extract customer data from URL parameters if available
-        const urlParams = new URLSearchParams(window.location.search);
-        const customerEmail = urlParams.get('email') || '';
-        const customerPhone = urlParams.get('phone') || '';
-        const firstName = urlParams.get('first_name') || '';
-        const lastName = urlParams.get('last_name') || '';
-        const orderId = urlParams.get('order_id') || 'order_' + Date.now();
-        const orderAmount = urlParams.get('order_amount');
-        
-        // Call enhanced tracking on purchase success
-        if (customerEmail || customerPhone) {
-            fetch('/api/enhanced-tracking', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: customerEmail,
-                    phone: customerPhone,
-                    first_name: firstName,
-                    last_name: lastName,
-                    order_id: orderId,
-                    amount: parseFloat(orderAmount) || 1499,
-                    currency: 'INR',
-                    source_url: window.location.href,
-                    country: 'IN',
-                    city: 'Mumbai',
-                    state: 'Maharashtra',
-                    fbp: fbp,
-                    fbc: fbc
-                })
-            })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.success) {
-                        console.log('✅ Enhanced Facebook EMQ tracking sent successfully:', result.event_id);
-                        console.log('📊 EMQ Parameters captured:', result.emq_parameters);
-                    } else {
-                        console.error('❌ Enhanced tracking failed:', result.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('❌ Enhanced tracking request failed:', error);
-                });
-        } else {
-            // Fallback: Call with minimal data if no customer info available
-            fetch('/api/enhanced-tracking', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    order_id: orderId,
-                    amount: parseFloat(orderAmount) || 1499,
-                    currency: 'INR',
-                    source_url: window.location.href,
-                    country: 'IN',
-                    fbp: fbp,
-                    fbc: fbc
-                })
-            })
-                .then(response => response.json())
-                .then(result => {
-                    console.log('✅ Enhanced tracking sent (minimal data):', result.event_id);
-                })
-                .catch(error => {
-                    console.error('❌ Enhanced tracking failed:', error);
-                });
-        }
     });
+
+    async function verifyPaymentStatus(orderId) {
+        try {
+            console.log('Verifying payment status for order:', orderId);
+            
+            const response = await fetch(`/api/verify-payment?order_id=${orderId}`);
+            const result = await response.json();
+            
+            console.log('Payment verification result:', result);
+            
+            if (result.success && result.order_status === 'Success') {
+                // Payment verified successfully
+                console.log('✅ Payment verified successfully');
+                
+                // Push accurate purchase event to dataLayer
+                pushAnalyticsEvent(
+                    result.payment_details.cf_payment_id || orderId,
+                    result.payment_details.amount || 1499
+                );
+                
+                // Update page content with verified payment details
+                updatePageContent(result);
+                
+            } else if (result.order_status === 'Pending') {
+                // Payment pending
+                console.log('⏳ Payment is pending verification');
+                showPendingStatus(result);
+                
+            } else {
+                // Payment failed
+                console.log('❌ Payment verification failed');
+                showFailureStatus(result);
+            }
+            
+        } catch (error) {
+            console.error('Payment verification error:', error);
+            // Fallback to showing success page (user reached here via return_url)
+            pushAnalyticsEvent('order_' + Date.now(), 1499);
+        }
+    }
+
+    function pushAnalyticsEvent(transactionId, amount) {
+        // Push purchase event to dataLayer for Google Analytics tracking
+        if (typeof dataLayer !== 'undefined') {
+            window.dataLayer.push({
+                'event': 'purchase',
+                'ecommerce': {
+                    'transaction_id': transactionId,
+                    'value': amount,
+                    'currency': 'INR',
+                    'items': [{
+                        'item_id': 'beyond-deck-course',
+                        'item_name': 'Beyond the Deck: Master the Investor Pitch to Get Funded',
+                        'category': 'Online Course',
+                        'quantity': 1,
+                        'price': amount
+                    }]
+                }
+            });
+            console.log('✅ Google Analytics purchase event pushed to dataLayer');
+        }
+        
+        // Facebook Pixel Purchase Event
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Purchase', {
+                value: amount,
+                currency: 'INR',
+                content_ids: ['beyond-deck-course'],
+                content_type: 'product'
+            });
+            console.log('✅ Facebook Pixel purchase event tracked');
+        }
+    }
+
+    function updatePageContent(verificationResult) {
+        // Update page with verified payment details
+        const paymentDetails = verificationResult.payment_details;
+        
+        // You can update specific elements with verified payment info
+        console.log('Payment Method:', paymentDetails.payment_method);
+        console.log('Payment Time:', paymentDetails.payment_time);
+        console.log('CF Payment ID:', paymentDetails.cf_payment_id);
+    }
+
+    function showPendingStatus(result) {
+        // Update page to show pending status
+        const titleElement = document.querySelector('h1');
+        const subtitleElement = document.querySelector('.subtitle');
+        
+        if (titleElement) titleElement.textContent = 'Payment Processing...';
+        if (subtitleElement) subtitleElement.textContent = 'Your payment is being processed. Please wait.';
+        
+        // You could add a refresh mechanism here
+        setTimeout(() => {
+            window.location.reload();
+        }, 30000); // Refresh after 30 seconds
+    }
+
+    function showFailureStatus(result) {
+        // Update page to show failure status
+        const titleElement = document.querySelector('h1');
+        const subtitleElement = document.querySelector('.subtitle');
+        
+        if (titleElement) {
+            titleElement.textContent = 'Payment Issue Detected';
+            titleElement.style.color = '#F4A261';
+        }
+        if (subtitleElement) {
+            subtitleElement.textContent = 'Please contact support for assistance with your payment.';
+        }
+    }
     </script>
 </body>
 </html>

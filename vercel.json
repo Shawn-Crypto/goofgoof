@@ -1,5 +1,5 @@
 {
-  "buildCommand": "echo 'Static site ready'",
+  "buildCommand": "node scripts/build-config.js",
   "outputDirectory": "./",
   "headers": [
     {
