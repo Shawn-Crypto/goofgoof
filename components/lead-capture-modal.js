@@ -316,46 +316,96 @@ class LeadCaptureModal {
       
       console.log('Initializing Cashfree checkout with SDK:', {
         payment_session_id,
-        environment
+        environment,
+        global_env: window.GLOBAL_CASHFREE_ENVIRONMENT
       });
 
-      // Initialize Cashfree instance
-      const cashfree = Cashfree({ mode: environment });
-      
-      // Start checkout process
-      cashfree.checkout({
-        paymentSessionId: payment_session_id,
-        redirectTarget: "_self"
-      }).then((result) => {
-        console.log('Cashfree checkout result:', result);
-        
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'cashfree_sdk_checkout_success', {
-            'event_category': 'ecommerce',
-            'event_label': 'sdk_checkout',
-            'value': 1499
-          });
-        }
-      }).catch((error) => {
-        console.error('Cashfree checkout error:', error);
-        throw error;
+      // Check SDK version and capabilities
+      console.log('Cashfree SDK info:', {
+        version: window.Cashfree.version || 'unknown',
+        methods: Object.keys(window.Cashfree).filter(key => typeof window.Cashfree[key] === 'function'),
+        environment: environment
       });
+
+      // Initialize Cashfree instance with proper configuration
+      const cashfree = Cashfree({ 
+        mode: environment
+      });
+
+      // Verify the instance was created properly
+      if (!cashfree || typeof cashfree.checkout !== 'function') {
+        throw new Error('Cashfree SDK initialization failed - checkout method not available');
+      }
+      
+      // Start checkout process with enhanced error handling
+      const checkoutOptions = {
+        paymentSessionId: payment_session_id,
+        redirectTarget: "_self",
+        appearance: {
+          theme: "light"
+        }
+      };
+
+      console.log('Starting Cashfree checkout with options:', checkoutOptions);
+
+      const checkoutResult = await cashfree.checkout(checkoutOptions);
+      
+      console.log('Cashfree checkout result:', checkoutResult);
+      
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'cashfree_sdk_checkout_success', {
+          'event_category': 'ecommerce',
+          'event_label': 'sdk_checkout',
+          'value': 1499
+        });
+      }
       
     } catch (error) {
-      console.error('SDK checkout failed:', error);
+      console.error('SDK checkout failed with detailed error:', {
+        error: error,
+        message: error.message,
+        stack: error.stack,
+        payment_session_id: payment_session_id,
+        environment: environment || 'unknown',
+        sdk_loaded: !!window.Cashfree
+      });
+      
+      // Check if it's a 400 error specifically
+      if (error.message && error.message.includes('400')) {
+        console.error('400 Error detected. Possible causes:');
+        console.error('1. Environment mismatch (production SDK with sandbox session)');
+        console.error('2. Invalid payment session ID format');
+        console.error('3. Session expired or already used');
+        console.error('4. Missing required parameters');
+      }
       
       if (typeof gtag !== 'undefined') {
         gtag('event', 'cashfree_sdk_failed', {
           'event_category': 'error',
           'event_label': 'sdk_fallback',
-          'value': 1499
+          'value': 1499,
+          'custom_parameters': {
+            'error_message': error.message,
+            'environment': environment
+          }
         });
       }
       
-      // Fallback to direct URL redirect if SDK fails
+      // Enhanced fallback strategy
       console.log('Falling back to direct URL redirect');
-      const checkoutURL = `https://payments.cashfree.com/pay/${payment_session_id}`;
-      window.location.href = checkoutURL;
+      console.log('Trying alternative URL formats...');
+      
+      // Try different URL patterns
+      const alternativeURLs = [
+        `https://payments.cashfree.com/pay/${payment_session_id}`,
+        `https://payments${environment === 'sandbox' ? '-test' : ''}.cashfree.com/pay/${payment_session_id}`,
+        `https://checkout.cashfree.com/pay/${payment_session_id}`
+      ];
+      
+      console.log('Alternative URLs to try:', alternativeURLs);
+      
+      // Use the first alternative URL for now
+      window.location.href = alternativeURLs[0];
     }
   }
 
