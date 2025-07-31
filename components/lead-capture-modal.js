@@ -320,79 +320,95 @@ class LeadCaptureModal {
       const formData = new FormData(form);
       console.log('FormData created successfully:', formData);
     
-    const email = formData.get('email');
-    const firstName = formData.get('firstName');
-    const lastName = formData.get('lastName');
-    const countryCode = formData.get('countryCode');
-    const phoneNumberPart = formData.get('phoneNumber');
-    const phone = countryCode + phoneNumberPart;
+      const email = formData.get('email');
+      const firstName = formData.get('firstName');
+      const lastName = formData.get('lastName');
+      const countryCode = formData.get('countryCode');
+      const phoneNumberPart = formData.get('phoneNumber');
+      const phone = countryCode + phoneNumberPart;
 
-    // --- VALIDATION CHECKS --- //
-    if (!this.validateName(firstName)) {
-        alert('Please enter a valid First Name.');
-        return;
-    }
-    if (!this.validateName(lastName)) {
-        alert('Please enter a valid Last Name.');
-        return;
-    }
-    if (!this.validateEmail(email)) {
-        alert('Please enter a valid Email Address.');
-        return;
-    }
-    if (!this.validatePhoneNumber(phoneNumberPart, countryCode)) {
-        alert('Please enter a valid Mobile Number.');
-        return;
-    }
-    
-    const timeElapsed = Date.now() - this.formLoadedTime;
-    if (timeElapsed < 2000) {
-        alert('Please review the details before submitting.');
-        return;
-    }
-
-    const submitButton = document.getElementById('continueToPayment');
-    submitButton.setLoading(true);
-
-    try {
-      const leadData = { email, firstName, lastName, phone, timestamp: new Date().toISOString(), source: 'pre_payment_capture', intent: 'high', amount: '1499', currency: 'INR' };
-      await this.sendLeadData(leadData);
+      // --- VALIDATION CHECKS --- //
+      if (!this.validateName(firstName)) {
+          alert('Please enter a valid First Name.');
+          return;
+      }
+      if (!this.validateName(lastName)) {
+          alert('Please enter a valid Last Name.');
+          return;
+      }
+      if (!this.validateEmail(email)) {
+          alert('Please enter a valid Email Address.');
+          return;
+      }
+      if (!this.validatePhoneNumber(phoneNumberPart, countryCode)) {
+          alert('Please enter a valid Mobile Number.');
+          return;
+      }
       
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'lead_captured', { 'event_category': 'conversion', 'event_label': 'pre_payment', 'value': 1499 });
+      const timeElapsed = Date.now() - this.formLoadedTime;
+      if (timeElapsed < 2000) {
+          alert('Please review the details before submitting.');
+          return;
       }
 
-      localStorage.setItem('leadCaptureData', JSON.stringify(leadData));
-      this.closeModal();
+      const submitButton = document.getElementById('continueToPayment');
+      submitButton.setLoading(true);
 
-      if (this.useAPI) {
-        await this.processAPIPayment(leadData);
-      } else {
-        this.redirectToPayment();
+      try {
+        const leadData = { email, firstName, lastName, phone, timestamp: new Date().toISOString(), source: 'pre_payment_capture', intent: 'high', amount: '1499', currency: 'INR' };
+        await this.sendLeadData(leadData);
+        
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'lead_captured', { 'event_category': 'conversion', 'event_label': 'pre_payment', 'value': 1499 });
+        }
+
+        localStorage.setItem('leadCaptureData', JSON.stringify(leadData));
+        this.closeModal();
+
+        if (this.useAPI) {
+          await this.processAPIPayment(leadData);
+        } else {
+          this.redirectToPayment();
+        }
+
+      } catch (error) {
+        console.error('❌ CRITICAL ERROR in payment processing:', error);
+        console.error('Error stack:', error.stack);
+        
+        const submitButton = document.getElementById('continueToPayment');
+        if (submitButton && submitButton.setLoading) {
+          submitButton.setLoading(false);
+        }
+        
+        alert('We\'ll proceed to payment. Your information is saved!');
+        this.closeModal();
+        
+        try {
+          if (this.useAPI) {
+            await this.processAPIPayment({ email: 'error@domain.com', firstName: 'Error', lastName: 'User', phone: '+911234567890' });
+          } else {
+            this.redirectToPayment();
+          }
+        } catch (fallbackError) {
+          console.error('❌ Fallback payment also failed:', fallbackError);
+          this.redirectToPayment();
+        }
       }
 
-    } catch (error) {
-      console.error('❌ CRITICAL ERROR in submitLeadAndProceed:', error);
-      console.error('Error stack:', error.stack);
+    } catch (outerError) {
+      console.error('❌ CRITICAL ERROR in submitLeadAndProceed function:', outerError);
+      console.error('Error stack:', outerError.stack);
       
+      // Reset button state if it exists
       const submitButton = document.getElementById('continueToPayment');
       if (submitButton && submitButton.setLoading) {
         submitButton.setLoading(false);
       }
       
-      alert('We\'ll proceed to payment. Your information is saved!');
+      // Show user-friendly error and fallback to direct payment
+      alert('There was an issue processing your request. Proceeding to payment page.');
       this.closeModal();
-      
-      try {
-        if (this.useAPI) {
-          await this.processAPIPayment({ email: 'error@domain.com', firstName: 'Error', lastName: 'User', phone: '+911234567890' });
-        } else {
-          this.redirectToPayment();
-        }
-      } catch (fallbackError) {
-        console.error('❌ Fallback payment also failed:', fallbackError);
-        this.redirectToPayment();
-      }
+      this.redirectToPayment();
     }
   }
 
