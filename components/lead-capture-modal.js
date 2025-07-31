@@ -16,14 +16,25 @@ class LeadCaptureModal {
   }
 
   interceptCTAButtons() {
-    const ctaButtons = document.querySelectorAll('a[href*="cashfree"], button[onclick*="cashfree"], .cta-button');
+    // More comprehensive selector to catch all possible CTA buttons
+    const ctaButtons = document.querySelectorAll('a[href*="cashfree"], button[onclick*="cashfree"], .cta-button, a[href="#"], button[type="button"]');
     
-    ctaButtons.forEach(button => {
-      button.removeAttribute('href');
+    console.log('Intercepting CTA buttons:', ctaButtons.length);
+    
+    ctaButtons.forEach((button, index) => {
+      // Remove any existing href or onclick that might cause direct redirects
+      if (button.href && (button.href.includes('cashfree') || button.href.includes('#'))) {
+        button.removeAttribute('href');
+      }
       button.removeAttribute('onclick');
       
+      // Prevent default behavior for all clicks
       button.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
+        
+        console.log(`CTA button ${index} clicked, showing modal`);
+        
         this.showModal();
         this.formLoadedTime = Date.now();
         
@@ -33,8 +44,19 @@ class LeadCaptureModal {
             'event_label': 'pre_payment_capture'
           });
         }
-      });
+      }, true); // Use capture phase to ensure we catch it first
     });
+    
+    // Additional safeguard: prevent any window.open calls to Cashfree
+    const originalOpen = window.open;
+    window.open = function(url, target, features) {
+      if (url && url.includes('cashfree')) {
+        console.log('Blocked window.open to Cashfree, showing modal instead');
+        window.leadCaptureModal.showModal();
+        return null;
+      }
+      return originalOpen.call(this, url, target, features);
+    };
   }
 
   async injectModalHTML() {
