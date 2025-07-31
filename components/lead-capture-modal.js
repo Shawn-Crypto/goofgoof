@@ -71,7 +71,7 @@ class LeadCaptureModal {
       const response = await fetch('components/lead-capture-modal.html');
       const modalHTML = await response.text();
       document.body.insertAdjacentHTML('beforeend', modalHTML);
-      console.log('Modal HTML injected into DOM.'); // ADDED LOG
+      // Modal HTML injected into DOM - debug log removed for security
 
       await this.loadCashfreeJSSDK();
       this.populateCountryCodes();
@@ -90,21 +90,73 @@ class LeadCaptureModal {
   // ***FIX***: Correctly initialize the Cashfree SDK as per their documentation.
   async loadCashfreeJSSDK() {
     return new Promise((resolve, reject) => {
-        const frontendEnv = window.GLOBAL_CASHFREE_ENVIRONMENT || 'PRODUCTION'; // Default to PRODUCTION
-        const sdkMode = frontendEnv === 'PRODUCTION' ? 'production' : 'sandbox';
+        // Get environment with secure fallback to SANDBOX
+        let frontendEnv = window.GLOBAL_CASHFREE_ENVIRONMENT || 'SANDBOX';
+        
+        // Validate environment value - security hardening
+        const validEnvironments = ['PRODUCTION', 'SANDBOX', 'TEST'];
+        if (!validEnvironments.includes(frontendEnv)) {
+            console.warn(`Invalid environment value: ${frontendEnv}, defaulting to SANDBOX for security`);
+            frontendEnv = 'SANDBOX';
+        }
+        
+        // Check if environment variable injection failed
+        let sdkMode;
+        if (frontendEnv.includes('$CASHFREE_ENVIRONMENT') || !frontendEnv) {
+            console.error('Environment variable not properly configured - failing safe to SANDBOX');
+            frontendEnv = 'SANDBOX';
+            sdkMode = 'sandbox';
+            
+            // Show configuration error to user if needed
+            if (this.showConfigurationError) {
+                this.showConfigurationError();
+            }
+        } else {
+            sdkMode = frontendEnv === 'PRODUCTION' ? 'production' : 'sandbox';
+        }
+        
+        // Conditional logging - only log in development environments
+        const isDevelopment = frontendEnv === 'SANDBOX' || window.location.hostname.includes('localhost');
+        if (isDevelopment) {
+            console.log(`Initializing Cashfree SDK with environment: ${frontendEnv}, mode: ${sdkMode}`);
+        }
 
         if (window.Cashfree) {
-            this.cashfreeSDK = Cashfree({ mode: sdkMode });
-            console.log('Cashfree JS SDK already loaded, initialized with mode:', sdkMode);
+            this.cashfreeSDK = new Cashfree({
+                mode: sdkMode === 'production' ? 'production' : 'sandbox'
+            });
+            if (isDevelopment) {
+                console.log('Cashfree JS SDK already loaded, initialized with mode:', sdkMode);
+            }
             return resolve(this.cashfreeSDK);
         }
 
         const script = document.createElement('script');
-        script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js';
+        script.src = 'https://sdk.cashfree.com/js/v4/cashfree.js';
         script.onload = () => {
-            this.cashfreeSDK = Cashfree({ mode: sdkMode });
-            console.log('Cashfree JS SDK loaded dynamically, initialized with mode:', sdkMode);
-            resolve(this.cashfreeSDK);
+            try {
+                this.cashfreeSDK = new Cashfree({
+                    mode: sdkMode === 'production' ? 'production' : 'sandbox'
+                });
+                if (isDevelopment) {
+                    console.log('Cashfree JS SDK loaded dynamically, initialized with mode:', sdkMode);
+                }
+                
+                // Validate SDK initialization
+                if (!this.cashfreeSDK) {
+                    throw new Error('Failed to initialize Cashfree SDK');
+                }
+                
+                // Test SDK methods are available
+                if (typeof this.cashfreeSDK.checkout !== 'function') {
+                    throw new Error('Cashfree SDK checkout method not available');
+                }
+                
+                resolve(this.cashfreeSDK);
+            } catch (error) {
+                console.error('Error initializing Cashfree SDK:', error);
+                reject(error);
+            }
         };
         script.onerror = (e) => {
             console.error('Failed to load Cashfree JS SDK:', e);
@@ -206,39 +258,67 @@ class LeadCaptureModal {
 
   // NEW METHOD: Attach listeners to modal's internal buttons
   attachModalButtonListeners() {
-      console.log('Attempting to attach modal button listeners...'); // ADDED LOG
+      console.log('🔗 Attempting to attach modal button listeners...');
       try {
           const continueButton = document.getElementById('continueToPayment');
+          console.log('Continue button found:', continueButton);
+          
           if (continueButton) {
-              console.log('Found #continueToPayment button.'); // ADDED LOG
-              continueButton.addEventListener('click', () => {
-                  console.log('Continue button click listener triggered.');
+              // Remove any existing listeners to prevent duplicates
+              const newButton = continueButton.cloneNode(true);
+              continueButton.parentNode.replaceChild(newButton, continueButton);
+              
+              // Use bind to ensure proper context
+              newButton.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('🔥 Continue button clicked! Context:', this);
+                  console.log('🔥 Function exists:', typeof this.submitLeadAndProceed);
                   debugger; // CRITICAL: Execution will pause here.
-                  this.submitLeadAndProceed();
-                  console.log('submitLeadAndProceed call initiated (from listener).'); 
+                  
+                  try {
+                    this.submitLeadAndProceed();
+                  } catch (error) {
+                    console.error('❌ Error calling submitLeadAndProceed:', error);
+                  }
               });
-              console.log('Attached click listener to #continueToPayment.'); // ADDED LOG
+              console.log('✅ Successfully attached click listener to #continueToPayment');
           } else {
-              console.warn('WARNING: #continueToPayment button not found in DOM.'); // ADDED LOG
+              console.error('❌ CRITICAL: #continueToPayment button not found in DOM!');
+              // Try to find it by class or other selector
+              const alternateButton = document.querySelector('.primary-button');
+              console.log('Alternate button found:', alternateButton);
           }
 
           const closeButton = document.getElementById('closeLCModalButton');
           if (closeButton) {
-              console.log('Found #closeLCModalButton button.'); // ADDED LOG
               closeButton.addEventListener('click', () => this.closeModal());
-              console.log('Attached click listener to #closeLCModalButton.'); // ADDED LOG
+              console.log('✅ Successfully attached close listener');
           } else {
-              console.warn('WARNING: #closeLCModalButton button not found in DOM.'); // ADDED LOG
+              console.warn('⚠️ WARNING: #closeLCModalButton button not found in DOM.');
           }
       } catch (e) {
-          console.error('ERROR: Failed to attach modal button listeners:', e); // ADDED ERROR CATCH
+          console.error('❌ CRITICAL ERROR: Failed to attach modal button listeners:', e);
+          console.error('Error stack:', e.stack);
       }
   }
 
   async submitLeadAndProceed() {
-    console.log('submitLeadAndProceed function entered.'); // ADDED LOG
-    const form = document.getElementById('leadCaptureForm');
-    const formData = new FormData(form);
+    console.log('🚀 submitLeadAndProceed function ENTERED');
+    debugger;
+    
+    try {
+      const form = document.getElementById('leadCaptureForm');
+      console.log('Form element found:', form);
+      
+      if (!form) {
+        console.error('❌ CRITICAL: Form element #leadCaptureForm not found!');
+        alert('Form not found - please refresh the page');
+        return;
+      }
+      
+      const formData = new FormData(form);
+      console.log('FormData created successfully:', formData);
     
     const email = formData.get('email');
     const firstName = formData.get('firstName');
@@ -292,14 +372,25 @@ class LeadCaptureModal {
       }
 
     } catch (error) {
-      console.error('Lead capture failed:', error);
-      submitButton.setLoading(false);
+      console.error('❌ CRITICAL ERROR in submitLeadAndProceed:', error);
+      console.error('Error stack:', error.stack);
+      
+      const submitButton = document.getElementById('continueToPayment');
+      if (submitButton && submitButton.setLoading) {
+        submitButton.setLoading(false);
+      }
+      
       alert('We\'ll proceed to payment. Your information is saved!');
       this.closeModal();
       
-      if (this.useAPI) {
-        await this.processAPIPayment({ email, firstName, lastName, phone });
-      } else {
+      try {
+        if (this.useAPI) {
+          await this.processAPIPayment({ email: 'error@domain.com', firstName: 'Error', lastName: 'User', phone: '+911234567890' });
+        } else {
+          this.redirectToPayment();
+        }
+      } catch (fallbackError) {
+        console.error('❌ Fallback payment also failed:', fallbackError);
         this.redirectToPayment();
       }
     }
@@ -323,13 +414,22 @@ class LeadCaptureModal {
         if (!response.ok) throw new Error(`API Error: ${response.status}`);
         const paymentData = await response.json();
 
+        console.log('Payment session created:', paymentData);
+
         if (this.cashfreeSDK && paymentData.payment_session_id) {
-            this.cashfreeSDK.checkout({
+            // FIXED: Use correct SDK v4 checkout method
+            const checkoutOptions = {
                 paymentSessionId: paymentData.payment_session_id,
-                redirectTarget: "_self"
-            });
+                returnUrl: `https://lfgventures.in/success.html?order_id=${paymentData.order_id}&email=${encodeURIComponent(customerData.email)}`
+            };
+            
+            console.log('Initiating checkout with options:', checkoutOptions);
+            await this.cashfreeSDK.checkout(checkoutOptions);
         } else {
-            console.error('Cashfree SDK not ready or payment_session_id missing.');
+            console.error('Cashfree SDK not ready or payment_session_id missing:', {
+                sdkReady: !!this.cashfreeSDK,
+                sessionId: paymentData.payment_session_id
+            });
             this.redirectToPayment();
         }
     } catch (error) {
@@ -368,5 +468,12 @@ function submitLeadAndProceed() {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  window.leadCaptureModal = new LeadCaptureModal();
+  console.log('🚀 Initializing LeadCaptureModal...');
+  try {
+    window.leadCaptureModal = new LeadCaptureModal();
+    console.log('✅ LeadCaptureModal initialized successfully:', window.leadCaptureModal);
+    console.log('✅ submitLeadAndProceed method exists:', typeof window.leadCaptureModal.submitLeadAndProceed);
+  } catch (error) {
+    console.error('❌ Failed to initialize LeadCaptureModal:', error);
+  }
 });

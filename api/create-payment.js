@@ -94,8 +94,8 @@ export default async function handler(req, res) {
             payment_session_id: orderResponse.data.payment_session_id,
             status: orderResponse.data.order_status,
             customer_email: customer_email,
-            amount: order_amount
-            // Removed payment_links_object and payment_links_web_url logging
+            amount: order_amount,
+            environment: process.env.CASHFREE_ENVIRONMENT
         });
 
         res.status(200).json({

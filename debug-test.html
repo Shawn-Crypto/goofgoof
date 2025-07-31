@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test - Lead Capture Modal</title>
+    <link rel="stylesheet" href="components/lead-capture-modal.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #0D1421 0%, #1A2332 100%);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 50px;
+        }
+        .test-button {
+            background: #4285f4;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debug Test Page</h1>
+    <p>Open browser console to see debug logs</p>
+    
+    <button class="test-button cta-button" onclick="showModal()">Test Modal</button>
+    <button class="test-button" onclick="checkInstance()">Check Instance</button>
+    
+    <script>
+        function showModal() {
+            console.log('Test button clicked');
+            if (window.leadCaptureModal) {
+                window.leadCaptureModal.showModal();
+            } else {
+                console.error('LeadCaptureModal not found!');
+            }
+        }
+        
+        function checkInstance() {
+            console.log('Modal instance:', window.leadCaptureModal);
+            console.log('submitLeadAndProceed exists:', typeof window.leadCaptureModal?.submitLeadAndProceed);
+        }
+    </script>
+    
+    <script type="module" src="components/lead-capture-modal.js"></script>
+</body>
+</html>
