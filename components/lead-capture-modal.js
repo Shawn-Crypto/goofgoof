@@ -213,7 +213,9 @@ class LeadCaptureModal {
               console.log('Found #continueToPayment button.'); // ADDED LOG
               continueButton.addEventListener('click', () => {
                   console.log('Continue button click listener triggered.');
+                  debugger; // CRITICAL: Execution will pause here.
                   this.submitLeadAndProceed();
+                  console.log('submitLeadAndProceed call initiated (from listener).'); 
               });
               console.log('Attached click listener to #continueToPayment.'); // ADDED LOG
           } else {
