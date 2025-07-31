@@ -77,7 +77,7 @@ class LeadCaptureModal {
 
       if (window.Cashfree) { 
         this.cashfreeSDK = Cashfree({ mode: sdkMode }); 
-        console.log('Cashfree JS SDK already loaded, initialized with mode:', sdkMode);
+        console.log('Cashfree JS SDK already loaded, initialized with v3 SDK');
         return resolve(this.cashfreeSDK);
       }
 
@@ -150,7 +150,7 @@ class LeadCaptureModal {
         if (typeof window.Cashfree === 'function') {
           try {
             this.cashfreeSDK = Cashfree({ mode: sdkMode });
-            console.log(`Cashfree JS SDK loaded successfully on attempt ${currentAttempt}, initialized with mode: ${sdkMode}`);
+            console.log(`Cashfree JS SDK loaded successfully on attempt ${currentAttempt}, initialized with v3 SDK`);
             resolve(this.cashfreeSDK);
           } catch (initError) {
             console.error('SDK loaded but initialization failed:', initError);
