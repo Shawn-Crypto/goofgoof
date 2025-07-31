@@ -273,7 +273,8 @@ class LeadCaptureModal {
   loadCashfreeSDK() {
     return new Promise((resolve, reject) => {
       // Check if SDK is already loaded
-      if (window.Cashfree) {
+      if (window.Cashfree && typeof window.Cashfree === 'function') {
+        console.log('Cashfree SDK already loaded');
         resolve(window.Cashfree);
         return;
       }
@@ -284,15 +285,23 @@ class LeadCaptureModal {
       script.async = true;
       
       script.onload = () => {
-        if (window.Cashfree) {
-          console.log('Cashfree SDK loaded successfully');
-          resolve(window.Cashfree);
-        } else {
-          reject(new Error('Cashfree SDK failed to initialize'));
-        }
+        // Wait a bit for the SDK to fully initialize
+        setTimeout(() => {
+          if (window.Cashfree && typeof window.Cashfree === 'function') {
+            console.log('Cashfree SDK loaded successfully');
+            console.log('Cashfree SDK type:', typeof window.Cashfree);
+            console.log('Cashfree SDK properties:', Object.keys(window.Cashfree || {}));
+            resolve(window.Cashfree);
+          } else {
+            console.error('Cashfree SDK failed to initialize properly');
+            console.error('window.Cashfree:', window.Cashfree);
+            reject(new Error('Cashfree SDK failed to initialize'));
+          }
+        }, 100);
       };
       
       script.onerror = () => {
+        console.error('Failed to load Cashfree SDK from URL');
         reject(new Error('Failed to load Cashfree SDK'));
       };
       
@@ -323,17 +332,35 @@ class LeadCaptureModal {
       // Check SDK version and capabilities
       console.log('Cashfree SDK info:', {
         version: window.Cashfree.version || 'unknown',
-        methods: Object.keys(window.Cashfree).filter(key => typeof window.Cashfree[key] === 'function'),
-        environment: environment
+        methods: Object.keys(window.Cashfree || {}).filter(key => typeof window.Cashfree[key] === 'function'),
+        environment: environment,
+        cashfreeType: typeof window.Cashfree,
+        cashfreeConstructor: window.Cashfree.toString ? window.Cashfree.toString().substring(0, 100) : 'N/A'
       });
 
       // Initialize Cashfree instance with proper configuration
-      const cashfree = Cashfree({ 
-        mode: environment
-      });
+      let cashfree;
+      try {
+        cashfree = Cashfree({ 
+          mode: environment
+        });
+        console.log('Cashfree instance created:', {
+          type: typeof cashfree,
+          methods: Object.keys(cashfree || {}).filter(key => typeof cashfree[key] === 'function'),
+          hasCheckout: typeof cashfree?.checkout
+        });
+      } catch (initError) {
+        console.error('Cashfree initialization error:', initError);
+        throw new Error(`Cashfree SDK initialization failed: ${initError.message}`);
+      }
 
       // Verify the instance was created properly
       if (!cashfree || typeof cashfree.checkout !== 'function') {
+        console.error('Cashfree checkout verification failed:', {
+          cashfree: !!cashfree,
+          checkoutType: typeof cashfree?.checkout,
+          availableMethods: Object.keys(cashfree || {})
+        });
         throw new Error('Cashfree SDK initialization failed - checkout method not available');
       }
       
