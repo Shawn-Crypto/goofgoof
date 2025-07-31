@@ -4,7 +4,7 @@ class LeadCaptureModal {
     this.originalCashfreeURL = 'https://payments.cashfree.com/forms/beyond-deck-course';
     this.apiEndpoint = '/api/create-payment'; // For Phase 2
     this.webhookURL = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/'; // Configure this
-    this.useAPI = true; // Enable API flow
+    this.useAPI = true; // Toggle this when API is ready
     this.cashfreeSDK = null; // To hold the Cashfree SDK instance
     this.init();
   }
@@ -24,17 +24,23 @@ class LeadCaptureModal {
   }
 
   async checkAPIAvailability() {
-    // Skip health check - API is always available
-    // this.useAPI is already set to true in constructor
-    console.log(`Payment API available - using API flow`);
-    
-    // Update help text based on API availability
-    setTimeout(() => {
-      const helpText = document.getElementById('helpText');
-      if (helpText && this.useAPI) {
-        helpText.textContent = '💡 Your information will pre-fill the checkout for faster payment';
-      }
-    }, 1000);
+    try {
+      // NOTE: This checkAPIAvailability might not be necessary if this.useAPI is always true.
+      // If this.useAPI is always true, you can remove this method and its call from init().
+      const response = await fetch('/api/health-check', { method: 'HEAD' });
+      this.useAPI = response.ok;
+      console.log(`Payment API ${this.useAPI ? 'available' : 'not available'} - using ${this.useAPI ? 'API flow' : 'direct redirect'}`);
+      
+      setTimeout(() => {
+        const helpText = document.getElementById('helpText');
+        if (helpText && !this.useAPI) {
+          helpText.textContent = '💡 Why? If payment fails, we\'ll help you complete your purchase';
+        }
+      }, 1000);
+    } catch (error) {
+      this.useAPI = false;
+      console.log('Payment API not available - using direct redirect flow');
+    }
   }
 
   interceptCTAButtons() {
@@ -71,7 +77,6 @@ class LeadCaptureModal {
       // Insert modal HTML at end of body
       document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-      // MODIFIED: Dynamically load Cashfree JS SDK
       await this.loadCashfreeJSSDK();
 
     } catch (error) {
@@ -79,27 +84,26 @@ class LeadCaptureModal {
     }
   }
 
-  // MODIFIED: New method to load Cashfree JS SDK
   async loadCashfreeJSSDK() {
     return new Promise((resolve, reject) => {
-      // Check for Vercel environment variable first, then hardcode to production
-      const cashfreeEnv = window.CASHFREE_ENVIRONMENT || 'PRODUCTION';
-      console.log('Frontend: CASHFREE_ENVIRONMENT:', cashfreeEnv);
+      const frontendEnv = window.GLOBAL_CASHFREE_ENVIRONMENT; 
+      console.log('Frontend (Browser): GLOBAL_CASHFREE_ENVIRONMENT during SDK load:', frontendEnv);
 
-      // Map to SDK mode: PRODUCTION -> 'production', anything else -> 'sandbox'
-      const sdkMode = cashfreeEnv === 'PRODUCTION' ? 'production' : 'sandbox';
+      // MODIFIED: Use lowercase 'production'/'sandbox' for SDK mode as per Cashfree
+      const sdkMode = frontendEnv === 'PRODUCTION' ? 'production' : 'sandbox'; 
 
-      if (window.Cashfree) { // Check if already loaded
-        this.cashfreeSDK = window.Cashfree({ mode: sdkMode });
+      if (window.Cashfree) { 
+        // MODIFIED: Correct initialization without 'new' as per Cashfree Tech Team
+        this.cashfreeSDK = Cashfree({ mode: sdkMode }); 
         console.log('Cashfree JS SDK already loaded, initialized with mode:', sdkMode);
         return resolve(this.cashfreeSDK);
       }
 
       const script = document.createElement('script');
-      script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js'; // Official Cashfree JS SDK CDN
+      script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js'; 
       script.onload = () => {
-        // Initialize the Cashfree client-side SDK after script loads
-        this.cashfreeSDK = window.Cashfree({ mode: sdkMode });
+        // MODIFIED: Correct initialization without 'new' as per Cashfree Tech Team
+        this.cashfreeSDK = Cashfree({ mode: sdkMode }); 
         console.log('Cashfree JS SDK loaded dynamically, initialized with mode:', sdkMode);
         resolve(this.cashfreeSDK);
       };
@@ -316,7 +320,6 @@ class LeadCaptureModal {
     }
   }
 
-  // PHASE 2: API-driven payment flow with pre-fill
   async processAPIPayment(customerData) {
     try {
       // Show processing state
@@ -352,21 +355,21 @@ class LeadCaptureModal {
         });
       }
 
-      // MODIFIED: Use Cashfree SDK checkout method with paymentSessionId
-      console.log('Attempting Cashfree SDK checkout...'); // ADDED LOG
-      console.log('SDK instance:', this.cashfreeSDK); // ADDED LOG
-      console.log('Payment Session ID:', paymentData.payment_session_id); // ADDED LOG
-      console.log('Full payment data response:', paymentData); // ADDED LOG
+      console.log('Attempting Cashfree SDK checkout...'); 
+      console.log('SDK instance:', this.cashfreeSDK);
+      console.log('Payment Session ID:', paymentData.payment_session_id);
+
+
 
       if (this.cashfreeSDK && paymentData.payment_session_id) {
           this.cashfreeSDK.checkout({
               paymentSessionId: paymentData.payment_session_id,
-              redirectTarget: "_self" // Opens in the same window
+              redirectTarget: "_self" 
           });
       } else {
           console.error('Cashfree SDK not loaded or payment_session_id missing!', { sdkLoaded: !!this.cashfreeSDK, paymentSessionId: paymentData.payment_session_id });
           alert('Failed to initiate secure payment. Redirecting to generic payment page.');
-          this.redirectToPayment(); // Fallback to the generic Cashfree form
+          this.redirectToPayment(); 
       }
 
     } catch (error) {
@@ -403,7 +406,6 @@ class LeadCaptureModal {
     return response;
   }
 
-  // PHASE 1: Direct redirect (current method)
   redirectToPayment() {
     // Add delay to ensure lead data is processed
     setTimeout(() => {

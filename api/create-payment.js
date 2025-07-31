@@ -89,22 +89,20 @@ export default async function handler(req, res) {
         // This aligns with the SDK's expected usage for creating orders.
         const orderResponse = await cashfree.PGCreateOrder(request); 
         
-        // MODIFIED: Add logging for payment_links and payment_links.web
         console.log('Cashfree order created successfully:', {
             order_id: orderResponse.data.order_id,
             payment_session_id: orderResponse.data.payment_session_id,
             status: orderResponse.data.order_status,
             customer_email: customer_email,
-            amount: order_amount,
-            payment_links_object: orderResponse.data.payment_links, // Log the whole payment_links object
-            payment_links_web_url: orderResponse.data.payment_links?.web // Log the specific web URL
+            amount: order_amount
+            // Removed payment_links_object and payment_links_web_url logging
         });
 
         res.status(200).json({
             success: true,
             order_id: orderResponse.data.order_id,
             payment_session_id: orderResponse.data.payment_session_id,
-            // MODIFIED: Removed payment_url field, as it's undefined
+            // Removed payment_url from here too as it's undefined
             customer_prefilled: true,
             customer_details: { // Echo back customer details for frontend confirmation
                 email: customer_email,
