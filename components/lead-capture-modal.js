@@ -243,8 +243,8 @@ class LeadCaptureModal {
       
       this.closeModal();
       
-      // Redirect to payment form with pre-filled data
-      this.redirectToPaymentWithData(leadData);
+      // Use API-based payment processing
+      await this.processAPIPayment(leadData);
 
     } catch (error) {
       console.error('Lead capture failed:', error);
@@ -259,8 +259,8 @@ class LeadCaptureModal {
       alert('We\'ll proceed to payment. Don\'t worry, your information is saved!');
       this.closeModal();
       
-      // Redirect to payment form with pre-filled data even on error
-      this.redirectToPaymentWithData({
+      // Use API-based payment processing even on lead capture error
+      await this.processAPIPayment({
         email: email,
         firstName: firstName,
         lastName: lastName,
@@ -269,7 +269,81 @@ class LeadCaptureModal {
     }
   }
 
-  // Simplified method to redirect to payment form with pre-filled data
+  // API-based payment processing method
+  async processAPIPayment(leadData) {
+    try {
+      console.log('Calling /api/create-payment endpoint with lead data:', leadData);
+      
+      const apiPayload = {
+        customer_email: leadData.email,
+        customer_name: `${leadData.firstName} ${leadData.lastName || ''}`.trim(),
+        customer_phone: leadData.phone,
+        order_amount: 1499.00,
+        order_currency: 'INR'
+      };
+
+      const response = await fetch('/api/create-payment.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(apiPayload)
+      });
+
+      const result = await response.json();
+      
+      if (result.success && result.payment_session_id) {
+        console.log('Payment session created successfully:', {
+          order_id: result.order_id,
+          payment_session_id: result.payment_session_id,
+          customer_email: result.customer_details.email
+        });
+
+        // Construct the checkout URL using the payment session ID
+        // Based on Cashfree documentation, the checkout URL format is:
+        const checkoutURL = `https://payments.cashfree.com/pay/${result.payment_session_id}`;
+        
+        console.log('Redirecting to Cashfree checkout:', checkoutURL);
+        
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'api_payment_created', {
+            'event_category': 'ecommerce',
+            'event_label': 'session_created',
+            'value': 1499,
+            'custom_parameters': {
+              'order_id': result.order_id,
+              'payment_session_id': result.payment_session_id
+            }
+          });
+        }
+        
+        // Redirect to checkout
+        setTimeout(() => {
+          window.location.href = checkoutURL;
+        }, 300);
+        
+      } else {
+        throw new Error(result.error || 'Failed to create payment session');
+      }
+      
+    } catch (error) {
+      console.error('API payment processing failed:', error);
+      
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'api_payment_failed', {
+          'event_category': 'error',
+          'event_label': 'fallback_to_form',
+          'value': 1499
+        });
+      }
+      
+      // Fallback to the original form-based approach
+      console.log('Falling back to pre-filled form redirect');
+      this.redirectToPaymentWithData(leadData);
+    }
+  }
+
+  // Simplified method to redirect to payment form with pre-filled data (fallback)
   redirectToPaymentWithData(leadData) {
     try {
       const baseURL = this.originalCashfreeURL;
