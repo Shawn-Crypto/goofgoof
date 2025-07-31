@@ -291,18 +291,22 @@ class LeadCaptureModal {
     const phone = countryCode + phoneNumberPart; // Combined phone for submission
 
     // --- INTEGRATE VALIDATION --- //
+    console.log('Validating First Name:', firstName, 'Result:', this.validateName(firstName)); // ADDED LOG
     if (!this.validateName(firstName)) {
         alert('Please enter a valid First Name (alphabets, spaces, hyphens, apostrophes only, min 2 characters).');
         return;
     }
+    console.log('Validating Last Name:', lastName, 'Result:', this.validateName(lastName)); // ADDED LOG
     if (!this.validateName(lastName)) {
         alert('Please enter a valid Last Name (alphabets, spaces, hyphens, apostrophes only, min 2 characters).');
         return;
     }
+    console.log('Validating Email:', email, 'Result:', this.validateEmail(email)); // ADDED LOG
     if (!this.validateEmail(email)) {
         alert('Please enter a valid Email Address.');
         return;
     }
+    console.log('Validating Phone Number:', phoneNumberPart, 'Country Code:', countryCode, 'Result:', this.validatePhoneNumber(phoneNumberPart, countryCode)); // ADDED LOG
     if (!this.validatePhoneNumber(phoneNumberPart, countryCode)) {
         if (countryCode === '+91') {
             alert('Please enter a valid 10-digit Indian Mobile Number (starts with 6, 7, 8, or 9).');
@@ -314,6 +318,7 @@ class LeadCaptureModal {
     
     // Submission Timer (2 seconds delay)
     const timeElapsed = Date.now() - this.formLoadedTime;
+    console.log('Time Elapsed (ms):', timeElapsed); // ADDED LOG
     if (timeElapsed < 2000) {
         alert('Please wait a moment before submitting to ensure data integrity.');
         return;
