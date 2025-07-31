@@ -337,20 +337,17 @@ class LeadCaptureModal {
         throw new Error('Cashfree SDK initialization failed - checkout method not available');
       }
       
-      // Start checkout process with enhanced error handling
+      // Start checkout process - exact pattern from dev studio
       const checkoutOptions = {
         paymentSessionId: payment_session_id,
-        redirectTarget: "_self",
-        appearance: {
-          theme: "light"
-        }
+        redirectTarget: "_self"
       };
 
       console.log('Starting Cashfree checkout with options:', checkoutOptions);
 
-      const checkoutResult = await cashfree.checkout(checkoutOptions);
+      cashfree.checkout(checkoutOptions);
       
-      console.log('Cashfree checkout result:', checkoutResult);
+      console.log('Cashfree checkout initiated successfully');
       
       if (typeof gtag !== 'undefined') {
         gtag('event', 'cashfree_sdk_checkout_success', {
