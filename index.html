@@ -2151,10 +2151,7 @@ setTimeout(collectTrackingParameters, 2000);
 </script>
 
 <!-- Inject Cashfree environment for client-side SDK -->
-<script>
-// Vercel will replace $CASHFREE_ENVIRONMENT with its actual value at build time.
-window.GLOBAL_CASHFREE_ENVIRONMENT = '$CASHFREE_ENVIRONMENT';
-</script>
+<script src="js/config.js"></script>
 
 <script type="module" src="components/lead-capture-modal.js"></script>
 </body>
