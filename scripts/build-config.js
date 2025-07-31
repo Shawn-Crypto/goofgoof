@@ -3,18 +3,8 @@ const path = require('path');
 
 console.log('Building configuration files...');
 
-// Get environment variable with strict validation
-const validEnvironments = ['PRODUCTION', 'SANDBOX', 'TEST'];
-const rawEnvironment = process.env.CASHFREE_ENVIRONMENT || 'PRODUCTION';
-
-// Validate environment value to prevent injection attacks
-if (!validEnvironments.includes(rawEnvironment)) {
-    console.error(`SECURITY ERROR: Invalid CASHFREE_ENVIRONMENT: ${rawEnvironment}`);
-    console.error(`Must be one of: ${validEnvironments.join(', ')}`);
-    process.exit(1);
-}
-
-const cashfreeEnvironment = rawEnvironment;
+// ALWAYS USE PRODUCTION - No sandbox mode allowed
+const cashfreeEnvironment = 'PRODUCTION';
 console.log(`Using validated CASHFREE_ENVIRONMENT: ${cashfreeEnvironment}`);
 
 // Read the template config file
