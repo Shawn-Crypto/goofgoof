@@ -8,6 +8,7 @@ class LeadCaptureModal {
     this.webhookURL = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/'; // Configure this
     this.useAPI = true; // Toggle this when API is ready
     this.cashfreeSDK = null; // To hold the Cashfree SDK instance
+    this.formLoadedTime = Date.now(); // For submission timer
     this.init();
   }
 
@@ -58,6 +59,8 @@ class LeadCaptureModal {
       button.addEventListener('click', (e) => {
         e.preventDefault();
         this.showModal();
+        // Reset form loaded time for submission timer
+        this.formLoadedTime = Date.now();
         
         // Track modal show event
         if (typeof gtag !== 'undefined') {
@@ -244,22 +247,76 @@ class LeadCaptureModal {
     selectElement.value = '+91';
   }
 
+  // --- NEW VALIDATION METHODS --- //
+
+  validateName(name) {
+    if (typeof name !== 'string' || name.length < 2) return false;
+    // Only alphabets, spaces, hyphens, apostrophes
+    const regex = /^[a-zA-Z\s'-]+$/;
+    return regex.test(name);
+  }
+
+  validateEmail(email) {
+    if (typeof email !== 'string' || email.trim() === '') return false;
+    // Basic email regex: must contain @ and a domain (e.g., example.com)
+    // Avoids obvious fakes and spaces
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email) && !email.includes(' ');
+  }
+
+  validatePhoneNumber(numberPart, countryCode) {
+    if (typeof numberPart !== 'string' || numberPart.trim() === '') return false;
+    const cleanNumber = numberPart.replace(/\D/g, ''); // Digits only
+
+    // MODIFIED: Apply specific Indian validation only for +91
+    if (countryCode === '+91') {
+      const indianRegex = /^[6-9]\d{9}$/; // Starts with 6,7,8,9 and is 10 digits
+      return cleanNumber.length === 10 && indianRegex.test(cleanNumber);
+    } 
+    // For all other countries, just check generic length (10-15 digits)
+    return cleanNumber.length >= 10 && cleanNumber.length <= 15;
+  }
+
+  // --- END NEW VALIDATION METHODS --- //
+
   async submitLeadAndProceed() {
     const form = document.getElementById('leadCaptureForm');
     const formData = new FormData(form);
     
-    // Validate required fields
     const email = formData.get('email');
     const firstName = formData.get('firstName');
     const lastName = formData.get('lastName');
-    // MODIFIED: Get selected country code and phone number part
     const countryCode = formData.get('countryCode'); 
     const phoneNumberPart = formData.get('phoneNumber');
-    const phone = countryCode + phoneNumberPart; // Combine them
+    const phone = countryCode + phoneNumberPart; // Combined phone for submission
+
+    // --- INTEGRATE VALIDATION --- //
+    if (!this.validateName(firstName)) {
+        alert('Please enter a valid First Name (alphabets, spaces, hyphens, apostrophes only, min 2 characters).');
+        return;
+    }
+    if (!this.validateName(lastName)) {
+        alert('Please enter a valid Last Name (alphabets, spaces, hyphens, apostrophes only, min 2 characters).');
+        return;
+    }
+    if (!this.validateEmail(email)) {
+        alert('Please enter a valid Email Address.');
+        return;
+    }
+    if (!this.validatePhoneNumber(phoneNumberPart, countryCode)) {
+        if (countryCode === '+91') {
+            alert('Please enter a valid 10-digit Indian Mobile Number (starts with 6, 7, 8, or 9).');
+        } else {
+            alert('Please enter a valid Mobile Number (10-15 digits, digits only).');
+        }
+        return;
+    }
     
-    if (!email || !firstName || !lastName || !phone) { // Use combined 'phone' here
-      alert('Please fill in all required fields');
-      return;
+    // Submission Timer (2 seconds delay)
+    const timeElapsed = Date.now() - this.formLoadedTime;
+    if (timeElapsed < 2000) {
+        alert('Please wait a moment before submitting to ensure data integrity.');
+        return;
     }
 
     // Show loading state
@@ -281,12 +338,10 @@ class LeadCaptureModal {
         email: email,
         firstName: firstName,
         lastName: lastName,
-        phone: phone,
-        bonusContent: bonusContentCheckbox?.getAttribute('data-state') === 'checked',
-        updates: updatesCheckbox?.getAttribute('data-state') === 'checked',
+        phone: phone, // This 'phone' variable now contains the combined formatted number
         timestamp: new Date().toISOString(),
         source: 'pre_payment_capture',
-        intent: 'high', // They clicked to buy
+        intent: 'high', 
         amount: '1499',
         currency: 'INR'
       };
