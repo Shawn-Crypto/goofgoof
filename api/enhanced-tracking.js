@@ -47,7 +47,8 @@ export default async function handler(request) {
           last_name: jsonData.last_name || '',
           order_id: jsonData.order_id || `order_${Date.now()}`,
           amount: parseFloat(jsonData.amount || '1499'),
-          currency: jsonData.currency || 'INR'
+          currency: jsonData.currency || 'INR',
+          eventId: jsonData.eventId || null
         };
         fbp = jsonData.fbp || null;
         fbc = jsonData.fbc || null;
@@ -65,7 +66,8 @@ export default async function handler(request) {
           last_name: formData.get('last_name') || '',
           order_id: formData.get('order_id') || `order_${Date.now()}`,
           amount: parseFloat(formData.get('amount') || '1499'),
-          currency: formData.get('currency') || 'INR'
+          currency: formData.get('currency') || 'INR',
+          eventId: formData.get('eventId') || null
         };
         fbp = formData.get('fbp') || null;
         fbc = formData.get('fbc') || null;
@@ -83,7 +85,8 @@ export default async function handler(request) {
         last_name: params.get('last_name') || '',
         order_id: params.get('order_id') || `order_${Date.now()}`,
         amount: parseFloat(params.get('amount') || '1499'),
-        currency: params.get('currency') || 'INR'
+        currency: params.get('currency') || 'INR',
+        eventId: params.get('eventId') || null
       };
       fbp = params.get('fbp') || null;
       fbc = params.get('fbc') || null;
@@ -97,6 +100,7 @@ export default async function handler(request) {
     console.log('DEBUG - Customer data received:', customerData);
     console.log('DEBUG - Email check:', !!customerData.email, customerData.email);
     console.log('DEBUG - Phone check:', !!customerData.phone, customerData.phone);
+    console.log('DEBUG - EventId received:', customerData.eventId);
 
     // Extract server-side data from headers
     const headers = request.headers;
@@ -150,8 +154,8 @@ export default async function handler(request) {
     const hashedFirstName = await hashData(customerData.first_name);
     const hashedLastName = await hashData(customerData.last_name);
 
-    // Use order_id as event_id for deduplication
-    const eventId = customerData.order_id;
+    // Use received eventId for deduplication, fallback to order_id if not provided
+    const eventId = customerData.eventId || customerData.order_id;
     const eventTime = Math.floor(Date.now() / 1000);
 
     // Prepare Facebook Conversions API payload
@@ -159,7 +163,7 @@ export default async function handler(request) {
       data: [{
         event_name: 'Purchase',
         event_time: eventTime,
-        event_id: eventId, // Using order_id directly for deduplication
+        event_id: eventId, // Using eventId from client for deduplication
         action_source: 'website',
         event_source_url: source_url,
         user_data: {

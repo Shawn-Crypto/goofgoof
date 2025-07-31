@@ -168,6 +168,13 @@
     }
 
     function pushAnalyticsEvent(transactionId, amount) {
+        // Extract order_id from URL parameters for eventID generation
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order_id') || transactionId;
+        
+        // Generate unique eventID for Facebook Pixel deduplication
+        const eventId = `purchase_${orderId}_${Math.floor(Date.now() / 1000)}`;
+        
         // Push purchase event to dataLayer for Google Analytics tracking
         if (typeof dataLayer !== 'undefined') {
             window.dataLayer.push({
@@ -188,16 +195,67 @@
             console.log('✅ Google Analytics purchase event pushed to dataLayer');
         }
         
-        // Facebook Pixel Purchase Event
+        // Facebook Pixel Purchase Event with deduplication eventID
         if (typeof fbq !== 'undefined') {
             fbq('track', 'Purchase', {
                 value: amount,
                 currency: 'INR',
                 content_ids: ['beyond-deck-course'],
                 content_type: 'product'
+            }, {
+                eventID: eventId
             });
-            console.log('✅ Facebook Pixel purchase event tracked');
+            console.log('✅ Facebook Pixel purchase event tracked with eventID:', eventId);
         }
+        
+        // Send eventID to server-side enhanced tracking for deduplication
+        sendEventToServer(eventId, orderId, amount);
+    }
+
+    async function sendEventToServer(eventId, orderId, amount) {
+        try {
+            // Get Facebook cookies for enhanced tracking
+            const fbp = getCookie('_fbp');
+            const fbc = getCookie('_fbc');
+            
+            const payload = {
+                eventId: eventId,
+                order_id: orderId,
+                amount: amount,
+                currency: 'INR',
+                fbp: fbp,
+                fbc: fbc,
+                source_url: window.location.origin
+            };
+            
+            console.log('Sending deduplication eventID to server:', eventId);
+            
+            const response = await fetch('/api/enhanced-tracking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                console.log('✅ Server-side tracking sent with eventID:', eventId);
+                console.log('Server response:', result);
+            } else {
+                console.warn('⚠️ Server-side tracking failed:', response.status);
+            }
+            
+        } catch (error) {
+            console.error('❌ Failed to send eventID to server:', error);
+        }
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
     }
 
     function updatePageContent(verificationResult) {
