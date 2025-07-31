@@ -70,15 +70,24 @@
           <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="phone">
             Mobile Number *
           </label>
-          <input 
-            class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
-            id="phone" 
-            name="phone" 
-            type="tel" 
-            placeholder="+91 98765 43210"
-            pattern="[+]?[0-9]{10,15}"
-            required
-          />
+          <div class="flex space-x-2"> <select
+              id="countryCode"
+              name="countryCode"
+              class="flex h-11 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              style="width: 100px; flex-shrink: 0;"
+              required
+            >
+              </select>
+            <input 
+              class="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" 
+              id="phoneNumber" 
+              name="phoneNumber" 
+              type="tel" 
+              placeholder="98765 43210"
+              pattern="[0-9]{10,15}"
+              required
+            />
+          </div>
         </div>
         
       </form>

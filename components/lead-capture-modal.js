@@ -1,4 +1,6 @@
 // Enhanced Lead Capture Modal System with API Pre-fill Support
+import { countryCodes } from '../js/country-codes.js';
+
 class LeadCaptureModal {
   constructor() {
     this.originalCashfreeURL = 'https://payments.cashfree.com/forms/beyond-deck-course';
@@ -78,6 +80,7 @@ class LeadCaptureModal {
       document.body.insertAdjacentHTML('beforeend', modalHTML);
 
       await this.loadCashfreeJSSDK();
+      this.populateCountryCodes(); // ADD THIS LINE
 
     } catch (error) {
       console.error('Failed to load modal HTML or Cashfree SDK:', error);
@@ -223,6 +226,24 @@ class LeadCaptureModal {
     }
   }
 
+  async populateCountryCodes() {
+    const selectElement = document.getElementById('countryCode');
+    if (!selectElement) return;
+
+    // Sort countries by name for better UX
+    const sortedCountryCodes = [...countryCodes].sort((a, b) => a.name.localeCompare(b.name));
+
+    sortedCountryCodes.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country.dial_code;
+        option.textContent = `${country.name} (${country.dial_code})`;
+        selectElement.appendChild(option);
+    });
+
+    // Set default to India (+91)
+    selectElement.value = '+91';
+  }
+
   async submitLeadAndProceed() {
     const form = document.getElementById('leadCaptureForm');
     const formData = new FormData(form);
@@ -231,9 +252,12 @@ class LeadCaptureModal {
     const email = formData.get('email');
     const firstName = formData.get('firstName');
     const lastName = formData.get('lastName');
-    const phone = formData.get('phone');
+    // MODIFIED: Get selected country code and phone number part
+    const countryCode = formData.get('countryCode'); 
+    const phoneNumberPart = formData.get('phoneNumber');
+    const phone = countryCode + phoneNumberPart; // Combine them
     
-    if (!email || !firstName || !lastName || !phone) {
+    if (!email || !firstName || !lastName || !phone) { // Use combined 'phone' here
       alert('Please fill in all required fields');
       return;
     }
