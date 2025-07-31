@@ -83,7 +83,10 @@ class LeadCaptureModal {
       document.body.insertAdjacentHTML('beforeend', modalHTML);
 
       await this.loadCashfreeJSSDK();
-      this.populateCountryCodes(); // ADD THIS LINE
+      this.populateCountryCodes();
+
+      // ADDED: Attach event listeners to modal buttons after injection
+      this.attachModalButtonListeners(); // NEW CALL
 
     } catch (error) {
       console.error('Failed to load modal HTML or Cashfree SDK:', error);
@@ -278,6 +281,21 @@ class LeadCaptureModal {
   }
 
   // --- END NEW VALIDATION METHODS --- //
+
+  // NEW METHOD: Attach listeners to modal's internal buttons
+  attachModalButtonListeners() {
+      const continueButton = document.getElementById('continueToPayment');
+      if (continueButton) {
+          continueButton.addEventListener('click', () => this.submitLeadAndProceed());
+      }
+
+      const closeButton = document.getElementById('closeLCModalButton'); // Using the new ID
+      if (closeButton) {
+          closeButton.addEventListener('click', () => this.closeModal());
+      }
+
+      // Also ensure overlay click still closes (already handled by addEventListeners setTimeout block)
+  }
 
   async submitLeadAndProceed() {
     const form = document.getElementById('leadCaptureForm');
@@ -498,14 +516,8 @@ class LeadCaptureModal {
   }
 }
 
-// Global functions for modal interactions
-function closeLCModal() {
-  window.leadCaptureModal.closeModal();
-}
-
-function submitLeadAndProceed() {
-  window.leadCaptureModal.submitLeadAndProceed();
-}
+// REMOVED: Old global function definitions (submitLeadAndProceed, closeLCModal)
+// These are now handled as methods of the LeadCaptureModal class and attached via event listeners.
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
