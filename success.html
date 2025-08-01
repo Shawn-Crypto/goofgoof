@@ -218,6 +218,9 @@
             const fbp = getCookie('_fbp');
             const fbc = getCookie('_fbc');
             
+            // Retrieve and validate customer data from localStorage
+            const leadData = getLeadCaptureData();
+            
             const payload = {
                 eventId: eventId,
                 order_id: orderId,
@@ -225,7 +228,12 @@
                 currency: 'INR',
                 fbp: fbp,
                 fbc: fbc,
-                source_url: window.location.origin
+                source_url: window.location.origin,
+                // Include customer data for enhanced EMQ
+                email: leadData.email || '',
+                phone: leadData.phone || '',
+                first_name: leadData.firstName || '',
+                last_name: leadData.lastName || ''
             };
             
             console.log('Sending deduplication eventID to server:', eventId);
@@ -256,6 +264,45 @@
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
         return null;
+    }
+
+    function getLeadCaptureData() {
+        const defaultData = {
+            email: '',
+            phone: '',
+            firstName: '',
+            lastName: ''
+        };
+
+        try {
+            const storedLeadData = localStorage.getItem('leadCaptureData');
+            if (!storedLeadData) {
+                console.warn('⚠️ No lead capture data found in localStorage');
+                return defaultData;
+            }
+
+            const leadData = JSON.parse(storedLeadData);
+            
+            // Validate that we have the expected structure
+            if (typeof leadData !== 'object' || leadData === null) {
+                console.warn('⚠️ Invalid lead capture data format');
+                return defaultData;
+            }
+
+            const validatedData = {
+                email: leadData.email || '',
+                phone: leadData.phone || '',
+                firstName: leadData.firstName || '',
+                lastName: leadData.lastName || ''
+            };
+
+            console.log('✅ Retrieved customer data from localStorage:', validatedData);
+            return validatedData;
+
+        } catch (error) {
+            console.error('❌ Failed to parse lead capture data:', error);
+            return defaultData;
+        }
     }
 
     function updatePageContent(verificationResult) {
